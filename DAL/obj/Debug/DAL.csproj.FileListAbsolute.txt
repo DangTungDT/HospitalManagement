@@ -1,0 +1,9 @@
+D:\Project_ThucTap\HospitalManagement\DAL\bin\Debug\DAL.dll
+D:\Project_ThucTap\HospitalManagement\DAL\bin\Debug\DAL.pdb
+D:\Project_ThucTap\HospitalManagement\DAL\bin\Debug\DTO.dll
+D:\Project_ThucTap\HospitalManagement\DAL\bin\Debug\DTO.pdb
+D:\Project_ThucTap\HospitalManagement\DAL\obj\Debug\DAL.csproj.AssemblyReference.cache
+D:\Project_ThucTap\HospitalManagement\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+D:\Project_ThucTap\HospitalManagement\DAL\obj\Debug\DAL.csproj.Up2Date
+D:\Project_ThucTap\HospitalManagement\DAL\obj\Debug\DAL.dll
+D:\Project_ThucTap\HospitalManagement\DAL\obj\Debug\DAL.pdb

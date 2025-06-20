@@ -46,8 +46,53 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormCapNhatThongTin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCapNhatThongTin.Designer.cs">
+      <DependentUpon>FormCapNhatThongTin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormChiTietKhamBenh.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormChiTietKhamBenh.Designer.cs">
+      <DependentUpon>FormChiTietKhamBenh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormDangKyLichHen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDangKyLichHen.Designer.cs">
+      <DependentUpon>FormDangKyLichHen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormLichSuKhamBenh.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLichSuKhamBenh.Designer.cs">
+      <DependentUpon>FormLichSuKhamBenh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormThongTinNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormThongTinNhanVien.Designer.cs">
+      <DependentUpon>FormThongTinNhanVien.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormCapNhatThongTin.resx">
+      <DependentUpon>FormCapNhatThongTin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormChiTietKhamBenh.resx">
+      <DependentUpon>FormChiTietKhamBenh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDangKyLichHen.resx">
+      <DependentUpon>FormDangKyLichHen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLichSuKhamBenh.resx">
+      <DependentUpon>FormLichSuKhamBenh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormThongTinNhanVien.resx">
+      <DependentUpon>FormThongTinNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -56,6 +101,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -79,6 +125,33 @@
       <Project>{3e7b49e7-ab52-4ae9-adb2-ae2d29ee7dd6}</Project>
       <Name>DTO</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user_info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\house.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\salary.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\salary1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\presentation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\house1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\loupe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\more.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

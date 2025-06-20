@@ -1,7 +1,39 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\workspace\\.Net\\QuanLyBenhVien\\GUI\\",
-  "Documents": [],
+  "WorkspaceRootPath": "D:\\TranhBien_TaiLoc\\VoThanhTrung_Project_ThucTap_Sprint1\\HospitalManagement\\GUI\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{0C76494E-9B86-4529-B9F3-9D9D79CB991F}|GUI.csproj|D:\\TranhBien_TaiLoc\\VoThanhTrung_Project_ThucTap_Sprint1\\HospitalManagement\\GUI\\formdangkylichhen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{0C76494E-9B86-4529-B9F3-9D9D79CB991F}|GUI.csproj|solutionrelative:formdangkylichhen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C76494E-9B86-4529-B9F3-9D9D79CB991F}|GUI.csproj|D:\\TranhBien_TaiLoc\\VoThanhTrung_Project_ThucTap_Sprint1\\HospitalManagement\\GUI\\formchitietkhambenh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{0C76494E-9B86-4529-B9F3-9D9D79CB991F}|GUI.csproj|solutionrelative:formchitietkhambenh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C76494E-9B86-4529-B9F3-9D9D79CB991F}|GUI.csproj|D:\\TranhBien_TaiLoc\\VoThanhTrung_Project_ThucTap_Sprint1\\HospitalManagement\\GUI\\formlichsukhambenh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{0C76494E-9B86-4529-B9F3-9D9D79CB991F}|GUI.csproj|solutionrelative:formlichsukhambenh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C76494E-9B86-4529-B9F3-9D9D79CB991F}|GUI.csproj|d:\\tranhbien_tailoc\\vothanhtrung_project_thuctap_sprint1\\hospitalmanagement\\gui\\formcapnhatthongtin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{0C76494E-9B86-4529-B9F3-9D9D79CB991F}|GUI.csproj|solutionrelative:formcapnhatthongtin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C76494E-9B86-4529-B9F3-9D9D79CB991F}|GUI.csproj|D:\\TranhBien_TaiLoc\\VoThanhTrung_Project_ThucTap_Sprint1\\HospitalManagement\\GUI\\formthongtinnhanvien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{0C76494E-9B86-4529-B9F3-9D9D79CB991F}|GUI.csproj|solutionrelative:formthongtinnhanvien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C76494E-9B86-4529-B9F3-9D9D79CB991F}|GUI.csproj|D:\\TranhBien_TaiLoc\\VoThanhTrung_Project_ThucTap_Sprint1\\HospitalManagement\\GUI\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C76494E-9B86-4529-B9F3-9D9D79CB991F}|GUI.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C76494E-9B86-4529-B9F3-9D9D79CB991F}|GUI.csproj|D:\\TranhBien_TaiLoc\\VoThanhTrung_Project_ThucTap_Sprint1\\HospitalManagement\\GUI\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{0C76494E-9B86-4529-B9F3-9D9D79CB991F}|GUI.csproj|solutionrelative:app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project_ThucTap\\HospitalManagement\\BLL\\Properties\\AssemblyInfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,15 +41,103 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FormDangKyLichHen.cs [Design]",
+              "DocumentMoniker": "D:\\TranhBien_TaiLoc\\VoThanhTrung_Project_ThucTap_Sprint1\\HospitalManagement\\GUI\\FormDangKyLichHen.cs",
+              "RelativeDocumentMoniker": "FormDangKyLichHen.cs",
+              "ToolTip": "D:\\TranhBien_TaiLoc\\VoThanhTrung_Project_ThucTap_Sprint1\\HospitalManagement\\GUI\\FormDangKyLichHen.cs [Design]",
+              "RelativeToolTip": "FormDangKyLichHen.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T18:14:09.117Z",
+              "EditorCaption": " [Design]"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "FormChiTietKhamBenh.cs [Design]",
+              "DocumentMoniker": "D:\\TranhBien_TaiLoc\\VoThanhTrung_Project_ThucTap_Sprint1\\HospitalManagement\\GUI\\FormChiTietKhamBenh.cs",
+              "RelativeDocumentMoniker": "FormChiTietKhamBenh.cs",
+              "ToolTip": "D:\\TranhBien_TaiLoc\\VoThanhTrung_Project_ThucTap_Sprint1\\HospitalManagement\\GUI\\FormChiTietKhamBenh.cs [Design]",
+              "RelativeToolTip": "FormChiTietKhamBenh.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T18:09:06.343Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FormLichSuKhamBenh.cs [Design]",
+              "DocumentMoniker": "D:\\TranhBien_TaiLoc\\VoThanhTrung_Project_ThucTap_Sprint1\\HospitalManagement\\GUI\\FormLichSuKhamBenh.cs",
+              "RelativeDocumentMoniker": "FormLichSuKhamBenh.cs",
+              "ToolTip": "D:\\TranhBien_TaiLoc\\VoThanhTrung_Project_ThucTap_Sprint1\\HospitalManagement\\GUI\\FormLichSuKhamBenh.cs [Design]",
+              "RelativeToolTip": "FormLichSuKhamBenh.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T18:05:32.305Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "FormCapNhatThongTin.cs [Design]",
+              "DocumentMoniker": "D:\\TranhBien_TaiLoc\\VoThanhTrung_Project_ThucTap_Sprint1\\HospitalManagement\\GUI\\FormCapNhatThongTin.cs",
+              "RelativeDocumentMoniker": "FormCapNhatThongTin.cs",
+              "ToolTip": "D:\\TranhBien_TaiLoc\\VoThanhTrung_Project_ThucTap_Sprint1\\HospitalManagement\\GUI\\FormCapNhatThongTin.cs [Design]",
+              "RelativeToolTip": "FormCapNhatThongTin.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T17:44:39.756Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "FormThongTinNhanVien.cs [Design]",
+              "DocumentMoniker": "D:\\TranhBien_TaiLoc\\VoThanhTrung_Project_ThucTap_Sprint1\\HospitalManagement\\GUI\\FormThongTinNhanVien.cs",
+              "RelativeDocumentMoniker": "FormThongTinNhanVien.cs",
+              "ToolTip": "D:\\Project_ThucTap\\HospitalManagement\\GUI\\FormThongTinNhanVien.cs [Design]",
+              "RelativeToolTip": "..\\..\\..\\..\\Project_ThucTap\\HospitalManagement\\GUI\\FormThongTinNhanVien.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-14T16:14:45.417Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\TranhBien_TaiLoc\\VoThanhTrung_Project_ThucTap_Sprint1\\HospitalManagement\\GUI\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\TranhBien_TaiLoc\\VoThanhTrung_Project_ThucTap_Sprint1\\HospitalManagement\\GUI\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwA4AAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-12T07:56:17.017Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "App.config",
+              "DocumentMoniker": "D:\\TranhBien_TaiLoc\\VoThanhTrung_Project_ThucTap_Sprint1\\HospitalManagement\\GUI\\App.config",
+              "RelativeDocumentMoniker": "App.config",
+              "ToolTip": "D:\\TranhBien_TaiLoc\\VoThanhTrung_Project_ThucTap_Sprint1\\HospitalManagement\\GUI\\App.config",
+              "RelativeToolTip": "App.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-06-15T18:00:39.713Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AssemblyInfo.cs",
+              "DocumentMoniker": "D:\\Project_ThucTap\\HospitalManagement\\BLL\\Properties\\AssemblyInfo.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\Project_ThucTap\\HospitalManagement\\BLL\\Properties\\AssemblyInfo.cs",
+              "ToolTip": "D:\\Project_ThucTap\\HospitalManagement\\BLL\\Properties\\AssemblyInfo.cs",
+              "RelativeToolTip": "..\\..\\..\\..\\Project_ThucTap\\HospitalManagement\\BLL\\Properties\\AssemblyInfo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T17:38:42.903Z"
             }
           ]
         }
