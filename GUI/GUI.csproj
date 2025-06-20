@@ -46,21 +46,130 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmAppointmentManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAppointmentManagement.Designer.cs">
+      <DependentUpon>frmAppointmentManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDailyCareGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDailyCareGUI.Designer.cs">
+      <DependentUpon>frmDailyCareGUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMedicalInventoryGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMedicalInventoryGUI.Designer.cs">
+      <DependentUpon>frmMedicalInventoryGUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMedicalRecordGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMedicalRecordGUI.Designer.cs">
+      <DependentUpon>frmMedicalRecordGUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmHeadNurseGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmHeadNurseGUI.Designer.cs">
+      <DependentUpon>frmHeadNurseGUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmInpatientManagementGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInpatientManagementGUI.Designer.cs">
+      <DependentUpon>frmInpatientManagementGUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMedicalRegistrationGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMedicalRegistrationGUI.Designer.cs">
+      <DependentUpon>frmMedicalRegistrationGUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPatientAdmissionGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPatientAdmissionGUI.Designer.cs">
+      <DependentUpon>frmPatientAdmissionGUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPatientSearchGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPatientSearchGUI.Designer.cs">
+      <DependentUpon>frmPatientSearchGUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReceptionistDashboardGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReceptionistDashboardGUI.Designer.cs">
+      <DependentUpon>frmReceptionistDashboardGUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTaskAssignmentGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTaskAssignmentGUI.Designer.cs">
+      <DependentUpon>frmTaskAssignmentGUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmUserGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUserGUI.Designer.cs">
+      <DependentUpon>frmUserGUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmAppointmentManagement.resx">
+      <DependentUpon>frmAppointmentManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDailyCareGUI.resx">
+      <DependentUpon>frmDailyCareGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMedicalInventoryGUI.resx">
+      <DependentUpon>frmMedicalInventoryGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMedicalRecordGUI.resx">
+      <DependentUpon>frmMedicalRecordGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmHeadNurseGUI.resx">
+      <DependentUpon>frmHeadNurseGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmInpatientManagementGUI.resx">
+      <DependentUpon>frmInpatientManagementGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMedicalRegistrationGUI.resx">
+      <DependentUpon>frmMedicalRegistrationGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPatientAdmissionGUI.resx">
+      <DependentUpon>frmPatientAdmissionGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPatientSearchGUI.resx">
+      <DependentUpon>frmPatientSearchGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReceptionistDashboardGUI.resx">
+      <DependentUpon>frmReceptionistDashboardGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTaskAssignmentGUI.resx">
+      <DependentUpon>frmTaskAssignmentGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUserGUI.resx">
+      <DependentUpon>frmUserGUI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -79,6 +188,28 @@
       <Project>{3e7b49e7-ab52-4ae9-adb2-ae2d29ee7dd6}</Project>
       <Name>DTO</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\add.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\delete.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\edit.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logonursing.png" />
+    <None Include="Resources\logoRexeption.png" />
+    <Content Include="Resources\search.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
