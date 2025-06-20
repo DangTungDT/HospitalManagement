@@ -1,0 +1,6 @@
+F:\ProjectQLBV\HospitalManagement\DTO\bin\Debug\DTO.dll
+F:\ProjectQLBV\HospitalManagement\DTO\bin\Debug\DTO.pdb
+F:\ProjectQLBV\HospitalManagement\DTO\obj\Debug\DTO.csproj.AssemblyReference.cache
+F:\ProjectQLBV\HospitalManagement\DTO\obj\Debug\DTO.csproj.CoreCompileInputs.cache
+F:\ProjectQLBV\HospitalManagement\DTO\obj\Debug\DTO.dll
+F:\ProjectQLBV\HospitalManagement\DTO\obj\Debug\DTO.pdb

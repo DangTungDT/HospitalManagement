@@ -1,0 +1,11 @@
+F:\ProjectQLBV\HospitalManagement\BLL\bin\Debug\BLL.dll
+F:\ProjectQLBV\HospitalManagement\BLL\bin\Debug\BLL.pdb
+F:\ProjectQLBV\HospitalManagement\BLL\bin\Debug\DAL.dll
+F:\ProjectQLBV\HospitalManagement\BLL\bin\Debug\DTO.dll
+F:\ProjectQLBV\HospitalManagement\BLL\bin\Debug\DAL.pdb
+F:\ProjectQLBV\HospitalManagement\BLL\bin\Debug\DTO.pdb
+F:\ProjectQLBV\HospitalManagement\BLL\obj\Debug\BLL.csproj.AssemblyReference.cache
+F:\ProjectQLBV\HospitalManagement\BLL\obj\Debug\BLL.csproj.CoreCompileInputs.cache
+F:\ProjectQLBV\HospitalManagement\BLL\obj\Debug\BLL.csproj.CopyComplete
+F:\ProjectQLBV\HospitalManagement\BLL\obj\Debug\BLL.dll
+F:\ProjectQLBV\HospitalManagement\BLL\obj\Debug\BLL.pdb
