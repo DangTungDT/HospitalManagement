@@ -85,6 +85,13 @@
     <Compile Include="frmTestTypeInfo_Doctor.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmUserGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUserGUI.designer.cs">
+      <DependentUpon>frmUserGUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PasswordHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="DangNhap_GUI.resx">
@@ -119,6 +126,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmTestTypeInfo_Doctor.resx">
       <DependentUpon>frmTestTypeInfo_Doctor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUserGUI.resx">
+      <DependentUpon>frmUserGUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -23,3 +23,7 @@ F:\ProjectQLBV\HospitalManagement\GUI\obj\Debug\GUI.exe
 F:\ProjectQLBV\HospitalManagement\GUI\obj\Debug\GUI.pdb
 F:\ProjectQLBV\HospitalManagement\GUI\obj\Debug\frmTestInfo_Doctor.resources
 F:\ProjectQLBV\HospitalManagement\GUI\obj\Debug\frmTestTypeInfo_Doctor.resources
+F:\ProjectQLBV\HospitalManagement\GUI\bin\Debug\DAL.dll
+F:\ProjectQLBV\HospitalManagement\GUI\bin\Debug\DAL.pdb
+F:\ProjectQLBV\HospitalManagement\GUI\bin\Debug\DAL.dll.config
+F:\ProjectQLBV\HospitalManagement\GUI\obj\Debug\GUI.frmUserGUI.resources
