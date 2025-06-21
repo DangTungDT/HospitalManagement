@@ -74,6 +74,106 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormItems.resx">
       <DependentUpon>FormItems.cs</DependentUpon>
+    <Compile Include="frm_BaoHiem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_BaoHiem.Designer.cs">
+      <DependentUpon>frm_BaoHiem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_CongNo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_CongNo.Designer.cs">
+      <DependentUpon>frm_CongNo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_CongNoTra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_CongNoTra.Designer.cs">
+      <DependentUpon>frm_CongNoTra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_DangKyBN.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_DangKyBN.Designer.cs">
+      <DependentUpon>frm_DangKyBN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_DichVu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_DichVu.Designer.cs">
+      <DependentUpon>frm_DichVu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_HoaDon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_HoaDon.Designer.cs">
+      <DependentUpon>frm_HoaDon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_Luong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_Luong.Designer.cs">
+      <DependentUpon>frm_Luong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_NhaCungCap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_NhaCungCap.Designer.cs">
+      <DependentUpon>frm_NhaCungCap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_PhieuChi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_PhieuChi.Designer.cs">
+      <DependentUpon>frm_PhieuChi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_PhieuThu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_PhieuThu.Designer.cs">
+      <DependentUpon>frm_PhieuThu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_TaiSan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_TaiSan.Designer.cs">
+      <DependentUpon>frm_TaiSan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frm_BaoHiem.resx">
+      <DependentUpon>frm_BaoHiem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_CongNo.resx">
+      <DependentUpon>frm_CongNo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_CongNoTra.resx">
+      <DependentUpon>frm_CongNoTra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_DangKyBN.resx">
+      <DependentUpon>frm_DangKyBN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_DichVu.resx">
+      <DependentUpon>frm_DichVu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_HoaDon.resx">
+      <DependentUpon>frm_HoaDon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_Luong.resx">
+      <DependentUpon>frm_Luong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_NhaCungCap.resx">
+      <DependentUpon>frm_NhaCungCap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_PhieuChi.resx">
+      <DependentUpon>frm_PhieuChi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_PhieuThu.resx">
+      <DependentUpon>frm_PhieuThu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_TaiSan.resx">
+      <DependentUpon>frm_TaiSan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
