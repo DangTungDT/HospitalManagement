@@ -46,6 +46,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormHistoryOutItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormHistoryOutItem.Designer.cs">
+      <DependentUpon>FormHistoryOutItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormInventoryManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormInventoryManager.Designer.cs">
+      <DependentUpon>FormInventoryManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormItems.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormItems.Designer.cs">
+      <DependentUpon>FormItems.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormHistoryOutItem.resx">
+      <DependentUpon>FormHistoryOutItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormInventoryManager.resx">
+      <DependentUpon>FormInventoryManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormItems.resx">
+      <DependentUpon>FormItems.cs</DependentUpon>
     <Compile Include="frm_BaoHiem.cs">
       <SubType>Form</SubType>
     </Compile>
