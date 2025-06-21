@@ -5,30 +5,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{0C76494E-9B86-4529-B9F3-9D9D79CB991F}|GUI.csproj|d:\\workspace\\.net\\quanlybenhvien\\gui\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0C76494E-9B86-4529-B9F3-9D9D79CB991F}|GUI.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0C76494E-9B86-4529-B9F3-9D9D79CB991F}|GUI.csproj|D:\\workspace\\.Net\\QuanLyBenhVien\\GUI\\formhistoryoutitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0C76494E-9B86-4529-B9F3-9D9D79CB991F}|GUI.csproj|solutionrelative:formhistoryoutitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0C76494E-9B86-4529-B9F3-9D9D79CB991F}|GUI.csproj|D:\\workspace\\.Net\\QuanLyBenhVien\\GUI\\formhistoryoutitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{0C76494E-9B86-4529-B9F3-9D9D79CB991F}|GUI.csproj|solutionrelative:formhistoryoutitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0C76494E-9B86-4529-B9F3-9D9D79CB991F}|GUI.csproj|D:\\workspace\\.Net\\QuanLyBenhVien\\GUI\\forminventorymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0C76494E-9B86-4529-B9F3-9D9D79CB991F}|GUI.csproj|solutionrelative:forminventorymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0C76494E-9B86-4529-B9F3-9D9D79CB991F}|GUI.csproj|D:\\workspace\\.Net\\QuanLyBenhVien\\GUI\\forminventorymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{0C76494E-9B86-4529-B9F3-9D9D79CB991F}|GUI.csproj|solutionrelative:forminventorymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0C76494E-9B86-4529-B9F3-9D9D79CB991F}|GUI.csproj|D:\\workspace\\.Net\\QuanLyBenhVien\\GUI\\formitems.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0C76494E-9B86-4529-B9F3-9D9D79CB991F}|GUI.csproj|solutionrelative:formitems.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0C76494E-9B86-4529-B9F3-9D9D79CB991F}|GUI.csproj|D:\\workspace\\.Net\\QuanLyBenhVien\\GUI\\formitems.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{0C76494E-9B86-4529-B9F3-9D9D79CB991F}|GUI.csproj|solutionrelative:formitems.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -50,84 +26,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "FormHistoryOutItem.cs",
-              "DocumentMoniker": "D:\\workspace\\.Net\\QuanLyBenhVien\\GUI\\FormHistoryOutItem.cs",
-              "RelativeDocumentMoniker": "FormHistoryOutItem.cs",
-              "ToolTip": "D:\\workspace\\.Net\\QuanLyBenhVien\\GUI\\FormHistoryOutItem.cs",
-              "RelativeToolTip": "FormHistoryOutItem.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAAfAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-20T17:04:29.203Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "FormHistoryOutItem.cs [Design]",
-              "DocumentMoniker": "D:\\workspace\\.Net\\QuanLyBenhVien\\GUI\\FormHistoryOutItem.cs",
-              "RelativeDocumentMoniker": "FormHistoryOutItem.cs",
-              "ToolTip": "D:\\workspace\\.Net\\QuanLyBenhVien\\GUI\\FormHistoryOutItem.cs [Design]",
-              "RelativeToolTip": "FormHistoryOutItem.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-20T17:03:24.959Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "FormInventoryManager.cs",
-              "DocumentMoniker": "D:\\workspace\\.Net\\QuanLyBenhVien\\GUI\\FormInventoryManager.cs",
-              "RelativeDocumentMoniker": "FormInventoryManager.cs",
-              "ToolTip": "D:\\workspace\\.Net\\QuanLyBenhVien\\GUI\\FormInventoryManager.cs",
-              "RelativeToolTip": "FormInventoryManager.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAF0AAABnAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-20T17:01:53.078Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "FormInventoryManager.cs [Design]",
-              "DocumentMoniker": "D:\\workspace\\.Net\\QuanLyBenhVien\\GUI\\FormInventoryManager.cs",
-              "RelativeDocumentMoniker": "FormInventoryManager.cs",
-              "ToolTip": "D:\\workspace\\.Net\\QuanLyBenhVien\\GUI\\FormInventoryManager.cs [Design]",
-              "RelativeToolTip": "FormInventoryManager.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-20T17:01:34.956Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "FormItems.cs",
-              "DocumentMoniker": "D:\\workspace\\.Net\\QuanLyBenhVien\\GUI\\FormItems.cs",
-              "RelativeDocumentMoniker": "FormItems.cs",
-              "ToolTip": "D:\\workspace\\.Net\\QuanLyBenhVien\\GUI\\FormItems.cs",
-              "RelativeToolTip": "FormItems.cs",
-              "ViewState": "AQIAAGYAAAAAAAAAAAAuwBkAAAArAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-20T16:45:05.442Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "FormItems.cs [Design]",
-              "DocumentMoniker": "D:\\workspace\\.Net\\QuanLyBenhVien\\GUI\\FormItems.cs",
-              "RelativeDocumentMoniker": "FormItems.cs",
-              "ToolTip": "D:\\workspace\\.Net\\QuanLyBenhVien\\GUI\\FormItems.cs [Design]",
-              "RelativeToolTip": "FormItems.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-15T10:20:09.701Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\workspace\\.Net\\QuanLyBenhVien\\GUI\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "D:\\workspace\\.Net\\QuanLyBenhVien\\GUI\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAQwBIAAAA7AAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAA1AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-15T10:35:46.459Z",
+              "WhenOpened": "2025-06-21T03:57:38.485Z",
               "EditorCaption": ""
             }
           ]

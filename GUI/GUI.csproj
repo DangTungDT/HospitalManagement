@@ -74,6 +74,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormItems.resx">
       <DependentUpon>FormItems.cs</DependentUpon>
+    </EmbeddedResource>
     <Compile Include="frm_BaoHiem.cs">
       <SubType>Form</SubType>
     </Compile>
