@@ -15,3 +15,14 @@ D:\workspace\.Net\QuanLyBenhVien\GUI\obj\Debug\GUI.csproj.Up2Date
 D:\workspace\.Net\QuanLyBenhVien\GUI\obj\Debug\GUI.exe
 D:\workspace\.Net\QuanLyBenhVien\GUI\obj\Debug\GUI.pdb
 D:\workspace\.Net\QuanLyBenhVien\GUI\obj\Debug\GUI.FormHistoryOutItem.resources
+D:\workspace\.Net\QuanLyBenhVien\GUI\obj\Debug\GUI.frm_BaoHiem.resources
+D:\workspace\.Net\QuanLyBenhVien\GUI\obj\Debug\GUI.frm_CongNo.resources
+D:\workspace\.Net\QuanLyBenhVien\GUI\obj\Debug\GUI.frm_CongNoTra.resources
+D:\workspace\.Net\QuanLyBenhVien\GUI\obj\Debug\GUI.frm_DangKyBN.resources
+D:\workspace\.Net\QuanLyBenhVien\GUI\obj\Debug\GUI.frm_DichVu.resources
+D:\workspace\.Net\QuanLyBenhVien\GUI\obj\Debug\GUI.frm_HoaDon.resources
+D:\workspace\.Net\QuanLyBenhVien\GUI\obj\Debug\GUI.frm_Luong.resources
+D:\workspace\.Net\QuanLyBenhVien\GUI\obj\Debug\GUI.frm_NhaCungCap.resources
+D:\workspace\.Net\QuanLyBenhVien\GUI\obj\Debug\GUI.frm_PhieuChi.resources
+D:\workspace\.Net\QuanLyBenhVien\GUI\obj\Debug\GUI.frm_PhieuThu.resources
+D:\workspace\.Net\QuanLyBenhVien\GUI\obj\Debug\GUI.frm_TaiSan.resources
