@@ -1,0 +1,17 @@
+D:\workspace\.Net\QuanLyBenhVien\GUI\bin\Debug\GUI.exe.config
+D:\workspace\.Net\QuanLyBenhVien\GUI\bin\Debug\GUI.exe
+D:\workspace\.Net\QuanLyBenhVien\GUI\bin\Debug\GUI.pdb
+D:\workspace\.Net\QuanLyBenhVien\GUI\bin\Debug\BLL.dll
+D:\workspace\.Net\QuanLyBenhVien\GUI\bin\Debug\DTO.dll
+D:\workspace\.Net\QuanLyBenhVien\GUI\bin\Debug\BLL.pdb
+D:\workspace\.Net\QuanLyBenhVien\GUI\bin\Debug\DTO.pdb
+D:\workspace\.Net\QuanLyBenhVien\GUI\obj\Debug\GUI.csproj.AssemblyReference.cache
+D:\workspace\.Net\QuanLyBenhVien\GUI\obj\Debug\GUI.FormInventoryManager.resources
+D:\workspace\.Net\QuanLyBenhVien\GUI\obj\Debug\GUI.FormItems.resources
+D:\workspace\.Net\QuanLyBenhVien\GUI\obj\Debug\GUI.Properties.Resources.resources
+D:\workspace\.Net\QuanLyBenhVien\GUI\obj\Debug\GUI.csproj.GenerateResource.cache
+D:\workspace\.Net\QuanLyBenhVien\GUI\obj\Debug\GUI.csproj.CoreCompileInputs.cache
+D:\workspace\.Net\QuanLyBenhVien\GUI\obj\Debug\GUI.csproj.Up2Date
+D:\workspace\.Net\QuanLyBenhVien\GUI\obj\Debug\GUI.exe
+D:\workspace\.Net\QuanLyBenhVien\GUI\obj\Debug\GUI.pdb
+D:\workspace\.Net\QuanLyBenhVien\GUI\obj\Debug\GUI.FormHistoryOutItem.resources
