@@ -1,6 +1,6 @@
-D:\Project_ThucTap\HospitalManagement\DTO\bin\Debug\DTO.dll
-D:\Project_ThucTap\HospitalManagement\DTO\bin\Debug\DTO.pdb
-D:\Project_ThucTap\HospitalManagement\DTO\obj\Debug\DTO.csproj.AssemblyReference.cache
-D:\Project_ThucTap\HospitalManagement\DTO\obj\Debug\DTO.csproj.CoreCompileInputs.cache
-D:\Project_ThucTap\HospitalManagement\DTO\obj\Debug\DTO.dll
-D:\Project_ThucTap\HospitalManagement\DTO\obj\Debug\DTO.pdb
+D:\workspace\.Net\QuanLyBenhVien\DTO\bin\Debug\DTO.dll
+D:\workspace\.Net\QuanLyBenhVien\DTO\bin\Debug\DTO.pdb
+D:\workspace\.Net\QuanLyBenhVien\DTO\obj\Debug\DTO.csproj.AssemblyReference.cache
+D:\workspace\.Net\QuanLyBenhVien\DTO\obj\Debug\DTO.csproj.CoreCompileInputs.cache
+D:\workspace\.Net\QuanLyBenhVien\DTO\obj\Debug\DTO.dll
+D:\workspace\.Net\QuanLyBenhVien\DTO\obj\Debug\DTO.pdb
