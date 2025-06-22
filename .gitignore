@@ -1,0 +1,13 @@
+# Ignore build output folders
+bin/
+obj/
+.vs/
+
+# Ignore build artifacts
+*.dll
+*.pdb
+*.exe
+*.cache
+*.suo
+*.user
+*.log
