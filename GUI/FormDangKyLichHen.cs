@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace GUI
 {
-    public partial class frm_TaiSan : Form
+    public partial class FormDangKyLichHen : Form
     {
-        public frm_TaiSan()
+        public FormDangKyLichHen()
         {
             InitializeComponent();
         }

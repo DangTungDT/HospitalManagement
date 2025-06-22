@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormCapNhatThongTin.cs">
+    </Compile>
     <Compile Include="FormHistoryOutItem.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,103 +80,49 @@
     <Compile Include="frm_BaoHiem.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_BaoHiem.Designer.cs">
-      <DependentUpon>frm_BaoHiem.cs</DependentUpon>
+    <Compile Include="FormCapNhatThongTin.Designer.cs">
+      <DependentUpon>FormCapNhatThongTin.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_CongNo.cs">
+    <Compile Include="FormChiTietKhamBenh.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_CongNo.Designer.cs">
-      <DependentUpon>frm_CongNo.cs</DependentUpon>
+    <Compile Include="FormChiTietKhamBenh.Designer.cs">
+      <DependentUpon>FormChiTietKhamBenh.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_CongNoTra.cs">
+    <Compile Include="FormDangKyLichHen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_CongNoTra.Designer.cs">
-      <DependentUpon>frm_CongNoTra.cs</DependentUpon>
+    <Compile Include="FormDangKyLichHen.Designer.cs">
+      <DependentUpon>FormDangKyLichHen.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_DangKyBN.cs">
+    <Compile Include="FormLichSuKhamBenh.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_DangKyBN.Designer.cs">
-      <DependentUpon>frm_DangKyBN.cs</DependentUpon>
+    <Compile Include="FormLichSuKhamBenh.Designer.cs">
+      <DependentUpon>FormLichSuKhamBenh.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_DichVu.cs">
+    <Compile Include="FormThongTinNhanVien.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_DichVu.Designer.cs">
-      <DependentUpon>frm_DichVu.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frm_HoaDon.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frm_HoaDon.Designer.cs">
-      <DependentUpon>frm_HoaDon.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frm_Luong.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frm_Luong.Designer.cs">
-      <DependentUpon>frm_Luong.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frm_NhaCungCap.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frm_NhaCungCap.Designer.cs">
-      <DependentUpon>frm_NhaCungCap.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frm_PhieuChi.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frm_PhieuChi.Designer.cs">
-      <DependentUpon>frm_PhieuChi.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frm_PhieuThu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frm_PhieuThu.Designer.cs">
-      <DependentUpon>frm_PhieuThu.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frm_TaiSan.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frm_TaiSan.Designer.cs">
-      <DependentUpon>frm_TaiSan.cs</DependentUpon>
+    <Compile Include="FormThongTinNhanVien.Designer.cs">
+      <DependentUpon>FormThongTinNhanVien.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="frm_BaoHiem.resx">
-      <DependentUpon>frm_BaoHiem.cs</DependentUpon>
+    <EmbeddedResource Include="FormCapNhatThongTin.resx">
+      <DependentUpon>FormCapNhatThongTin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_CongNo.resx">
-      <DependentUpon>frm_CongNo.cs</DependentUpon>
+    <EmbeddedResource Include="FormChiTietKhamBenh.resx">
+      <DependentUpon>FormChiTietKhamBenh.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_CongNoTra.resx">
-      <DependentUpon>frm_CongNoTra.cs</DependentUpon>
+    <EmbeddedResource Include="FormDangKyLichHen.resx">
+      <DependentUpon>FormDangKyLichHen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_DangKyBN.resx">
-      <DependentUpon>frm_DangKyBN.cs</DependentUpon>
+    <EmbeddedResource Include="FormLichSuKhamBenh.resx">
+      <DependentUpon>FormLichSuKhamBenh.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_DichVu.resx">
-      <DependentUpon>frm_DichVu.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frm_HoaDon.resx">
-      <DependentUpon>frm_HoaDon.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frm_Luong.resx">
-      <DependentUpon>frm_Luong.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frm_NhaCungCap.resx">
-      <DependentUpon>frm_NhaCungCap.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frm_PhieuChi.resx">
-      <DependentUpon>frm_PhieuChi.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frm_PhieuThu.resx">
-      <DependentUpon>frm_PhieuThu.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frm_TaiSan.resx">
-      <DependentUpon>frm_TaiSan.cs</DependentUpon>
+    <EmbeddedResource Include="FormThongTinNhanVien.resx">
+      <DependentUpon>FormThongTinNhanVien.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -184,6 +132,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -207,6 +156,33 @@
       <Project>{3e7b49e7-ab52-4ae9-adb2-ae2d29ee7dd6}</Project>
       <Name>DTO</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user_info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\house.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\salary.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\salary1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\presentation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\house1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\loupe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\more.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
