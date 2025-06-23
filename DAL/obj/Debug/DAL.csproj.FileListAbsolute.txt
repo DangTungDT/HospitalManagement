@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 F:\ProjectQLBV\HospitalManagement\DAL\bin\Debug\DAL.dll
 F:\ProjectQLBV\HospitalManagement\DAL\bin\Debug\DAL.pdb
 F:\ProjectQLBV\HospitalManagement\DAL\bin\Debug\DTO.dll
@@ -8,3 +9,14 @@ F:\ProjectQLBV\HospitalManagement\DAL\obj\Debug\DAL.csproj.CopyComplete
 F:\ProjectQLBV\HospitalManagement\DAL\obj\Debug\DAL.dll
 F:\ProjectQLBV\HospitalManagement\DAL\obj\Debug\DAL.pdb
 F:\ProjectQLBV\HospitalManagement\DAL\bin\Debug\DAL.dll.config
+=======
+D:\workspace\.Net\QuanLyBenhVien\DAL\bin\Debug\DAL.dll
+D:\workspace\.Net\QuanLyBenhVien\DAL\bin\Debug\DAL.pdb
+D:\workspace\.Net\QuanLyBenhVien\DAL\bin\Debug\DTO.dll
+D:\workspace\.Net\QuanLyBenhVien\DAL\bin\Debug\DTO.pdb
+D:\workspace\.Net\QuanLyBenhVien\DAL\obj\Debug\DAL.csproj.AssemblyReference.cache
+D:\workspace\.Net\QuanLyBenhVien\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+D:\workspace\.Net\QuanLyBenhVien\DAL\obj\Debug\DAL.csproj.Up2Date
+D:\workspace\.Net\QuanLyBenhVien\DAL\obj\Debug\DAL.dll
+D:\workspace\.Net\QuanLyBenhVien\DAL\obj\Debug\DAL.pdb
+>>>>>>> main

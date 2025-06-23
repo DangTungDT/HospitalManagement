@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="DangNhap_GUI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,23 +127,313 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmTestTypeInfo_Doctor.resx">
       <DependentUpon>frmTestTypeInfo_Doctor.cs</DependentUpon>
+=======
+    <Compile Include="frmAppointmentManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAppointmentManagement.Designer.cs">
+      <DependentUpon>frmAppointmentManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDailyCareGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDailyCareGUI.Designer.cs">
+      <DependentUpon>frmDailyCareGUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMedicalInventoryGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMedicalInventoryGUI.Designer.cs">
+      <DependentUpon>frmMedicalInventoryGUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMedicalRecordGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMedicalRecordGUI.Designer.cs">
+      <DependentUpon>frmMedicalRecordGUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmHeadNurseGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmHeadNurseGUI.Designer.cs">
+      <DependentUpon>frmHeadNurseGUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmInpatientManagementGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInpatientManagementGUI.Designer.cs">
+      <DependentUpon>frmInpatientManagementGUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMedicalRegistrationGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMedicalRegistrationGUI.Designer.cs">
+      <DependentUpon>frmMedicalRegistrationGUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPatientAdmissionGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPatientAdmissionGUI.Designer.cs">
+      <DependentUpon>frmPatientAdmissionGUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPatientSearchGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPatientSearchGUI.Designer.cs">
+      <DependentUpon>frmPatientSearchGUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReceptionistDashboardGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReceptionistDashboardGUI.Designer.cs">
+      <DependentUpon>frmReceptionistDashboardGUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTaskAssignmentGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTaskAssignmentGUI.Designer.cs">
+      <DependentUpon>frmTaskAssignmentGUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmUserGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUserGUI.Designer.cs">
+      <DependentUpon>frmUserGUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmAppointmentManagement.resx">
+      <DependentUpon>frmAppointmentManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDailyCareGUI.resx">
+      <DependentUpon>frmDailyCareGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMedicalInventoryGUI.resx">
+      <DependentUpon>frmMedicalInventoryGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMedicalRecordGUI.resx">
+      <DependentUpon>frmMedicalRecordGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmHeadNurseGUI.resx">
+      <DependentUpon>frmHeadNurseGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmInpatientManagementGUI.resx">
+      <DependentUpon>frmInpatientManagementGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMedicalRegistrationGUI.resx">
+      <DependentUpon>frmMedicalRegistrationGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPatientAdmissionGUI.resx">
+      <DependentUpon>frmPatientAdmissionGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPatientSearchGUI.resx">
+      <DependentUpon>frmPatientSearchGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReceptionistDashboardGUI.resx">
+      <DependentUpon>frmReceptionistDashboardGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTaskAssignmentGUI.resx">
+      <DependentUpon>frmTaskAssignmentGUI.cs</DependentUpon>
+>>>>>>> main
     </EmbeddedResource>
     <EmbeddedResource Include="frmUserGUI.resx">
       <DependentUpon>frmUserGUI.cs</DependentUpon>
     </EmbeddedResource>
+<<<<<<< HEAD
+=======
+    <Compile Include="FormCapNhatThongTin.cs">
+    </Compile>
+    <Compile Include="FormHistoryOutItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormHistoryOutItem.Designer.cs">
+      <DependentUpon>FormHistoryOutItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormInventoryManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormInventoryManager.Designer.cs">
+      <DependentUpon>FormInventoryManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormItems.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormItems.Designer.cs">
+      <DependentUpon>FormItems.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormHistoryOutItem.resx">
+      <DependentUpon>FormHistoryOutItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormInventoryManager.resx">
+      <DependentUpon>FormInventoryManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormItems.resx">
+      <DependentUpon>FormItems.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="frm_BaoHiem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_BaoHiem.Designer.cs">
+      <DependentUpon>frm_BaoHiem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_CongNo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_CongNo.Designer.cs">
+      <DependentUpon>frm_CongNo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_CongNoTra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_CongNoTra.Designer.cs">
+      <DependentUpon>frm_CongNoTra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_DangKyBN.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_DangKyBN.Designer.cs">
+      <DependentUpon>frm_DangKyBN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_DichVu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_DichVu.Designer.cs">
+      <DependentUpon>frm_DichVu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_HoaDon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_HoaDon.Designer.cs">
+      <DependentUpon>frm_HoaDon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_Luong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_Luong.Designer.cs">
+      <DependentUpon>frm_Luong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_NhaCungCap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_NhaCungCap.Designer.cs">
+      <DependentUpon>frm_NhaCungCap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_PhieuChi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_PhieuChi.Designer.cs">
+      <DependentUpon>frm_PhieuChi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_PhieuThu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_PhieuThu.Designer.cs">
+      <DependentUpon>frm_PhieuThu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_TaiSan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_TaiSan.Designer.cs">
+      <DependentUpon>frm_TaiSan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frm_BaoHiem.resx">
+      <DependentUpon>frm_BaoHiem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_CongNo.resx">
+      <DependentUpon>frm_CongNo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_CongNoTra.resx">
+      <DependentUpon>frm_CongNoTra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_DangKyBN.resx">
+      <DependentUpon>frm_DangKyBN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_DichVu.resx">
+      <DependentUpon>frm_DichVu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_HoaDon.resx">
+      <DependentUpon>frm_HoaDon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_Luong.resx">
+      <DependentUpon>frm_Luong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_NhaCungCap.resx">
+      <DependentUpon>frm_NhaCungCap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_PhieuChi.resx">
+      <DependentUpon>frm_PhieuChi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_PhieuThu.resx">
+      <DependentUpon>frm_PhieuThu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_TaiSan.resx">
+      <DependentUpon>frm_TaiSan.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="FormCapNhatThongTin.Designer.cs">
+      <DependentUpon>FormCapNhatThongTin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormChiTietKhamBenh.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormChiTietKhamBenh.Designer.cs">
+      <DependentUpon>FormChiTietKhamBenh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormDangKyLichHen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDangKyLichHen.Designer.cs">
+      <DependentUpon>FormDangKyLichHen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormLichSuKhamBenh.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLichSuKhamBenh.Designer.cs">
+      <DependentUpon>FormLichSuKhamBenh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormThongTinNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormThongTinNhanVien.Designer.cs">
+      <DependentUpon>FormThongTinNhanVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormCapNhatThongTin.resx">
+      <DependentUpon>FormCapNhatThongTin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormChiTietKhamBenh.resx">
+      <DependentUpon>FormChiTietKhamBenh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDangKyLichHen.resx">
+      <DependentUpon>FormDangKyLichHen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLichSuKhamBenh.resx">
+      <DependentUpon>FormLichSuKhamBenh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormThongTinNhanVien.resx">
+      <DependentUpon>FormThongTinNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
+>>>>>>> main
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -161,6 +452,53 @@
       <Project>{3e7b49e7-ab52-4ae9-adb2-ae2d29ee7dd6}</Project>
       <Name>DTO</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\add.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\delete.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\edit.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logonursing.png" />
+    <None Include="Resources\logoRexeption.png" />
+    <Content Include="Resources\search.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\user_info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\house.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\salary.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\salary1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\presentation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\house1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\loupe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\more.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
