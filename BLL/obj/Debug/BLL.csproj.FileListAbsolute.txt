@@ -1,0 +1,11 @@
+D:\workspace\.Net\QuanLyBenhVien\BLL\bin\Debug\BLL.dll
+D:\workspace\.Net\QuanLyBenhVien\BLL\bin\Debug\BLL.pdb
+D:\workspace\.Net\QuanLyBenhVien\BLL\bin\Debug\DAL.dll
+D:\workspace\.Net\QuanLyBenhVien\BLL\bin\Debug\DTO.dll
+D:\workspace\.Net\QuanLyBenhVien\BLL\bin\Debug\DAL.pdb
+D:\workspace\.Net\QuanLyBenhVien\BLL\bin\Debug\DTO.pdb
+D:\workspace\.Net\QuanLyBenhVien\BLL\obj\Debug\BLL.csproj.AssemblyReference.cache
+D:\workspace\.Net\QuanLyBenhVien\BLL\obj\Debug\BLL.csproj.CoreCompileInputs.cache
+D:\workspace\.Net\QuanLyBenhVien\BLL\obj\Debug\BLL.csproj.Up2Date
+D:\workspace\.Net\QuanLyBenhVien\BLL\obj\Debug\BLL.dll
+D:\workspace\.Net\QuanLyBenhVien\BLL\obj\Debug\BLL.pdb
