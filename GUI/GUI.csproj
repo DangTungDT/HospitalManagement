@@ -46,6 +46,88 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
+    <Compile Include="DangNhap_GUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DangNhap_GUI.designer.cs">
+      <DependentUpon>DangNhap_GUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDepartmentInfo_Doctor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDoctorInfo_Doctor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMedicalRecordInfo_Doctor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMedicineInfo_Doctor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPatientInfo_Doctor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrescriptionDetailInfo_Doctor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrescriptionInfo_Doctor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMenuDoctor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMenuDoctor.designer.cs">
+      <DependentUpon>frmMenuDoctor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTestInfo_Doctor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTestTypeInfo_Doctor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUserGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUserGUI.designer.cs">
+      <DependentUpon>frmUserGUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PasswordHelper.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="DangNhap_GUI.resx">
+      <DependentUpon>DangNhap_GUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDepartmentInfo_Doctor.resx">
+      <DependentUpon>frmDepartmentInfo_Doctor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDoctorInfo_Doctor.resx">
+      <DependentUpon>frmDoctorInfo_Doctor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMedicalRecordInfo_Doctor.resx">
+      <DependentUpon>frmMedicalRecordInfo_Doctor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMedicineInfo_Doctor.resx">
+      <DependentUpon>frmMedicineInfo_Doctor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPatientInfo_Doctor.resx">
+      <DependentUpon>frmPatientInfo_Doctor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrescriptionDetailInfo_Doctor.resx">
+      <DependentUpon>frmPrescriptionDetailInfo_Doctor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrescriptionInfo_Doctor.resx">
+      <DependentUpon>frmPrescriptionInfo_Doctor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMenuDoctor.resx">
+      <DependentUpon>frmMenuDoctor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTestInfo_Doctor.resx">
+      <DependentUpon>frmTestInfo_Doctor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTestTypeInfo_Doctor.resx">
+      <DependentUpon>frmTestTypeInfo_Doctor.cs</DependentUpon>
+=======
     <Compile Include="frmAppointmentManagement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -152,10 +234,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmTaskAssignmentGUI.resx">
       <DependentUpon>frmTaskAssignmentGUI.cs</DependentUpon>
+>>>>>>> main
     </EmbeddedResource>
     <EmbeddedResource Include="frmUserGUI.resx">
       <DependentUpon>frmUserGUI.cs</DependentUpon>
     </EmbeddedResource>
+<<<<<<< HEAD
+=======
     <Compile Include="FormCapNhatThongTin.cs">
     </Compile>
     <Compile Include="FormHistoryOutItem.cs">
@@ -329,6 +414,7 @@
     <EmbeddedResource Include="FormThongTinNhanVien.resx">
       <DependentUpon>FormThongTinNhanVien.cs</DependentUpon>
     </EmbeddedResource>
+>>>>>>> main
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
