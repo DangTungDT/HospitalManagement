@@ -24,7 +24,6 @@ CREATE TABLE Staff (
     position VARCHAR(50),
     qualification VARCHAR(100),
     degree VARCHAR(100),
-    salaryID INT,
     status NVARCHAR(20) DEFAULT 'Active' CHECK (status IN ('Active', 'Inactive', 'On Leave')),
 	startDate date,
     Notes text
@@ -46,7 +45,7 @@ go
 --Table Room
 create table Room
 (
-	id char(10) primary key,
+	id int identity(1,1) primary key,
 	roomName nvarchar(100),
 	bedCount int,
 	departmentID char(10)
@@ -74,7 +73,7 @@ create table DailyCare
 	pulseRate int,
 	note text,
 	patientID char(10),
-	roomID char(10),
+	roomID int,
 	nurseID char(10)
 )
 go
@@ -178,25 +177,60 @@ go
 CREATE TABLE SupplyHistory (
     id CHAR(10) PRIMARY KEY,
     itemID CHAR(10) NOT NULL,
-    roomID CHAR(10) NOT NULL,
+    roomID int NOT NULL,
     nurseID CHAR(10) NOT NULL,
     dosage VARCHAR(255),
     quantity INT,
     unit VARCHAR(255),
     note text
 )
-go
+go	
 
 --Table Items
 CREATE TABLE Items (
-    id CHAR(10) PRIMARY KEY,        -- Mã vật tư (duy nhất)
-    itemName NVARCHAR(255) NOT NULL, -- Tên vật tư (dùng NVARCHAR để hỗ trợ tiếng Việt)
-    itemType NVARCHAR(100),          -- Loại vật tư (ví dụ: thuốc, thiết bị, dụng cụ...)
-	unit nvarchar(20),
-	price DECIMAL(18, 2)
+    ID        CHAR(10) PRIMARY KEY,                          -- Mã vật tư (duy nhất)
+    ItemName      NVARCHAR(255) NOT NULL,                    -- Tên vật tư
+    ItemType NVARCHAR(100) CHECK (ItemType IN (
+    N'Medicine', N'Equipment', N'Tool', N'Other Supplies')), -- Loại vật tư có ràng buộc phân loại
+    Unit          NVARCHAR(20) NOT NULL DEFAULT N'Chiếc',    -- Đơn vị (viên, hộp, chiếc,...)
+    Price         DECIMAL(18, 2) CHECK (Price >= 0),         -- Giá không âm
+    CreatedAt     DATETIME DEFAULT GETDATE(),                -- Ngày thêm vào hệ thống
+    IsActive      BIT NOT NULL DEFAULT 1                     -- Đang được sử dụng?
+);
+go
 
+--Table Inventory
+CREATE TABLE Inventory (
+    ItemID     CHAR(10) PRIMARY KEY FOREIGN KEY REFERENCES Items(ID),
+    Quantity   INT NOT NULL CHECK (Quantity >= 0),
+    LastUpdated DATETIME DEFAULT GETDATE()
+);
+go
+
+--Table Salaries
+CREATE TABLE Salaries (
+    Id INT IDENTITY(1,1) PRIMARY KEY,               -- Mã bảng lương tự tăng
+    StaffId CHAR(10) NOT NULL,                      -- Mã nhân viên (FK)
+    SalaryPeriod VARCHAR(20) NOT NULL,              -- Kỳ lương, ví dụ '2025-06'
+    SalaryDate DATE NOT NULL,                       -- Ngày trả lương
+    BasicSalary DECIMAL(18,2) NOT NULL,             -- Lương cơ bản
+    WorkingDays INT NOT NULL,                       -- Số ngày công thực tế
+    OvertimeHours DECIMAL(5,2) DEFAULT 0,           -- Số giờ tăng ca
+    Allowance DECIMAL(18,2) DEFAULT 0,              -- Phụ cấp
+    Bonus DECIMAL(18,2) DEFAULT 0,                  -- Thưởng
+    Deduction DECIMAL(18,2) DEFAULT 0,              -- Các khoản bị trừ
+    IncomeTax DECIMAL(18,2) DEFAULT 0,              -- Thuế TNCN
+    SocialInsurance DECIMAL(18,2) DEFAULT 0,        -- Bảo hiểm xã hội
+	NetSalary AS (                                  -- Lương thực nhận (cột tính toán)
+        BasicSalary + Allowance + Bonus 
+        - Deduction - IncomeTax - SocialInsurance
+    ) PERSISTED,
+    Note text NULL,                                 -- Ghi chú thêm
+    CreatedAt DATETIME DEFAULT GETDATE(),           -- Ngày tạo
+    CreatedBy NVARCHAR(100) NULL                    -- Người tạo
 )
 go
+
 
 --Foreign key
 alter table Account
@@ -246,6 +280,10 @@ add constraint fk_Item_SupplyHistory foreign key(itemID) references Items(id),
 	constraint fk_Nurse_SupplyHistory foreign key(nurseID) references Staff(id);
 go
 
---USE master;
---ALTER DATABASE HospitalManagement SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
---DROP DATABASE HospitalManagement;
+alter table Salaries
+add constraint fk_Staff_Salary foreign key(StaffId) references Staff(id);
+go
+
+----USE master;
+----ALTER DATABASE HospitalManagement SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+----DROP DATABASE HospitalManagement;
