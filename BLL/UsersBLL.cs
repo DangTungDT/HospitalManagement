@@ -11,6 +11,8 @@ namespace BLL
     public class UsersBLL
     {
         UsersDAL dal = new UsersDAL();
+
+        public UsersDTO GetAccountByUsername(string username) => dal.GetAccountByUsername(username);
         public List<UsersDTO> GetAllUsers() => dal.GetAllUsers();
         public bool AddUser(UsersDTO u) => dal.AddUser(u);
         public bool EditUser(UsersDTO u) => dal.EditUser(u);

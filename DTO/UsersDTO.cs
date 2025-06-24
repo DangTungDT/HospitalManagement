@@ -11,7 +11,7 @@ namespace DTO
         public int UserID { get; set; } // Khóa chính
         public string Username { get; set; }
         public string PasswordHash { get; set; }
-        public DateTime StartDate { get; set; } = DateTime.Now;
+        public DateTime? StartDate { get; set; } = DateTime.Now;
         public string StaffID { get; set; }
         public string Status { get; set; }
     }

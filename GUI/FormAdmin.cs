@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace GUI
 {
-    public partial class FormCapNhatThongTin : Form
+    public partial class FormAdmin : Form
     {
-        public FormCapNhatThongTin()
+        public FormAdmin()
         {
             InitializeComponent();
-        }
-
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

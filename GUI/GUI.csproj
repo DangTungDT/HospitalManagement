@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version='1.0' encoding='utf-8'?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="15.0">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -46,12 +46,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Compile Include="DangNhap_GUI.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DangNhap_GUI.designer.cs">
       <DependentUpon>DangNhap_GUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAdmin.Designer.cs">
+      <DependentUpon>FormAdmin.cs</DependentUpon>
     </Compile>
     <Compile Include="frmDepartmentInfo_Doctor.cs">
       <SubType>Form</SubType>
@@ -93,10 +98,12 @@
       <DependentUpon>frmUserGUI.cs</DependentUpon>
     </Compile>
     <Compile Include="PasswordHelper.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="DangNhap_GUI.resx">
       <DependentUpon>DangNhap_GUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAdmin.resx">
+      <DependentUpon>FormAdmin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDepartmentInfo_Doctor.resx">
       <DependentUpon>frmDepartmentInfo_Doctor.cs</DependentUpon>
@@ -127,7 +134,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmTestTypeInfo_Doctor.resx">
       <DependentUpon>frmTestTypeInfo_Doctor.cs</DependentUpon>
-=======
+    </EmbeddedResource>
     <Compile Include="frmAppointmentManagement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -194,14 +201,10 @@
     <Compile Include="frmTaskAssignmentGUI.Designer.cs">
       <DependentUpon>frmTaskAssignmentGUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmUserGUI.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="frmUserGUI.Designer.cs">
       <DependentUpon>frmUserGUI.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmAppointmentManagement.resx">
       <DependentUpon>frmAppointmentManagement.cs</DependentUpon>
     </EmbeddedResource>
@@ -234,14 +237,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmTaskAssignmentGUI.resx">
       <DependentUpon>frmTaskAssignmentGUI.cs</DependentUpon>
->>>>>>> main
     </EmbeddedResource>
     <EmbeddedResource Include="frmUserGUI.resx">
       <DependentUpon>frmUserGUI.cs</DependentUpon>
     </EmbeddedResource>
-<<<<<<< HEAD
-=======
     <Compile Include="FormCapNhatThongTin.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormHistoryOutItem.cs">
       <SubType>Form</SubType>
@@ -261,7 +262,6 @@
     <Compile Include="FormItems.Designer.cs">
       <DependentUpon>FormItems.cs</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormHistoryOutItem.resx">
       <DependentUpon>FormHistoryOutItem.cs</DependentUpon>
     </EmbeddedResource>
@@ -337,7 +337,6 @@
     <Compile Include="frm_TaiSan.Designer.cs">
       <DependentUpon>frm_TaiSan.cs</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frm_BaoHiem.resx">
       <DependentUpon>frm_BaoHiem.cs</DependentUpon>
     </EmbeddedResource>
@@ -398,7 +397,6 @@
     <Compile Include="FormThongTinNhanVien.Designer.cs">
       <DependentUpon>FormThongTinNhanVien.cs</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormCapNhatThongTin.resx">
       <DependentUpon>FormCapNhatThongTin.cs</DependentUpon>
     </EmbeddedResource>
@@ -414,7 +412,6 @@
     <EmbeddedResource Include="FormThongTinNhanVien.resx">
       <DependentUpon>FormThongTinNhanVien.cs</DependentUpon>
     </EmbeddedResource>
->>>>>>> main
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
@@ -429,11 +426,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>

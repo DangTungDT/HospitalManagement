@@ -11,6 +11,21 @@ namespace DAL
     public class UsersDAL
     {
         HospitalManagementDataContext db = new HospitalManagementDataContext();
+
+        //Hàm lấy account theo username
+        public UsersDTO GetAccountByUsername(string username)
+        {
+            return db.Accounts.Where(x=> x.username == username).Select(x=> new UsersDTO
+            {
+                UserID = x.id,
+                Username = x.username,
+                PasswordHash = x.password,
+                StaffID = x.staffID,
+                StartDate = x.startDate,
+                Status = x.status
+
+            }).FirstOrDefault();
+        }
         //Hàm lấy danh sách User
         public List<UsersDTO> GetAllUsers()
         {
