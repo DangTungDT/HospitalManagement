@@ -53,6 +53,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="StaffDAL.cs" />
     <Compile Include="UsersDAL.cs" />
   </ItemGroup>
   <ItemGroup>
