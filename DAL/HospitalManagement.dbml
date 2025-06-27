@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="HospitalManagement" Class="HospitalManagementDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-UUT1B4I;Initial Catalog=HospitalManagement;Integrated Security=True;Trust Server Certificate=True" SettingsObjectName="DAL.Properties.Settings" SettingsPropertyName="HospitalManagementConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-6LE6PT2\SQLEXPRESS;Initial Catalog=HospitalManagement;Integrated Security=True;Encrypt=False" SettingsObjectName="DAL.Properties.Settings" SettingsPropertyName="HospitalManagementConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Account" Member="Accounts">
     <Type Name="Account">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -15,13 +15,13 @@
     <Type Name="SupplyHistory">
       <Column Name="id" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="itemID" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
-      <Column Name="roomID" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="roomID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="nurseID" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
       <Column Name="dosage" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
       <Column Name="quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="unit" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
       <Column Name="note" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
-      <Association Name="Item_SupplyHistory" Member="Item" ThisKey="itemID" OtherKey="id" Type="Item" IsForeignKey="true" />
+      <Association Name="Item_SupplyHistory" Member="Item" ThisKey="itemID" OtherKey="ID" Type="Item" IsForeignKey="true" />
       <Association Name="Room_SupplyHistory" Member="Room" ThisKey="roomID" OtherKey="id" Type="Room" IsForeignKey="true" />
       <Association Name="Staff_SupplyHistory" Member="Staff" ThisKey="nurseID" OtherKey="id" Type="Staff" IsForeignKey="true" />
     </Type>
@@ -47,7 +47,7 @@
       <Column Name="pulseRate" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="note" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="patientID" Type="System.String" DbType="Char(10)" CanBeNull="true" />
-      <Column Name="roomID" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="roomID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="nurseID" Type="System.String" DbType="Char(10)" CanBeNull="true" />
       <Association Name="Patient_DailyCare" Member="Patient" ThisKey="patientID" OtherKey="id" Type="Patient" IsForeignKey="true" />
       <Association Name="Room_DailyCare" Member="Room" ThisKey="roomID" OtherKey="id" Type="Room" IsForeignKey="true" />
@@ -74,15 +74,26 @@
       <Association Name="Staff_DoctorPatient" Member="Staff" ThisKey="doctorID" OtherKey="id" Type="Staff" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.Inventory" Member="Inventories">
+    <Type Name="Inventory">
+      <Column Name="ItemID" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LastUpdated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Item_Inventory" Member="Item" ThisKey="ItemID" OtherKey="ID" Type="Item" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.Items" Member="Items">
     <Type Name="Item">
-      <Column Name="id" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="itemName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="itemType" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="unit" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="price" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
-      <Association Name="Item_SupplyHistory" Member="SupplyHistories" ThisKey="id" OtherKey="itemID" Type="SupplyHistory" />
-      <Association Name="Item_MedicalOrder" Member="MedicalOrders" ThisKey="id" OtherKey="ItemID" Type="MedicalOrder" />
+      <Column Name="ID" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ItemName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ItemType" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Unit" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Price" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CreatedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Item_SupplyHistory" Member="SupplyHistories" ThisKey="ID" OtherKey="itemID" Type="SupplyHistory" />
+      <Association Name="Item_Inventory" Member="Inventory" ThisKey="ID" OtherKey="ItemID" Type="Inventory" Cardinality="One" />
+      <Association Name="Item_MedicalOrder" Member="MedicalOrders" ThisKey="ID" OtherKey="ItemID" Type="MedicalOrder" />
     </Type>
   </Table>
   <Table Name="dbo.LaboratoryTest" Member="LaboratoryTests">
@@ -121,7 +132,7 @@
       <Column Name="CreatedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="SignedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Note" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
-      <Association Name="Item_MedicalOrder" Member="Item" ThisKey="ItemID" OtherKey="id" Type="Item" IsForeignKey="true" />
+      <Association Name="Item_MedicalOrder" Member="Item" ThisKey="ItemID" OtherKey="ID" Type="Item" IsForeignKey="true" />
       <Association Name="LaboratoryTest_MedicalOrder" Member="LaboratoryTest" ThisKey="TestTypeID" OtherKey="id" Type="LaboratoryTest" IsForeignKey="true" />
       <Association Name="Patient_MedicalOrder" Member="Patient" ThisKey="PatientID" OtherKey="id" Type="Patient" IsForeignKey="true" />
       <Association Name="Staff_MedicalOrder" Member="Staff" ThisKey="DoctorID" OtherKey="id" Type="Staff" IsForeignKey="true" />
@@ -169,12 +180,33 @@
   </Table>
   <Table Name="dbo.Room" Member="Rooms">
     <Type Name="Room">
-      <Column Name="id" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="roomName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
       <Column Name="bedCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="departmentID" Type="System.String" DbType="Char(10)" CanBeNull="true" />
       <Association Name="Room_SupplyHistory" Member="SupplyHistories" ThisKey="id" OtherKey="roomID" Type="SupplyHistory" />
       <Association Name="Room_DailyCare" Member="DailyCares" ThisKey="id" OtherKey="roomID" Type="DailyCare" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Salaries" Member="Salaries">
+    <Type Name="Salary">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="StaffId" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="SalaryPeriod" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="SalaryDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="BasicSalary" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="WorkingDays" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="OvertimeHours" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Column Name="Allowance" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Bonus" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Deduction" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="IncomeTax" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="SocialInsurance" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="NetSalary" Type="System.Decimal" DbType="Decimal(23,2)" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Note" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CreatedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Association Name="Staff_Salary" Member="Staff" ThisKey="StaffId" OtherKey="id" Type="Staff" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Staff" Member="Staffs">
@@ -192,7 +224,6 @@
       <Column Name="position" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="qualification" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="degree" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="salaryID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="status" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
       <Column Name="startDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="Notes" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
@@ -204,6 +235,7 @@
       <Association Name="Staff_LaboratoryTest" Member="LaboratoryTests" ThisKey="id" OtherKey="doctorID" Type="LaboratoryTest" />
       <Association Name="Staff_MedicalOrder" Member="MedicalOrders" ThisKey="id" OtherKey="DoctorID" Type="MedicalOrder" />
       <Association Name="Staff_MedicalRecord" Member="MedicalRecords" ThisKey="id" OtherKey="doctorID" Type="MedicalRecord" />
+      <Association Name="Staff_Salary" Member="Salaries" ThisKey="id" OtherKey="StaffId" Type="Salary" />
       <Association Name="Department_Staff" Member="Department" ThisKey="departmentID" OtherKey="id" Type="Department" IsForeignKey="true" />
     </Type>
   </Table>

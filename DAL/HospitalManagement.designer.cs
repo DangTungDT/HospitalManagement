@@ -48,6 +48,9 @@ namespace DAL
     partial void InsertDoctorPatient(DoctorPatient instance);
     partial void UpdateDoctorPatient(DoctorPatient instance);
     partial void DeleteDoctorPatient(DoctorPatient instance);
+    partial void InsertInventory(Inventory instance);
+    partial void UpdateInventory(Inventory instance);
+    partial void DeleteInventory(Inventory instance);
     partial void InsertItem(Item instance);
     partial void UpdateItem(Item instance);
     partial void DeleteItem(Item instance);
@@ -66,13 +69,16 @@ namespace DAL
     partial void InsertRoom(Room instance);
     partial void UpdateRoom(Room instance);
     partial void DeleteRoom(Room instance);
+    partial void InsertSalary(Salary instance);
+    partial void UpdateSalary(Salary instance);
+    partial void DeleteSalary(Salary instance);
     partial void InsertStaff(Staff instance);
     partial void UpdateStaff(Staff instance);
     partial void DeleteStaff(Staff instance);
     #endregion
 		
 		public HospitalManagementDataContext() : 
-				base(global::DAL.Properties.Settings.Default.HospitalManagementConnectionString, mappingSource)
+				base(global::DAL.Properties.Settings.Default.HospitalManagementConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -149,6 +155,14 @@ namespace DAL
 			}
 		}
 		
+		public System.Data.Linq.Table<Inventory> Inventories
+		{
+			get
+			{
+				return this.GetTable<Inventory>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Item> Items
 		{
 			get
@@ -194,6 +208,14 @@ namespace DAL
 			get
 			{
 				return this.GetTable<Room>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Salary> Salaries
+		{
+			get
+			{
+				return this.GetTable<Salary>();
 			}
 		}
 		
@@ -439,7 +461,7 @@ namespace DAL
 		
 		private string _itemID;
 		
-		private string _roomID;
+		private int _roomID;
 		
 		private string _nurseID;
 		
@@ -465,7 +487,7 @@ namespace DAL
     partial void OnidChanged();
     partial void OnitemIDChanging(string value);
     partial void OnitemIDChanged();
-    partial void OnroomIDChanging(string value);
+    partial void OnroomIDChanging(int value);
     partial void OnroomIDChanged();
     partial void OnnurseIDChanging(string value);
     partial void OnnurseIDChanged();
@@ -531,8 +553,8 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_roomID", DbType="Char(10) NOT NULL", CanBeNull=false)]
-		public string roomID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_roomID", DbType="Int NOT NULL")]
+		public int roomID
 		{
 			get
 			{
@@ -659,7 +681,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Item_SupplyHistory", Storage="_Item", ThisKey="itemID", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Item_SupplyHistory", Storage="_Item", ThisKey="itemID", OtherKey="ID", IsForeignKey=true)]
 		public Item Item
 		{
 			get
@@ -682,7 +704,7 @@ namespace DAL
 					if ((value != null))
 					{
 						value.SupplyHistories.Add(this);
-						this._itemID = value.id;
+						this._itemID = value.ID;
 					}
 					else
 					{
@@ -720,7 +742,7 @@ namespace DAL
 					}
 					else
 					{
-						this._roomID = default(string);
+						this._roomID = default(int);
 					}
 					this.SendPropertyChanged("Room");
 				}
@@ -1066,7 +1088,7 @@ namespace DAL
 		
 		private string _patientID;
 		
-		private string _roomID;
+		private System.Nullable<int> _roomID;
 		
 		private string _nurseID;
 		
@@ -1094,7 +1116,7 @@ namespace DAL
     partial void OnnoteChanged();
     partial void OnpatientIDChanging(string value);
     partial void OnpatientIDChanged();
-    partial void OnroomIDChanging(string value);
+    partial void OnroomIDChanging(System.Nullable<int> value);
     partial void OnroomIDChanged();
     partial void OnnurseIDChanging(string value);
     partial void OnnurseIDChanged();
@@ -1252,8 +1274,8 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_roomID", DbType="Char(10)")]
-		public string roomID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_roomID", DbType="Int")]
+		public System.Nullable<int> roomID
 		{
 			get
 			{
@@ -1361,7 +1383,7 @@ namespace DAL
 					}
 					else
 					{
-						this._roomID = default(string);
+						this._roomID = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("Room");
 				}
@@ -1825,23 +1847,180 @@ namespace DAL
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Inventory")]
+	public partial class Inventory : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _ItemID;
+		
+		private int _Quantity;
+		
+		private System.Nullable<System.DateTime> _LastUpdated;
+		
+		private EntityRef<Item> _Item;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnItemIDChanging(string value);
+    partial void OnItemIDChanged();
+    partial void OnQuantityChanging(int value);
+    partial void OnQuantityChanged();
+    partial void OnLastUpdatedChanging(System.Nullable<System.DateTime> value);
+    partial void OnLastUpdatedChanged();
+    #endregion
+		
+		public Inventory()
+		{
+			this._Item = default(EntityRef<Item>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ItemID", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string ItemID
+		{
+			get
+			{
+				return this._ItemID;
+			}
+			set
+			{
+				if ((this._ItemID != value))
+				{
+					if (this._Item.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnItemIDChanging(value);
+					this.SendPropertyChanging();
+					this._ItemID = value;
+					this.SendPropertyChanged("ItemID");
+					this.OnItemIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Quantity", DbType="Int NOT NULL")]
+		public int Quantity
+		{
+			get
+			{
+				return this._Quantity;
+			}
+			set
+			{
+				if ((this._Quantity != value))
+				{
+					this.OnQuantityChanging(value);
+					this.SendPropertyChanging();
+					this._Quantity = value;
+					this.SendPropertyChanged("Quantity");
+					this.OnQuantityChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastUpdated", DbType="DateTime")]
+		public System.Nullable<System.DateTime> LastUpdated
+		{
+			get
+			{
+				return this._LastUpdated;
+			}
+			set
+			{
+				if ((this._LastUpdated != value))
+				{
+					this.OnLastUpdatedChanging(value);
+					this.SendPropertyChanging();
+					this._LastUpdated = value;
+					this.SendPropertyChanged("LastUpdated");
+					this.OnLastUpdatedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Item_Inventory", Storage="_Item", ThisKey="ItemID", OtherKey="ID", IsForeignKey=true)]
+		public Item Item
+		{
+			get
+			{
+				return this._Item.Entity;
+			}
+			set
+			{
+				Item previousValue = this._Item.Entity;
+				if (((previousValue != value) 
+							|| (this._Item.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Item.Entity = null;
+						previousValue.Inventory = null;
+					}
+					this._Item.Entity = value;
+					if ((value != null))
+					{
+						value.Inventory = this;
+						this._ItemID = value.ID;
+					}
+					else
+					{
+						this._ItemID = default(string);
+					}
+					this.SendPropertyChanged("Item");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Items")]
 	public partial class Item : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _id;
+		private string _ID;
 		
-		private string _itemName;
+		private string _ItemName;
 		
-		private string _itemType;
+		private string _ItemType;
 		
-		private string _unit;
+		private string _Unit;
 		
-		private System.Nullable<decimal> _price;
+		private System.Nullable<decimal> _Price;
+		
+		private System.Nullable<System.DateTime> _CreatedAt;
+		
+		private bool _IsActive;
 		
 		private EntitySet<SupplyHistory> _SupplyHistories;
+		
+		private EntityRef<Inventory> _Inventory;
 		
 		private EntitySet<MedicalOrder> _MedicalOrders;
 		
@@ -1849,126 +2028,171 @@ namespace DAL
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnidChanging(string value);
-    partial void OnidChanged();
-    partial void OnitemNameChanging(string value);
-    partial void OnitemNameChanged();
-    partial void OnitemTypeChanging(string value);
-    partial void OnitemTypeChanged();
-    partial void OnunitChanging(string value);
-    partial void OnunitChanged();
-    partial void OnpriceChanging(System.Nullable<decimal> value);
-    partial void OnpriceChanged();
+    partial void OnIDChanging(string value);
+    partial void OnIDChanged();
+    partial void OnItemNameChanging(string value);
+    partial void OnItemNameChanged();
+    partial void OnItemTypeChanging(string value);
+    partial void OnItemTypeChanged();
+    partial void OnUnitChanging(string value);
+    partial void OnUnitChanged();
+    partial void OnPriceChanging(System.Nullable<decimal> value);
+    partial void OnPriceChanged();
+    partial void OnCreatedAtChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreatedAtChanged();
+    partial void OnIsActiveChanging(bool value);
+    partial void OnIsActiveChanged();
     #endregion
 		
 		public Item()
 		{
 			this._SupplyHistories = new EntitySet<SupplyHistory>(new Action<SupplyHistory>(this.attach_SupplyHistories), new Action<SupplyHistory>(this.detach_SupplyHistories));
+			this._Inventory = default(EntityRef<Inventory>);
 			this._MedicalOrders = new EntitySet<MedicalOrder>(new Action<MedicalOrder>(this.attach_MedicalOrders), new Action<MedicalOrder>(this.detach_MedicalOrders));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string ID
 		{
 			get
 			{
-				return this._id;
+				return this._ID;
 			}
 			set
 			{
-				if ((this._id != value))
+				if ((this._ID != value))
 				{
-					this.OnidChanging(value);
+					this.OnIDChanging(value);
 					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_itemName", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
-		public string itemName
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ItemName", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string ItemName
 		{
 			get
 			{
-				return this._itemName;
+				return this._ItemName;
 			}
 			set
 			{
-				if ((this._itemName != value))
+				if ((this._ItemName != value))
 				{
-					this.OnitemNameChanging(value);
+					this.OnItemNameChanging(value);
 					this.SendPropertyChanging();
-					this._itemName = value;
-					this.SendPropertyChanged("itemName");
-					this.OnitemNameChanged();
+					this._ItemName = value;
+					this.SendPropertyChanged("ItemName");
+					this.OnItemNameChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_itemType", DbType="NVarChar(100)")]
-		public string itemType
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ItemType", DbType="NVarChar(100)")]
+		public string ItemType
 		{
 			get
 			{
-				return this._itemType;
+				return this._ItemType;
 			}
 			set
 			{
-				if ((this._itemType != value))
+				if ((this._ItemType != value))
 				{
-					this.OnitemTypeChanging(value);
+					this.OnItemTypeChanging(value);
 					this.SendPropertyChanging();
-					this._itemType = value;
-					this.SendPropertyChanged("itemType");
-					this.OnitemTypeChanged();
+					this._ItemType = value;
+					this.SendPropertyChanged("ItemType");
+					this.OnItemTypeChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_unit", DbType="NVarChar(20)")]
-		public string unit
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Unit", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string Unit
 		{
 			get
 			{
-				return this._unit;
+				return this._Unit;
 			}
 			set
 			{
-				if ((this._unit != value))
+				if ((this._Unit != value))
 				{
-					this.OnunitChanging(value);
+					this.OnUnitChanging(value);
 					this.SendPropertyChanging();
-					this._unit = value;
-					this.SendPropertyChanged("unit");
-					this.OnunitChanged();
+					this._Unit = value;
+					this.SendPropertyChanged("Unit");
+					this.OnUnitChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_price", DbType="Decimal(18,2)")]
-		public System.Nullable<decimal> price
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> Price
 		{
 			get
 			{
-				return this._price;
+				return this._Price;
 			}
 			set
 			{
-				if ((this._price != value))
+				if ((this._Price != value))
 				{
-					this.OnpriceChanging(value);
+					this.OnPriceChanging(value);
 					this.SendPropertyChanging();
-					this._price = value;
-					this.SendPropertyChanged("price");
-					this.OnpriceChanged();
+					this._Price = value;
+					this.SendPropertyChanged("Price");
+					this.OnPriceChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Item_SupplyHistory", Storage="_SupplyHistories", ThisKey="id", OtherKey="itemID")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedAt", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreatedAt
+		{
+			get
+			{
+				return this._CreatedAt;
+			}
+			set
+			{
+				if ((this._CreatedAt != value))
+				{
+					this.OnCreatedAtChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedAt = value;
+					this.SendPropertyChanged("CreatedAt");
+					this.OnCreatedAtChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsActive", DbType="Bit NOT NULL")]
+		public bool IsActive
+		{
+			get
+			{
+				return this._IsActive;
+			}
+			set
+			{
+				if ((this._IsActive != value))
+				{
+					this.OnIsActiveChanging(value);
+					this.SendPropertyChanging();
+					this._IsActive = value;
+					this.SendPropertyChanged("IsActive");
+					this.OnIsActiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Item_SupplyHistory", Storage="_SupplyHistories", ThisKey="ID", OtherKey="itemID")]
 		public EntitySet<SupplyHistory> SupplyHistories
 		{
 			get
@@ -1981,7 +2205,36 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Item_MedicalOrder", Storage="_MedicalOrders", ThisKey="id", OtherKey="ItemID")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Item_Inventory", Storage="_Inventory", ThisKey="ID", OtherKey="ItemID", IsUnique=true, IsForeignKey=false)]
+		public Inventory Inventory
+		{
+			get
+			{
+				return this._Inventory.Entity;
+			}
+			set
+			{
+				Inventory previousValue = this._Inventory.Entity;
+				if (((previousValue != value) 
+							|| (this._Inventory.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Inventory.Entity = null;
+						previousValue.Item = null;
+					}
+					this._Inventory.Entity = value;
+					if ((value != null))
+					{
+						value.Item = this;
+					}
+					this.SendPropertyChanged("Inventory");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Item_MedicalOrder", Storage="_MedicalOrders", ThisKey="ID", OtherKey="ItemID")]
 		public EntitySet<MedicalOrder> MedicalOrders
 		{
 			get
@@ -2880,7 +3133,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Item_MedicalOrder", Storage="_Item", ThisKey="ItemID", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Item_MedicalOrder", Storage="_Item", ThisKey="ItemID", OtherKey="ID", IsForeignKey=true)]
 		public Item Item
 		{
 			get
@@ -2903,7 +3156,7 @@ namespace DAL
 					if ((value != null))
 					{
 						value.MedicalOrders.Add(this);
-						this._ItemID = value.id;
+						this._ItemID = value.ID;
 					}
 					else
 					{
@@ -3945,7 +4198,7 @@ namespace DAL
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _id;
+		private int _id;
 		
 		private string _roomName;
 		
@@ -3961,7 +4214,7 @@ namespace DAL
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnidChanging(string value);
+    partial void OnidChanging(int value);
     partial void OnidChanged();
     partial void OnroomNameChanging(string value);
     partial void OnroomNameChanged();
@@ -3978,8 +4231,8 @@ namespace DAL
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
 		{
 			get
 			{
@@ -4129,6 +4382,469 @@ namespace DAL
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Salaries")]
+	public partial class Salary : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _StaffId;
+		
+		private string _SalaryPeriod;
+		
+		private System.DateTime _SalaryDate;
+		
+		private decimal _BasicSalary;
+		
+		private int _WorkingDays;
+		
+		private System.Nullable<decimal> _OvertimeHours;
+		
+		private System.Nullable<decimal> _Allowance;
+		
+		private System.Nullable<decimal> _Bonus;
+		
+		private System.Nullable<decimal> _Deduction;
+		
+		private System.Nullable<decimal> _IncomeTax;
+		
+		private System.Nullable<decimal> _SocialInsurance;
+		
+		private System.Nullable<decimal> _NetSalary;
+		
+		private string _Note;
+		
+		private System.Nullable<System.DateTime> _CreatedAt;
+		
+		private string _CreatedBy;
+		
+		private EntityRef<Staff> _Staff;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnStaffIdChanging(string value);
+    partial void OnStaffIdChanged();
+    partial void OnSalaryPeriodChanging(string value);
+    partial void OnSalaryPeriodChanged();
+    partial void OnSalaryDateChanging(System.DateTime value);
+    partial void OnSalaryDateChanged();
+    partial void OnBasicSalaryChanging(decimal value);
+    partial void OnBasicSalaryChanged();
+    partial void OnWorkingDaysChanging(int value);
+    partial void OnWorkingDaysChanged();
+    partial void OnOvertimeHoursChanging(System.Nullable<decimal> value);
+    partial void OnOvertimeHoursChanged();
+    partial void OnAllowanceChanging(System.Nullable<decimal> value);
+    partial void OnAllowanceChanged();
+    partial void OnBonusChanging(System.Nullable<decimal> value);
+    partial void OnBonusChanged();
+    partial void OnDeductionChanging(System.Nullable<decimal> value);
+    partial void OnDeductionChanged();
+    partial void OnIncomeTaxChanging(System.Nullable<decimal> value);
+    partial void OnIncomeTaxChanged();
+    partial void OnSocialInsuranceChanging(System.Nullable<decimal> value);
+    partial void OnSocialInsuranceChanged();
+    partial void OnNetSalaryChanging(System.Nullable<decimal> value);
+    partial void OnNetSalaryChanged();
+    partial void OnNoteChanging(string value);
+    partial void OnNoteChanged();
+    partial void OnCreatedAtChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreatedAtChanged();
+    partial void OnCreatedByChanging(string value);
+    partial void OnCreatedByChanged();
+    #endregion
+		
+		public Salary()
+		{
+			this._Staff = default(EntityRef<Staff>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StaffId", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		public string StaffId
+		{
+			get
+			{
+				return this._StaffId;
+			}
+			set
+			{
+				if ((this._StaffId != value))
+				{
+					if (this._Staff.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnStaffIdChanging(value);
+					this.SendPropertyChanging();
+					this._StaffId = value;
+					this.SendPropertyChanged("StaffId");
+					this.OnStaffIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SalaryPeriod", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
+		public string SalaryPeriod
+		{
+			get
+			{
+				return this._SalaryPeriod;
+			}
+			set
+			{
+				if ((this._SalaryPeriod != value))
+				{
+					this.OnSalaryPeriodChanging(value);
+					this.SendPropertyChanging();
+					this._SalaryPeriod = value;
+					this.SendPropertyChanged("SalaryPeriod");
+					this.OnSalaryPeriodChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SalaryDate", DbType="Date NOT NULL")]
+		public System.DateTime SalaryDate
+		{
+			get
+			{
+				return this._SalaryDate;
+			}
+			set
+			{
+				if ((this._SalaryDate != value))
+				{
+					this.OnSalaryDateChanging(value);
+					this.SendPropertyChanging();
+					this._SalaryDate = value;
+					this.SendPropertyChanged("SalaryDate");
+					this.OnSalaryDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BasicSalary", DbType="Decimal(18,2) NOT NULL")]
+		public decimal BasicSalary
+		{
+			get
+			{
+				return this._BasicSalary;
+			}
+			set
+			{
+				if ((this._BasicSalary != value))
+				{
+					this.OnBasicSalaryChanging(value);
+					this.SendPropertyChanging();
+					this._BasicSalary = value;
+					this.SendPropertyChanged("BasicSalary");
+					this.OnBasicSalaryChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WorkingDays", DbType="Int NOT NULL")]
+		public int WorkingDays
+		{
+			get
+			{
+				return this._WorkingDays;
+			}
+			set
+			{
+				if ((this._WorkingDays != value))
+				{
+					this.OnWorkingDaysChanging(value);
+					this.SendPropertyChanging();
+					this._WorkingDays = value;
+					this.SendPropertyChanged("WorkingDays");
+					this.OnWorkingDaysChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OvertimeHours", DbType="Decimal(5,2)")]
+		public System.Nullable<decimal> OvertimeHours
+		{
+			get
+			{
+				return this._OvertimeHours;
+			}
+			set
+			{
+				if ((this._OvertimeHours != value))
+				{
+					this.OnOvertimeHoursChanging(value);
+					this.SendPropertyChanging();
+					this._OvertimeHours = value;
+					this.SendPropertyChanged("OvertimeHours");
+					this.OnOvertimeHoursChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Allowance", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> Allowance
+		{
+			get
+			{
+				return this._Allowance;
+			}
+			set
+			{
+				if ((this._Allowance != value))
+				{
+					this.OnAllowanceChanging(value);
+					this.SendPropertyChanging();
+					this._Allowance = value;
+					this.SendPropertyChanged("Allowance");
+					this.OnAllowanceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Bonus", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> Bonus
+		{
+			get
+			{
+				return this._Bonus;
+			}
+			set
+			{
+				if ((this._Bonus != value))
+				{
+					this.OnBonusChanging(value);
+					this.SendPropertyChanging();
+					this._Bonus = value;
+					this.SendPropertyChanged("Bonus");
+					this.OnBonusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Deduction", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> Deduction
+		{
+			get
+			{
+				return this._Deduction;
+			}
+			set
+			{
+				if ((this._Deduction != value))
+				{
+					this.OnDeductionChanging(value);
+					this.SendPropertyChanging();
+					this._Deduction = value;
+					this.SendPropertyChanged("Deduction");
+					this.OnDeductionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IncomeTax", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> IncomeTax
+		{
+			get
+			{
+				return this._IncomeTax;
+			}
+			set
+			{
+				if ((this._IncomeTax != value))
+				{
+					this.OnIncomeTaxChanging(value);
+					this.SendPropertyChanging();
+					this._IncomeTax = value;
+					this.SendPropertyChanged("IncomeTax");
+					this.OnIncomeTaxChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SocialInsurance", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> SocialInsurance
+		{
+			get
+			{
+				return this._SocialInsurance;
+			}
+			set
+			{
+				if ((this._SocialInsurance != value))
+				{
+					this.OnSocialInsuranceChanging(value);
+					this.SendPropertyChanging();
+					this._SocialInsurance = value;
+					this.SendPropertyChanged("SocialInsurance");
+					this.OnSocialInsuranceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NetSalary", AutoSync=AutoSync.Always, DbType="Decimal(23,2)", IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<decimal> NetSalary
+		{
+			get
+			{
+				return this._NetSalary;
+			}
+			set
+			{
+				if ((this._NetSalary != value))
+				{
+					this.OnNetSalaryChanging(value);
+					this.SendPropertyChanging();
+					this._NetSalary = value;
+					this.SendPropertyChanged("NetSalary");
+					this.OnNetSalaryChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Note", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string Note
+		{
+			get
+			{
+				return this._Note;
+			}
+			set
+			{
+				if ((this._Note != value))
+				{
+					this.OnNoteChanging(value);
+					this.SendPropertyChanging();
+					this._Note = value;
+					this.SendPropertyChanged("Note");
+					this.OnNoteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedAt", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreatedAt
+		{
+			get
+			{
+				return this._CreatedAt;
+			}
+			set
+			{
+				if ((this._CreatedAt != value))
+				{
+					this.OnCreatedAtChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedAt = value;
+					this.SendPropertyChanged("CreatedAt");
+					this.OnCreatedAtChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedBy", DbType="NVarChar(100)")]
+		public string CreatedBy
+		{
+			get
+			{
+				return this._CreatedBy;
+			}
+			set
+			{
+				if ((this._CreatedBy != value))
+				{
+					this.OnCreatedByChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedBy = value;
+					this.SendPropertyChanged("CreatedBy");
+					this.OnCreatedByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Staff_Salary", Storage="_Staff", ThisKey="StaffId", OtherKey="id", IsForeignKey=true)]
+		public Staff Staff
+		{
+			get
+			{
+				return this._Staff.Entity;
+			}
+			set
+			{
+				Staff previousValue = this._Staff.Entity;
+				if (((previousValue != value) 
+							|| (this._Staff.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Staff.Entity = null;
+						previousValue.Salaries.Remove(this);
+					}
+					this._Staff.Entity = value;
+					if ((value != null))
+					{
+						value.Salaries.Add(this);
+						this._StaffId = value.id;
+					}
+					else
+					{
+						this._StaffId = default(string);
+					}
+					this.SendPropertyChanged("Staff");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Staff")]
 	public partial class Staff : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -4161,8 +4877,6 @@ namespace DAL
 		
 		private string _degree;
 		
-		private System.Nullable<int> _salaryID;
-		
 		private string _status;
 		
 		private System.Nullable<System.DateTime> _startDate;
@@ -4184,6 +4898,8 @@ namespace DAL
 		private EntitySet<MedicalOrder> _MedicalOrders;
 		
 		private EntitySet<MedicalRecord> _MedicalRecords;
+		
+		private EntitySet<Salary> _Salaries;
 		
 		private EntityRef<Department> _Department;
 		
@@ -4217,8 +4933,6 @@ namespace DAL
     partial void OnqualificationChanged();
     partial void OndegreeChanging(string value);
     partial void OndegreeChanged();
-    partial void OnsalaryIDChanging(System.Nullable<int> value);
-    partial void OnsalaryIDChanged();
     partial void OnstatusChanging(string value);
     partial void OnstatusChanged();
     partial void OnstartDateChanging(System.Nullable<System.DateTime> value);
@@ -4237,6 +4951,7 @@ namespace DAL
 			this._LaboratoryTests = new EntitySet<LaboratoryTest>(new Action<LaboratoryTest>(this.attach_LaboratoryTests), new Action<LaboratoryTest>(this.detach_LaboratoryTests));
 			this._MedicalOrders = new EntitySet<MedicalOrder>(new Action<MedicalOrder>(this.attach_MedicalOrders), new Action<MedicalOrder>(this.detach_MedicalOrders));
 			this._MedicalRecords = new EntitySet<MedicalRecord>(new Action<MedicalRecord>(this.attach_MedicalRecords), new Action<MedicalRecord>(this.detach_MedicalRecords));
+			this._Salaries = new EntitySet<Salary>(new Action<Salary>(this.attach_Salaries), new Action<Salary>(this.detach_Salaries));
 			this._Department = default(EntityRef<Department>);
 			OnCreated();
 		}
@@ -4505,26 +5220,6 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_salaryID", DbType="Int")]
-		public System.Nullable<int> salaryID
-		{
-			get
-			{
-				return this._salaryID;
-			}
-			set
-			{
-				if ((this._salaryID != value))
-				{
-					this.OnsalaryIDChanging(value);
-					this.SendPropertyChanging();
-					this._salaryID = value;
-					this.SendPropertyChanged("salaryID");
-					this.OnsalaryIDChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status", DbType="NVarChar(20)")]
 		public string status
 		{
@@ -4689,6 +5384,19 @@ namespace DAL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Staff_Salary", Storage="_Salaries", ThisKey="id", OtherKey="StaffId")]
+		public EntitySet<Salary> Salaries
+		{
+			get
+			{
+				return this._Salaries;
+			}
+			set
+			{
+				this._Salaries.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Department_Staff", Storage="_Department", ThisKey="departmentID", OtherKey="id", IsForeignKey=true)]
 		public Department Department
 		{
@@ -4834,6 +5542,18 @@ namespace DAL
 		}
 		
 		private void detach_MedicalRecords(MedicalRecord entity)
+		{
+			this.SendPropertyChanging();
+			entity.Staff = null;
+		}
+		
+		private void attach_Salaries(Salary entity)
+		{
+			this.SendPropertyChanging();
+			entity.Staff = this;
+		}
+		
+		private void detach_Salaries(Salary entity)
 		{
 			this.SendPropertyChanging();
 			entity.Staff = null;

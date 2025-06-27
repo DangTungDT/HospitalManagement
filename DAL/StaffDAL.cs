@@ -2,6 +2,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Sql;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +12,30 @@ namespace DAL
 {
     public class StaffDAL
     {
-        HospitalManagementDataContext db = new HospitalManagementDataContext();
+        public static string GetFirstSqlServerInstanceName()
+        {
+            SqlDataSourceEnumerator instance = SqlDataSourceEnumerator.Instance;
+            DataTable table = instance.GetDataSources();
+
+            foreach (DataRow row in table.Rows)
+            {
+                string serverName = row["ServerName"].ToString();
+                string instanceName = row["InstanceName"].ToString();
+
+                string fullName = string.IsNullOrEmpty(instanceName)
+                    ? serverName
+                    : $"{serverName}\\{instanceName}";
+
+                //string stringConnection = $"Data Source={fullName};Initial Catalog=HospitalManagement;Integrated Security=True;Encrypt=False";
+
+                return "Data Source=DESKTOP-6LE6PT2\\SQLEXPRESS;Initial Catalog=HospitalManagement;Integrated Security=True;Encrypt=False"; // Trả về instance đầu tiên tìm thấy
+                
+            }
+
+            return "Data Source=DESKTOP-6LE6PT2\\SQLEXPRESS;Initial Catalog=HospitalManagement;Integrated Security=True;Encrypt=False"; // Không tìm thấy
+        }
+        HospitalManagementDataContext db = new HospitalManagementDataContext(GetFirstSqlServerInstanceName());
+        
         public IQueryable GetAll()
         {
             return from nv in db.Staffs select nv;
@@ -18,7 +43,7 @@ namespace DAL
 
         private Staff Exists(string id)
         {
-            Staff itemSelect = (from nv in db.Staffs where nv.id == id select nv).First();
+            Staff itemSelect = db.Staffs.Where(x => x.id == id).FirstOrDefault();
             if(itemSelect == null)
             {
                 return null;
@@ -95,23 +120,24 @@ namespace DAL
                 }
 
                 //Lấy dữ liệu và cập nhật
-                Staff oldItem = db.Staffs.Single(x => x.id == item.Id);
-                oldItem.id = item.Id;
-                oldItem.name = item.Name;
-                oldItem.role = item.Role;
+                Staff oldItem = db.Staffs.Where(x => x.id == item.Id).FirstOrDefault();
+
+                // Cập nhật các thuộc tính
+                oldItem.name = item.Name ?? oldItem.name; // Giữ giá trị cũ nếu null
+                oldItem.role = item.Role ?? oldItem.role;
                 oldItem.dob = item.Dob;
                 oldItem.gender = item.Gender;
-                oldItem.phoneNumber = item.PhoneNumber;
-                oldItem.email = item.Email;
-                oldItem.homeAddress = item.HomeAddress;
-                oldItem.citizenID = item.CitizenID;
-                oldItem.departmentID = item.DepartmentID;
-                oldItem.position = item.Position;
-                oldItem.qualification = item.Qualification;
-                oldItem.degree = item.Degree;
+                oldItem.phoneNumber = item.PhoneNumber ?? oldItem.phoneNumber;
+                oldItem.email = item.Email ?? oldItem.email;
+                oldItem.homeAddress = item.HomeAddress ?? oldItem.homeAddress;
+                oldItem.citizenID = item.CitizenID ?? oldItem.citizenID;
+                oldItem.departmentID = item.DepartmentID ?? oldItem.departmentID;
+                oldItem.position = item.Position ?? oldItem.position;
+                oldItem.qualification = item.Qualification ?? oldItem.qualification;
+                oldItem.degree = item.Degree ?? oldItem.degree;
                 oldItem.status = item.Status;
                 oldItem.startDate = item.StartDate;
-                oldItem.Notes = item.Notes;
+                oldItem.Notes = item.Notes ?? oldItem.Notes;
                 db.SubmitChanges();
 
                 return true;
@@ -120,6 +146,15 @@ namespace DAL
             {
                 return false;
             }
+        }
+
+        public IQueryable LoadDepartment()
+        {
+            return db.Departments.Select(x => new
+            {
+                x.id,
+                x.departmentName
+            });
         }
     }
 }

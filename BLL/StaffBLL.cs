@@ -13,8 +13,15 @@ namespace BLL
     {
         //Biến toàn cục
         StaffDAL dal = new StaffDAL();
-        
 
+        public IQueryable LoadDepartment()
+        {
+            return dal.LoadDepartment();
+        }
+        public IQueryable GetAll()
+        {
+            return dal.GetAll();
+        }
         public int Add(StaffDTO staff)
         {
             try
