@@ -4,3 +4,15 @@ D:\workspace\.Net\HospitalManagement\DTO\obj\Debug\DTO.csproj.AssemblyReference.
 D:\workspace\.Net\HospitalManagement\DTO\obj\Debug\DTO.csproj.CoreCompileInputs.cache
 D:\workspace\.Net\HospitalManagement\DTO\obj\Debug\DTO.dll
 D:\workspace\.Net\HospitalManagement\DTO\obj\Debug\DTO.pdb
+E:\DoAn\DTO\bin\Debug\DTO.dll
+E:\DoAn\DTO\bin\Debug\DTO.pdb
+E:\DoAn\DTO\obj\Debug\DTO.csproj.AssemblyReference.cache
+E:\DoAn\DTO\obj\Debug\DTO.csproj.CoreCompileInputs.cache
+E:\DoAn\DTO\obj\Debug\DTO.dll
+E:\DoAn\DTO\obj\Debug\DTO.pdb
+E:\Doan1\DTO\bin\Debug\DTO.dll
+E:\Doan1\DTO\bin\Debug\DTO.pdb
+E:\Doan1\DTO\obj\Debug\DTO.csproj.AssemblyReference.cache
+E:\Doan1\DTO\obj\Debug\DTO.csproj.CoreCompileInputs.cache
+E:\Doan1\DTO\obj\Debug\DTO.dll
+E:\Doan1\DTO\obj\Debug\DTO.pdb
