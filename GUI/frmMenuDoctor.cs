@@ -16,6 +16,10 @@ namespace GUI
     {
         //private string maAccount;
 
+        public frmMenuDoctor()
+        {
+            InitializeComponent();
+        }
         public frmMenuDoctor(string maAccount)
         {
             InitializeComponent();

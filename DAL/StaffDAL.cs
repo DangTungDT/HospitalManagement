@@ -26,9 +26,9 @@ namespace DAL
                     ? serverName
                     : $"{serverName}\\{instanceName}";
 
-                //string stringConnection = $"Data Source={fullName};Initial Catalog=HospitalManagement;Integrated Security=True;Encrypt=False";
-
-                return "Data Source=DESKTOP-6LE6PT2\\SQLEXPRESS;Initial Catalog=HospitalManagement;Integrated Security=True;Encrypt=False"; // Trả về instance đầu tiên tìm thấy
+                string stringConnection = $"Data Source={fullName};Initial Catalog=HospitalManagement;Integrated Security=True;Encrypt=False";
+                return stringConnection;
+                //return "Data Source=DESKTOP-6LE6PT2\\SQLEXPRESS;Initial Catalog=HospitalManagement;Integrated Security=True;Encrypt=False"; // Trả về instance đầu tiên tìm thấy
                 
             }
 
@@ -155,6 +155,17 @@ namespace DAL
                 x.id,
                 x.departmentName
             });
+        }
+
+        public IQueryable GetStaffByDepartmentID(string id)
+        {
+            try
+            {
+                return db.Staffs.Where(x=> x.departmentID == id).Select(x=>x);
+            }catch (Exception e)
+            {
+                return null;
+            }
         }
     }
 }

@@ -22,6 +22,13 @@ namespace BLL
         {
             return dal.GetAll();
         }
+        public IQueryable GetStaffByDepartmentID(string id)
+        {
+            if(!string.IsNullOrEmpty(id))
+            {
+                return dal.GetStaffByDepartmentID(id);
+            }return null;
+        }
         public int Add(StaffDTO staff)
         {
             try
