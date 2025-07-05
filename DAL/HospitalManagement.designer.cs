@@ -63,9 +63,6 @@ namespace DAL
     partial void InsertMedicalRecord(MedicalRecord instance);
     partial void UpdateMedicalRecord(MedicalRecord instance);
     partial void DeleteMedicalRecord(MedicalRecord instance);
-    partial void InsertPatient(Patient instance);
-    partial void UpdatePatient(Patient instance);
-    partial void DeletePatient(Patient instance);
     partial void InsertRoom(Room instance);
     partial void UpdateRoom(Room instance);
     partial void DeleteRoom(Room instance);
@@ -75,6 +72,9 @@ namespace DAL
     partial void InsertStaff(Staff instance);
     partial void UpdateStaff(Staff instance);
     partial void DeleteStaff(Staff instance);
+    partial void InsertPatient(Patient instance);
+    partial void UpdatePatient(Patient instance);
+    partial void DeletePatient(Patient instance);
     #endregion
 		
 		public HospitalManagementDataContext() : 
@@ -195,14 +195,6 @@ namespace DAL
 			}
 		}
 		
-		public System.Data.Linq.Table<Patient> Patients
-		{
-			get
-			{
-				return this.GetTable<Patient>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Room> Rooms
 		{
 			get
@@ -224,6 +216,14 @@ namespace DAL
 			get
 			{
 				return this.GetTable<Staff>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Patient> Patients
+		{
+			get
+			{
+				return this.GetTable<Patient>();
 			}
 		}
 	}
@@ -822,9 +822,9 @@ namespace DAL
 		
 		private string _patientID;
 		
-		private EntityRef<Patient> _Patient;
-		
 		private EntityRef<Staff> _Staff;
+		
+		private EntityRef<Patient> _Patient;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -846,8 +846,8 @@ namespace DAL
 		
 		public Appointment()
 		{
-			this._Patient = default(EntityRef<Patient>);
 			this._Staff = default(EntityRef<Staff>);
+			this._Patient = default(EntityRef<Patient>);
 			OnCreated();
 		}
 		
@@ -979,40 +979,6 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_Appointment", Storage="_Patient", ThisKey="patientID", OtherKey="id", IsForeignKey=true)]
-		public Patient Patient
-		{
-			get
-			{
-				return this._Patient.Entity;
-			}
-			set
-			{
-				Patient previousValue = this._Patient.Entity;
-				if (((previousValue != value) 
-							|| (this._Patient.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Patient.Entity = null;
-						previousValue.Appointments.Remove(this);
-					}
-					this._Patient.Entity = value;
-					if ((value != null))
-					{
-						value.Appointments.Add(this);
-						this._patientID = value.id;
-					}
-					else
-					{
-						this._patientID = default(string);
-					}
-					this.SendPropertyChanged("Patient");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Staff_Appointment", Storage="_Staff", ThisKey="doctorID", OtherKey="id", IsForeignKey=true)]
 		public Staff Staff
 		{
@@ -1043,6 +1009,40 @@ namespace DAL
 						this._doctorID = default(string);
 					}
 					this.SendPropertyChanged("Staff");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_Appointment", Storage="_Patient", ThisKey="patientID", OtherKey="id", IsForeignKey=true)]
+		public Patient Patient
+		{
+			get
+			{
+				return this._Patient.Entity;
+			}
+			set
+			{
+				Patient previousValue = this._Patient.Entity;
+				if (((previousValue != value) 
+							|| (this._Patient.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Patient.Entity = null;
+						previousValue.Appointments.Remove(this);
+					}
+					this._Patient.Entity = value;
+					if ((value != null))
+					{
+						value.Appointments.Add(this);
+						this._patientID = value.id;
+					}
+					else
+					{
+						this._patientID = default(string);
+					}
+					this.SendPropertyChanged("Patient");
 				}
 			}
 		}
@@ -1092,11 +1092,11 @@ namespace DAL
 		
 		private string _nurseID;
 		
-		private EntityRef<Patient> _Patient;
-		
 		private EntityRef<Room> _Room;
 		
 		private EntityRef<Staff> _Staff;
+		
+		private EntityRef<Patient> _Patient;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1124,9 +1124,9 @@ namespace DAL
 		
 		public DailyCare()
 		{
-			this._Patient = default(EntityRef<Patient>);
 			this._Room = default(EntityRef<Room>);
 			this._Staff = default(EntityRef<Staff>);
+			this._Patient = default(EntityRef<Patient>);
 			OnCreated();
 		}
 		
@@ -1322,40 +1322,6 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_DailyCare", Storage="_Patient", ThisKey="patientID", OtherKey="id", IsForeignKey=true)]
-		public Patient Patient
-		{
-			get
-			{
-				return this._Patient.Entity;
-			}
-			set
-			{
-				Patient previousValue = this._Patient.Entity;
-				if (((previousValue != value) 
-							|| (this._Patient.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Patient.Entity = null;
-						previousValue.DailyCares.Remove(this);
-					}
-					this._Patient.Entity = value;
-					if ((value != null))
-					{
-						value.DailyCares.Add(this);
-						this._patientID = value.id;
-					}
-					else
-					{
-						this._patientID = default(string);
-					}
-					this.SendPropertyChanged("Patient");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_DailyCare", Storage="_Room", ThisKey="roomID", OtherKey="id", IsForeignKey=true)]
 		public Room Room
 		{
@@ -1420,6 +1386,40 @@ namespace DAL
 						this._nurseID = default(string);
 					}
 					this.SendPropertyChanged("Staff");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_DailyCare", Storage="_Patient", ThisKey="patientID", OtherKey="id", IsForeignKey=true)]
+		public Patient Patient
+		{
+			get
+			{
+				return this._Patient.Entity;
+			}
+			set
+			{
+				Patient previousValue = this._Patient.Entity;
+				if (((previousValue != value) 
+							|| (this._Patient.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Patient.Entity = null;
+						previousValue.DailyCares.Remove(this);
+					}
+					this._Patient.Entity = value;
+					if ((value != null))
+					{
+						value.DailyCares.Add(this);
+						this._patientID = value.id;
+					}
+					else
+					{
+						this._patientID = default(string);
+					}
+					this.SendPropertyChanged("Patient");
 				}
 			}
 		}
@@ -1601,9 +1601,9 @@ namespace DAL
 		
 		private string _note;
 		
-		private EntityRef<Patient> _Patient;
-		
 		private EntityRef<Staff> _Staff;
+		
+		private EntityRef<Patient> _Patient;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1625,8 +1625,8 @@ namespace DAL
 		
 		public DoctorPatient()
 		{
-			this._Patient = default(EntityRef<Patient>);
 			this._Staff = default(EntityRef<Staff>);
+			this._Patient = default(EntityRef<Patient>);
 			OnCreated();
 		}
 		
@@ -1758,40 +1758,6 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_DoctorPatient", Storage="_Patient", ThisKey="patientID", OtherKey="id", IsForeignKey=true)]
-		public Patient Patient
-		{
-			get
-			{
-				return this._Patient.Entity;
-			}
-			set
-			{
-				Patient previousValue = this._Patient.Entity;
-				if (((previousValue != value) 
-							|| (this._Patient.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Patient.Entity = null;
-						previousValue.DoctorPatients.Remove(this);
-					}
-					this._Patient.Entity = value;
-					if ((value != null))
-					{
-						value.DoctorPatients.Add(this);
-						this._patientID = value.id;
-					}
-					else
-					{
-						this._patientID = default(string);
-					}
-					this.SendPropertyChanged("Patient");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Staff_DoctorPatient", Storage="_Staff", ThisKey="doctorID", OtherKey="id", IsForeignKey=true)]
 		public Staff Staff
 		{
@@ -1822,6 +1788,40 @@ namespace DAL
 						this._doctorID = default(string);
 					}
 					this.SendPropertyChanged("Staff");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_DoctorPatient", Storage="_Patient", ThisKey="patientID", OtherKey="id", IsForeignKey=true)]
+		public Patient Patient
+		{
+			get
+			{
+				return this._Patient.Entity;
+			}
+			set
+			{
+				Patient previousValue = this._Patient.Entity;
+				if (((previousValue != value) 
+							|| (this._Patient.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Patient.Entity = null;
+						previousValue.DoctorPatients.Remove(this);
+					}
+					this._Patient.Entity = value;
+					if ((value != null))
+					{
+						value.DoctorPatients.Add(this);
+						this._patientID = value.id;
+					}
+					else
+					{
+						this._patientID = default(string);
+					}
+					this.SendPropertyChanged("Patient");
 				}
 			}
 		}
@@ -2322,9 +2322,9 @@ namespace DAL
 		
 		private EntitySet<MedicalOrder> _MedicalOrders;
 		
-		private EntityRef<Patient> _Patient;
-		
 		private EntityRef<Staff> _Staff;
+		
+		private EntityRef<Patient> _Patient;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2357,8 +2357,8 @@ namespace DAL
 		public LaboratoryTest()
 		{
 			this._MedicalOrders = new EntitySet<MedicalOrder>(new Action<MedicalOrder>(this.attach_MedicalOrders), new Action<MedicalOrder>(this.detach_MedicalOrders));
-			this._Patient = default(EntityRef<Patient>);
 			this._Staff = default(EntityRef<Staff>);
+			this._Patient = default(EntityRef<Patient>);
 			OnCreated();
 		}
 		
@@ -2603,40 +2603,6 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_LaboratoryTest", Storage="_Patient", ThisKey="patientID", OtherKey="id", IsForeignKey=true)]
-		public Patient Patient
-		{
-			get
-			{
-				return this._Patient.Entity;
-			}
-			set
-			{
-				Patient previousValue = this._Patient.Entity;
-				if (((previousValue != value) 
-							|| (this._Patient.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Patient.Entity = null;
-						previousValue.LaboratoryTests.Remove(this);
-					}
-					this._Patient.Entity = value;
-					if ((value != null))
-					{
-						value.LaboratoryTests.Add(this);
-						this._patientID = value.id;
-					}
-					else
-					{
-						this._patientID = default(string);
-					}
-					this.SendPropertyChanged("Patient");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Staff_LaboratoryTest", Storage="_Staff", ThisKey="doctorID", OtherKey="id", IsForeignKey=true)]
 		public Staff Staff
 		{
@@ -2667,6 +2633,40 @@ namespace DAL
 						this._doctorID = default(string);
 					}
 					this.SendPropertyChanged("Staff");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_LaboratoryTest", Storage="_Patient", ThisKey="patientID", OtherKey="id", IsForeignKey=true)]
+		public Patient Patient
+		{
+			get
+			{
+				return this._Patient.Entity;
+			}
+			set
+			{
+				Patient previousValue = this._Patient.Entity;
+				if (((previousValue != value) 
+							|| (this._Patient.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Patient.Entity = null;
+						previousValue.LaboratoryTests.Remove(this);
+					}
+					this._Patient.Entity = value;
+					if ((value != null))
+					{
+						value.LaboratoryTests.Add(this);
+						this._patientID = value.id;
+					}
+					else
+					{
+						this._patientID = default(string);
+					}
+					this.SendPropertyChanged("Patient");
 				}
 			}
 		}
@@ -2746,9 +2746,9 @@ namespace DAL
 		
 		private EntityRef<LaboratoryTest> _LaboratoryTest;
 		
-		private EntityRef<Patient> _Patient;
-		
 		private EntityRef<Staff> _Staff;
+		
+		private EntityRef<Patient> _Patient;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2792,8 +2792,8 @@ namespace DAL
 		{
 			this._Item = default(EntityRef<Item>);
 			this._LaboratoryTest = default(EntityRef<LaboratoryTest>);
-			this._Patient = default(EntityRef<Patient>);
 			this._Staff = default(EntityRef<Staff>);
+			this._Patient = default(EntityRef<Patient>);
 			OnCreated();
 		}
 		
@@ -3201,40 +3201,6 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_MedicalOrder", Storage="_Patient", ThisKey="PatientID", OtherKey="id", IsForeignKey=true)]
-		public Patient Patient
-		{
-			get
-			{
-				return this._Patient.Entity;
-			}
-			set
-			{
-				Patient previousValue = this._Patient.Entity;
-				if (((previousValue != value) 
-							|| (this._Patient.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Patient.Entity = null;
-						previousValue.MedicalOrders.Remove(this);
-					}
-					this._Patient.Entity = value;
-					if ((value != null))
-					{
-						value.MedicalOrders.Add(this);
-						this._PatientID = value.id;
-					}
-					else
-					{
-						this._PatientID = default(string);
-					}
-					this.SendPropertyChanged("Patient");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Staff_MedicalOrder", Storage="_Staff", ThisKey="DoctorID", OtherKey="id", IsForeignKey=true)]
 		public Staff Staff
 		{
@@ -3265,6 +3231,40 @@ namespace DAL
 						this._DoctorID = default(string);
 					}
 					this.SendPropertyChanged("Staff");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_MedicalOrder", Storage="_Patient", ThisKey="PatientID", OtherKey="id", IsForeignKey=true)]
+		public Patient Patient
+		{
+			get
+			{
+				return this._Patient.Entity;
+			}
+			set
+			{
+				Patient previousValue = this._Patient.Entity;
+				if (((previousValue != value) 
+							|| (this._Patient.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Patient.Entity = null;
+						previousValue.MedicalOrders.Remove(this);
+					}
+					this._Patient.Entity = value;
+					if ((value != null))
+					{
+						value.MedicalOrders.Add(this);
+						this._PatientID = value.id;
+					}
+					else
+					{
+						this._PatientID = default(string);
+					}
+					this.SendPropertyChanged("Patient");
 				}
 			}
 		}
@@ -3314,9 +3314,9 @@ namespace DAL
 		
 		private string _notes;
 		
-		private EntityRef<Patient> _Patient;
-		
 		private EntityRef<Staff> _Staff;
+		
+		private EntityRef<Patient> _Patient;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -3344,8 +3344,8 @@ namespace DAL
 		
 		public MedicalRecord()
 		{
-			this._Patient = default(EntityRef<Patient>);
 			this._Staff = default(EntityRef<Staff>);
+			this._Patient = default(EntityRef<Patient>);
 			OnCreated();
 		}
 		
@@ -3537,40 +3537,6 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_MedicalRecord", Storage="_Patient", ThisKey="patientID", OtherKey="id", IsForeignKey=true)]
-		public Patient Patient
-		{
-			get
-			{
-				return this._Patient.Entity;
-			}
-			set
-			{
-				Patient previousValue = this._Patient.Entity;
-				if (((previousValue != value) 
-							|| (this._Patient.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Patient.Entity = null;
-						previousValue.MedicalRecords.Remove(this);
-					}
-					this._Patient.Entity = value;
-					if ((value != null))
-					{
-						value.MedicalRecords.Add(this);
-						this._patientID = value.id;
-					}
-					else
-					{
-						this._patientID = default(string);
-					}
-					this.SendPropertyChanged("Patient");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Staff_MedicalRecord", Storage="_Staff", ThisKey="doctorID", OtherKey="id", IsForeignKey=true)]
 		public Staff Staff
 		{
@@ -3605,497 +3571,37 @@ namespace DAL
 			}
 		}
 		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Patient")]
-	public partial class Patient : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _id;
-		
-		private string _fullName;
-		
-		private string _gender;
-		
-		private System.Nullable<System.DateTime> _dob;
-		
-		private string _phoneNumber;
-		
-		private string _citizenID;
-		
-		private string _InsuranceID;
-		
-		private string _address;
-		
-		private string _EmergencyContact;
-		
-		private string _EmergencyPhone;
-		
-		private string _status;
-		
-		private System.Nullable<System.DateTime> _createdDate;
-		
-		private System.Nullable<System.DateTime> _updatedDate;
-		
-		private System.Nullable<double> _weight;
-		
-		private System.Nullable<double> _height;
-		
-		private EntitySet<Appointment> _Appointments;
-		
-		private EntitySet<DailyCare> _DailyCares;
-		
-		private EntitySet<DoctorPatient> _DoctorPatients;
-		
-		private EntitySet<LaboratoryTest> _LaboratoryTests;
-		
-		private EntitySet<MedicalOrder> _MedicalOrders;
-		
-		private EntitySet<MedicalRecord> _MedicalRecords;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(string value);
-    partial void OnidChanged();
-    partial void OnfullNameChanging(string value);
-    partial void OnfullNameChanged();
-    partial void OngenderChanging(string value);
-    partial void OngenderChanged();
-    partial void OndobChanging(System.Nullable<System.DateTime> value);
-    partial void OndobChanged();
-    partial void OnphoneNumberChanging(string value);
-    partial void OnphoneNumberChanged();
-    partial void OncitizenIDChanging(string value);
-    partial void OncitizenIDChanged();
-    partial void OnInsuranceIDChanging(string value);
-    partial void OnInsuranceIDChanged();
-    partial void OnaddressChanging(string value);
-    partial void OnaddressChanged();
-    partial void OnEmergencyContactChanging(string value);
-    partial void OnEmergencyContactChanged();
-    partial void OnEmergencyPhoneChanging(string value);
-    partial void OnEmergencyPhoneChanged();
-    partial void OnstatusChanging(string value);
-    partial void OnstatusChanged();
-    partial void OncreatedDateChanging(System.Nullable<System.DateTime> value);
-    partial void OncreatedDateChanged();
-    partial void OnupdatedDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnupdatedDateChanged();
-    partial void OnweightChanging(System.Nullable<double> value);
-    partial void OnweightChanged();
-    partial void OnheightChanging(System.Nullable<double> value);
-    partial void OnheightChanged();
-    #endregion
-		
-		public Patient()
-		{
-			this._Appointments = new EntitySet<Appointment>(new Action<Appointment>(this.attach_Appointments), new Action<Appointment>(this.detach_Appointments));
-			this._DailyCares = new EntitySet<DailyCare>(new Action<DailyCare>(this.attach_DailyCares), new Action<DailyCare>(this.detach_DailyCares));
-			this._DoctorPatients = new EntitySet<DoctorPatient>(new Action<DoctorPatient>(this.attach_DoctorPatients), new Action<DoctorPatient>(this.detach_DoctorPatients));
-			this._LaboratoryTests = new EntitySet<LaboratoryTest>(new Action<LaboratoryTest>(this.attach_LaboratoryTests), new Action<LaboratoryTest>(this.detach_LaboratoryTests));
-			this._MedicalOrders = new EntitySet<MedicalOrder>(new Action<MedicalOrder>(this.attach_MedicalOrders), new Action<MedicalOrder>(this.detach_MedicalOrders));
-			this._MedicalRecords = new EntitySet<MedicalRecord>(new Action<MedicalRecord>(this.attach_MedicalRecords), new Action<MedicalRecord>(this.detach_MedicalRecords));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string id
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_MedicalRecord", Storage="_Patient", ThisKey="patientID", OtherKey="id", IsForeignKey=true)]
+		public Patient Patient
 		{
 			get
 			{
-				return this._id;
+				return this._Patient.Entity;
 			}
 			set
 			{
-				if ((this._id != value))
+				Patient previousValue = this._Patient.Entity;
+				if (((previousValue != value) 
+							|| (this._Patient.HasLoadedOrAssignedValue == false)))
 				{
-					this.OnidChanging(value);
 					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
+					if ((previousValue != null))
+					{
+						this._Patient.Entity = null;
+						previousValue.MedicalRecords.Remove(this);
+					}
+					this._Patient.Entity = value;
+					if ((value != null))
+					{
+						value.MedicalRecords.Add(this);
+						this._patientID = value.id;
+					}
+					else
+					{
+						this._patientID = default(string);
+					}
+					this.SendPropertyChanged("Patient");
 				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fullName", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
-		public string fullName
-		{
-			get
-			{
-				return this._fullName;
-			}
-			set
-			{
-				if ((this._fullName != value))
-				{
-					this.OnfullNameChanging(value);
-					this.SendPropertyChanging();
-					this._fullName = value;
-					this.SendPropertyChanged("fullName");
-					this.OnfullNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gender", DbType="NVarChar(10)")]
-		public string gender
-		{
-			get
-			{
-				return this._gender;
-			}
-			set
-			{
-				if ((this._gender != value))
-				{
-					this.OngenderChanging(value);
-					this.SendPropertyChanging();
-					this._gender = value;
-					this.SendPropertyChanged("gender");
-					this.OngenderChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dob", DbType="Date")]
-		public System.Nullable<System.DateTime> dob
-		{
-			get
-			{
-				return this._dob;
-			}
-			set
-			{
-				if ((this._dob != value))
-				{
-					this.OndobChanging(value);
-					this.SendPropertyChanging();
-					this._dob = value;
-					this.SendPropertyChanged("dob");
-					this.OndobChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_phoneNumber", DbType="VarChar(15)")]
-		public string phoneNumber
-		{
-			get
-			{
-				return this._phoneNumber;
-			}
-			set
-			{
-				if ((this._phoneNumber != value))
-				{
-					this.OnphoneNumberChanging(value);
-					this.SendPropertyChanging();
-					this._phoneNumber = value;
-					this.SendPropertyChanged("phoneNumber");
-					this.OnphoneNumberChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_citizenID", DbType="VarChar(20)")]
-		public string citizenID
-		{
-			get
-			{
-				return this._citizenID;
-			}
-			set
-			{
-				if ((this._citizenID != value))
-				{
-					this.OncitizenIDChanging(value);
-					this.SendPropertyChanging();
-					this._citizenID = value;
-					this.SendPropertyChanged("citizenID");
-					this.OncitizenIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InsuranceID", DbType="VarChar(20)")]
-		public string InsuranceID
-		{
-			get
-			{
-				return this._InsuranceID;
-			}
-			set
-			{
-				if ((this._InsuranceID != value))
-				{
-					this.OnInsuranceIDChanging(value);
-					this.SendPropertyChanging();
-					this._InsuranceID = value;
-					this.SendPropertyChanged("InsuranceID");
-					this.OnInsuranceIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_address", DbType="NVarChar(255)")]
-		public string address
-		{
-			get
-			{
-				return this._address;
-			}
-			set
-			{
-				if ((this._address != value))
-				{
-					this.OnaddressChanging(value);
-					this.SendPropertyChanging();
-					this._address = value;
-					this.SendPropertyChanged("address");
-					this.OnaddressChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmergencyContact", DbType="NVarChar(255)")]
-		public string EmergencyContact
-		{
-			get
-			{
-				return this._EmergencyContact;
-			}
-			set
-			{
-				if ((this._EmergencyContact != value))
-				{
-					this.OnEmergencyContactChanging(value);
-					this.SendPropertyChanging();
-					this._EmergencyContact = value;
-					this.SendPropertyChanged("EmergencyContact");
-					this.OnEmergencyContactChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmergencyPhone", DbType="VarChar(15)")]
-		public string EmergencyPhone
-		{
-			get
-			{
-				return this._EmergencyPhone;
-			}
-			set
-			{
-				if ((this._EmergencyPhone != value))
-				{
-					this.OnEmergencyPhoneChanging(value);
-					this.SendPropertyChanging();
-					this._EmergencyPhone = value;
-					this.SendPropertyChanged("EmergencyPhone");
-					this.OnEmergencyPhoneChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status", DbType="NVarChar(50)")]
-		public string status
-		{
-			get
-			{
-				return this._status;
-			}
-			set
-			{
-				if ((this._status != value))
-				{
-					this.OnstatusChanging(value);
-					this.SendPropertyChanging();
-					this._status = value;
-					this.SendPropertyChanged("status");
-					this.OnstatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_createdDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> createdDate
-		{
-			get
-			{
-				return this._createdDate;
-			}
-			set
-			{
-				if ((this._createdDate != value))
-				{
-					this.OncreatedDateChanging(value);
-					this.SendPropertyChanging();
-					this._createdDate = value;
-					this.SendPropertyChanged("createdDate");
-					this.OncreatedDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_updatedDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> updatedDate
-		{
-			get
-			{
-				return this._updatedDate;
-			}
-			set
-			{
-				if ((this._updatedDate != value))
-				{
-					this.OnupdatedDateChanging(value);
-					this.SendPropertyChanging();
-					this._updatedDate = value;
-					this.SendPropertyChanged("updatedDate");
-					this.OnupdatedDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_weight", DbType="Float")]
-		public System.Nullable<double> weight
-		{
-			get
-			{
-				return this._weight;
-			}
-			set
-			{
-				if ((this._weight != value))
-				{
-					this.OnweightChanging(value);
-					this.SendPropertyChanging();
-					this._weight = value;
-					this.SendPropertyChanged("weight");
-					this.OnweightChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_height", DbType="Float")]
-		public System.Nullable<double> height
-		{
-			get
-			{
-				return this._height;
-			}
-			set
-			{
-				if ((this._height != value))
-				{
-					this.OnheightChanging(value);
-					this.SendPropertyChanging();
-					this._height = value;
-					this.SendPropertyChanged("height");
-					this.OnheightChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_Appointment", Storage="_Appointments", ThisKey="id", OtherKey="patientID")]
-		public EntitySet<Appointment> Appointments
-		{
-			get
-			{
-				return this._Appointments;
-			}
-			set
-			{
-				this._Appointments.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_DailyCare", Storage="_DailyCares", ThisKey="id", OtherKey="patientID")]
-		public EntitySet<DailyCare> DailyCares
-		{
-			get
-			{
-				return this._DailyCares;
-			}
-			set
-			{
-				this._DailyCares.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_DoctorPatient", Storage="_DoctorPatients", ThisKey="id", OtherKey="patientID")]
-		public EntitySet<DoctorPatient> DoctorPatients
-		{
-			get
-			{
-				return this._DoctorPatients;
-			}
-			set
-			{
-				this._DoctorPatients.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_LaboratoryTest", Storage="_LaboratoryTests", ThisKey="id", OtherKey="patientID")]
-		public EntitySet<LaboratoryTest> LaboratoryTests
-		{
-			get
-			{
-				return this._LaboratoryTests;
-			}
-			set
-			{
-				this._LaboratoryTests.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_MedicalOrder", Storage="_MedicalOrders", ThisKey="id", OtherKey="PatientID")]
-		public EntitySet<MedicalOrder> MedicalOrders
-		{
-			get
-			{
-				return this._MedicalOrders;
-			}
-			set
-			{
-				this._MedicalOrders.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_MedicalRecord", Storage="_MedicalRecords", ThisKey="id", OtherKey="patientID")]
-		public EntitySet<MedicalRecord> MedicalRecords
-		{
-			get
-			{
-				return this._MedicalRecords;
-			}
-			set
-			{
-				this._MedicalRecords.Assign(value);
 			}
 		}
 		
@@ -4117,78 +3623,6 @@ namespace DAL
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_Appointments(Appointment entity)
-		{
-			this.SendPropertyChanging();
-			entity.Patient = this;
-		}
-		
-		private void detach_Appointments(Appointment entity)
-		{
-			this.SendPropertyChanging();
-			entity.Patient = null;
-		}
-		
-		private void attach_DailyCares(DailyCare entity)
-		{
-			this.SendPropertyChanging();
-			entity.Patient = this;
-		}
-		
-		private void detach_DailyCares(DailyCare entity)
-		{
-			this.SendPropertyChanging();
-			entity.Patient = null;
-		}
-		
-		private void attach_DoctorPatients(DoctorPatient entity)
-		{
-			this.SendPropertyChanging();
-			entity.Patient = this;
-		}
-		
-		private void detach_DoctorPatients(DoctorPatient entity)
-		{
-			this.SendPropertyChanging();
-			entity.Patient = null;
-		}
-		
-		private void attach_LaboratoryTests(LaboratoryTest entity)
-		{
-			this.SendPropertyChanging();
-			entity.Patient = this;
-		}
-		
-		private void detach_LaboratoryTests(LaboratoryTest entity)
-		{
-			this.SendPropertyChanging();
-			entity.Patient = null;
-		}
-		
-		private void attach_MedicalOrders(MedicalOrder entity)
-		{
-			this.SendPropertyChanging();
-			entity.Patient = this;
-		}
-		
-		private void detach_MedicalOrders(MedicalOrder entity)
-		{
-			this.SendPropertyChanging();
-			entity.Patient = null;
-		}
-		
-		private void attach_MedicalRecords(MedicalRecord entity)
-		{
-			this.SendPropertyChanging();
-			entity.Patient = this;
-		}
-		
-		private void detach_MedicalRecords(MedicalRecord entity)
-		{
-			this.SendPropertyChanging();
-			entity.Patient = null;
 		}
 	}
 	
@@ -5557,6 +4991,596 @@ namespace DAL
 		{
 			this.SendPropertyChanging();
 			entity.Staff = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Patient")]
+	public partial class Patient : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _id;
+		
+		private string _fullName;
+		
+		private string _gender;
+		
+		private System.Nullable<System.DateTime> _dob;
+		
+		private string _phoneNumber;
+		
+		private string _TypePatient;
+		
+		private string _citizenID;
+		
+		private string _InsuranceID;
+		
+		private string _address;
+		
+		private string _EmergencyContact;
+		
+		private string _EmergencyPhone;
+		
+		private string _status;
+		
+		private System.Nullable<System.DateTime> _createdDate;
+		
+		private System.Nullable<System.DateTime> _updatedDate;
+		
+		private System.Nullable<double> _weight;
+		
+		private System.Nullable<double> _height;
+		
+		private EntitySet<Appointment> _Appointments;
+		
+		private EntitySet<DailyCare> _DailyCares;
+		
+		private EntitySet<DoctorPatient> _DoctorPatients;
+		
+		private EntitySet<LaboratoryTest> _LaboratoryTests;
+		
+		private EntitySet<MedicalOrder> _MedicalOrders;
+		
+		private EntitySet<MedicalRecord> _MedicalRecords;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(string value);
+    partial void OnidChanged();
+    partial void OnfullNameChanging(string value);
+    partial void OnfullNameChanged();
+    partial void OngenderChanging(string value);
+    partial void OngenderChanged();
+    partial void OndobChanging(System.Nullable<System.DateTime> value);
+    partial void OndobChanged();
+    partial void OnphoneNumberChanging(string value);
+    partial void OnphoneNumberChanged();
+    partial void OnTypePatientChanging(string value);
+    partial void OnTypePatientChanged();
+    partial void OncitizenIDChanging(string value);
+    partial void OncitizenIDChanged();
+    partial void OnInsuranceIDChanging(string value);
+    partial void OnInsuranceIDChanged();
+    partial void OnaddressChanging(string value);
+    partial void OnaddressChanged();
+    partial void OnEmergencyContactChanging(string value);
+    partial void OnEmergencyContactChanged();
+    partial void OnEmergencyPhoneChanging(string value);
+    partial void OnEmergencyPhoneChanged();
+    partial void OnstatusChanging(string value);
+    partial void OnstatusChanged();
+    partial void OncreatedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OncreatedDateChanged();
+    partial void OnupdatedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnupdatedDateChanged();
+    partial void OnweightChanging(System.Nullable<double> value);
+    partial void OnweightChanged();
+    partial void OnheightChanging(System.Nullable<double> value);
+    partial void OnheightChanged();
+    #endregion
+		
+		public Patient()
+		{
+			this._Appointments = new EntitySet<Appointment>(new Action<Appointment>(this.attach_Appointments), new Action<Appointment>(this.detach_Appointments));
+			this._DailyCares = new EntitySet<DailyCare>(new Action<DailyCare>(this.attach_DailyCares), new Action<DailyCare>(this.detach_DailyCares));
+			this._DoctorPatients = new EntitySet<DoctorPatient>(new Action<DoctorPatient>(this.attach_DoctorPatients), new Action<DoctorPatient>(this.detach_DoctorPatients));
+			this._LaboratoryTests = new EntitySet<LaboratoryTest>(new Action<LaboratoryTest>(this.attach_LaboratoryTests), new Action<LaboratoryTest>(this.detach_LaboratoryTests));
+			this._MedicalOrders = new EntitySet<MedicalOrder>(new Action<MedicalOrder>(this.attach_MedicalOrders), new Action<MedicalOrder>(this.detach_MedicalOrders));
+			this._MedicalRecords = new EntitySet<MedicalRecord>(new Action<MedicalRecord>(this.attach_MedicalRecords), new Action<MedicalRecord>(this.detach_MedicalRecords));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fullName", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string fullName
+		{
+			get
+			{
+				return this._fullName;
+			}
+			set
+			{
+				if ((this._fullName != value))
+				{
+					this.OnfullNameChanging(value);
+					this.SendPropertyChanging();
+					this._fullName = value;
+					this.SendPropertyChanged("fullName");
+					this.OnfullNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gender", DbType="NVarChar(10)")]
+		public string gender
+		{
+			get
+			{
+				return this._gender;
+			}
+			set
+			{
+				if ((this._gender != value))
+				{
+					this.OngenderChanging(value);
+					this.SendPropertyChanging();
+					this._gender = value;
+					this.SendPropertyChanged("gender");
+					this.OngenderChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dob", DbType="Date")]
+		public System.Nullable<System.DateTime> dob
+		{
+			get
+			{
+				return this._dob;
+			}
+			set
+			{
+				if ((this._dob != value))
+				{
+					this.OndobChanging(value);
+					this.SendPropertyChanging();
+					this._dob = value;
+					this.SendPropertyChanged("dob");
+					this.OndobChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_phoneNumber", DbType="VarChar(15)")]
+		public string phoneNumber
+		{
+			get
+			{
+				return this._phoneNumber;
+			}
+			set
+			{
+				if ((this._phoneNumber != value))
+				{
+					this.OnphoneNumberChanging(value);
+					this.SendPropertyChanging();
+					this._phoneNumber = value;
+					this.SendPropertyChanged("phoneNumber");
+					this.OnphoneNumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TypePatient", DbType="VarChar(20)")]
+		public string TypePatient
+		{
+			get
+			{
+				return this._TypePatient;
+			}
+			set
+			{
+				if ((this._TypePatient != value))
+				{
+					this.OnTypePatientChanging(value);
+					this.SendPropertyChanging();
+					this._TypePatient = value;
+					this.SendPropertyChanged("TypePatient");
+					this.OnTypePatientChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_citizenID", DbType="VarChar(20)")]
+		public string citizenID
+		{
+			get
+			{
+				return this._citizenID;
+			}
+			set
+			{
+				if ((this._citizenID != value))
+				{
+					this.OncitizenIDChanging(value);
+					this.SendPropertyChanging();
+					this._citizenID = value;
+					this.SendPropertyChanged("citizenID");
+					this.OncitizenIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InsuranceID", DbType="VarChar(20)")]
+		public string InsuranceID
+		{
+			get
+			{
+				return this._InsuranceID;
+			}
+			set
+			{
+				if ((this._InsuranceID != value))
+				{
+					this.OnInsuranceIDChanging(value);
+					this.SendPropertyChanging();
+					this._InsuranceID = value;
+					this.SendPropertyChanged("InsuranceID");
+					this.OnInsuranceIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_address", DbType="NVarChar(255)")]
+		public string address
+		{
+			get
+			{
+				return this._address;
+			}
+			set
+			{
+				if ((this._address != value))
+				{
+					this.OnaddressChanging(value);
+					this.SendPropertyChanging();
+					this._address = value;
+					this.SendPropertyChanged("address");
+					this.OnaddressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmergencyContact", DbType="NVarChar(255)")]
+		public string EmergencyContact
+		{
+			get
+			{
+				return this._EmergencyContact;
+			}
+			set
+			{
+				if ((this._EmergencyContact != value))
+				{
+					this.OnEmergencyContactChanging(value);
+					this.SendPropertyChanging();
+					this._EmergencyContact = value;
+					this.SendPropertyChanged("EmergencyContact");
+					this.OnEmergencyContactChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmergencyPhone", DbType="VarChar(15)")]
+		public string EmergencyPhone
+		{
+			get
+			{
+				return this._EmergencyPhone;
+			}
+			set
+			{
+				if ((this._EmergencyPhone != value))
+				{
+					this.OnEmergencyPhoneChanging(value);
+					this.SendPropertyChanging();
+					this._EmergencyPhone = value;
+					this.SendPropertyChanged("EmergencyPhone");
+					this.OnEmergencyPhoneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status", DbType="NVarChar(50)")]
+		public string status
+		{
+			get
+			{
+				return this._status;
+			}
+			set
+			{
+				if ((this._status != value))
+				{
+					this.OnstatusChanging(value);
+					this.SendPropertyChanging();
+					this._status = value;
+					this.SendPropertyChanged("status");
+					this.OnstatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_createdDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> createdDate
+		{
+			get
+			{
+				return this._createdDate;
+			}
+			set
+			{
+				if ((this._createdDate != value))
+				{
+					this.OncreatedDateChanging(value);
+					this.SendPropertyChanging();
+					this._createdDate = value;
+					this.SendPropertyChanged("createdDate");
+					this.OncreatedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_updatedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> updatedDate
+		{
+			get
+			{
+				return this._updatedDate;
+			}
+			set
+			{
+				if ((this._updatedDate != value))
+				{
+					this.OnupdatedDateChanging(value);
+					this.SendPropertyChanging();
+					this._updatedDate = value;
+					this.SendPropertyChanged("updatedDate");
+					this.OnupdatedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_weight", DbType="Float")]
+		public System.Nullable<double> weight
+		{
+			get
+			{
+				return this._weight;
+			}
+			set
+			{
+				if ((this._weight != value))
+				{
+					this.OnweightChanging(value);
+					this.SendPropertyChanging();
+					this._weight = value;
+					this.SendPropertyChanged("weight");
+					this.OnweightChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_height", DbType="Float")]
+		public System.Nullable<double> height
+		{
+			get
+			{
+				return this._height;
+			}
+			set
+			{
+				if ((this._height != value))
+				{
+					this.OnheightChanging(value);
+					this.SendPropertyChanging();
+					this._height = value;
+					this.SendPropertyChanged("height");
+					this.OnheightChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_Appointment", Storage="_Appointments", ThisKey="id", OtherKey="patientID")]
+		public EntitySet<Appointment> Appointments
+		{
+			get
+			{
+				return this._Appointments;
+			}
+			set
+			{
+				this._Appointments.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_DailyCare", Storage="_DailyCares", ThisKey="id", OtherKey="patientID")]
+		public EntitySet<DailyCare> DailyCares
+		{
+			get
+			{
+				return this._DailyCares;
+			}
+			set
+			{
+				this._DailyCares.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_DoctorPatient", Storage="_DoctorPatients", ThisKey="id", OtherKey="patientID")]
+		public EntitySet<DoctorPatient> DoctorPatients
+		{
+			get
+			{
+				return this._DoctorPatients;
+			}
+			set
+			{
+				this._DoctorPatients.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_LaboratoryTest", Storage="_LaboratoryTests", ThisKey="id", OtherKey="patientID")]
+		public EntitySet<LaboratoryTest> LaboratoryTests
+		{
+			get
+			{
+				return this._LaboratoryTests;
+			}
+			set
+			{
+				this._LaboratoryTests.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_MedicalOrder", Storage="_MedicalOrders", ThisKey="id", OtherKey="PatientID")]
+		public EntitySet<MedicalOrder> MedicalOrders
+		{
+			get
+			{
+				return this._MedicalOrders;
+			}
+			set
+			{
+				this._MedicalOrders.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_MedicalRecord", Storage="_MedicalRecords", ThisKey="id", OtherKey="patientID")]
+		public EntitySet<MedicalRecord> MedicalRecords
+		{
+			get
+			{
+				return this._MedicalRecords;
+			}
+			set
+			{
+				this._MedicalRecords.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Appointments(Appointment entity)
+		{
+			this.SendPropertyChanging();
+			entity.Patient = this;
+		}
+		
+		private void detach_Appointments(Appointment entity)
+		{
+			this.SendPropertyChanging();
+			entity.Patient = null;
+		}
+		
+		private void attach_DailyCares(DailyCare entity)
+		{
+			this.SendPropertyChanging();
+			entity.Patient = this;
+		}
+		
+		private void detach_DailyCares(DailyCare entity)
+		{
+			this.SendPropertyChanging();
+			entity.Patient = null;
+		}
+		
+		private void attach_DoctorPatients(DoctorPatient entity)
+		{
+			this.SendPropertyChanging();
+			entity.Patient = this;
+		}
+		
+		private void detach_DoctorPatients(DoctorPatient entity)
+		{
+			this.SendPropertyChanging();
+			entity.Patient = null;
+		}
+		
+		private void attach_LaboratoryTests(LaboratoryTest entity)
+		{
+			this.SendPropertyChanging();
+			entity.Patient = this;
+		}
+		
+		private void detach_LaboratoryTests(LaboratoryTest entity)
+		{
+			this.SendPropertyChanging();
+			entity.Patient = null;
+		}
+		
+		private void attach_MedicalOrders(MedicalOrder entity)
+		{
+			this.SendPropertyChanging();
+			entity.Patient = this;
+		}
+		
+		private void detach_MedicalOrders(MedicalOrder entity)
+		{
+			this.SendPropertyChanging();
+			entity.Patient = null;
+		}
+		
+		private void attach_MedicalRecords(MedicalRecord entity)
+		{
+			this.SendPropertyChanging();
+			entity.Patient = this;
+		}
+		
+		private void detach_MedicalRecords(MedicalRecord entity)
+		{
+			this.SendPropertyChanging();
+			entity.Patient = null;
 		}
 	}
 }

@@ -35,7 +35,7 @@ namespace DAL
         }
         HospitalManagementDataContext db = new HospitalManagementDataContext(GetFirstSqlServerInstanceName());
 
-        private IQueryable GetAll()
+        public IQueryable GetAll()
         {
             try
             {
@@ -56,7 +56,7 @@ namespace DAL
             }
             return itemSelect;
         }
-        private int Add(PatientDTO dto)
+        public int Add(PatientDTO dto)
         {
             try
             {
@@ -64,25 +64,30 @@ namespace DAL
                 {
                     return -1; //Đã tồn tại dũ liệu trùng id
                 }
-                Patient itemNew = new Patient()
+                Patient newP = new Patient()
                 {
                     id = dto.Id,
                     fullName = dto.FullName,
                     gender = dto.Gender,
                     dob = dto.Dob,
                     phoneNumber = dto.PhoneNumber,
+                    TypePatient = dto.TypePatient,
                     citizenID = dto.CitizenID,
                     InsuranceID = dto.InsuranceID,
                     address = dto.Address,
                     EmergencyContact = dto.EmergencyContact,
                     EmergencyPhone = dto.EmergencyPhone,
-                    status = dto.Status,
-                    createdDate = dto.CreatedDate,
-                    updatedDate = dto.UpdatedDate,
-                    weight = dto.Weight,
-                    height = dto.Height
+                    status = dto.Status
                 };
-                db.Patients.InsertOnSubmit(itemNew);
+                if (dto.Weight > 0)
+                {
+                    newP.weight = dto.Weight;
+                }
+                if (dto.Height > 0)
+                {
+                    newP.height = dto.Height;
+                }
+                db.Patients.InsertOnSubmit(newP);
                 db.SubmitChanges();
                 return 0;
             }catch(Exception ex)
@@ -91,7 +96,7 @@ namespace DAL
             }
         }
 
-        private bool Delete(string id)
+        public bool Delete(string id)
         {
             try
             {
@@ -109,7 +114,7 @@ namespace DAL
             }
         }
 
-        private int Update(PatientDTO dto)
+        public int Update(PatientDTO dto)
         {
             try
             {
@@ -127,11 +132,11 @@ namespace DAL
                     phoneNumber = dto.PhoneNumber,
                     citizenID = dto.CitizenID,
                     InsuranceID = dto.InsuranceID,
+                    TypePatient = dto.TypePatient,
                     address = dto.Address,
                     EmergencyContact = dto.EmergencyContact,
                     EmergencyPhone = dto.EmergencyPhone,
                     status = dto.Status,
-                    createdDate = dto.CreatedDate,
                     updatedDate = dto.UpdatedDate,
                     weight = dto.Weight,
                     height = dto.Height

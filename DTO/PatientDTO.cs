@@ -13,6 +13,7 @@ namespace DTO
         public string Gender { get; set; }           // Giới tính: Nam/Nữ/Khác
         public DateTime? Dob { get; set; }            // Ngày sinh
         public string PhoneNumber { get; set; }      // Số điện thoại
+        public string TypePatient { get; set; }      // Số điện thoại
         public string CitizenID { get; set; }        // CCCD/CMND
         public string InsuranceID { get; set; }      // Mã bảo hiểm y tế
         public string Address { get; set; }          // Địa chỉ

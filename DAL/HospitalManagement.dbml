@@ -34,8 +34,8 @@
       <Column Name="status" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
       <Column Name="doctorID" Type="System.String" DbType="Char(10)" CanBeNull="true" />
       <Column Name="patientID" Type="System.String" DbType="Char(10)" CanBeNull="true" />
-      <Association Name="Patient_Appointment" Member="Patient" ThisKey="patientID" OtherKey="id" Type="Patient" IsForeignKey="true" />
       <Association Name="Staff_Appointment" Member="Staff" ThisKey="doctorID" OtherKey="id" Type="Staff" IsForeignKey="true" />
+      <Association Name="Patient_Appointment" Member="Patient" ThisKey="patientID" OtherKey="id" Type="Patient" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.DailyCare" Member="DailyCares">
@@ -49,9 +49,9 @@
       <Column Name="patientID" Type="System.String" DbType="Char(10)" CanBeNull="true" />
       <Column Name="roomID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="nurseID" Type="System.String" DbType="Char(10)" CanBeNull="true" />
-      <Association Name="Patient_DailyCare" Member="Patient" ThisKey="patientID" OtherKey="id" Type="Patient" IsForeignKey="true" />
       <Association Name="Room_DailyCare" Member="Room" ThisKey="roomID" OtherKey="id" Type="Room" IsForeignKey="true" />
       <Association Name="Staff_DailyCare" Member="Staff" ThisKey="nurseID" OtherKey="id" Type="Staff" IsForeignKey="true" />
+      <Association Name="Patient_DailyCare" Member="Patient" ThisKey="patientID" OtherKey="id" Type="Patient" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Department" Member="Departments">
@@ -70,8 +70,8 @@
       <Column Name="endDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="role" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="note" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
-      <Association Name="Patient_DoctorPatient" Member="Patient" ThisKey="patientID" OtherKey="id" Type="Patient" IsForeignKey="true" />
       <Association Name="Staff_DoctorPatient" Member="Staff" ThisKey="doctorID" OtherKey="id" Type="Staff" IsForeignKey="true" />
+      <Association Name="Patient_DoctorPatient" Member="Patient" ThisKey="patientID" OtherKey="id" Type="Patient" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Inventory" Member="Inventories">
@@ -110,8 +110,8 @@
       <Column Name="status" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="note" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="LaboratoryTest_MedicalOrder" Member="MedicalOrders" ThisKey="id" OtherKey="TestTypeID" Type="MedicalOrder" />
-      <Association Name="Patient_LaboratoryTest" Member="Patient" ThisKey="patientID" OtherKey="id" Type="Patient" IsForeignKey="true" />
       <Association Name="Staff_LaboratoryTest" Member="Staff" ThisKey="doctorID" OtherKey="id" Type="Staff" IsForeignKey="true" />
+      <Association Name="Patient_LaboratoryTest" Member="Patient" ThisKey="patientID" OtherKey="id" Type="Patient" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.MedicalOrder" Member="MedicalOrders">
@@ -134,8 +134,8 @@
       <Column Name="Note" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="Item_MedicalOrder" Member="Item" ThisKey="ItemID" OtherKey="ID" Type="Item" IsForeignKey="true" />
       <Association Name="LaboratoryTest_MedicalOrder" Member="LaboratoryTest" ThisKey="TestTypeID" OtherKey="id" Type="LaboratoryTest" IsForeignKey="true" />
-      <Association Name="Patient_MedicalOrder" Member="Patient" ThisKey="PatientID" OtherKey="id" Type="Patient" IsForeignKey="true" />
       <Association Name="Staff_MedicalOrder" Member="Staff" ThisKey="DoctorID" OtherKey="id" Type="Staff" IsForeignKey="true" />
+      <Association Name="Patient_MedicalOrder" Member="Patient" ThisKey="PatientID" OtherKey="id" Type="Patient" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.MedicalRecord" Member="MedicalRecords">
@@ -149,33 +149,8 @@
       <Column Name="vitalSigns" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="createdDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="notes" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
-      <Association Name="Patient_MedicalRecord" Member="Patient" ThisKey="patientID" OtherKey="id" Type="Patient" IsForeignKey="true" />
       <Association Name="Staff_MedicalRecord" Member="Staff" ThisKey="doctorID" OtherKey="id" Type="Staff" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Patient" Member="Patients">
-    <Type Name="Patient">
-      <Column Name="id" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="fullName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="gender" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
-      <Column Name="dob" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="phoneNumber" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
-      <Column Name="citizenID" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="InsuranceID" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="address" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="EmergencyContact" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="EmergencyPhone" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
-      <Column Name="status" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="createdDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="updatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="weight" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="height" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Association Name="Patient_Appointment" Member="Appointments" ThisKey="id" OtherKey="patientID" Type="Appointment" />
-      <Association Name="Patient_DailyCare" Member="DailyCares" ThisKey="id" OtherKey="patientID" Type="DailyCare" />
-      <Association Name="Patient_DoctorPatient" Member="DoctorPatients" ThisKey="id" OtherKey="patientID" Type="DoctorPatient" />
-      <Association Name="Patient_LaboratoryTest" Member="LaboratoryTests" ThisKey="id" OtherKey="patientID" Type="LaboratoryTest" />
-      <Association Name="Patient_MedicalOrder" Member="MedicalOrders" ThisKey="id" OtherKey="PatientID" Type="MedicalOrder" />
-      <Association Name="Patient_MedicalRecord" Member="MedicalRecords" ThisKey="id" OtherKey="patientID" Type="MedicalRecord" />
+      <Association Name="Patient_MedicalRecord" Member="Patient" ThisKey="patientID" OtherKey="id" Type="Patient" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Room" Member="Rooms">
@@ -237,6 +212,32 @@
       <Association Name="Staff_MedicalRecord" Member="MedicalRecords" ThisKey="id" OtherKey="doctorID" Type="MedicalRecord" />
       <Association Name="Staff_Salary" Member="Salaries" ThisKey="id" OtherKey="StaffId" Type="Salary" />
       <Association Name="Department_Staff" Member="Department" ThisKey="departmentID" OtherKey="id" Type="Department" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Patient" Member="Patients">
+    <Type Name="Patient">
+      <Column Name="id" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fullName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="gender" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="dob" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="phoneNumber" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="TypePatient" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="citizenID" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="InsuranceID" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="address" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="EmergencyContact" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="EmergencyPhone" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="status" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="createdDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="updatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="weight" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="height" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Association Name="Patient_Appointment" Member="Appointments" ThisKey="id" OtherKey="patientID" Type="Appointment" />
+      <Association Name="Patient_DailyCare" Member="DailyCares" ThisKey="id" OtherKey="patientID" Type="DailyCare" />
+      <Association Name="Patient_DoctorPatient" Member="DoctorPatients" ThisKey="id" OtherKey="patientID" Type="DoctorPatient" />
+      <Association Name="Patient_LaboratoryTest" Member="LaboratoryTests" ThisKey="id" OtherKey="patientID" Type="LaboratoryTest" />
+      <Association Name="Patient_MedicalOrder" Member="MedicalOrders" ThisKey="id" OtherKey="PatientID" Type="MedicalOrder" />
+      <Association Name="Patient_MedicalRecord" Member="MedicalRecords" ThisKey="id" OtherKey="patientID" Type="MedicalRecord" />
     </Type>
   </Table>
 </Database>

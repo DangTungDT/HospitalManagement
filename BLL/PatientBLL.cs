@@ -12,25 +12,65 @@ namespace BLL
 {
     public class PatientBLL
     {
-        PatientBLL bll = new PatientBLL();
+        PatientDAL dal = new PatientDAL();
 
-        private IQueryable GetAll()
+        public IQueryable GetAll()
         {
-            return bll.GetAll();
+            return dal.GetAll();
         }
-        private int Add(PatientDTO dto)
+        public int Add(PatientDTO dto)
         {
-            return bll.Add(dto);
+            try
+            {
+                if(string.IsNullOrEmpty(dto.Id) || string.IsNullOrEmpty(dto.FullName) || string.IsNullOrEmpty(dto.Gender) || 
+                    dto.Dob > DateTime.Now || string.IsNullOrEmpty(dto.PhoneNumber) || string.IsNullOrEmpty(dto.CitizenID) || 
+                    string.IsNullOrEmpty(dto.Address) || string.IsNullOrEmpty(dto.EmergencyContact) || string.IsNullOrEmpty(dto.EmergencyPhone) || 
+                    string.IsNullOrEmpty(dto.Status) || dto.Weight <= 0 || dto.Height <=0)
+                {
+                    return -2;
+                }
+                return dal.Add(dto);
+            }
+            catch(Exception ex)
+            {
+                return 2;
+            }
+            
         }
 
-        private bool Delete(string id)
-        { 
-            return bll.Delete(id);
+        public bool Delete(string id)
+        {
+            try
+            {
+                if(string.IsNullOrEmpty(id))
+                {
+                    return false;
+                }
+                return dal.Delete(id);
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
         }
 
-        private int Update(PatientDTO dto)
+        public int Update(PatientDTO dto)
         {
-            return bll.Update(dto);
+            try
+            {
+                if (string.IsNullOrEmpty(dto.Id) || string.IsNullOrEmpty(dto.FullName) || string.IsNullOrEmpty(dto.Gender) ||
+                    dto.Dob > DateTime.Now || string.IsNullOrEmpty(dto.PhoneNumber) || string.IsNullOrEmpty(dto.CitizenID) ||
+                    string.IsNullOrEmpty(dto.Address) || string.IsNullOrEmpty(dto.EmergencyContact) || string.IsNullOrEmpty(dto.EmergencyPhone) ||
+                    string.IsNullOrEmpty(dto.Status) || dto.Weight <= 0 || dto.Height <= 0)
+                {
+                    return -2;
+                }
+                return dal.Update(dto);
+            }
+            catch (Exception ex)
+            {
+                return 2;
+            }
         }
     }
 }

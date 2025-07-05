@@ -109,9 +109,10 @@ CREATE TABLE Patient (
     gender NVARCHAR(10),                -- Giới tính: Nam/Nữ/Khác
     dob DATE,                           -- Ngày sinh
     phoneNumber VARCHAR(15),
+	TypePatient varchar(20)CHECK (TypePatient IN ('Inpatient', 'Outpatient', 'Other')),		   -- Loại bệnh nhân (Nội trú, ngoại trú, khác)
     citizenID VARCHAR(20),             -- CCCD/CMND
     InsuranceID VARCHAR(20),           -- Mã bảo hiểm y tế
-    address NVARCHAR(255),
+    address NVARCHAR(255),             -- Địa chỉ
     EmergencyContact NVARCHAR(255),    -- Tên người liên hệ khẩn cấp
     EmergencyPhone VARCHAR(15),
     status NVARCHAR(50),               -- Trạng thái (đang điều trị, xuất viện,...)
