@@ -10,3 +10,15 @@ D:\workspace\.Net\HospitalManagement\BLL\obj\Debug\BLL.csproj.CoreCompileInputs.
 D:\workspace\.Net\HospitalManagement\BLL\obj\Debug\BLL.csproj.Up2Date
 D:\workspace\.Net\HospitalManagement\BLL\obj\Debug\BLL.dll
 D:\workspace\.Net\HospitalManagement\BLL\obj\Debug\BLL.pdb
+C:\Thực tập\HospitalManagement\BLL\bin\Debug\BLL.dll
+C:\Thực tập\HospitalManagement\BLL\bin\Debug\BLL.pdb
+C:\Thực tập\HospitalManagement\BLL\bin\Debug\DAL.dll
+C:\Thực tập\HospitalManagement\BLL\bin\Debug\DTO.dll
+C:\Thực tập\HospitalManagement\BLL\bin\Debug\DAL.pdb
+C:\Thực tập\HospitalManagement\BLL\bin\Debug\DAL.dll.config
+C:\Thực tập\HospitalManagement\BLL\bin\Debug\DTO.pdb
+C:\Thực tập\HospitalManagement\BLL\obj\Debug\BLL.csproj.AssemblyReference.cache
+C:\Thực tập\HospitalManagement\BLL\obj\Debug\BLL.csproj.CoreCompileInputs.cache
+C:\Thực tập\HospitalManagement\BLL\obj\Debug\BLL.csproj.Up2Date
+C:\Thực tập\HospitalManagement\BLL\obj\Debug\BLL.dll
+C:\Thực tập\HospitalManagement\BLL\obj\Debug\BLL.pdb

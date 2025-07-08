@@ -58,6 +58,18 @@
     <Compile Include="FormAdmin.Designer.cs">
       <DependentUpon>FormAdmin.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormAppointmentAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAppointmentAdmin.Designer.cs">
+      <DependentUpon>FormAppointmentAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormDailyCareAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDailyCareAdmin.Designer.cs">
+      <DependentUpon>FormDailyCareAdmin.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmDepartmentInfo_Doctor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,12 +109,24 @@
     <Compile Include="frmUserGUI.designer.cs">
       <DependentUpon>frmUserGUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="FromSupplyHistoryAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FromSupplyHistoryAdmin.Designer.cs">
+      <DependentUpon>FromSupplyHistoryAdmin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="DangNhap_GUI.resx">
       <DependentUpon>DangNhap_GUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormAdmin.resx">
       <DependentUpon>FormAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAppointmentAdmin.resx">
+      <DependentUpon>FormAppointmentAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDailyCareAdmin.resx">
+      <DependentUpon>FormDailyCareAdmin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDepartmentInfo_Doctor.resx">
       <DependentUpon>frmDepartmentInfo_Doctor.cs</DependentUpon>
@@ -407,6 +431,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormThongTinNhanVien.resx">
       <DependentUpon>FormThongTinNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FromSupplyHistoryAdmin.resx">
+      <DependentUpon>FromSupplyHistoryAdmin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

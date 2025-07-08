@@ -41,6 +41,13 @@ namespace GUI
                 return;
             }
 
+            // ✅ Kiểm tra nếu StaffID thay đổi
+            if (!string.Equals(originalStaffID, staffId, StringComparison.OrdinalIgnoreCase))
+            {
+                MessageBox.Show("Không được thay đổi mã nhân viên của tài khoản!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             string oldUsername = dgvUsers.CurrentRow.Cells["Username"].Value.ToString();
             if (!username.Equals(oldUsername, StringComparison.OrdinalIgnoreCase) && !bus.IsUsernameUnique(username))
             {
@@ -55,7 +62,7 @@ namespace GUI
                 PasswordHash = password,
                 StaffID = staffId,
                 Status = status,
-                StartDate = DateTime.Now // hoặc giữ nguyên nếu cần
+                StartDate = DateTime.Now
             };
 
             if (bus.EditUser(user))
@@ -188,6 +195,9 @@ namespace GUI
                 txtUsername.Text = row.Cells["Username"].Value.ToString();
                 txtStaffID.Text = row.Cells["StaffID"].Value.ToString();
                 txtStatus.Text = row.Cells["Status"].Value.ToString();
+
+                // 👉 Lưu lại StaffID gốc để so sánh khi sửa
+                originalStaffID = txtStaffID.Text.Trim();
             }
         }
 
@@ -326,5 +336,6 @@ namespace GUI
             txtUsername.Clear();
             txtUsername.Focus();
         }
+        private string originalStaffID = null;
     }
 }

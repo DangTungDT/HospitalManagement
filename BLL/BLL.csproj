@@ -41,7 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppointmentBLL.cs" />
+    <Compile Include="DailyCareBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SupplyHistoryBLL.cs" />
     <Compile Include="UsersBLL.cs" />
   </ItemGroup>
   <ItemGroup>
