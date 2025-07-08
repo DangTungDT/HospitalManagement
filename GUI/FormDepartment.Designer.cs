@@ -46,6 +46,7 @@
             // 
             // dgv_phongban
             // 
+            this.dgv_phongban.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgv_phongban.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_phongban.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgv_phongban.Location = new System.Drawing.Point(0, 316);

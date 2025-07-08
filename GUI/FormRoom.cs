@@ -30,9 +30,36 @@ namespace GUI
 
         private void btn_them_Click(object sender, EventArgs e)
         {
-            bllroom.ThemRoom(new RoomDTO(int.Parse(txtIdRoom.Text), txtNameRoom.Text, int.Parse(txtBedCount.Text), cbo_bophan.SelectedValue.ToString()));
+            // Kiểm tra tên phòng
+            if (string.IsNullOrWhiteSpace(txtNameRoom.Text))
+            {
+                MessageBox.Show("Vui lòng nhập tên phòng.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-            // Cập nhật DataGridView để hiển thị thông tin vừa nhập
+            // Kiểm tra số giường hợp lệ
+            if (string.IsNullOrWhiteSpace(txtBedCount.Text) || !int.TryParse(txtBedCount.Text, out int bedCount) || bedCount <= 0)
+            {
+                MessageBox.Show("Số giường phải là số nguyên dương.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Kiểm tra bộ phận đã chọn chưa
+            if (cbo_bophan.SelectedValue == null)
+            {
+                MessageBox.Show("Vui lòng chọn bộ phận.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Thêm phòng nếu mọi thứ hợp lệ
+            RoomDTO room = new RoomDTO
+            {
+                RoomName = txtNameRoom.Text.Trim(),
+                BedCount = bedCount,
+                DepartmentID = cbo_bophan.SelectedValue.ToString()
+            };
+
+            bllroom.ThemRoom(room);
             dgv_phong.DataSource = bllroom.HienThi();
         }
 
@@ -40,9 +67,9 @@ namespace GUI
         {
             if (e.RowIndex > -1 && e != null)
             {
-                txtIdRoom.Text = dgv_phong.Rows[e.RowIndex].Cells[0].Value.ToString();
-                txtNameRoom.Text = dgv_phong.Rows[e.RowIndex].Cells[1].Value.ToString();
-                txtBedCount.Text = dgv_phong.Rows[e.RowIndex].Cells[2].Value.ToString();              
+                txtIdRoom.Text = dgv_phong.Rows[e.RowIndex].Cells[0].Value.ToString().Trim();
+                txtNameRoom.Text = dgv_phong.Rows[e.RowIndex].Cells[1].Value.ToString().Trim();
+                txtBedCount.Text = dgv_phong.Rows[e.RowIndex].Cells[2].Value.ToString().Trim();              
                 cbo_bophan.SelectedValue = dgv_phong.Rows[e.RowIndex].Cells[3].Value.ToString();              
             }
         }
@@ -59,7 +86,36 @@ namespace GUI
 
         private void btn_sua_Click(object sender, EventArgs e)
         {
-            bllroom.CapnhatRoom(new RoomDTO(int.Parse(txtIdRoom.Text), txtNameRoom.Text, int.Parse(txtBedCount.Text), cbo_bophan.SelectedValue.ToString()));
+            // Kiểm tra tên phòng
+            if (string.IsNullOrWhiteSpace(txtNameRoom.Text))
+            {
+                MessageBox.Show("Vui lòng nhập tên phòng.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Kiểm tra số giường hợp lệ
+            if (string.IsNullOrWhiteSpace(txtBedCount.Text) || !int.TryParse(txtBedCount.Text, out int bedCount) || bedCount <= 0)
+            {
+                MessageBox.Show("Số giường phải là số nguyên dương.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Kiểm tra bộ phận đã chọn chưa
+            if (cbo_bophan.SelectedValue == null)
+            {
+                MessageBox.Show("Vui lòng chọn bộ phận.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Thêm phòng nếu mọi thứ hợp lệ
+            RoomDTO room = new RoomDTO
+            {
+                RoomName = txtNameRoom.Text.Trim(),
+                BedCount = bedCount,
+                DepartmentID = cbo_bophan.SelectedValue.ToString()
+            };
+
+            bllroom.CapnhatRoom(room);
             dgv_phong.DataSource = bllroom.HienThi();
         }
 

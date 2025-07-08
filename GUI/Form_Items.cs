@@ -42,24 +42,63 @@ namespace GUI
 
         private void btn_them_Click(object sender, EventArgs e)
         {
-            bllitem.ThemItems(new ItemsDTO(txtIdItem.Text, txtNameItem.Text, cboTypeItem.SelectedValue.ToString(), txtUnit.Text, decimal.Parse(txtPrice.Text), DateTime.Parse(dtp_CreatedAt.Text), click()));
+            // 1. Kiểm tra các trường bắt buộc
+            if (string.IsNullOrWhiteSpace(txtIdItem.Text) ||
+                string.IsNullOrWhiteSpace(txtNameItem.Text) ||
+                string.IsNullOrWhiteSpace(txtUnit.Text) ||
+                string.IsNullOrWhiteSpace(txtPrice.Text))
+            {
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin các trường bắt buộc.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 2. Kiểm tra định dạng giá
+            if (!decimal.TryParse(txtPrice.Text, out decimal price))
+            {
+                MessageBox.Show("Giá không hợp lệ. Vui lòng nhập số.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // 3. Kiểm tra combobox đã chọn chưa
+            if (cboTypeItem.SelectedValue == null)
+            {
+                MessageBox.Show("Vui lòng chọn loại vật tư.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 4. Kiểm tra trạng thái có được chọn không
+            bool? status = GetItemStatus();
+            if (status == null)
+            {
+                // Hàm GetItemStatus sẽ hiển thị MessageBox nên chỉ cần return
+                return;
+            }
+
+            // 5. Tạo DTO và gọi BLL
+            ItemsDTO item = new ItemsDTO(
+                txtIdItem.Text.Trim(),
+                txtNameItem.Text.Trim(),
+                cboTypeItem.SelectedValue.ToString(),
+                txtUnit.Text.Trim(),
+                price,
+                dtp_CreatedAt.Value,
+                status.Value
+            );
+
+            bllitem.ThemItems(item);
             dgv_items.DataSource = bllitem.HienThi();
+           
         }
-        private bool click()
+        private bool? GetItemStatus()
         {
             if (radActive.Checked)
-            {
                 return true;
-            }
             else if (radInActive.Checked)
-            {
                 return false;
-            }
             else
             {
-                MessageBox.Show("Vui lòng chọn trạng thái.");
-                // Trường hợp không chọn gì: mặc định trả false hoặc bạn có thể throw exception tùy logic
-                return false;
+                MessageBox.Show("Vui lòng chọn trạng thái hoạt động.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return null;
             }
         }
 
@@ -67,21 +106,21 @@ namespace GUI
         {
             if (e.RowIndex >= 0 && e != null)
             {
-                txtIdItem.Text = dgv_items.Rows[e.RowIndex].Cells[0].Value.ToString();
-                txtNameItem.Text = dgv_items.Rows[e.RowIndex].Cells[1].Value.ToString();
-                cboTypeItem.SelectedValue = dgv_items.Rows[e.RowIndex].Cells[2].Value.ToString();
-                txtUnit.Text = dgv_items.Rows[e.RowIndex].Cells[3].Value.ToString();
+                txtIdItem.Text = dgv_items.Rows[e.RowIndex].Cells[0].Value.ToString().Trim();
+                txtNameItem.Text = dgv_items.Rows[e.RowIndex].Cells[1].Value.ToString().Trim();
+                cboTypeItem.SelectedValue = dgv_items.Rows[e.RowIndex].Cells[2].Value.ToString().Trim();
+                txtUnit.Text = dgv_items.Rows[e.RowIndex].Cells[3].Value.ToString().Trim();
 
                 // Giá
                 decimal price;
-                if (decimal.TryParse(dgv_items.Rows[e.RowIndex].Cells[4].Value.ToString(), out price))
+                if (decimal.TryParse(dgv_items.Rows[e.RowIndex].Cells[4].Value.ToString().Trim(), out price))
                 {
                     txtPrice.Text = price.ToString("0.##");
                 }
 
                 // Ngày tạo
                 DateTime createdAt;
-                if (DateTime.TryParse(dgv_items.Rows[e.RowIndex].Cells[5].Value.ToString(), out createdAt))
+                if (DateTime.TryParse(dgv_items.Rows[e.RowIndex].Cells[5].Value.ToString().Trim(), out createdAt))
                 {
                     dtp_CreatedAt.Value = createdAt;
                 }
@@ -101,8 +140,52 @@ namespace GUI
 
         private void btn_sua_Click(object sender, EventArgs e)
         {
-            bllitem.CapnhatItems(new ItemsDTO(txtIdItem.Text, txtNameItem.Text, cboTypeItem.SelectedValue.ToString(), txtUnit.Text, decimal.Parse(txtPrice.Text), DateTime.Parse(dtp_CreatedAt.Text), click()));
+
+            // 1. Kiểm tra các trường bắt buộc
+            if (string.IsNullOrWhiteSpace(txtIdItem.Text) ||
+                string.IsNullOrWhiteSpace(txtNameItem.Text) ||
+                string.IsNullOrWhiteSpace(txtUnit.Text) ||
+                string.IsNullOrWhiteSpace(txtPrice.Text))
+            {
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin các trường bắt buộc.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 2. Kiểm tra định dạng giá
+            if (!decimal.TryParse(txtPrice.Text, out decimal price))
+            {
+                MessageBox.Show("Giá không hợp lệ. Vui lòng nhập số.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // 3. Kiểm tra combobox đã chọn chưa
+            if (cboTypeItem.SelectedValue == null)
+            {
+                MessageBox.Show("Vui lòng chọn loại vật tư.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 4. Kiểm tra trạng thái có được chọn không
+            bool? status = GetItemStatus();
+            if (status == null)
+            {
+                return; // Hàm đã hiển thị MessageBox
+            }
+
+            // 5. Tạo DTO và cập nhật
+            ItemsDTO item = new ItemsDTO(
+                txtIdItem.Text.Trim(),
+                txtNameItem.Text.Trim(),
+                cboTypeItem.SelectedValue.ToString(),
+                txtUnit.Text.Trim(),
+                price,
+                dtp_CreatedAt.Value,
+                status.Value
+            );
+
+            bllitem.CapnhatItems(item);
             dgv_items.DataSource = bllitem.HienThi();
+           
         }
 
         private void btn_xoa_Click(object sender, EventArgs e)

@@ -49,5 +49,6 @@ namespace BLL
                 MessageBox.Show("Cập nhật không thành công", "thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+       
     }
 }

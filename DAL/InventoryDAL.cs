@@ -8,17 +8,32 @@ using System.Threading.Tasks;
 namespace DAL
 {
     public class InventoryDAL
-    {
+       
+{
         HospitalManagementDataContext db = new HospitalManagementDataContext();
         public IQueryable HienThi()
         {
             IQueryable Inventory = (from ivt in db.Inventories
-                              select new { ivt.ItemID, ivt.Quantity, ivt.LastUpdated });
+                              select new {ivt.id, ivt.ItemID, ivt.Quantity, ivt.LastUpdated });
             return Inventory;
+        }
+        public IQueryable SearchItems(string keyword)
+        {
+            try
+            {
+                IQueryable Item = from it in db.Items
+                                       where it.ItemName.Contains(keyword)
+                                       select new { it.ID, it.ItemName, it.ItemType,it.Unit };
+                return Item;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Lỗi khi tìm kiếm kho: " + ex.Message);
+            }
         }
         public bool ThemInventory(InventoryDTO dtoivt)
         {
-            if (db.Inventories.Any(sp => sp.ItemID == dtoivt.Id))
+            if (db.Inventories.Any(sp => sp.ItemID == dtoivt.IdItem && sp.Quantity==dtoivt.Quantity && sp.LastUpdated==dtoivt.LastUpdate))
             {
                 return false;
             }
@@ -26,7 +41,7 @@ namespace DAL
             {
                 Inventory ivt = new Inventory
                 {
-                    ItemID = dtoivt.Id,
+                    ItemID = dtoivt.IdItem,
                     Quantity = dtoivt.Quantity,
                     LastUpdated = dtoivt.LastUpdate,
                 };
@@ -38,19 +53,20 @@ namespace DAL
                 db.SubmitChanges();
             }
         }
-        public bool XoaInventory(string maIVT)
+        public bool XoaInventory(int id)
         {
             try
             {
-                var xoa = from ivt in db.Inventories
-                          where ivt.ItemID == maIVT
-                          select ivt;
-                foreach (var x in xoa)
-                {
-                    db.Inventories.DeleteOnSubmit(x);
-                    db.SubmitChanges();
+                Inventory xoa = (from ivt in db.Inventories
+                          where ivt.id == id
+                          select ivt).FirstOrDefault();
+                if(xoa != null)
+                {                   
+                        db.Inventories.DeleteOnSubmit(xoa);
+                        db.SubmitChanges();                  
+                    return true;
                 }
-                return true;
+                return false;
             }
             catch (System.Data.SqlClient.SqlException ex)
             {
@@ -65,13 +81,17 @@ namespace DAL
         {
             try
             {
-                if (db.Inventories.Where(x => x.ItemID == dtoivt.Id).FirstOrDefault() != null)
+                if (db.Inventories.Where(x => x.id == dtoivt.Id).FirstOrDefault() != null)
                 {
-                    var update = db.Inventories.Single(sp => sp.ItemID == dtoivt.Id);
-                    update.Quantity = dtoivt.Quantity;
-                    update.LastUpdated = dtoivt.LastUpdate;
-                    db.SubmitChanges();
-                    return true;
+                    var update = db.Inventories.Where(sp => sp.id == dtoivt.Id).FirstOrDefault();
+                    if(update != null)
+                    {
+                        update.Quantity = dtoivt.Quantity;
+                        update.LastUpdated = dtoivt.LastUpdate;
+                        db.SubmitChanges();
+                        return true;
+                    }
+                    return false;
                 }
                 return false;
             }

@@ -15,19 +15,38 @@ namespace BLL
         public IQueryable HienThi()
         {
             return dalivt.HienThi();
-        }       
-        public void ThemInventory(InventoryDTO dtoivt)
+        }
+        public IQueryable SearchItems(string keyword)
         {
-            if (dalivt.ThemInventory(dtoivt) == true)
+            return dalivt.SearchItems(keyword);
+        }
+        public void ThemInventory(InventoryDTO dtoivt)
+        {          
+            if (dtoivt.LastUpdate.Date > DateTime.Now.Date)
             {
-                MessageBox.Show("Thêm thành công", "thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("ngày cập nhật không được lớn hơn ngày hiện tại!!!!", "Thông báo!");
+            }
+            else if (string.IsNullOrEmpty(dtoivt.IdItem))
+            {
+                MessageBox.Show("vui lòng chọn vật phẩm chính xác!!", "Thông báo!");
+            }
+            else if (dtoivt.Quantity < 0)
+            {
+                MessageBox.Show("số lượng phải lớn hơn 0!!", "Thông báo!");
             }
             else
             {
-                MessageBox.Show("Thêm không thành công", "thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (dalivt.ThemInventory(dtoivt) == true)
+                {
+                    MessageBox.Show("Thêm thành công", "thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Thêm không thành công", "thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
-        public void XoaInventory(string maIVT)
+        public void XoaInventory(int maIVT)
         {
             if (dalivt.XoaInventory(maIVT) == true)
             {
@@ -49,5 +68,6 @@ namespace BLL
                 MessageBox.Show("Cập nhật không thành công", "thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+       
     }
 }

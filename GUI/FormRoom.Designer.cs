@@ -30,10 +30,8 @@
         {
             this.label16 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.txtIdRoom = new System.Windows.Forms.TextBox();
             this.txtNameRoom = new System.Windows.Forms.TextBox();
             this.txtBedCount = new System.Windows.Forms.TextBox();
             this.btn_them = new System.Windows.Forms.Button();
@@ -43,6 +41,8 @@
             this.btn_thoat = new System.Windows.Forms.Button();
             this.dgv_phong = new System.Windows.Forms.DataGridView();
             this.cbo_bophan = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtIdRoom = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_phong)).BeginInit();
             this.SuspendLayout();
             // 
@@ -65,15 +65,6 @@
             this.label1.TabIndex = 27;
             this.label1.Text = "Tên phòng:";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(54, 121);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 13);
-            this.label2.TabIndex = 27;
-            this.label2.Text = "ID phòng:";
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -91,13 +82,6 @@
             this.label4.Size = new System.Drawing.Size(50, 13);
             this.label4.TabIndex = 27;
             this.label4.Text = "Bộ phận:";
-            // 
-            // txtIdRoom
-            // 
-            this.txtIdRoom.Location = new System.Drawing.Point(140, 113);
-            this.txtIdRoom.Name = "txtIdRoom";
-            this.txtIdRoom.Size = new System.Drawing.Size(211, 20);
-            this.txtIdRoom.TabIndex = 28;
             // 
             // txtNameRoom
             // 
@@ -165,6 +149,7 @@
             // 
             // dgv_phong
             // 
+            this.dgv_phong.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgv_phong.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_phong.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgv_phong.Location = new System.Drawing.Point(0, 320);
@@ -180,6 +165,23 @@
             this.cbo_bophan.Name = "cbo_bophan";
             this.cbo_bophan.Size = new System.Drawing.Size(211, 21);
             this.cbo_bophan.TabIndex = 31;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(54, 121);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(54, 13);
+            this.label2.TabIndex = 27;
+            this.label2.Text = "ID phòng:";
+            // 
+            // txtIdRoom
+            // 
+            this.txtIdRoom.Enabled = false;
+            this.txtIdRoom.Location = new System.Drawing.Point(140, 113);
+            this.txtIdRoom.Name = "txtIdRoom";
+            this.txtIdRoom.Size = new System.Drawing.Size(211, 20);
+            this.txtIdRoom.TabIndex = 28;
             // 
             // FormRoom
             // 
@@ -215,10 +217,8 @@
 
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtIdRoom;
         private System.Windows.Forms.TextBox txtNameRoom;
         private System.Windows.Forms.TextBox txtBedCount;
         private System.Windows.Forms.Button btn_them;
@@ -228,5 +228,7 @@
         private System.Windows.Forms.Button btn_thoat;
         private System.Windows.Forms.DataGridView dgv_phong;
         private System.Windows.Forms.ComboBox cbo_bophan;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtIdRoom;
     }
 }

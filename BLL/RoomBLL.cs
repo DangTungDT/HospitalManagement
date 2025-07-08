@@ -39,7 +39,7 @@ namespace BLL
             }
             else
             {
-                MessageBox.Show("Xóa không thành công", "thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Xóa không thành công vì liên quan đến các dữ liệu khác!!!", "thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         public void CapnhatRoom(RoomDTO dtoroom)

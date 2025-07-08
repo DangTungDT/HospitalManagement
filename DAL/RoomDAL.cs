@@ -25,7 +25,7 @@ namespace DAL
         }
         public bool ThemRoom(RoomDTO dtoroom)
         {
-            if (db.Rooms.Any(sp => sp.id == dtoroom.ID1))
+            if (db.Rooms.Any(sp => sp.roomName == dtoroom.RoomName && sp.departmentID == dtoroom.DepartmentID))
             {
                 return false;
             }
@@ -33,7 +33,6 @@ namespace DAL
             {
                 Room room = new Room
                 {
-                    id = dtoroom.ID1,
                     roomName = dtoroom.RoomName,
                     bedCount = dtoroom.BedCount,
                     departmentID = dtoroom.DepartmentID,
@@ -50,6 +49,10 @@ namespace DAL
         {
             try
             {
+                if(db.DailyCares.Any(sp => sp.roomID == maRoom)|| db.SupplyHistories.Any(sp => sp.roomID == maRoom ))
+                {
+                    return false;
+                }
                 var xoa = from room in db.Rooms
                           where room.id == maRoom
                           select room;

@@ -42,6 +42,10 @@ namespace DAL
         {
             try
             {
+                if (db.Rooms.Any(sp => sp.departmentID == maDPM) || db.Staffs.Any(sp => sp.departmentID == maDPM))
+                {
+                    return false;
+                }
                 var xoa = from dpm in db.Departments
                           where dpm.id == maDPM
                           select dpm;
