@@ -10,3 +10,9 @@ C:\Thực tập\HospitalManagement\DTO\obj\Debug\DTO.csproj.AssemblyReference.ca
 C:\Thực tập\HospitalManagement\DTO\obj\Debug\DTO.csproj.CoreCompileInputs.cache
 C:\Thực tập\HospitalManagement\DTO\obj\Debug\DTO.dll
 C:\Thực tập\HospitalManagement\DTO\obj\Debug\DTO.pdb
+D:\DoAnThucTap\HospitalManagement\DTO\bin\Debug\DTO.dll
+D:\DoAnThucTap\HospitalManagement\DTO\bin\Debug\DTO.pdb
+D:\DoAnThucTap\HospitalManagement\DTO\obj\Debug\DTO.csproj.AssemblyReference.cache
+D:\DoAnThucTap\HospitalManagement\DTO\obj\Debug\DTO.csproj.CoreCompileInputs.cache
+D:\DoAnThucTap\HospitalManagement\DTO\obj\Debug\DTO.dll
+D:\DoAnThucTap\HospitalManagement\DTO\obj\Debug\DTO.pdb

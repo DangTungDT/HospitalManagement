@@ -18,3 +18,13 @@ C:\Thực tập\HospitalManagement\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.ca
 C:\Thực tập\HospitalManagement\DAL\obj\Debug\DAL.csproj.Up2Date
 C:\Thực tập\HospitalManagement\DAL\obj\Debug\DAL.dll
 C:\Thực tập\HospitalManagement\DAL\obj\Debug\DAL.pdb
+D:\DoAnThucTap\HospitalManagement\DAL\bin\Debug\DAL.dll.config
+D:\DoAnThucTap\HospitalManagement\DAL\bin\Debug\DAL.dll
+D:\DoAnThucTap\HospitalManagement\DAL\bin\Debug\DAL.pdb
+D:\DoAnThucTap\HospitalManagement\DAL\bin\Debug\DTO.dll
+D:\DoAnThucTap\HospitalManagement\DAL\bin\Debug\DTO.pdb
+D:\DoAnThucTap\HospitalManagement\DAL\obj\Debug\DAL.csproj.AssemblyReference.cache
+D:\DoAnThucTap\HospitalManagement\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+D:\DoAnThucTap\HospitalManagement\DAL\obj\Debug\DAL.csproj.Up2Date
+D:\DoAnThucTap\HospitalManagement\DAL\obj\Debug\DAL.dll
+D:\DoAnThucTap\HospitalManagement\DAL\obj\Debug\DAL.pdb

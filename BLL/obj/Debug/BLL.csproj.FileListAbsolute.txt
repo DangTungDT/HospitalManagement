@@ -22,3 +22,15 @@ C:\Thực tập\HospitalManagement\BLL\obj\Debug\BLL.csproj.CoreCompileInputs.ca
 C:\Thực tập\HospitalManagement\BLL\obj\Debug\BLL.csproj.Up2Date
 C:\Thực tập\HospitalManagement\BLL\obj\Debug\BLL.dll
 C:\Thực tập\HospitalManagement\BLL\obj\Debug\BLL.pdb
+D:\DoAnThucTap\HospitalManagement\BLL\bin\Debug\BLL.dll
+D:\DoAnThucTap\HospitalManagement\BLL\bin\Debug\BLL.pdb
+D:\DoAnThucTap\HospitalManagement\BLL\bin\Debug\DAL.dll
+D:\DoAnThucTap\HospitalManagement\BLL\bin\Debug\DTO.dll
+D:\DoAnThucTap\HospitalManagement\BLL\bin\Debug\DAL.pdb
+D:\DoAnThucTap\HospitalManagement\BLL\bin\Debug\DAL.dll.config
+D:\DoAnThucTap\HospitalManagement\BLL\bin\Debug\DTO.pdb
+D:\DoAnThucTap\HospitalManagement\BLL\obj\Debug\BLL.csproj.AssemblyReference.cache
+D:\DoAnThucTap\HospitalManagement\BLL\obj\Debug\BLL.csproj.CoreCompileInputs.cache
+D:\DoAnThucTap\HospitalManagement\BLL\obj\Debug\BLL.csproj.Up2Date
+D:\DoAnThucTap\HospitalManagement\BLL\obj\Debug\BLL.dll
+D:\DoAnThucTap\HospitalManagement\BLL\obj\Debug\BLL.pdb
