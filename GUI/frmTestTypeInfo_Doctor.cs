@@ -138,7 +138,7 @@ public class frmTestTypeInfo_Doctor : Form
             // 
             // frmTestTypeInfo_Doctor
             // 
-            this.ClientSize = new System.Drawing.Size(866, 261);
+            this.ClientSize = new System.Drawing.Size(284, 261);
             this.Name = "frmTestTypeInfo_Doctor";
             this.Load += new System.EventHandler(this.frmTestTypeInfo_Doctor_Load);
             this.ResumeLayout(false);

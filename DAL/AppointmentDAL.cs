@@ -2,155 +2,82 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class AppointmentDAL
+    public class appointmentDAL
     {
         HospitalManagementDataContext db = new HospitalManagementDataContext();
-
-        public List<AppointmentDTO> GetAll()
+        public IQueryable HienThi()
         {
-            var query = from a in db.Appointments
-                        join d in db.Staffs on a.doctorID equals d.id
-                        join p in db.Patients on a.patientID equals p.id
-                        select new AppointmentDTO
-                        {
-                            Id = a.id,
-                            StartDate = a.startDate.Value,
-                            Note = a.note,
-                            Status = a.status,
-                            DoctorID = a.doctorID,
-                            PatientID = a.patientID,
-                            DoctorName = d.name,
-                            PatientName = p.fullName
-                        };
-
-            return query.ToList();
+            IQueryable Aptm = (from aptm in db.Appointments
+                              select new { aptm.id, aptm.startDate, aptm.note, aptm.status, aptm.doctorID, aptm.patientID });
+            return Aptm;
         }
-
-        public void Add(AppointmentDTO dto)
+        public IQueryable LaydsBacsi()
         {
-            var a = new Appointment
-            {
-                startDate = dto.StartDate,
-                note = dto.Note,
-                status = dto.Status,
-                doctorID = dto.DoctorID,
-                patientID = dto.PatientID
-            };
-            db.Appointments.InsertOnSubmit(a);
-            db.SubmitChanges();
+            IQueryable BS = (from bs in db.DoctorPatients
+                             join nv in db.Staffs on bs.doctorID equals nv.id 
+                             select new { bs.doctorID, nv.name }
+                             );
+            return BS;
         }
-
-        public void Update(AppointmentDTO dto)
+        public IQueryable LaydsBN()
         {
-            var a = db.Appointments.FirstOrDefault(x => x.id == dto.Id);
-            if (a != null)
+            IQueryable BN = (from bn in db.Patients
+                             select new { bn.id, bn.fullName });
+            return BN;
+        }
+        public bool Themappointment(appointmentDTO dtoivt)
+        {
+            if (db.Appointments.Any(sp => sp.startDate == dtoivt.StarDate && sp.doctorID == dtoivt.DoctorID))
             {
-                a.startDate = dto.StartDate;
-                a.note = dto.Note;
-                a.status = dto.Status;
-                a.doctorID = dto.DoctorID;
-                a.patientID = dto.PatientID;
+                return false;
+            }
+            try
+            {
+                Appointment ivt = new Appointment
+                {
+                    startDate = dtoivt.StarDate,
+                    note = dtoivt.Note,
+                    status = dtoivt.Status,
+                    doctorID = dtoivt.DoctorID,
+                    patientID = dtoivt.PatientID,
+                };
+                db.Appointments.InsertOnSubmit(ivt);
+                return true;
+            }
+            finally
+            {
                 db.SubmitChanges();
             }
         }
-
-        public void Delete(int id)
+        public bool Xoaappointment(int id)
         {
-            var a = db.Appointments.FirstOrDefault(x => x.id == id);
-            if (a != null)
+            try
             {
-                db.Appointments.DeleteOnSubmit(a);
-                db.SubmitChanges();
+                Appointment xoa = (from apm in db.Appointments
+                                 where apm.id == id
+                                 select apm).FirstOrDefault();
+                if (xoa != null)
+                {
+                    db.Appointments.DeleteOnSubmit(xoa);
+                    db.SubmitChanges();
+                    return true;
+                }
+                return false;
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                if (ex.Number == 547)
+                {
+                    return false;
+                }
+                return false;
             }
         }
-        public List<AppointmentDTO> Search(string doctorId, string patientId, string startDateText, string status)
-        {
-            var query = from a in db.Appointments
-                        join d in db.Staffs on a.doctorID equals d.id
-                        join p in db.Patients on a.patientID equals p.id
-                        select new { a, d, p };
-
-            if (!string.IsNullOrWhiteSpace(doctorId))
-                query = query.Where(x => x.a.doctorID.Contains(doctorId));
-
-            if (!string.IsNullOrWhiteSpace(patientId))
-                query = query.Where(x => x.a.patientID.Contains(patientId));
-
-            if (DateTime.TryParse(startDateText, out DateTime startDate))
-                query = query.Where(x => x.a.startDate.HasValue && x.a.startDate.Value.Date == startDate.Date);
-
-            if (!string.IsNullOrWhiteSpace(status))
-                query = query.Where(x => x.a.status.Contains(status));
-
-            return query.Select(x => new AppointmentDTO
-            {
-                Id = x.a.id,
-                StartDate = x.a.startDate.Value,
-                Note = x.a.note,
-                Status = x.a.status,
-                DoctorID = x.a.doctorID,
-                PatientID = x.a.patientID,
-                DoctorName = x.d.name,
-                PatientName = x.p.fullName
-            }).ToList();
-        }
-
-
-        // Kiểm tra tồn tại bệnh nhân theo ID
-        public bool IsPatientExists(string patientId)
-        {
-            return db.Patients.Any(p => p.id == patientId);
-        }
-
-        // Kiểm tra tồn tại nhân viên là bác sĩ theo ID
-        public bool IsDoctorExists(string nurseId)
-        {
-            return db.Staffs.Any(s => s.id == nurseId && s.role.ToLower().Contains("Bác sĩ"));
-        }
-        public List<DepartmentSupplyHistoryDTO> GetDepartments()
-        {
-            return db.Departments.Select(d => new DepartmentSupplyHistoryDTO
-            {
-                Id = d.id,
-                DepartmentName = d.departmentName
-            }).ToList();
-        }
-        // ✅ Thêm hàm lấy danh sách y tá theo khoa
-        public List<StaffSupplyHistoryDTO> GetNursesByDepartment(string departmentId)
-        {
-            return db.Staffs
-                     .Where(s => s.departmentID == departmentId && s.role.ToLower().Contains("Bác Sĩ"))
-                     .Select(s => new StaffSupplyHistoryDTO
-                     {
-                         Id = s.id,
-                         Name = s.name
-                     }).ToList();
-        }
-        public string GetDepartmentIdByStaffId(string staffId)
-        {
-            return db.Staffs
-                     .Where(s => s.id == staffId)
-                     .Select(s => s.departmentID)
-                     .FirstOrDefault();
-        }
-        // ✅ Trả danh sách bệnh nhân cho combobox (id + name)
-        public List<PatientSupplyHistoryDTO> GetAllPatients()
-        {
-            return db.Patients.Select(p => new PatientSupplyHistoryDTO
-            {
-                Id = p.id.Trim(),
-                FullName = p.fullName.Trim(),
-                Gender = p.gender,
-                Dob = p.dob,
-                PhoneNumber = p.phoneNumber,
-                Status = p.status
-            }).ToList();
-        }
-
     }
 }

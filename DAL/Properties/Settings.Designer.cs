@@ -27,7 +27,7 @@ namespace DAL.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-UUT1B4I;Initial Catalog=HospitalManagement;Integrated Securit" +
-            "y=True;TrustServerCertificate=True")]
+            "y=True;Trust Server Certificate=True")]
         public string HospitalManagementConnectionString {
             get {
                 return ((string)(this["HospitalManagementConnectionString"]));
@@ -37,8 +37,8 @@ namespace DAL.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=LAPTOP-S013149L\\SQLEXPRESS;Initial Catalog=HospitalManagement;Integra" +
-            "ted Security=True;TrustServerCertificate=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=TrieuVy\\TRIEUVY;Initial Catalog=HospitalManagement;Integrated Securit" +
+            "y=True")]
         public string HospitalManagementConnectionString1 {
             get {
                 return ((string)(this["HospitalManagementConnectionString1"]));
@@ -48,8 +48,8 @@ namespace DAL.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=MSI\\SQLEXPRESS;Initial Catalog=HospitalManagement;Integrated Security" +
-            "=True;TrustServerCertificate=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=LAPTOP-2LEA9U48\\SQLEXPRESS;Initial Catalog=HospitalManagement;Integra" +
+            "ted Security=True;Encrypt=False")]
         public string HospitalManagementConnectionString2 {
             get {
                 return ((string)(this["HospitalManagementConnectionString2"]));

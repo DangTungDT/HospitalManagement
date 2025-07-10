@@ -52,41 +52,59 @@
     <Compile Include="DangNhap_GUI.designer.cs">
       <DependentUpon>DangNhap_GUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="DoctorPatientAdmin.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DoctorPatientAdmin.Designer.cs">
-      <DependentUpon>DoctorPatientAdmin.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormAdmin.Designer.cs">
       <DependentUpon>FormAdmin.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormAppointmentAdmin.cs">
+    <Compile Include="FormDepartment.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormAppointmentAdmin.Designer.cs">
-      <DependentUpon>FormAppointmentAdmin.cs</DependentUpon>
+    <Compile Include="FormDepartment.Designer.cs">
+      <DependentUpon>FormDepartment.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormDailyCareAdmin.cs">
+    <Compile Include="FormInventory.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormDailyCareAdmin.Designer.cs">
-      <DependentUpon>FormDailyCareAdmin.cs</DependentUpon>
+    <Compile Include="FormInventory.Designer.cs">
+      <DependentUpon>FormInventory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormLeTan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLeTan.Designer.cs">
+      <DependentUpon>FormLeTan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormRoom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRoom.Designer.cs">
+      <DependentUpon>FormRoom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_DangKyLichHen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_DangKyLichHen.Designer.cs">
+      <DependentUpon>Form_DangKyLichHen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Items.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Items.Designer.cs">
+      <DependentUpon>Form_Items.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_TimBenhNhan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_TimBenhNhan.Designer.cs">
+      <DependentUpon>Form_TimBenhNhan.cs</DependentUpon>
     </Compile>
     <Compile Include="frmDepartmentInfo_Doctor.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmDoctorInfo_Doctor.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmMedicalOrderAdmin.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmMedicalOrderAdmin.Designer.cs">
-      <DependentUpon>frmMedicalOrderAdmin.cs</DependentUpon>
     </Compile>
     <Compile Include="frmMedicalRecordInfo_Doctor.cs">
       <SubType>Form</SubType>
@@ -121,54 +139,39 @@
     <Compile Include="frmUserGUI.designer.cs">
       <DependentUpon>frmUserGUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmUserInformation.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmUserInformation.Designer.cs">
-      <DependentUpon>frmUserInformation.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FromSupplyHistoryAdmin.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FromSupplyHistoryAdmin.Designer.cs">
-      <DependentUpon>FromSupplyHistoryAdmin.cs</DependentUpon>
-    </Compile>
-    <Compile Include="LaboratoryTestAdmin.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="LaboratoryTestAdmin.Designer.cs">
-      <DependentUpon>LaboratoryTestAdmin.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MedicalRecordAdmin.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MedicalRecordAdmin.Designer.cs">
-      <DependentUpon>MedicalRecordAdmin.cs</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="DangNhap_GUI.resx">
       <DependentUpon>DangNhap_GUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DoctorPatientAdmin.resx">
-      <DependentUpon>DoctorPatientAdmin.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FormAdmin.resx">
       <DependentUpon>FormAdmin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormAppointmentAdmin.resx">
-      <DependentUpon>FormAppointmentAdmin.cs</DependentUpon>
+    <EmbeddedResource Include="FormDepartment.resx">
+      <DependentUpon>FormDepartment.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormDailyCareAdmin.resx">
-      <DependentUpon>FormDailyCareAdmin.cs</DependentUpon>
+    <EmbeddedResource Include="FormInventory.resx">
+      <DependentUpon>FormInventory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLeTan.resx">
+      <DependentUpon>FormLeTan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormRoom.resx">
+      <DependentUpon>FormRoom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_DangKyLichHen.resx">
+      <DependentUpon>Form_DangKyLichHen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Items.resx">
+      <DependentUpon>Form_Items.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_TimBenhNhan.resx">
+      <DependentUpon>Form_TimBenhNhan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDepartmentInfo_Doctor.resx">
       <DependentUpon>frmDepartmentInfo_Doctor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDoctorInfo_Doctor.resx">
       <DependentUpon>frmDoctorInfo_Doctor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmMedicalOrderAdmin.resx">
-      <DependentUpon>frmMedicalOrderAdmin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMedicalRecordInfo_Doctor.resx">
       <DependentUpon>frmMedicalRecordInfo_Doctor.cs</DependentUpon>
@@ -393,9 +396,6 @@
     <Compile Include="frm_TaiSan.Designer.cs">
       <DependentUpon>frm_TaiSan.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="frmUserInformation.resx">
-      <DependentUpon>frmUserInformation.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frm_BaoHiem.resx">
       <DependentUpon>frm_BaoHiem.cs</DependentUpon>
     </EmbeddedResource>
@@ -471,15 +471,6 @@
     <EmbeddedResource Include="FormThongTinNhanVien.resx">
       <DependentUpon>FormThongTinNhanVien.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FromSupplyHistoryAdmin.resx">
-      <DependentUpon>FromSupplyHistoryAdmin.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="LaboratoryTestAdmin.resx">
-      <DependentUpon>LaboratoryTestAdmin.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MedicalRecordAdmin.resx">
-      <DependentUpon>MedicalRecordAdmin.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
@@ -507,10 +498,6 @@
     <ProjectReference Include="..\BLL\BLL.csproj">
       <Project>{3b3a7ed2-6097-478f-a313-fb7aa7f43174}</Project>
       <Name>BLL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DAL\DAL.csproj">
-      <Project>{fa52a087-52e5-48cc-a5a2-a6e2585c3fa5}</Project>
-      <Name>DAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\DTO\DTO.csproj">
       <Project>{3e7b49e7-ab52-4ae9-adb2-ae2d29ee7dd6}</Project>
@@ -564,6 +551,5 @@
   <ItemGroup>
     <None Include="Resources\more.png" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
