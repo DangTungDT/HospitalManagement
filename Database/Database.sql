@@ -287,3 +287,42 @@ go
 ----USE master;
 ----ALTER DATABASE HospitalManagement SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
 ----DROP DATABASE HospitalManagement;
+
+-- Chèn dữ liệu vào bảng Department
+INSERT INTO Department (id, departmentName, description)
+VALUES 
+    ('KHOA01', N'Nội khoa', N'Chuyên điều trị các bệnh lý nội khoa như tim mạch, tiêu hóa, hô hấp.'),
+    ('KHOA02', N'Ngoại khoa', N'Chuyên phẫu thuật và điều trị các bệnh lý ngoại khoa.'),
+    ('KHOA03', N'Nhi khoa', N'Chăm sóc và điều trị cho trẻ em.'),
+    ('KHOA04', N'Sản khoa', N'Chăm sóc sức khỏe bà mẹ và thai nhi.'),
+    ('KHOA05', N'Xét nghiệm', N'Thực hiện các xét nghiệm y khoa.');
+
+-- Chèn dữ liệu vào bảng Room
+INSERT INTO Room (roomName, bedCount, departmentID)
+VALUES 
+    (N'Phòng 101', 4, 'KHOA01'),
+    (N'Phòng 102', 3, 'KHOA01'),
+    (N'Phòng 201', 5, 'KHOA02'),
+    (N'Phòng 301', 6, 'KHOA03'),
+    (N'Phòng 401', 4, 'KHOA04'),
+    (N'Phòng xét nghiệm 1', 0, 'KHOA05');
+
+-- Chèn dữ liệu vào bảng Items
+INSERT INTO Items (ID, ItemName, ItemType, Unit, Price, IsActive)
+VALUES 
+    ('VT001', N'Paracetamol 500mg', N'Medicine', N'Viên', 500.00, 1),
+    ('VT002', N'Khẩu trang y tế', N'Other Supplies', N'Chiếc', 1000.00, 1),
+    ('VT003', N'Kim tiêm 5ml', N'Tool', N'Chiếc', 2000.00, 1),
+    ('VT004', N'Máy đo huyết áp', N'Equipment', N'Chiếc', 1500000.00, 1),
+    ('VT005', N'Băng gạc y tế', N'Other Supplies', N'Hộp', 20000.00, 1),
+    ('VT006', N'Amoxicillin 500mg', N'Medicine', N'Viên', 1000.00, 1);
+
+-- Chèn dữ liệu vào bảng Inventory
+INSERT INTO Inventory (ItemID, Quantity, LastUpdated)
+VALUES 
+    ('VT001', 1000, GETDATE()),
+    ('VT002', 5000, GETDATE()),
+    ('VT003', 2000, GETDATE()),
+    ('VT004', 10, GETDATE()),
+    ('VT005', 100, GETDATE()),
+    ('VT006', 800, GETDATE());
