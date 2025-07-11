@@ -1,13 +1,15 @@
-# Ignore build output folders
+# Build results
 bin/
 obj/
-.vs/
-
-# Ignore build artifacts
 *.dll
-*.pdb
 *.exe
-*.cache
-*.suo
+
+# Visual Studio files
+.vs/
 *.user
+*.suo
+*.cache
+
+# Others
 *.log
+*.db

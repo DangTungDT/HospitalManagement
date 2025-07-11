@@ -14,14 +14,14 @@
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>0</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,9 +32,18 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -76,6 +85,48 @@
     <Compile Include="FormDailyCareAdmin.Designer.cs">
       <DependentUpon>FormDailyCareAdmin.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmDoctorListbyDepartmentGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDoctorListbyDepartmentGUI.Designer.cs">
+      <DependentUpon>frmDoctorListbyDepartmentGUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPatientListbyDepartmentGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPatientListbyDepartmentGUI.Designer.cs">
+      <DependentUpon>frmPatientListbyDepartmentGUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPrescriptionOfPatient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrescriptionOfPatient.Designer.cs">
+      <DependentUpon>frmPrescriptionOfPatient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReportDoctorListbyDepartment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReportDoctorListbyDepartment.Designer.cs">
+      <DependentUpon>frmReportDoctorListbyDepartment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReportPatientListbyDepartment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReportPatientListbyDepartment.Designer.cs">
+      <DependentUpon>frmReportPatientListbyDepartment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReportPrescription.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReportPrescription.Designer.cs">
+      <DependentUpon>frmReportPrescription.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReportStaffListbyDepartment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReportStaffListbyDepartment.Designer.cs">
+      <DependentUpon>frmReportStaffListbyDepartment.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmDepartmentInfo_Doctor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,6 +159,12 @@
     </Compile>
     <Compile Include="frmMenuDoctor.designer.cs">
       <DependentUpon>frmMenuDoctor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmStaffListbyDepartment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmStaffListbyDepartment.Designer.cs">
+      <DependentUpon>frmStaffListbyDepartment.cs</DependentUpon>
     </Compile>
     <Compile Include="frmTestInfo_Doctor.cs">
       <SubType>Form</SubType>
@@ -146,6 +203,34 @@
       <DependentUpon>MedicalRecordAdmin.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\rptDoctorList.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptDoctorList.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Report\rptPatientList.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptPatientList.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Report\rptPrescription.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptPrescription.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Report\rptStaffList.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptStaffList.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
     <EmbeddedResource Include="DangNhap_GUI.resx">
       <DependentUpon>DangNhap_GUI.cs</DependentUpon>
     </EmbeddedResource>
@@ -160,6 +245,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormDailyCareAdmin.resx">
       <DependentUpon>FormDailyCareAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPatientListbyDepartmentGUI.resx">
+      <DependentUpon>frmPatientListbyDepartmentGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReportDoctorListbyDepartment.resx">
+      <DependentUpon>frmReportDoctorListbyDepartment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReportPatientListbyDepartment.resx">
+      <DependentUpon>frmReportPatientListbyDepartment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReportPrescription.resx">
+      <DependentUpon>frmReportPrescription.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReportStaffListbyDepartment.resx">
+      <DependentUpon>frmReportStaffListbyDepartment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDepartmentInfo_Doctor.resx">
       <DependentUpon>frmDepartmentInfo_Doctor.cs</DependentUpon>
@@ -490,6 +590,26 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Content Include="Report\rptDoctorList.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptDoctorList.cs</LastGenOutput>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Report\rptPatientList.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptPatientList.cs</LastGenOutput>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Report\rptPrescription.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptPrescription.cs</LastGenOutput>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Report\rptStaffList.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptStaffList.cs</LastGenOutput>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -564,6 +684,8 @@
   <ItemGroup>
     <None Include="Resources\more.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

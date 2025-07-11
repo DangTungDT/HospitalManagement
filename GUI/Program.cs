@@ -17,7 +17,8 @@ namespace GUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LaboratoryTestAdmin());
+            
+            Application.Run(new frmStaffListbyDepartment());
         } 
     }
 }
