@@ -192,6 +192,7 @@
             this.Name = "frmHeadNurseGUI";
             this.Text = "frmHeadNurse";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmHeadNurseGUI_FormClosing);
             this.Load += new System.EventHandler(this.frmHeadNurse_Load);
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

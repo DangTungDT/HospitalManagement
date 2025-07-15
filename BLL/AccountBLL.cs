@@ -18,6 +18,17 @@ namespace BLL
         {
             return dal.GetAllDepartment();
         }
+
+        //Hàm tìm kiếm theo username (tương đối)
+        public IQueryable Find(string username)
+        {
+            if (string.IsNullOrEmpty(username))
+            {
+                return null;
+            }
+            return dal.Find(username);
+        }
+
         //Hàm lấy tất cả dữ liệu trong bảng
         public IQueryable GetAll()
         {

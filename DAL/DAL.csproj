@@ -55,6 +55,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="SalaryDAL.cs" />
+    <Compile Include="SalaryDetailDAL.cs" />
     <Compile Include="StaffDAL.cs" />
     <Compile Include="UsersDAL.cs" />
   </ItemGroup>

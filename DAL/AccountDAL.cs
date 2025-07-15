@@ -38,6 +38,34 @@ namespace DAL
             return "Data Source=DESKTOP-6LE6PT2\\SQLEXPRESS;Initial Catalog=HospitalManagement;Integrated Security=True;Encrypt=False"; // Không tìm thấy
         }
 
+
+        //Hàm lấy danh sách Account theo Username
+        public IQueryable Find(string username)
+        {
+            try
+            {
+                IQueryable queryable = from ac in db.Accounts
+                                      join nv in db.Staffs on ac.staffID equals nv.id
+                                      join pb in db.Departments on nv.departmentID equals pb.id
+                                      where ac.username.Contains(username)
+                                      select new
+                                      {
+                                          AccountID = ac.id,
+                                          ac.username,
+                                          ac.password,
+                                          ac.staffID,
+                                          nv.name,
+                                          ac.startDate,
+                                          ac.status,
+                                          DepartmentID = pb.id
+                                      };
+                return queryable;
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
+        }
         //Hàm lấy dữ liệu theo username
         private Account Exists(string username)
         {
@@ -115,12 +143,28 @@ namespace DAL
             }
         }
 
+
+        //Check foreign key
+        public bool CheckForeignKey(string staffID)
+        {
+            Staff check = db.Staffs.Where(x=> x.id == staffID).FirstOrDefault();
+            if (check != null)
+            {
+                return true;
+            }
+            return false;
+        }
+
         //Hàm xóa 1 item theo id
         public bool Delete(int id)
         {
             try
             {
                 Account itemDelete = db.Accounts.Where(x => x.id == id).FirstOrDefault();
+                if(CheckForeignKey(itemDelete.staffID))
+                {
+                    return false; //Dữ liệu xóa liên quan đến các dữ liệu khác
+                }
                 if (itemDelete != null)
                 {
                     db.Accounts.DeleteOnSubmit(itemDelete);
@@ -159,8 +203,8 @@ namespace DAL
         {
             try
             {
-                Account itemUpdate = db.Accounts.Where(x => x.id == item.Id || x.username == item.Username).FirstOrDefault();
-                if (itemUpdate != null)
+                Account itemUpdate = db.Accounts.Where(x =>x.id == item.Id || x.username.Trim() == item.Username.Trim()).FirstOrDefault();
+                if (itemUpdate == null)
                 {
                     return false; //Dữ liệu không có để cập nhật
                 }

@@ -14,6 +14,10 @@ namespace BLL
         //Biến toàn cục
         StaffDAL dal = new StaffDAL();
 
+        public IQueryable Find(StaffDTO dto)
+        {
+            return dal.Find(dto);
+        }
         public IQueryable LoadDepartment()
         {
             return dal.LoadDepartment();
@@ -88,11 +92,24 @@ namespace BLL
                 string.IsNullOrEmpty(staff.PhoneNumber) || string.IsNullOrEmpty(staff.Email) || string.IsNullOrEmpty(staff.HomeAddress) ||
                 string.IsNullOrEmpty(staff.CitizenID) || string.IsNullOrEmpty(staff.DepartmentID) || string.IsNullOrEmpty(staff.Position) ||
                 string.IsNullOrEmpty(staff.Qualification) || string.IsNullOrEmpty(staff.Degree) || string.IsNullOrEmpty(staff.Status) ||
-                staff.StartDate.Date != DateTime.Now.Date || string.IsNullOrEmpty(staff.Notes) || staff.StartDate.Date != DateTime.Today)
+                staff.StartDate.Date != DateTime.Now.Date || string.IsNullOrEmpty(staff.Notes) || staff.StartDate.Date != DateTime.Now.Date)
             {
                 return false;
             }
             return true;
         }
+
+
+        //Hàm lấy 1 dòng dữ liệu theo id
+        public string Exists(string id)
+        {
+            var staffCreate = dal.Exists(id);
+            if(staffCreate != null)
+            {
+                return $"{staffCreate.name}_{staffCreate.role}_{staffCreate.position}";
+            }
+            return "";
+        }
+
     }
 }

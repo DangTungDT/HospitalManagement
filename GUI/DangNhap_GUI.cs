@@ -19,6 +19,7 @@ namespace GUI
         public DangNhap_GUI()
         {
             InitializeComponent();
+            txtPassword.UseSystemPasswordChar = true;
         }
 
         private void btnDangNhap_Click(object sender, EventArgs e)
@@ -116,6 +117,21 @@ namespace GUI
             {
                 Login(txtUserName.Text, txtPassword.Text);
             }
+        }
+
+        private void DangNhap_GUI_Load(object sender, EventArgs e)
+        {
+            txtPassword.UseSystemPasswordChar = true;
+        }
+
+        private void btnThoat_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void txtPassword_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

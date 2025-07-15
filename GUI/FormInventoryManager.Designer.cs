@@ -87,6 +87,7 @@
             this.Name = "FormInventoryManager";
             this.Text = "Quản Lý Kho";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormInventoryManager_FormClosing);
             this.Load += new System.EventHandler(this.FormInventoryManager_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

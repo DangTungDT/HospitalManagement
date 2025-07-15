@@ -39,7 +39,25 @@ namespace DAL
         {
             try
             {
-                return db.Patients;
+                return db.Patients.Select(x=> new
+                {
+                    x.id, 
+                    x.fullName,
+                    x.gender,
+                    x.dob,
+                    x.phoneNumber,
+                    x.TypePatient,
+                    x.citizenID,
+                    x.InsuranceID,
+                    x.address,
+                    x.EmergencyContact,
+                    x.EmergencyPhone,
+                    x.status,
+                    x.createdDate,
+                    x.updatedDate,
+                    x.weight,
+                    x.height
+                });
 
             }catch (Exception ex)
             {
@@ -77,7 +95,9 @@ namespace DAL
                     address = dto.Address,
                     EmergencyContact = dto.EmergencyContact,
                     EmergencyPhone = dto.EmergencyPhone,
-                    status = dto.Status
+                    status = dto.Status,
+                    createdDate = DateTime.Now,
+                    updatedDate = DateTime.Now
                 };
                 if (dto.Weight > 0)
                 {

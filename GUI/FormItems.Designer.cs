@@ -278,9 +278,9 @@ namespace GUI
             // label4
             // 
             this.label4.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(20, 0);
+            this.label4.Location = new System.Drawing.Point(20, 9);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(175, 70);
+            this.label4.Size = new System.Drawing.Size(175, 51);
             this.label4.TabIndex = 2;
             this.label4.Text = "Hàng Hóa";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

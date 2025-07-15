@@ -184,7 +184,7 @@ CREATE TABLE SupplyHistory (
     nurseID CHAR(10) NOT NULL,
     dosage VARCHAR(255),
     quantity INT,
-    unit VARCHAR(255),
+    unit nVARCHAR(255),
     note Ntext,
 	PatientID char(10) null,
 	typeSupply nvarchar(100) CHECK (typeSupply IN (       -- Phân loại để nhận biết là loại xuất (cho bệnh nhân, cho khoa,..).
@@ -208,16 +208,17 @@ go
 
 --Table Inventory
 CREATE TABLE Inventory (
-    ItemID     CHAR(10) PRIMARY KEY FOREIGN KEY REFERENCES Items(ID),
+	id int identity(1,1) primary key,
+    ItemID     CHAR(10) FOREIGN KEY REFERENCES Items(ID),
     Quantity   INT NOT NULL CHECK (Quantity >= 0),
     LastUpdated DATETIME DEFAULT GETDATE()
 );
 go
 
 --Table Salaries
-CREATE TABLE Salaries (
-    Id INT IDENTITY(1,1) PRIMARY KEY,               -- Mã bảng lương tự tăng
-    StaffId CHAR(10) NOT NULL,                      -- Mã nhân viên (FK)
+CREATE TABLE SalaryDetail (
+    SalaryID INT not null,                          -- Mã lương  
+    StaffId CHAR(10) NOT NULL,                      -- Mã nhân viên
     SalaryPeriod VARCHAR(20) NOT NULL,              -- Kỳ lương, ví dụ '2025-06'
     SalaryDate DATE NOT NULL,                       -- Ngày trả lương
     BasicSalary DECIMAL(18,2) NOT NULL,             -- Lương cơ bản
@@ -234,10 +235,18 @@ CREATE TABLE Salaries (
     ) PERSISTED,
     Note Ntext NULL,                                 -- Ghi chú thêm
     CreatedAt DATETIME DEFAULT GETDATE(),           -- Ngày tạo
-    CreatedBy NVARCHAR(100) NULL                    -- Người tạo
+    CreatedBy NVARCHAR(100) NULL,                   -- Người tạo
+	primary key(SalaryID, StaffId, SalaryDate)
 )
 go
-
+ 
+--Table Salary
+create table Salary (
+	id int identity(1,1) primary key,
+	BasicSalary DECIMAL(18,2) NOT NULL unique
+)
+--SalaryDetail
+--Salary
 
 --Foreign key
 alter table Account
@@ -288,8 +297,9 @@ add constraint fk_Item_SupplyHistory foreign key(itemID) references Items(id),
 	constraint fk_Patient_SupplyHistory foreign key(PatientID) references Patient(id);
 go
 
-alter table Salaries
-add constraint fk_Staff_Salary foreign key(StaffId) references Staff(id);
+alter table SalaryDetail
+add constraint fk_Staff_SalaryDetail foreign key(StaffId) references Staff(id),
+   constraint fk_Salary_SalaryDetail foreign key(SalaryId) references Salary(id);
 go
 
 --USE master;

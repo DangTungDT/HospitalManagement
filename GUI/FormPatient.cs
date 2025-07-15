@@ -48,6 +48,15 @@ namespace GUI
         {
             //Load data cho datagridview patient
             dgvPatient.DataSource = bll.GetAll();
+            dgvPatient.Columns["citizenID"].Visible = false;
+            dgvPatient.Columns["InsuranceID"].Visible = false;
+            dgvPatient.Columns["address"].Visible = false;
+            dgvPatient.Columns["EmergencyContact"].Visible = false;
+            dgvPatient.Columns["EmergencyPhone"].Visible = false;
+            dgvPatient.Columns["createdDate"].Visible = false;
+            dgvPatient.Columns["updatedDate"].Visible = false;
+            dgvPatient.Columns["weight"].Visible = false;
+            dgvPatient.Columns["height"].Visible = false;
 
             //Tạo List typepatient
             List<Item> list = new List<Item>()
@@ -161,7 +170,7 @@ namespace GUI
         private bool CheckValueInput()
         {
             bool flag = true;
-            if(string.IsNullOrEmpty(txtID.Text))
+            if(txtID == null)
             {
                 labelID.Text = "Vui lòng nhập ID";
                 labelID.ForeColor = Color.Red;
@@ -171,7 +180,7 @@ namespace GUI
             {
                 labelID.Text = "";
             }
-            if (string.IsNullOrEmpty(txtFullName.Text))
+            if (txtFullName == null)
             {
                 labelFullName.Text = "Vui lòng nhập họ và tên";
                 labelFullName.ForeColor = Color.Red;
@@ -181,7 +190,7 @@ namespace GUI
             {
                 labelFullName.Text = "";
             }
-            if (dtpDob.Value.Date > DateTime.Now.Date)
+            if (dtpDob == null)
             {
                 labelDob.Text = "Vui lòng nhập ngày sinh đúng";
                 labelDob.ForeColor = Color.Red;
@@ -189,9 +198,13 @@ namespace GUI
             }
             else
             {
+                if(dtpDob.Value.Date > DateTime.Now.Date)
+                {
+
                 labelDob.Text = "";
+                }
             }
-            if (string.IsNullOrEmpty(txtPhoneNumber.Text))
+            if (txtPhoneNumber == null)
             {
                 labelPhoneNumber.Text = "Vui lòng nhập đúng số điện thoại";
                 labelPhoneNumber.ForeColor = Color.Red;
@@ -201,7 +214,7 @@ namespace GUI
             {
                 labelPhoneNumber.Text = "";
             }
-            if (cbInsuranceID.Checked == true && string.IsNullOrEmpty(txtInsuranceID.Text))
+            if (cbInsuranceID.Checked == true && txtInsuranceID == null)
             {
                 labelInsuranceID.Text = "Vui lòng nhập đúng bảo hiểm y tế";
                 labelInsuranceID.ForeColor = Color.Red;
@@ -209,29 +222,41 @@ namespace GUI
             }
             else
             {
+                if(string.IsNullOrEmpty(txtInsuranceID.Text))
+                {
                 labelInsuranceID.Text = "";
+                }
             }
-            if (int.Parse(txtWeight.Text) <= 0||string.IsNullOrEmpty(txtWeight.Text))
+            if (txtWeight == null)
             {
-                labelWeight.Text = "Vui lòng nhập đúng cân nặng";
-                labelWeight.ForeColor = Color.Red;
-                flag = false;
+                if(int.Parse(txtWeight.Text) <= 0)
+                {
+                    labelWeight.Text = "Vui lòng nhập đúng cân nặng";
+                    labelWeight.ForeColor = Color.Red;
+                    flag = false;
+                }
+                
             }
             else
             {
                 labelWeight.Text = "";
             }
-            if (int.Parse(txtHeight.Text) <= 0 || string.IsNullOrEmpty(txtHeight.Text))
+            if ( txtHeight == null)
             {
-                labelHeight.Text = "Vui lòng nhập đúng chiều cao";
-                labelHeight.ForeColor = Color.Red;
+                    labelHeight.Text = "Vui lòng nhập đúng chiều cao";
+                    labelHeight.ForeColor = Color.Red;
                 flag = false;
+                
             }
             else
             {
-                labelHeight.Text = "";
+                if (int.Parse(txtHeight.Text) > 0)
+                {
+
+                    labelHeight.Text = "";
+                }
             }
-            if (string.IsNullOrEmpty(txtAddress.Text))
+            if (txtAddress == null)
             {
                 labelAddress.Text = "Vui lòng nhập địa chỉ";
                 labelAddress.ForeColor = Color.Red;
@@ -239,9 +264,19 @@ namespace GUI
             }
             else
             {
-                labelPhoneNumber.Text = "";
+                if (!string.IsNullOrEmpty(txtAddress.Text))
+                {
+                    labelPhoneNumber.Text = "";
+                }
+                else
+                {
+                    labelAddress.Text = "Vui lòng nhập địa chỉ";
+                    labelAddress.ForeColor = Color.Red;
+                    flag = false;
+                }
+
             }
-            if (string.IsNullOrEmpty(txtEmergencyName.Text))
+            if (txtEmergencyName == null)
             {
                 labelEmergencyName.Text = "Vui lòng nhập tên người thân";
                 labelEmergencyName.ForeColor = Color.Red;
@@ -249,9 +284,18 @@ namespace GUI
             }
             else
             {
-                labelEmergencyName.Text = "";
+                if (!string.IsNullOrEmpty(txtEmergencyName.Text))
+                {
+                    labelEmergencyName.Text = "";
+                }
+                else
+                {
+                    labelEmergencyName.Text = "Vui lòng nhập địa chỉ";
+                    labelEmergencyName.ForeColor = Color.Red;
+                    flag = false;
+                }
             }
-            if (string.IsNullOrEmpty(txtEmergencyPhone.Text))
+            if (txtEmergencyPhone == null)
             {
                 labelEmergencyPhone.Text = "Vui lòng nhập số điện thoại người thân";
                 labelEmergencyPhone.ForeColor = Color.Red;
@@ -328,6 +372,108 @@ namespace GUI
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true; // Không cho nhập ký tự không hợp lệ
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            DialogResult kq = MessageBox.Show("Bạn có muốn xóa ?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if(kq == DialogResult.Yes)
+            {
+                if (txtID != null)
+                {
+                    if (bll.Delete(txtID.Text.Trim()))
+                    {
+                        MessageBox.Show("Xóa thành công", "Thông báo");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Xóa thất bại", "Thông báo");
+                    }
+                    dgvPatient.DataSource = bll.GetAll();
+                }
+            }
+        }
+
+        private void btnClean_Click(object sender, EventArgs e)
+        {
+            Clean();
+        }
+
+        private void Clean()
+        {
+            txtID.Text = "";
+            txtFullName.Text = "";
+            radGenderFemale.Checked = false;
+            radGenderMale.Checked = false;
+            radGenderOther.Checked = false;
+            dtpDob.Value = DateTime.Now;
+            txtPhoneNumber.Text = "";
+            txtCitizenID.Text = "";
+            cbInsuranceID.Checked = false;
+            txtInsuranceID.Text = "";
+            txtWeight.Text = "";
+            txtHeight.Text = "";
+            txtAddress.Text = "";
+            txtEmergencyName.Text = "";
+            txtEmergencyPhone.Text = "";
+            dtpCreatedDate.Value = DateTime.Now;
+            dtpUpdatedDate.Value = DateTime.Now;
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void dgvPatient_Click(object sender, EventArgs e)
+        {
+            int cellSelected = dgvPatient.CurrentCell.RowIndex;
+            if(cellSelected >-1 && dgvPatient.Rows[cellSelected].Cells.Count >0 &&
+                dgvPatient.Rows[cellSelected].Cells[2].Value != null)
+            {
+                txtID.Text = dgvPatient.Rows[cellSelected].Cells[0].Value.ToString();
+                txtFullName.Text = dgvPatient.Rows[cellSelected].Cells[1].Value.ToString();
+                if(dgvPatient.Rows[cellSelected].Cells[2].Value.ToString().ToLower() == "male")
+                {
+                    radGenderOther.Checked = false;
+                    radGenderFemale.Checked = false;
+                    radGenderMale.Checked = true;
+                }else if(dgvPatient.Rows[cellSelected].Cells[2].Value.ToString().ToLower() == "female")
+                {
+                    radGenderMale.Checked = false;
+                    radGenderOther.Checked = false;
+                    radGenderFemale.Checked = true;
+                }
+                else
+                {
+                    radGenderFemale.Checked = false;
+                    radGenderMale.Checked = false;
+                    radGenderOther.Checked = true;
+                }
+                dtpDob.Value = DateTime.Parse(dgvPatient.Rows[cellSelected].Cells[3].Value.ToString());
+                txtPhoneNumber.Text = dgvPatient.Rows[cellSelected].Cells[4].Value.ToString();
+                txtCitizenID.Text = dgvPatient.Rows[cellSelected].Cells[6].Value.ToString();
+                if (dgvPatient.Rows[cellSelected].Cells[7].Value == null)
+                {
+                    cbInsuranceID.Checked = false;
+                    txtInsuranceID.Text = "";
+                }
+                else
+                {
+                    cbInsuranceID.Checked = true;
+                    txtInsuranceID.Text = dgvPatient.Rows[cellSelected].Cells[7].Value.ToString();
+
+                }
+                txtWeight.Text = dgvPatient.Rows[cellSelected].Cells[14].Value.ToString();
+                txtHeight.Text = dgvPatient.Rows[cellSelected].Cells[15].Value.ToString();
+                txtAddress.Text = dgvPatient.Rows[cellSelected].Cells[8].Value.ToString();
+                txtEmergencyName.Text = dgvPatient.Rows[cellSelected].Cells[9].Value.ToString();
+                txtEmergencyPhone.Text = dgvPatient.Rows[cellSelected].Cells[10].Value.ToString();
+                cbbStatus.SelectedValue = dgvPatient.Rows[cellSelected].Cells[11].Value.ToString();
+                dtpCreatedDate.Value = DateTime.Parse(dgvPatient.Rows[cellSelected].Cells[12].Value.ToString());
+                dtpUpdatedDate.Value = DateTime.Parse(dgvPatient.Rows[cellSelected].Cells[13].Value.ToString());
+                cbbTypePatient.SelectedValue = dgvPatient.Rows[cellSelected].Cells[5].Value.ToString();
             }
         }
     }

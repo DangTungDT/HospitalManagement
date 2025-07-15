@@ -70,6 +70,18 @@
     <Compile Include="FormPatient.Designer.cs">
       <DependentUpon>FormPatient.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormSalary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSalary.Designer.cs">
+      <DependentUpon>FormSalary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSalaryDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSalaryDetail.Designer.cs">
+      <DependentUpon>FormSalaryDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormStaff.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +140,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormPatient.resx">
       <DependentUpon>FormPatient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSalary.resx">
+      <DependentUpon>FormSalary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSalaryDetail.resx">
+      <DependentUpon>FormSalaryDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormStaff.resx">
       <DependentUpon>FormStaff.cs</DependentUpon>

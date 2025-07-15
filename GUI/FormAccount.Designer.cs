@@ -34,6 +34,7 @@
             this.btnFind = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
+            this.btnClean = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.cbbDepartmentID = new System.Windows.Forms.ComboBox();
@@ -53,7 +54,6 @@
             this.txtCheckPass = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.txtUsername = new System.Windows.Forms.TextBox();
-            this.btnClean = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccount)).BeginInit();
             this.pButton.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -112,6 +112,7 @@
             this.btnFind.TabIndex = 10;
             this.btnFind.Text = "Tìm";
             this.btnFind.UseVisualStyleBackColor = true;
+            this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
             // 
             // btnUpdate
             // 
@@ -134,6 +135,17 @@
             this.btnDelete.Text = "Xóa";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnClean
+            // 
+            this.btnClean.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClean.Location = new System.Drawing.Point(23, 270);
+            this.btnClean.Name = "btnClean";
+            this.btnClean.Size = new System.Drawing.Size(215, 40);
+            this.btnClean.TabIndex = 11;
+            this.btnClean.Text = "Làm mới";
+            this.btnClean.UseVisualStyleBackColor = true;
+            this.btnClean.Click += new System.EventHandler(this.btnClean_Click);
             // 
             // btnAdd
             // 
@@ -339,17 +351,6 @@
             this.txtUsername.TabIndex = 0;
             this.txtUsername.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtUsername_KeyDown);
             // 
-            // btnClean
-            // 
-            this.btnClean.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClean.Location = new System.Drawing.Point(23, 270);
-            this.btnClean.Name = "btnClean";
-            this.btnClean.Size = new System.Drawing.Size(215, 40);
-            this.btnClean.TabIndex = 11;
-            this.btnClean.Text = "Làm mới";
-            this.btnClean.UseVisualStyleBackColor = true;
-            this.btnClean.Click += new System.EventHandler(this.btnClean_Click);
-            // 
             // FormAccount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -360,7 +361,7 @@
             this.Controls.Add(this.dgvAccount);
             this.MinimumSize = new System.Drawing.Size(1120, 650);
             this.Name = "FormAccount";
-            this.Text = "yy";
+            this.Text = "Tài Khoản";
             this.Load += new System.EventHandler(this.FormAccount_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormAccount_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccount)).EndInit();

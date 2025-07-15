@@ -18,7 +18,7 @@ namespace BLL
         {
             return dal.GetAll();
         }
-        public int Add(PatientDTO dto)
+            public int Add(PatientDTO dto)
         {
             try
             {

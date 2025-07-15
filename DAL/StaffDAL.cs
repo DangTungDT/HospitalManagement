@@ -12,6 +12,7 @@ namespace DAL
 {
     public class StaffDAL
     {
+        //Hàm lấy chuỗi kết nối database sql server 
         public static string GetFirstSqlServerInstanceName()
         {
             SqlDataSourceEnumerator instance = SqlDataSourceEnumerator.Instance;
@@ -36,12 +37,34 @@ namespace DAL
         }
         HospitalManagementDataContext db = new HospitalManagementDataContext(GetFirstSqlServerInstanceName());
         
+        //Hàm lấy tất cả dữ liệu trong table Staff
         public IQueryable GetAll()
         {
-            return from nv in db.Staffs select nv;
+            return from nv in db.Staffs
+                   select new
+                   {
+                       nv.id,
+                       nv.name,
+                       nv.role,
+                       nv.dob,
+                       nv.gender,
+                       nv.phoneNumber,
+                       nv.email,
+                       nv.homeAddress,
+                       nv.citizenID,
+                       nv.departmentID,
+                       nv.position,
+                       nv.qualification,
+                       nv.degree,
+                       nv.status,
+                       nv.startDate,
+                       nv.Notes,
+                       nv.Department
+                   };
         }
 
-        private Staff Exists(string id)
+        //Hàm lấy 1 dòng dữ liệu theo id staff
+        public Staff Exists(string id)
         {
             Staff itemSelect = db.Staffs.Where(x => x.id == id).FirstOrDefault();
             if(itemSelect == null)
@@ -50,6 +73,8 @@ namespace DAL
             }
             return itemSelect;
         }
+
+        //Hàm thêm 1 dòng dữ liệu cho table 
         public int Add(StaffDTO staff)
         {
             try
@@ -87,6 +112,7 @@ namespace DAL
             }
         }
 
+        //Hàm xóa 1 dòng dữ liệu dựa trên id staff 
         public bool Delete(string idDelete)
         {
             try
@@ -109,6 +135,7 @@ namespace DAL
             }
         }
 
+        //Hàm cập nhật 1 dòng dữ liệu có trong table theo ID
         public bool Update(StaffDTO item)
         {
             try
@@ -148,6 +175,8 @@ namespace DAL
             }
         }
 
+
+        //Hàm load danh sách khoa (Do chưa có DAL của Department nên dùng đỡ)
         public IQueryable LoadDepartment()
         {
             return db.Departments.Select(x => new
@@ -157,12 +186,87 @@ namespace DAL
             });
         }
 
+        //Hàm lấy dánh sách nhân viên theo khoa
         public IQueryable GetStaffByDepartmentID(string id)
         {
             try
             {
                 return db.Staffs.Where(x=> x.departmentID == id).Select(x=>x);
             }catch (Exception e)
+            {
+                return null;
+            }
+        }
+
+        public IQueryable Find(StaffDTO dto)
+        {
+            try
+            {
+
+                //IQueryable list = from staff in db.Staffs
+                //                  where (string.IsNullOrEmpty(dto.Id) || staff.id.Contains(dto.Id))
+                //                    && (string.IsNullOrEmpty(dto.Name) || staff.name.Contains(dto.Name))
+                //                    && (string.IsNullOrEmpty(dto.Role) || staff.role.Contains(dto.Role))
+                //                    && (string.IsNullOrEmpty(dto.Gender) || staff.gender.Contains(dto.Gender))
+                //                    && (string.IsNullOrEmpty(dto.PhoneNumber) || staff.phoneNumber.Contains(dto.PhoneNumber))
+                //                    && (string.IsNullOrEmpty(dto.Email) || staff.email.Contains(dto.Email))
+                //                    && (string.IsNullOrEmpty(dto.HomeAddress) || staff.homeAddress.Contains(dto.HomeAddress))
+                //                    && (string.IsNullOrEmpty(dto.CitizenID) || staff.citizenID.Contains(dto.CitizenID))
+                //                    && (string.IsNullOrEmpty(dto.DepartmentID) || staff.departmentID.Contains(dto.DepartmentID))
+                //                    && (string.IsNullOrEmpty(dto.Position) || staff.position.Contains(dto.Position))
+                //                    && (string.IsNullOrEmpty(dto.Degree) || staff.degree.Contains(dto.Degree))
+                //                    && (string.IsNullOrEmpty(dto.Qualification) || staff.qualification.Contains(dto.Qualification))
+                //                    && (string.IsNullOrEmpty(dto.Status) || staff.status.Contains(dto.Status))
+                //                    && (string.IsNullOrEmpty(dto.Notes) || staff.Notes.Contains(dto.Notes))
+                //                  select staff;
+
+                IQueryable<Staff> list = db.Staffs;
+
+                if (!string.IsNullOrEmpty(dto.Id))
+                    list = list.Where(x => x.id.Contains(dto.Id));
+
+                if (!string.IsNullOrEmpty(dto.Name))
+                    list = list.Where(x => x.name.Contains(dto.Name));
+
+                if (!string.IsNullOrEmpty(dto.Role))
+                    list = list.Where(x => x.role.Contains(dto.Role));
+
+                if (!string.IsNullOrEmpty(dto.Gender))
+                    list = list.Where(x => x.gender.Contains(dto.Gender));
+
+                if (!string.IsNullOrEmpty(dto.PhoneNumber))
+                    list = list.Where(x => x.phoneNumber.Contains(dto.PhoneNumber));
+
+                if (!string.IsNullOrEmpty(dto.Email))
+                    list = list.Where(x => x.email.Contains(dto.Email));
+
+                if (!string.IsNullOrEmpty(dto.HomeAddress))
+                    list = list.Where(x => x.homeAddress.Contains(dto.HomeAddress));
+
+                if (!string.IsNullOrEmpty(dto.CitizenID))
+                    list = list.Where(x => x.citizenID.Contains(dto.CitizenID));
+
+                if (!string.IsNullOrEmpty(dto.DepartmentID))
+                    list = list.Where(x => x.departmentID.Contains(dto.DepartmentID));
+
+                if (!string.IsNullOrEmpty(dto.Position))
+                    list = list.Where(x => x.position.Contains(dto.Position));
+
+                if (!string.IsNullOrEmpty(dto.Degree))
+                    list = list.Where(x => x.degree.Contains(dto.Degree));
+
+                if (!string.IsNullOrEmpty(dto.Qualification))
+                    list = list.Where(x => x.qualification.Contains(dto.Qualification));
+
+                if (!string.IsNullOrEmpty(dto.Status))
+                    list = list.Where(x => x.status.Contains(dto.Status));
+
+                if (!string.IsNullOrEmpty(dto.Notes))
+                    list = list.Where(x => x.Notes.Contains(dto.Notes));
+
+                return list;
+            }
+            catch (Exception ex)
             {
                 return null;
             }

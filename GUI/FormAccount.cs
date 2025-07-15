@@ -190,6 +190,7 @@ namespace GUI
             dgvAccount.DataSource = bll.GetAll();
             dgvAccount.Columns["password"].Visible = false;
             dgvAccount.Columns["staffID"].Visible = false;
+            
 
             //Load Status
             cbbStatus.DataSource = list;
@@ -251,7 +252,7 @@ namespace GUI
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if(bll.Update(new AccountDTO(txtUsername.Text, HashStringSHA256(txtPassword.Text), cbbStaffID.ValueMember.ToString(), cbbStatus.ValueMember.ToString())))
+            if(bll.Update(new AccountDTO(txtUsername.Text.Trim(), HashStringSHA256(txtPassword.Text), cbbStaffID.SelectedValue.ToString(), cbbStatus.SelectedValue.ToString())))
             {
                 MessageBox.Show("Cập nhật thành công !", "Thông báo");
                 dgvAccount.DataSource = bll.GetAll();
@@ -269,12 +270,13 @@ namespace GUI
 
         private void dgvAccount_Click(object sender, EventArgs e)
         {
+            //od
             int cellSelect = dgvAccount.CurrentCell.RowIndex;
             if(cellSelect > -1 &&
                 dgvAccount.Rows[cellSelect].Cells.Count >0 &&
                 dgvAccount.Rows[cellSelect].Cells[1].Value != null)
             {
-                txtUsername.Text = dgvAccount.Rows[cellSelect].Cells[1].Value.ToString();
+                txtUsername.Text = dgvAccount.Rows[cellSelect].Cells[1].Value.ToString().Trim();
                 dtpStartDate.Value = DateTime.Parse(dgvAccount.Rows[cellSelect].Cells[5].Value.ToString());
                 cbbStaffID.SelectedValue = dgvAccount.Rows[cellSelect].Cells[3].Value.ToString();
                 cbbDepartmentID.SelectedValue = dgvAccount.Rows[cellSelect].Cells[7].Value.ToString();
@@ -293,6 +295,11 @@ namespace GUI
         private void pButton_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void btnFind_Click(object sender, EventArgs e)
+        {
+            dgvAccount.DataSource = bll.Find(txtUsername.Text.Trim());
         }
     }
 }

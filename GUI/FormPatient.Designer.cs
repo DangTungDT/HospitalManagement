@@ -31,6 +31,13 @@
             this.dgvPatient = new System.Windows.Forms.DataGridView();
             this.panelFillForm = new System.Windows.Forms.Panel();
             this.panelRight = new System.Windows.Forms.Panel();
+            this.labelTypePatient = new System.Windows.Forms.Label();
+            this.labelUpdatedDate = new System.Windows.Forms.Label();
+            this.labelCreatedDate = new System.Windows.Forms.Label();
+            this.labelStatus = new System.Windows.Forms.Label();
+            this.labelEmergencyPhone = new System.Windows.Forms.Label();
+            this.labelEmergencyName = new System.Windows.Forms.Label();
+            this.labelAddress = new System.Windows.Forms.Label();
             this.dtpUpdatedDate = new System.Windows.Forms.DateTimePicker();
             this.dtpCreatedDate = new System.Windows.Forms.DateTimePicker();
             this.cbbTypePatient = new System.Windows.Forms.ComboBox();
@@ -46,6 +53,15 @@
             this.txtEmergencyName = new System.Windows.Forms.TextBox();
             this.txtAddress = new System.Windows.Forms.TextBox();
             this.panelLeft = new System.Windows.Forms.Panel();
+            this.labelHeight = new System.Windows.Forms.Label();
+            this.labelWeight = new System.Windows.Forms.Label();
+            this.labelInsuranceID = new System.Windows.Forms.Label();
+            this.labelCitizenID = new System.Windows.Forms.Label();
+            this.labelPhoneNumber = new System.Windows.Forms.Label();
+            this.labelDob = new System.Windows.Forms.Label();
+            this.labelGender = new System.Windows.Forms.Label();
+            this.labelFullName = new System.Windows.Forms.Label();
+            this.labelID = new System.Windows.Forms.Label();
             this.cbInsuranceID = new System.Windows.Forms.CheckBox();
             this.dtpDob = new System.Windows.Forms.DateTimePicker();
             this.radGenderOther = new System.Windows.Forms.RadioButton();
@@ -73,22 +89,6 @@
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.labelID = new System.Windows.Forms.Label();
-            this.labelFullName = new System.Windows.Forms.Label();
-            this.labelGender = new System.Windows.Forms.Label();
-            this.labelDob = new System.Windows.Forms.Label();
-            this.labelPhoneNumber = new System.Windows.Forms.Label();
-            this.labelCitizenID = new System.Windows.Forms.Label();
-            this.labelInsuranceID = new System.Windows.Forms.Label();
-            this.labelWeight = new System.Windows.Forms.Label();
-            this.labelHeight = new System.Windows.Forms.Label();
-            this.labelAddress = new System.Windows.Forms.Label();
-            this.labelEmergencyName = new System.Windows.Forms.Label();
-            this.labelEmergencyPhone = new System.Windows.Forms.Label();
-            this.labelStatus = new System.Windows.Forms.Label();
-            this.labelCreatedDate = new System.Windows.Forms.Label();
-            this.labelUpdatedDate = new System.Windows.Forms.Label();
-            this.labelTypePatient = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPatient)).BeginInit();
             this.panelFillForm.SuspendLayout();
             this.panelRight.SuspendLayout();
@@ -107,6 +107,7 @@
             this.dgvPatient.Size = new System.Drawing.Size(1182, 176);
             this.dgvPatient.TabIndex = 0;
             this.dgvPatient.TabStop = false;
+            this.dgvPatient.Click += new System.EventHandler(this.dgvPatient_Click);
             // 
             // panelFillForm
             // 
@@ -150,6 +151,62 @@
             this.panelRight.Size = new System.Drawing.Size(455, 553);
             this.panelRight.TabIndex = 1;
             this.panelRight.Paint += new System.Windows.Forms.PaintEventHandler(this.panel4_Paint);
+            // 
+            // labelTypePatient
+            // 
+            this.labelTypePatient.AutoSize = true;
+            this.labelTypePatient.Location = new System.Drawing.Point(182, 321);
+            this.labelTypePatient.Name = "labelTypePatient";
+            this.labelTypePatient.Size = new System.Drawing.Size(0, 16);
+            this.labelTypePatient.TabIndex = 10;
+            // 
+            // labelUpdatedDate
+            // 
+            this.labelUpdatedDate.AutoSize = true;
+            this.labelUpdatedDate.Location = new System.Drawing.Point(182, 271);
+            this.labelUpdatedDate.Name = "labelUpdatedDate";
+            this.labelUpdatedDate.Size = new System.Drawing.Size(0, 16);
+            this.labelUpdatedDate.TabIndex = 10;
+            // 
+            // labelCreatedDate
+            // 
+            this.labelCreatedDate.AutoSize = true;
+            this.labelCreatedDate.Location = new System.Drawing.Point(182, 221);
+            this.labelCreatedDate.Name = "labelCreatedDate";
+            this.labelCreatedDate.Size = new System.Drawing.Size(0, 16);
+            this.labelCreatedDate.TabIndex = 10;
+            // 
+            // labelStatus
+            // 
+            this.labelStatus.AutoSize = true;
+            this.labelStatus.Location = new System.Drawing.Point(182, 171);
+            this.labelStatus.Name = "labelStatus";
+            this.labelStatus.Size = new System.Drawing.Size(0, 16);
+            this.labelStatus.TabIndex = 10;
+            // 
+            // labelEmergencyPhone
+            // 
+            this.labelEmergencyPhone.AutoSize = true;
+            this.labelEmergencyPhone.Location = new System.Drawing.Point(182, 121);
+            this.labelEmergencyPhone.Name = "labelEmergencyPhone";
+            this.labelEmergencyPhone.Size = new System.Drawing.Size(0, 16);
+            this.labelEmergencyPhone.TabIndex = 10;
+            // 
+            // labelEmergencyName
+            // 
+            this.labelEmergencyName.AutoSize = true;
+            this.labelEmergencyName.Location = new System.Drawing.Point(182, 71);
+            this.labelEmergencyName.Name = "labelEmergencyName";
+            this.labelEmergencyName.Size = new System.Drawing.Size(0, 16);
+            this.labelEmergencyName.TabIndex = 10;
+            // 
+            // labelAddress
+            // 
+            this.labelAddress.AutoSize = true;
+            this.labelAddress.Location = new System.Drawing.Point(182, 18);
+            this.labelAddress.Name = "labelAddress";
+            this.labelAddress.Size = new System.Drawing.Size(0, 16);
+            this.labelAddress.TabIndex = 10;
             // 
             // dtpUpdatedDate
             // 
@@ -327,6 +384,78 @@
             this.panelLeft.Name = "panelLeft";
             this.panelLeft.Size = new System.Drawing.Size(440, 553);
             this.panelLeft.TabIndex = 0;
+            // 
+            // labelHeight
+            // 
+            this.labelHeight.AutoSize = true;
+            this.labelHeight.Location = new System.Drawing.Point(127, 461);
+            this.labelHeight.Name = "labelHeight";
+            this.labelHeight.Size = new System.Drawing.Size(0, 16);
+            this.labelHeight.TabIndex = 10;
+            // 
+            // labelWeight
+            // 
+            this.labelWeight.AutoSize = true;
+            this.labelWeight.Location = new System.Drawing.Point(127, 411);
+            this.labelWeight.Name = "labelWeight";
+            this.labelWeight.Size = new System.Drawing.Size(0, 16);
+            this.labelWeight.TabIndex = 10;
+            // 
+            // labelInsuranceID
+            // 
+            this.labelInsuranceID.AutoSize = true;
+            this.labelInsuranceID.Location = new System.Drawing.Point(127, 361);
+            this.labelInsuranceID.Name = "labelInsuranceID";
+            this.labelInsuranceID.Size = new System.Drawing.Size(0, 16);
+            this.labelInsuranceID.TabIndex = 10;
+            // 
+            // labelCitizenID
+            // 
+            this.labelCitizenID.AutoSize = true;
+            this.labelCitizenID.Location = new System.Drawing.Point(127, 261);
+            this.labelCitizenID.Name = "labelCitizenID";
+            this.labelCitizenID.Size = new System.Drawing.Size(0, 16);
+            this.labelCitizenID.TabIndex = 10;
+            // 
+            // labelPhoneNumber
+            // 
+            this.labelPhoneNumber.AutoSize = true;
+            this.labelPhoneNumber.Location = new System.Drawing.Point(127, 211);
+            this.labelPhoneNumber.Name = "labelPhoneNumber";
+            this.labelPhoneNumber.Size = new System.Drawing.Size(0, 16);
+            this.labelPhoneNumber.TabIndex = 10;
+            // 
+            // labelDob
+            // 
+            this.labelDob.AutoSize = true;
+            this.labelDob.Location = new System.Drawing.Point(127, 160);
+            this.labelDob.Name = "labelDob";
+            this.labelDob.Size = new System.Drawing.Size(0, 16);
+            this.labelDob.TabIndex = 10;
+            // 
+            // labelGender
+            // 
+            this.labelGender.AutoSize = true;
+            this.labelGender.Location = new System.Drawing.Point(127, 112);
+            this.labelGender.Name = "labelGender";
+            this.labelGender.Size = new System.Drawing.Size(0, 16);
+            this.labelGender.TabIndex = 10;
+            // 
+            // labelFullName
+            // 
+            this.labelFullName.AutoSize = true;
+            this.labelFullName.Location = new System.Drawing.Point(127, 61);
+            this.labelFullName.Name = "labelFullName";
+            this.labelFullName.Size = new System.Drawing.Size(0, 16);
+            this.labelFullName.TabIndex = 10;
+            // 
+            // labelID
+            // 
+            this.labelID.AutoSize = true;
+            this.labelID.Location = new System.Drawing.Point(127, 11);
+            this.labelID.Name = "labelID";
+            this.labelID.Size = new System.Drawing.Size(0, 16);
+            this.labelID.TabIndex = 10;
             // 
             // cbInsuranceID
             // 
@@ -564,6 +693,7 @@
             this.btnClose.TabStop = false;
             this.btnClose.Text = "Thoát";
             this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnClean
             // 
@@ -575,6 +705,7 @@
             this.btnClean.TabStop = false;
             this.btnClean.Text = "Làm mới";
             this.btnClean.UseVisualStyleBackColor = true;
+            this.btnClean.Click += new System.EventHandler(this.btnClean_Click);
             // 
             // btnUpdate
             // 
@@ -597,6 +728,7 @@
             this.btnDelete.TabStop = false;
             this.btnDelete.Text = "Xóa";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnAdd
             // 
@@ -609,134 +741,6 @@
             this.btnAdd.Text = "Thêm";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // labelID
-            // 
-            this.labelID.AutoSize = true;
-            this.labelID.Location = new System.Drawing.Point(127, 11);
-            this.labelID.Name = "labelID";
-            this.labelID.Size = new System.Drawing.Size(0, 16);
-            this.labelID.TabIndex = 10;
-            // 
-            // labelFullName
-            // 
-            this.labelFullName.AutoSize = true;
-            this.labelFullName.Location = new System.Drawing.Point(127, 61);
-            this.labelFullName.Name = "labelFullName";
-            this.labelFullName.Size = new System.Drawing.Size(0, 16);
-            this.labelFullName.TabIndex = 10;
-            // 
-            // labelGender
-            // 
-            this.labelGender.AutoSize = true;
-            this.labelGender.Location = new System.Drawing.Point(127, 112);
-            this.labelGender.Name = "labelGender";
-            this.labelGender.Size = new System.Drawing.Size(0, 16);
-            this.labelGender.TabIndex = 10;
-            // 
-            // labelDob
-            // 
-            this.labelDob.AutoSize = true;
-            this.labelDob.Location = new System.Drawing.Point(127, 160);
-            this.labelDob.Name = "labelDob";
-            this.labelDob.Size = new System.Drawing.Size(0, 16);
-            this.labelDob.TabIndex = 10;
-            // 
-            // labelPhoneNumber
-            // 
-            this.labelPhoneNumber.AutoSize = true;
-            this.labelPhoneNumber.Location = new System.Drawing.Point(127, 211);
-            this.labelPhoneNumber.Name = "labelPhoneNumber";
-            this.labelPhoneNumber.Size = new System.Drawing.Size(0, 16);
-            this.labelPhoneNumber.TabIndex = 10;
-            // 
-            // labelCitizenID
-            // 
-            this.labelCitizenID.AutoSize = true;
-            this.labelCitizenID.Location = new System.Drawing.Point(127, 261);
-            this.labelCitizenID.Name = "labelCitizenID";
-            this.labelCitizenID.Size = new System.Drawing.Size(0, 16);
-            this.labelCitizenID.TabIndex = 10;
-            // 
-            // labelInsuranceID
-            // 
-            this.labelInsuranceID.AutoSize = true;
-            this.labelInsuranceID.Location = new System.Drawing.Point(127, 361);
-            this.labelInsuranceID.Name = "labelInsuranceID";
-            this.labelInsuranceID.Size = new System.Drawing.Size(0, 16);
-            this.labelInsuranceID.TabIndex = 10;
-            // 
-            // labelWeight
-            // 
-            this.labelWeight.AutoSize = true;
-            this.labelWeight.Location = new System.Drawing.Point(127, 411);
-            this.labelWeight.Name = "labelWeight";
-            this.labelWeight.Size = new System.Drawing.Size(0, 16);
-            this.labelWeight.TabIndex = 10;
-            // 
-            // labelHeight
-            // 
-            this.labelHeight.AutoSize = true;
-            this.labelHeight.Location = new System.Drawing.Point(127, 461);
-            this.labelHeight.Name = "labelHeight";
-            this.labelHeight.Size = new System.Drawing.Size(0, 16);
-            this.labelHeight.TabIndex = 10;
-            // 
-            // labelAddress
-            // 
-            this.labelAddress.AutoSize = true;
-            this.labelAddress.Location = new System.Drawing.Point(182, 18);
-            this.labelAddress.Name = "labelAddress";
-            this.labelAddress.Size = new System.Drawing.Size(0, 16);
-            this.labelAddress.TabIndex = 10;
-            // 
-            // labelEmergencyName
-            // 
-            this.labelEmergencyName.AutoSize = true;
-            this.labelEmergencyName.Location = new System.Drawing.Point(182, 71);
-            this.labelEmergencyName.Name = "labelEmergencyName";
-            this.labelEmergencyName.Size = new System.Drawing.Size(0, 16);
-            this.labelEmergencyName.TabIndex = 10;
-            // 
-            // labelEmergencyPhone
-            // 
-            this.labelEmergencyPhone.AutoSize = true;
-            this.labelEmergencyPhone.Location = new System.Drawing.Point(182, 121);
-            this.labelEmergencyPhone.Name = "labelEmergencyPhone";
-            this.labelEmergencyPhone.Size = new System.Drawing.Size(0, 16);
-            this.labelEmergencyPhone.TabIndex = 10;
-            // 
-            // labelStatus
-            // 
-            this.labelStatus.AutoSize = true;
-            this.labelStatus.Location = new System.Drawing.Point(182, 171);
-            this.labelStatus.Name = "labelStatus";
-            this.labelStatus.Size = new System.Drawing.Size(0, 16);
-            this.labelStatus.TabIndex = 10;
-            // 
-            // labelCreatedDate
-            // 
-            this.labelCreatedDate.AutoSize = true;
-            this.labelCreatedDate.Location = new System.Drawing.Point(182, 221);
-            this.labelCreatedDate.Name = "labelCreatedDate";
-            this.labelCreatedDate.Size = new System.Drawing.Size(0, 16);
-            this.labelCreatedDate.TabIndex = 10;
-            // 
-            // labelUpdatedDate
-            // 
-            this.labelUpdatedDate.AutoSize = true;
-            this.labelUpdatedDate.Location = new System.Drawing.Point(182, 271);
-            this.labelUpdatedDate.Name = "labelUpdatedDate";
-            this.labelUpdatedDate.Size = new System.Drawing.Size(0, 16);
-            this.labelUpdatedDate.TabIndex = 10;
-            // 
-            // labelTypePatient
-            // 
-            this.labelTypePatient.AutoSize = true;
-            this.labelTypePatient.Location = new System.Drawing.Point(182, 321);
-            this.labelTypePatient.Name = "labelTypePatient";
-            this.labelTypePatient.Size = new System.Drawing.Size(0, 16);
-            this.labelTypePatient.TabIndex = 10;
             // 
             // FormPatient
             // 

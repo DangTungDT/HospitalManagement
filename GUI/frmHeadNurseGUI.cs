@@ -63,5 +63,13 @@ namespace GUI
         {
             OpenChildForm(new frmMedicalInventoryGUI());
         }
+
+        private void frmHeadNurseGUI_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Hide();
+            DangNhap_GUI f = new DangNhap_GUI();
+            f.ShowDialog();
+            this.Close();
+        }
     }
 }

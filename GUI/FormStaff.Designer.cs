@@ -31,7 +31,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.dtpDob = new System.Windows.Forms.DateTimePicker();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.btnClose = new System.Windows.Forms.Button();
+            this.btnClean = new System.Windows.Forms.Button();
             this.btnFind = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
@@ -61,13 +61,14 @@
             this.txtCitizenID = new System.Windows.Forms.TextBox();
             this.txtNote = new System.Windows.Forms.TextBox();
             this.txtHomeAddress = new System.Windows.Forms.TextBox();
+            this.txtPhoneNumber = new System.Windows.Forms.TextBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
+            this.txtPosition = new System.Windows.Forms.TextBox();
             this.txtQualification = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
             this.txtID = new System.Windows.Forms.TextBox();
             this.dgvStaff = new System.Windows.Forms.DataGridView();
-            this.txtPhoneNumber = new System.Windows.Forms.TextBox();
-            this.txtPosition = new System.Windows.Forms.TextBox();
+            this.btnClose = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStaff)).BeginInit();
@@ -125,6 +126,7 @@
             // panel2
             // 
             this.panel2.Controls.Add(this.btnClose);
+            this.panel2.Controls.Add(this.btnClean);
             this.panel2.Controls.Add(this.btnFind);
             this.panel2.Controls.Add(this.btnUpdate);
             this.panel2.Controls.Add(this.btnDelete);
@@ -135,14 +137,15 @@
             this.panel2.Size = new System.Drawing.Size(257, 399);
             this.panel2.TabIndex = 4;
             // 
-            // btnClose
+            // btnClean
             // 
-            this.btnClose.Location = new System.Drawing.Point(19, 263);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(200, 40);
-            this.btnClose.TabIndex = 20;
-            this.btnClose.Text = "Thoát";
-            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClean.Location = new System.Drawing.Point(19, 263);
+            this.btnClean.Name = "btnClean";
+            this.btnClean.Size = new System.Drawing.Size(200, 40);
+            this.btnClean.TabIndex = 20;
+            this.btnClean.Text = "Làm mới";
+            this.btnClean.UseVisualStyleBackColor = true;
+            this.btnClean.Click += new System.EventHandler(this.btnClean_Click);
             // 
             // btnFind
             // 
@@ -152,6 +155,7 @@
             this.btnFind.TabIndex = 19;
             this.btnFind.Text = "Tìm kiếm";
             this.btnFind.UseVisualStyleBackColor = true;
+            this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
             // 
             // btnUpdate
             // 
@@ -402,6 +406,14 @@
             this.txtHomeAddress.Size = new System.Drawing.Size(200, 22);
             this.txtHomeAddress.TabIndex = 6;
             // 
+            // txtPhoneNumber
+            // 
+            this.txtPhoneNumber.Location = new System.Drawing.Point(153, 203);
+            this.txtPhoneNumber.MaxLength = 15;
+            this.txtPhoneNumber.Name = "txtPhoneNumber";
+            this.txtPhoneNumber.Size = new System.Drawing.Size(200, 22);
+            this.txtPhoneNumber.TabIndex = 4;
+            // 
             // txtEmail
             // 
             this.txtEmail.Location = new System.Drawing.Point(153, 241);
@@ -409,6 +421,14 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(200, 22);
             this.txtEmail.TabIndex = 5;
+            // 
+            // txtPosition
+            // 
+            this.txtPosition.Location = new System.Drawing.Point(554, 68);
+            this.txtPosition.MaxLength = 50;
+            this.txtPosition.Name = "txtPosition";
+            this.txtPosition.Size = new System.Drawing.Size(200, 22);
+            this.txtPosition.TabIndex = 10;
             // 
             // txtQualification
             // 
@@ -448,22 +468,17 @@
             this.dgvStaff.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvStaff.Size = new System.Drawing.Size(1044, 268);
             this.dgvStaff.TabIndex = 21;
+            this.dgvStaff.Click += new System.EventHandler(this.dgvStaff_Click);
             // 
-            // txtPhoneNumber
+            // btnClose
             // 
-            this.txtPhoneNumber.Location = new System.Drawing.Point(153, 203);
-            this.txtPhoneNumber.MaxLength = 15;
-            this.txtPhoneNumber.Name = "txtPhoneNumber";
-            this.txtPhoneNumber.Size = new System.Drawing.Size(200, 22);
-            this.txtPhoneNumber.TabIndex = 4;
-            // 
-            // txtPosition
-            // 
-            this.txtPosition.Location = new System.Drawing.Point(554, 68);
-            this.txtPosition.MaxLength = 50;
-            this.txtPosition.Name = "txtPosition";
-            this.txtPosition.Size = new System.Drawing.Size(200, 22);
-            this.txtPosition.TabIndex = 10;
+            this.btnClose.Location = new System.Drawing.Point(19, 321);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(200, 40);
+            this.btnClose.TabIndex = 20;
+            this.btnClose.Text = "Thoát";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // FormStaff
             // 
@@ -512,7 +527,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Button btnClean;
         private System.Windows.Forms.Button btnFind;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnDelete;
@@ -525,5 +540,6 @@
         private System.Windows.Forms.ComboBox cobRole;
         private System.Windows.Forms.TextBox txtPhoneNumber;
         private System.Windows.Forms.TextBox txtPosition;
+        private System.Windows.Forms.Button btnClose;
     }
 }

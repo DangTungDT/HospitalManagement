@@ -95,5 +95,13 @@ namespace GUI
         {
             OpenChildForm(new frmTestTypeInfo_Doctor());
         }
+
+        private void frmMenuDoctor_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Hide();
+            DangNhap_GUI f = new DangNhap_GUI();
+            f.ShowDialog();
+            this.Close();
+        }
     }
 }

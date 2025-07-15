@@ -94,6 +94,13 @@ namespace GUI
                 ShowForm(new FormHistoryOutItem(), lịchSửToolStripMenuItem, trangChủToolStripMenuItem);
             }
         }
-        
+
+        private void FormInventoryManager_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Hide();
+            DangNhap_GUI f = new DangNhap_GUI();
+            f.ShowDialog();
+            this.Close();
+        }
     }
 }
