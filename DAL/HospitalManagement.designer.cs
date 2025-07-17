@@ -214,8 +214,8 @@ namespace DAL
 			}
 		}
 		
-		public System.Data.Linq.Table<Salary> Salaries
-		{
+		public System.Data.Linq.Table<Salary> Salary
+        {
 			get
 			{
 				return this.GetTable<Salary>();
@@ -2001,8 +2001,6 @@ namespace DAL
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _id;
-		
 		private string _ItemID;
 		
 		private int _Quantity;
@@ -2015,8 +2013,6 @@ namespace DAL
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
     partial void OnItemIDChanging(string value);
     partial void OnItemIDChanged();
     partial void OnQuantityChanging(int value);
@@ -2031,27 +2027,7 @@ namespace DAL
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ItemID", DbType="Char(10)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ItemID", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
 		public string ItemID
 		{
 			get
@@ -2132,12 +2108,12 @@ namespace DAL
 					if ((previousValue != null))
 					{
 						this._Item.Entity = null;
-						previousValue.Inventories.Remove(this);
+						previousValue.Inventory = null;
 					}
 					this._Item.Entity = value;
 					if ((value != null))
 					{
-						value.Inventories.Add(this);
+						value.Inventory = this;
 						this._ItemID = value.ID;
 					}
 					else
@@ -2177,7 +2153,300 @@ namespace DAL
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private string _ID;
+		private string _ItemName;
 		
+		private string _ItemType;
+		
+		private string _Unit;
+		
+		private System.Nullable<decimal> _Price;
+		
+		private System.Nullable<System.DateTime> _CreatedAt;
+		
+		private bool _IsActive;
+		
+		private EntitySet<SupplyHistory> _SupplyHistories;
+		
+		private EntityRef<Inventory> _Inventory;
+		
+		private EntitySet<MedicalOrder> _MedicalOrders;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(string value);
+    partial void OnIDChanged();
+    partial void OnItemNameChanging(string value);
+    partial void OnItemNameChanged();
+    partial void OnItemTypeChanging(string value);
+    partial void OnItemTypeChanged();
+    partial void OnUnitChanging(string value);
+    partial void OnUnitChanged();
+    partial void OnPriceChanging(System.Nullable<decimal> value);
+    partial void OnPriceChanged();
+    partial void OnCreatedAtChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreatedAtChanged();
+    partial void OnIsActiveChanging(bool value);
+    partial void OnIsActiveChanged();
+    #endregion
+		
+		public Item()
+		{
+			this._SupplyHistories = new EntitySet<SupplyHistory>(new Action<SupplyHistory>(this.attach_SupplyHistories), new Action<SupplyHistory>(this.detach_SupplyHistories));
+			this._Inventory = default(EntityRef<Inventory>);
+			this._MedicalOrders = new EntitySet<MedicalOrder>(new Action<MedicalOrder>(this.attach_MedicalOrders), new Action<MedicalOrder>(this.detach_MedicalOrders));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ItemName", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string ItemName
+		{
+			get
+			{
+				return this._ItemName;
+			}
+			set
+			{
+				if ((this._ItemName != value))
+				{
+					this.OnItemNameChanging(value);
+					this.SendPropertyChanging();
+					this._ItemName = value;
+					this.SendPropertyChanged("ItemName");
+					this.OnItemNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ItemType", DbType="NVarChar(100)")]
+		public string ItemType
+		{
+			get
+			{
+				return this._ItemType;
+			}
+			set
+			{
+				if ((this._ItemType != value))
+				{
+					this.OnItemTypeChanging(value);
+					this.SendPropertyChanging();
+					this._ItemType = value;
+					this.SendPropertyChanged("ItemType");
+					this.OnItemTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Unit", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string Unit
+		{
+			get
+			{
+				return this._Unit;
+			}
+			set
+			{
+				if ((this._Unit != value))
+				{
+					this.OnUnitChanging(value);
+					this.SendPropertyChanging();
+					this._Unit = value;
+					this.SendPropertyChanged("Unit");
+					this.OnUnitChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> Price
+		{
+			get
+			{
+				return this._Price;
+			}
+			set
+			{
+				if ((this._Price != value))
+				{
+					this.OnPriceChanging(value);
+					this.SendPropertyChanging();
+					this._Price = value;
+					this.SendPropertyChanged("Price");
+					this.OnPriceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedAt", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreatedAt
+		{
+			get
+			{
+				return this._CreatedAt;
+			}
+			set
+			{
+				if ((this._CreatedAt != value))
+				{
+					this.OnCreatedAtChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedAt = value;
+					this.SendPropertyChanged("CreatedAt");
+					this.OnCreatedAtChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsActive", DbType="Bit NOT NULL")]
+		public bool IsActive
+		{
+			get
+			{
+				return this._IsActive;
+			}
+			set
+			{
+				if ((this._IsActive != value))
+				{
+					this.OnIsActiveChanging(value);
+					this.SendPropertyChanging();
+					this._IsActive = value;
+					this.SendPropertyChanged("IsActive");
+					this.OnIsActiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Item_SupplyHistory", Storage="_SupplyHistories", ThisKey="ID", OtherKey="itemID")]
+		public EntitySet<SupplyHistory> SupplyHistories
+		{
+			get
+			{
+				return this._SupplyHistories;
+			}
+			set
+			{
+				this._SupplyHistories.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Item_Inventory", Storage="_Inventory", ThisKey="ID", OtherKey="ItemID", IsUnique=true, IsForeignKey=false)]
+		public Inventory Inventory
+		{
+			get
+			{
+				return this._Inventory.Entity;
+			}
+			set
+			{
+				Inventory previousValue = this._Inventory.Entity;
+				if (((previousValue != value) 
+							|| (this._Inventory.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Inventory.Entity = null;
+						previousValue.Item = null;
+					}
+					this._Inventory.Entity = value;
+					if ((value != null))
+					{
+						value.Item = this;
+					}
+					this.SendPropertyChanged("Inventory");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Item_MedicalOrder", Storage="_MedicalOrders", ThisKey="ID", OtherKey="ItemID")]
+		public EntitySet<MedicalOrder> MedicalOrders
+		{
+			get
+			{
+				return this._MedicalOrders;
+			}
+			set
+			{
+				this._MedicalOrders.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_SupplyHistories(SupplyHistory entity)
+		{
+			this.SendPropertyChanging();
+			entity.Item = this;
+		}
+		
+		private void detach_SupplyHistories(SupplyHistory entity)
+		{
+			this.SendPropertyChanging();
+			entity.Item = null;
+		}
+		
+		private void attach_MedicalOrders(MedicalOrder entity)
+		{
+			this.SendPropertyChanging();
+			entity.Item = this;
+		}
+		
+		private void detach_MedicalOrders(MedicalOrder entity)
+		{
+			this.SendPropertyChanging();
+			entity.Item = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.LaboratoryTest")]
+	public partial class LaboratoryTest : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+    
 		private string _ItemName;
 		
 		private string _ItemType;
@@ -4234,6 +4503,19 @@ namespace DAL
 		{
 			get
 			{
+				return this._SupplyHistories;
+			}
+			set
+			{
+				this._SupplyHistories.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_Appointment", Storage="_Appointments", ThisKey="id", OtherKey="patientID")]
+		public EntitySet<Appointment> Appointments
+		{
+			get
+			{
 				return this._Appointments;
 			}
 			set
@@ -4328,6 +4610,18 @@ namespace DAL
 		}
 		
 		private void attach_SupplyHistories(SupplyHistory entity)
+		{
+			this.SendPropertyChanging();
+			entity.Patient = this;
+		}
+		
+		private void detach_SupplyHistories(SupplyHistory entity)
+		{
+			this.SendPropertyChanging();
+			entity.Patient = null;
+		}
+		
+		private void attach_Appointments(Appointment entity)
 		{
 			this.SendPropertyChanging();
 			entity.Patient = this;

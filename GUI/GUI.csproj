@@ -61,6 +61,12 @@
     <Compile Include="DangNhap_GUI.designer.cs">
       <DependentUpon>DangNhap_GUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAccount.Designer.cs">
+      <DependentUpon>FormAccount.cs</DependentUpon>
+    </Compile>
     <Compile Include="DoctorPatientAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,6 +78,30 @@
     </Compile>
     <Compile Include="FormAdmin.Designer.cs">
       <DependentUpon>FormAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPatient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPatient.Designer.cs">
+      <DependentUpon>FormPatient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSalary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSalary.Designer.cs">
+      <DependentUpon>FormSalary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSalaryDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSalaryDetail.Designer.cs">
+      <DependentUpon>FormSalaryDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormStaff.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStaff.Designer.cs">
+      <DependentUpon>FormStaff.cs</DependentUpon>
     </Compile>
     <Compile Include="FormAppointmentAdmin.cs">
       <SubType>Form</SubType>
@@ -178,6 +208,7 @@
     <Compile Include="frmUserGUI.designer.cs">
       <DependentUpon>frmUserGUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="Item.cs" />
     <Compile Include="frmUserInformation.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -234,11 +265,26 @@
     <EmbeddedResource Include="DangNhap_GUI.resx">
       <DependentUpon>DangNhap_GUI.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormAccount.resx">
+      <DependentUpon>FormAccount.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DoctorPatientAdmin.resx">
       <DependentUpon>DoctorPatientAdmin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormAdmin.resx">
       <DependentUpon>FormAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPatient.resx">
+      <DependentUpon>FormPatient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSalary.resx">
+      <DependentUpon>FormSalary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSalaryDetail.resx">
+      <DependentUpon>FormSalaryDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormStaff.resx">
+      <DependentUpon>FormStaff.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormAppointmentAdmin.resx">
       <DependentUpon>FormAppointmentAdmin.cs</DependentUpon>

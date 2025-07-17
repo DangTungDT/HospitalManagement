@@ -91,21 +91,21 @@
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(224, 233);
+            this.txtPassword.Location = new System.Drawing.Point(224, 230);
             this.txtPassword.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtPassword.Multiline = true;
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(264, 36);
+            this.txtPassword.Size = new System.Drawing.Size(264, 22);
             this.txtPassword.TabIndex = 14;
+            this.txtPassword.UseSystemPasswordChar = true;
+            this.txtPassword.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
             this.txtPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPassword_KeyDown);
             // 
             // txtUserName
             // 
             this.txtUserName.Location = new System.Drawing.Point(224, 164);
             this.txtUserName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtUserName.Multiline = true;
             this.txtUserName.Name = "txtUserName";
-            this.txtUserName.Size = new System.Drawing.Size(264, 36);
+            this.txtUserName.Size = new System.Drawing.Size(264, 22);
             this.txtUserName.TabIndex = 15;
             this.txtUserName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtUserName_KeyDown);
             // 
@@ -130,6 +130,7 @@
             this.btnThoat.TabIndex = 21;
             this.btnThoat.Text = "X";
             this.btnThoat.UseVisualStyleBackColor = false;
+            this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 
             // DangNhap_GUI
             // 
@@ -150,6 +151,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "DangNhap_GUI";
             this.Text = "DangNhap_GUI";
+            this.Load += new System.EventHandler(this.DangNhap_GUI_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DangNhap_GUI_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

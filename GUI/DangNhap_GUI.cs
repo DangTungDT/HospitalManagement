@@ -1,5 +1,4 @@
-﻿
-using BLL;
+﻿using BLL;
 using DTO;
 using System;
 using System.Collections.Generic;
@@ -20,12 +19,12 @@ namespace GUI
         public DangNhap_GUI()
         {
             InitializeComponent();
+            txtPassword.UseSystemPasswordChar = true;
         }
 
         private void btnDangNhap_Click(object sender, EventArgs e)
         {
                 Login(txtUserName.Text, txtPassword.Text);
-         
         }
 
         private void DangNhap_GUI_KeyDown(object sender, KeyEventArgs e)
@@ -47,9 +46,42 @@ namespace GUI
             if(accountLogin != null)
             {
                 password = HashStringSHA256(password);
-                if (password.Equals(accountLogin.PasswordHash, StringComparison.OrdinalIgnoreCase))
+                if (password.Equals(accountLogin.PasswordHash.Trim(), StringComparison.OrdinalIgnoreCase))
                 {
-                    MessageBox.Show("Thành công!");
+                    // Cắt chuỗi để lấy phần quyền
+                    string[] parts = username.Split('_');
+                    string role = parts[0].ToLower();
+
+                    this.Hide();  // Ẩn form Login trước
+
+                    if (role == "quanlykho")
+                    {
+                        FormInventoryManager f = new FormInventoryManager();
+                        f.ShowDialog();
+                    }
+                    else if (role == "bacsi")
+                    {
+                        frmMenuDoctor f = new frmMenuDoctor();
+                        f.ShowDialog();
+                    }
+                    else if (role == "dieuduong")
+                    {
+                        frmHeadNurseGUI f = new frmHeadNurseGUI();
+                        f.ShowDialog();
+                    }
+                    else if (role == "admin")
+                    {
+                        FormAdmin f = new FormAdmin();
+                        f.ShowDialog();
+                    }
+                    else if (role == "quanlythuoc")
+                    {
+                        FormInventoryManager f = new FormInventoryManager("quanlythuoc");
+                        f.ShowDialog();
+                    }
+
+                    // Sau khi form con đóng thì mới đóng form Login
+                    this.Close();
                 }
                 else
                 {
@@ -85,6 +117,21 @@ namespace GUI
             {
                 Login(txtUserName.Text, txtPassword.Text);
             }
+        }
+
+        private void DangNhap_GUI_Load(object sender, EventArgs e)
+        {
+            txtPassword.UseSystemPasswordChar = true;
+        }
+
+        private void btnThoat_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void txtPassword_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

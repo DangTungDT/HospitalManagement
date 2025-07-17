@@ -16,6 +16,10 @@ namespace GUI
     {
         //private string maAccount;
 
+        public frmMenuDoctor()
+        {
+            InitializeComponent();
+        }
         public frmMenuDoctor(string maAccount)
         {
             InitializeComponent();
@@ -90,6 +94,14 @@ namespace GUI
         private void btnLoaiXetNghiem_Click(object sender, EventArgs e)
         {
             OpenChildForm(new frmTestTypeInfo_Doctor());
+        }
+
+        private void frmMenuDoctor_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Hide();
+            DangNhap_GUI f = new DangNhap_GUI();
+            f.ShowDialog();
+            this.Close();
         }
     }
 }
