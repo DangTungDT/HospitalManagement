@@ -459,7 +459,7 @@ namespace GUI
                     cbInsuranceID.Checked = false;
                     txtInsuranceID.Text = "";
                 }
-                else
+                else if(string.IsNullOrEmpty(dgvPatient.Rows[cellSelected].Cells[7].Value.ToString()))
                 {
                     cbInsuranceID.Checked = true;
                     txtInsuranceID.Text = dgvPatient.Rows[cellSelected].Cells[7].Value.ToString();

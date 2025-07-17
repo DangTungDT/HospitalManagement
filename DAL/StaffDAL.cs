@@ -112,6 +112,29 @@ namespace DAL
             }
         }
 
+        //Hàm kiểm tra ràng buộc toàn vẹn tham chiếu của dữ liệu
+        private bool CheckReferentialIntegrity(string id)
+        {
+            try
+            {
+                if (db.Accounts.Any(ac => ac.staffID == id)) return false;
+                if (db.MedicalRecords.Any(mr => mr.doctorID == id)) return false;
+                if (db.SalaryDetails.Any(sd => sd.StaffId == id)) return false;
+                if (db.LaboratoryTests.Any(lt => lt.doctorID == id)) return false;
+                if (db.MedicalOrders.Any(mo => mo.DoctorID == id)) return false;
+                if (db.SupplyHistories.Any(sh => sh.nurseID == id)) return false;
+                if (db.DoctorPatients.Any(dp => dp.doctorID == id)) return false;
+                if (db.DailyCares.Any(dc => dc.nurseID == id)) return false;
+                if (db.Appointments.Any(app => app.doctorID == id)) return false;
+
+                return true;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
+        }
+
         //Hàm xóa 1 dòng dữ liệu dựa trên id staff 
         public bool Delete(string idDelete)
         {
@@ -123,7 +146,10 @@ namespace DAL
                 {
                     return false; //dữ liệu cần xóa không tồn tại trong database
                 }
-                
+                if(!CheckReferentialIntegrity(idDelete))
+                {
+                    return false; //Dữ liệu còn liên quan đến các dữ liệu ở bảng khác
+                }
                 //Xóa
                 db.Staffs.DeleteOnSubmit(itemSelect);
                 db.SubmitChanges();
