@@ -43,12 +43,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountDAL.cs" />
+    <Compile Include="AppointmentDAL.cs" />
+    <Compile Include="DailyCareDAL.cs" />
+    <Compile Include="DoctorListbyDepartmentDAL.cs" />
+    <Compile Include="DoctorPatientAdminDAL.cs" />
     <Compile Include="HospitalManagement.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>HospitalManagement.dbml</DependentUpon>
     </Compile>
     <Compile Include="PatientDAL.cs" />
+    <Compile Include="LaboratoryTestAdminDAL.cs" />
+    <Compile Include="MedicalOrderAdminDAL.cs" />
+    <Compile Include="MedicalRecordAdminDAL.cs" />
+    <Compile Include="PatientListbyDepartmentDAL.cs" />
+    <Compile Include="PrescriptionOfPatientDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -58,6 +67,9 @@
     <Compile Include="SalaryDAL.cs" />
     <Compile Include="SalaryDetailDAL.cs" />
     <Compile Include="StaffDAL.cs" />
+    <Compile Include="StaffListbyDepartmentDAL.cs" />
+    <Compile Include="SupplyHistoryDAL.cs" />
+    <Compile Include="UserInfomationDAL.cs" />
     <Compile Include="UsersDAL.cs" />
   </ItemGroup>
   <ItemGroup>

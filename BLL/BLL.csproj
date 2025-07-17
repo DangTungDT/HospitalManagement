@@ -47,6 +47,19 @@
     <Compile Include="SalaryBLL.cs" />
     <Compile Include="SalaryDetailBLL.cs" />
     <Compile Include="StaffBLL.cs" />
+    <Compile Include="AppointmentBLL.cs" />
+    <Compile Include="DailyCareBLL.cs" />
+    <Compile Include="DoctorListbyDepartmentBLL.cs" />
+    <Compile Include="DoctorPatientAdminBLL.cs" />
+    <Compile Include="LaboratoryTestAdminBLL.cs" />
+    <Compile Include="MedicalOrderAdminBLL.cs" />
+    <Compile Include="MedicalRecordAdminBLL.cs" />
+    <Compile Include="PatientListbyDepartmentBLL.cs" />
+    <Compile Include="PrescriptionOfPatientBLL.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StaffListbyDepartmentBLL.cs" />
+    <Compile Include="SupplyHistoryBLL.cs" />
+    <Compile Include="UserInfomationBLL.cs" />
     <Compile Include="UsersBLL.cs" />
   </ItemGroup>
   <ItemGroup>
