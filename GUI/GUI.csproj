@@ -79,6 +79,12 @@
     <Compile Include="FormAdmin.Designer.cs">
       <DependentUpon>FormAdmin.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormMedicalOrderDoctorGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMedicalOrderDoctorGUI.Designer.cs">
+      <DependentUpon>FormMedicalOrderDoctorGUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormPatient.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,11 +121,23 @@
     <Compile Include="FormDailyCareAdmin.Designer.cs">
       <DependentUpon>FormDailyCareAdmin.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmDoctorInfo_Doctor.Designer.cs">
+      <DependentUpon>frmDoctorInfo_Doctor.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmDoctorListbyDepartmentGUI.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmDoctorListbyDepartmentGUI.Designer.cs">
       <DependentUpon>frmDoctorListbyDepartmentGUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMedicalRecordInfo_Doctor.Designer.cs">
+      <DependentUpon>frmMedicalRecordInfo_Doctor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMedicineInfo_Doctor.Designer.cs">
+      <DependentUpon>frmMedicineInfo_Doctor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPatientInfo_Doctor.Designer.cs">
+      <DependentUpon>frmPatientInfo_Doctor.cs</DependentUpon>
     </Compile>
     <Compile Include="frmPatientListbyDepartmentGUI.cs">
       <SubType>Form</SubType>
@@ -199,6 +217,9 @@
     <Compile Include="frmTestInfo_Doctor.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmTestInfo_Doctor.Designer.cs">
+      <DependentUpon>frmTestInfo_Doctor.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmTestTypeInfo_Doctor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -273,6 +294,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormAdmin.resx">
       <DependentUpon>FormAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMedicalOrderDoctorGUI.resx">
+      <DependentUpon>FormMedicalOrderDoctorGUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormPatient.resx">
       <DependentUpon>FormPatient.cs</DependentUpon>

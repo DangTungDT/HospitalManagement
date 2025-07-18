@@ -35,6 +35,7 @@
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panel_Left = new System.Windows.Forms.Panel();
+            this.btnMedicalOrder = new System.Windows.Forms.Button();
             this.btnLoaiXetNghiem = new System.Windows.Forms.Button();
             this.btnChiTietDonThuoc = new System.Windows.Forms.Button();
             this.btnXetNghiem = new System.Windows.Forms.Button();
@@ -63,7 +64,7 @@
             this.panel_Body.Location = new System.Drawing.Point(179, 80);
             this.panel_Body.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel_Body.Name = "panel_Body";
-            this.panel_Body.Size = new System.Drawing.Size(749, 502);
+            this.panel_Body.Size = new System.Drawing.Size(749, 558);
             this.panel_Body.TabIndex = 5;
             this.panel_Body.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Body_Paint);
             // 
@@ -117,6 +118,7 @@
             // panel_Left
             // 
             this.panel_Left.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel_Left.Controls.Add(this.btnMedicalOrder);
             this.panel_Left.Controls.Add(this.btnLoaiXetNghiem);
             this.panel_Left.Controls.Add(this.btnChiTietDonThuoc);
             this.panel_Left.Controls.Add(this.btnXetNghiem);
@@ -131,8 +133,20 @@
             this.panel_Left.Location = new System.Drawing.Point(0, 0);
             this.panel_Left.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel_Left.Name = "panel_Left";
-            this.panel_Left.Size = new System.Drawing.Size(179, 582);
+            this.panel_Left.Size = new System.Drawing.Size(179, 638);
             this.panel_Left.TabIndex = 3;
+            // 
+            // btnMedicalOrder
+            // 
+            this.btnMedicalOrder.BackColor = System.Drawing.Color.White;
+            this.btnMedicalOrder.Location = new System.Drawing.Point(0, 577);
+            this.btnMedicalOrder.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnMedicalOrder.Name = "btnMedicalOrder";
+            this.btnMedicalOrder.Size = new System.Drawing.Size(179, 59);
+            this.btnMedicalOrder.TabIndex = 10;
+            this.btnMedicalOrder.Text = "Y Lệnh";
+            this.btnMedicalOrder.UseVisualStyleBackColor = false;
+            this.btnMedicalOrder.Click += new System.EventHandler(this.btnMedicalOrder_Click);
             // 
             // btnLoaiXetNghiem
             // 
@@ -267,7 +281,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(928, 582);
+            this.ClientSize = new System.Drawing.Size(928, 638);
             this.Controls.Add(this.panel_Body);
             this.Controls.Add(this.panel_Top);
             this.Controls.Add(this.panel_Left);
@@ -276,7 +290,7 @@
             this.Name = "frmMenuDoctor";
             this.Text = "frmMenuDoctor";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMenuDoctor_FormClosing);
+            this.Load += new System.EventHandler(this.frmMenuDoctor_Load);
             this.panel_Top.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -307,5 +321,6 @@
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Button btnChiTietDonThuoc;
         private System.Windows.Forms.Button btnLoaiXetNghiem;
+        private System.Windows.Forms.Button btnMedicalOrder;
     }
 }

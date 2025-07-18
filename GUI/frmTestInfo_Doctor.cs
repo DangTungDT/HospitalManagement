@@ -1,177 +1,283 @@
-﻿using System;
+﻿using BLL;
+using DTO;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
-public class frmTestInfo_Doctor : Form
+namespace GUI
 {
-    public frmTestInfo_Doctor()
+    public partial class frmTestInfo_Doctor : Form
     {
-        // Cài đặt form
-        this.Text = "Thông Tin Xét Nghiệm";
-        this.Size = new Size(950, 600);
-        this.StartPosition = FormStartPosition.CenterScreen;
-        this.FormBorderStyle = FormBorderStyle.FixedDialog;
-        this.MaximizeBox = false;
-        this.Font = new Font("Segoe UI", 11);
-
-        // Tiêu đề
-        Label lblTitle = new Label()
+        public frmTestInfo_Doctor(string currentDoctorId)
         {
-            Text = "Thông Tin Xét Nghiệm",
-            Font = new Font("Segoe UI", 20, FontStyle.Bold),
-            AutoSize = false,
-            TextAlign = ContentAlignment.MiddleCenter,
-            Dock = DockStyle.Top,
-            Height = 50
-        };
-        this.Controls.Add(lblTitle);
-
-        // GroupBox thông tin chi tiết xét nghiệm
-        GroupBox gbDetail = new GroupBox()
+            InitializeComponent();
+            this.doctorId = currentDoctorId;
+        }
+        private LaboratoryTestBLL bll = new LaboratoryTestBLL();
+        private string doctorId;
+        private void btnAdd_Click(object sender, EventArgs e)
         {
-            Text = "Thông tin chi tiết phiếu xét nghiệm",
-            Font = new Font("Segoe UI", 12, FontStyle.Regular),
-            Location = new Point((this.ClientSize.Width - Width) / 2, 60),
-            Anchor = AnchorStyles.Top,
-            Size = new Size(870, 220)
-        };
-        this.Controls.Add(gbDetail);
 
-        // Các label và textbox (chia đều 2 bên, mỗi bên 5 trường)
-        string[] leftLabels = { "Mã xét nghiệm:", "Mã bệnh nhân:", "Tên bệnh nhân:", "Ngày yêu cầu:", "Trạng thái:" };
-        int[] yLeft = { 35, 70, 105, 140, 175 };
-        for (int i = 0; i < leftLabels.Length; i++)
-        {
-            Label lbl = new Label()
+            if (cboMedicalOrderID.SelectedValue == null)
             {
-                Text = leftLabels[i],
-                Location = new Point(30, yLeft[i]),
-                Size = new Size(130, 25),
-                Font = new Font("Segoe UI", 11, FontStyle.Bold)
-            };
-            gbDetail.Controls.Add(lbl);
+                MessageBox.Show("Vui lòng chọn y lệnh trong danh sách!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-            TextBox txt = new TextBox()
+            // Kiểm tra các trường bắt buộc
+            if (
+                string.IsNullOrWhiteSpace(txtResultValue.Text) ||
+                string.IsNullOrWhiteSpace(txtResultUnit.Text) ||
+                string.IsNullOrWhiteSpace(txtResult.Text))
             {
-                Location = new Point(160, yLeft[i]),
-                Size = new Size(200, 25),
-                Font = new Font("Segoe UI", 11),
-                BackColor = Color.Gainsboro,
-                BorderStyle = BorderStyle.FixedSingle,
-                ReadOnly = true
+                MessageBox.Show("Vui lòng điền đầy đủ các trường thông tin bắt buộc!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Kiểm tra ngày xét nghiệm
+            DateTime selectedDate = dtpStartDate.Value.Date;
+            DateTime today = DateTime.Today;
+
+            if (selectedDate < today)
+            {
+                MessageBox.Show("Ngày xét nghiệm không được nhỏ hơn ngày hiện tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Tạo DTO
+            LaboratoryTestDoctorDTO dto = new LaboratoryTestDoctorDTO
+            {
+                MedicalOrderID = Convert.ToInt32(cboMedicalOrderID.SelectedValue), // Sửa lại chỗ này
+                ResultValue = txtResultValue.Text.Trim(),
+                ResultUnit = txtResultUnit.Text.Trim(),
+                Result = txtResult.Text.Trim(),
+                StartDate = selectedDate,
+                Note = txtNote.Text.Trim()
             };
-            gbDetail.Controls.Add(txt);
+
+            try
+            {
+                bll.AddTest(dto);
+                MessageBox.Show("Thêm xét nghiệm thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                ClearForm();
+                LoadData();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi thêm xét nghiệm: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-        string[] rightLabels = { "Loại xét nghiệm:", "Kết quả:", "Chỉ số bình thường:", "Bác sĩ chỉ định:", "Ghi chú:" };
-        int[] yRight = { 35, 70, 105, 140, 175 };
-        for (int i = 0; i < rightLabels.Length; i++)
+        private void btnSearch_Click(object sender, EventArgs e)
         {
-            Label lbl = new Label()
+            if (cboMedicalOrderID.SelectedValue == null)
             {
-                Text = rightLabels[i],
-                Location = new Point(420, yRight[i]),
-                Size = new Size(140, 25),
-                Font = new Font("Segoe UI", 11, FontStyle.Bold)
-            };
-            gbDetail.Controls.Add(lbl);
+                MessageBox.Show("Vui lòng chọn y lệnh để tìm kiếm!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
-            Control txt;
-            if (rightLabels[i] == "Ghi chú:")
+            int selectedOrderId = Convert.ToInt32(cboMedicalOrderID.SelectedValue);
+
+            var result = bll.SearchTestsByPatientId(doctorId, selectedOrderId);
+
+            if (result.Count == 0)
             {
-                txt = new RichTextBox()
-                {
-                    Location = new Point(570, yRight[i]),
-                    Size = new Size(220, 35),
-                    Font = new Font("Segoe UI", 11),
-                    BackColor = Color.Gainsboro,
-                    BorderStyle = BorderStyle.FixedSingle,
-                    ReadOnly = true
-                };
+                MessageBox.Show("Không tìm thấy xét nghiệm cho y lệnh này!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            else
-            {
-                txt = new TextBox()
-                {
-                    Location = new Point(570, yRight[i]),
-                    Size = new Size(220, 25),
-                    Font = new Font("Segoe UI", 11),
-                    BackColor = Color.Gainsboro,
-                    BorderStyle = BorderStyle.FixedSingle,
-                    ReadOnly = true
-                };
-            }
-            gbDetail.Controls.Add(txt);
+
+            dgvTestInfo.DataSource = result;
         }
 
-        // Label danh sách phiếu xét nghiệm
-        Label lblList = new Label()
+        private void btnRefresh_Click(object sender, EventArgs e)
         {
-            Text = "Danh sách các phiếu xét nghiệm",
-            Font = new Font("Segoe UI", 13, FontStyle.Bold),
-            ForeColor = Color.Teal,
-            AutoSize = false,
-            TextAlign = ContentAlignment.MiddleCenter,
-            Size = new Size(950, 30),
-            Location = new Point((this.ClientSize.Width - 950) / 2, 320), 
-        };
-        this.Controls.Add(lblList);
-        // Tự canh giữa khi form resize
-        this.Resize += (s, e) =>
+            ClearForm();
+            LoadData();
+        }
+
+        private void dgvTestInfo_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            lblList.Left = (this.ClientSize.Width - lblList.Width) / 2;
-        };
-        // DataGridView danh sách phiếu xét nghiệm
-        DataGridView dgv = new DataGridView()
-        {
-            Dock = DockStyle.Bottom,
-            Height = 230, // Chiều cao cố định
-            Font = new Font("Segoe UI", 11),
-            ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle()
+            if (e.RowIndex >= 0)
             {
-                Font = new Font("Segoe UI", 11, FontStyle.Bold),
-                BackColor = Color.LightCyan,
-                ForeColor = Color.Black,
-                Alignment = DataGridViewContentAlignment.MiddleCenter
-            },
-            EnableHeadersVisualStyles = false,
-            AllowUserToAddRows = false,
-            ReadOnly = true,
-            RowTemplate = { Height = 30 },
-            SelectionMode = DataGridViewSelectionMode.FullRowSelect,
-            BackgroundColor = Color.White,
-            AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
-        };
+                var selected = dgvTestInfo.Rows[e.RowIndex].DataBoundItem as LaboratoryTestDoctorDTO;
+                if (selected != null)
+                {
+                    // Gán mã y lệnh, ComboBox sẽ hiển thị tên y lệnh (OrderType)
+                    cboMedicalOrderID.SelectedValue = selected.MedicalOrderID;
 
-        dgv.Columns.Add("MaXN", "Mã Xét Nghiệm");
-        dgv.Columns.Add("MaBN", "Mã BN");
-        dgv.Columns.Add("TenBN", "Tên BN");
-        dgv.Columns.Add("NgayYeuCau", "Ngày Yêu Cầu");
-        dgv.Columns.Add("LoaiXN", "Loại Xét Nghiệm");
-        dgv.Columns.Add("KetQua", "Kết Quả");
-        dgv.Columns.Add("ChiSoBinhThuong", "Chỉ Số Bình Thường");
-        dgv.Columns.Add("BacSiChiDinh", "Bác Sĩ Chỉ Định");
-        dgv.Columns.Add("TrangThai", "Trạng Thái");
-        dgv.Columns.Add("GhiChu", "Ghi Chú");
+                    // Nếu không khớp, fallback bằng tên y lệnh
+                    if (cboMedicalOrderID.SelectedValue == null || (int)cboMedicalOrderID.SelectedValue != selected.MedicalOrderID)
+                    {
+                        cboMedicalOrderID.SelectedIndex = -1;
+                        cboMedicalOrderID.Text = selected.OrderType; // ✅ chỉ hiển thị tên y lệnh
+                    }
 
-        this.Controls.Add(dgv);
-    }
+                    txtResultValue.Text = selected.ResultValue;
+                    txtResultUnit.Text = selected.ResultUnit;
+                    txtResult.Text = selected.Result;
+                    txtNote.Text = selected.Note;
+                    dtpStartDate.Value = selected.StartDate ?? DateTime.Now;
+                }
+            }
+        }
 
-    private void InitializeComponent()
-    {
-            this.SuspendLayout();
-            // 
-            // frmTestInfo_Doctor
-            // 
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Name = "frmTestInfo_Doctor";
-            this.Load += new System.EventHandler(this.frmTestInfo_Doctor_Load);
-            this.ResumeLayout(false);
+        private void frmTestInfo_Doctor_Load(object sender, EventArgs e)
+        {
+            LoadMedicalOrders();
+            LoadData();
+            StyleDataGridView(dgvTestInfo);
+            StyleDataGridView(dgvMedicalOrderID);
 
-    }
+        }
+        private void groupBox2_Paint(object sender, PaintEventArgs e)
+        {
+            GroupBox box = sender as GroupBox;
 
-    private void frmTestInfo_Doctor_Load(object sender, EventArgs e)
-    {
+            // Màu nền nhẹ dịu (xanh nhạt)
+            Color nurseBackground = Color.FromArgb(230, 245, 255);
+            this.BackColor = nurseBackground;
+            e.Graphics.Clear(nurseBackground);
+
+            Pen thickPen = new Pen(Color.RoyalBlue, 2);
+            Brush textBrush = new SolidBrush(Color.RoyalBlue);
+
+            Font font = box.Font;
+            string text = box.Text;
+            SizeF textSize = e.Graphics.MeasureString(text, font);
+
+            int textPadding = 10;
+            int textWidth = (int)textSize.Width + textPadding * 2;
+
+            Rectangle borderRect = new Rectangle(
+                0,
+                (int)(textSize.Height / 2),
+                box.Width - 1,
+                box.Height - (int)(textSize.Height / 2) - 1
+            );
+
+            e.Graphics.DrawRectangle(thickPen, borderRect);
+
+            e.Graphics.FillRectangle(
+                new SolidBrush(nurseBackground),
+                new Rectangle(textPadding, 0, textWidth, (int)textSize.Height)
+            );
+
+            e.Graphics.DrawString(text, font, textBrush, textPadding, 0);
+
+            // Chỉ đổi màu chữ cho các control không phải TextBox
+            foreach (Control ctrl in box.Controls)
+            {
+                if (!(ctrl is TextBox))
+                {
+                    ctrl.ForeColor = Color.RoyalBlue;
+                }
+            }
+        }
+        private void StyleDataGridView(DataGridView dgv)
+        {
+            // Nền tổng thể (hơi xám xanh, khác biệt với form xanh nhạt)
+            dgv.BackgroundColor = Color.FromArgb(245, 248, 250); // Nhạt nhưng hơi xám -> tạo tách biệt
+
+            // Viền & ô
+            dgv.BorderStyle = BorderStyle.None;
+            dgv.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+
+            // 👉 Đổi màu đường phân cách giữa các ô (hàng dữ liệu)
+            dgv.GridColor = Color.MediumSeaGreen; // Xanh lá dễ nhìn
+
+            // Header
+            dgv.EnableHeadersVisualStyles = false;
+            dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.SteelBlue;  // đậm hơn RoyalBlue
+            dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            dgv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            // Dữ liệu
+            dgv.DefaultCellStyle.BackColor = Color.White;
+            dgv.DefaultCellStyle.ForeColor = Color.FromArgb(30, 60, 90); // Xanh navy nhẹ
+            dgv.DefaultCellStyle.SelectionBackColor = Color.FromArgb(200, 230, 255); // xanh pastel khi chọn
+            dgv.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dgv.DefaultCellStyle.Font = new Font("Segoe UI", 10);
+
+            // Hàng xen kẽ
+            dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(250, 253, 255); // Trắng-xanh nhạt sát trắng
+
+            // Căn lề
+            dgv.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+
+            // Kích thước dòng + kiểu fill
+            dgv.RowTemplate.Height = 28;
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        }
+        private void LoadMedicalOrders()
+        {
+            var orders = bll.GetOrdersByAssignedPatients(doctorId);
+
+            cboMedicalOrderID.DataSource = orders;
+            cboMedicalOrderID.DisplayMember = "OrderType";  // chỉ hiển thị tên y lệnh
+            cboMedicalOrderID.ValueMember = "OrderId";      // giá trị là ID y lệnh
+
+            cboMedicalOrderID.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cboMedicalOrderID.AutoCompleteSource = AutoCompleteSource.CustomSource;
+
+            var auto = new AutoCompleteStringCollection();
+            auto.AddRange(orders.Select(o => o.OrderType).ToArray());
+            cboMedicalOrderID.AutoCompleteCustomSource = auto;
+
+            cboMedicalOrderID.SelectedIndex = -1;
+            cboMedicalOrderID.Text = "";
+        }
+
+        private void LoadData()
+        {
+            dgvTestInfo.DataSource = bll.GetTestsByDoctor(doctorId);
+        }
+        private void ClearForm()
+        {
+            cboMedicalOrderID.SelectedIndex = -1;
+            txtResultValue.Clear();
+            txtResultUnit.Clear();
+            txtResult.Clear();
+            txtNote.Clear();
+            dtpStartDate.Value = DateTime.Now;
+        }
+
+        private void cboMedicalOrderID_TextChanged(object sender, EventArgs e)
+        {
+            string keyword = cboMedicalOrderID.Text.Trim().ToLower();
+
+            var allOrders = bll.GetOrdersByAssignedPatients(doctorId);
+            var filtered = string.IsNullOrWhiteSpace(keyword)
+                ? allOrders
+                : allOrders.Where(o => o.PatientName.ToLower().Contains(keyword)
+                                    || o.OrderType.ToLower().Contains(keyword)).ToList();
+
+            dgvMedicalOrderID.DataSource = filtered;
+        }
+        private void dgvMedicalOrderID_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                var selectedOrder = dgvMedicalOrderID.Rows[e.RowIndex].DataBoundItem as MedicalOrderSimpleDTO;
+                if (selectedOrder != null)
+                {
+                    cboMedicalOrderID.SelectedValue = selectedOrder.OrderId;
+
+                    // Nếu không matching thì fallback hiển thị tên y lệnh
+                    if (cboMedicalOrderID.SelectedValue == null || cboMedicalOrderID.SelectedValue.ToString() != selectedOrder.OrderId.ToString())
+                    {
+                        cboMedicalOrderID.Text = selectedOrder.OrderType;
+                    }
+                }
+            }
+        }
 
     }
 }

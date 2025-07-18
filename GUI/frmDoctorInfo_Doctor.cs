@@ -1,96 +1,155 @@
-﻿using System;
+﻿using BLL;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-public class frmDoctorInfo_Doctor : Form
+namespace GUI
 {
-    public frmDoctorInfo_Doctor()
+    public partial class frmDoctorInfo_Doctor : Form
     {
-        // Cài đặt form
-        this.Text = "Thông Tin Bác Sĩ";
-        this.Size = new Size(600, 400);
-        this.StartPosition = FormStartPosition.CenterScreen;
-        this.FormBorderStyle = FormBorderStyle.FixedDialog;
-        this.MaximizeBox = false;
-        this.Font = new Font("Segoe UI", 11);
+        private string doctorId;
+        private StaffDoctorBLL bll = new StaffDoctorBLL();
 
-        // Tiêu đề
-        Label lblTitle = new Label()
+        private Label lblName, lblGender, lblDob, lblPhone, lblAddress, lblEmail;
+
+        private void frmDoctorInfo_Doctor_Load(object sender, EventArgs e)
         {
-            Text = "Thông Tin Bác Sĩ",
-            Font = new Font("Segoe UI", 20, FontStyle.Bold),
-            AutoSize = false,
-            TextAlign = ContentAlignment.MiddleCenter,
-            Dock = DockStyle.Top,
-            Height = 50
-        };
-        this.Controls.Add(lblTitle);
 
-        // Panel chứa thông tin
-        Panel infoPanel = new Panel()
-        {
-            BorderStyle = BorderStyle.FixedSingle,
-            Location = new Point((this.ClientSize.Width - 540) / 2, 70),
-            Size = new Size(540, 260),
-            BackColor = Color.WhiteSmoke
-        };
-        this.Controls.Add(infoPanel);
-        this.Resize += (s, e) =>
-        {
-            infoPanel.Left = (this.ClientSize.Width - infoPanel.Width) / 2;
-        };
-
-        // Các label thuộc tính
-        string[] labels = {
-            "Mã bác sĩ:", "Họ và tên:", "Ngày sinh:", "Giới tính:", "SDT:",
-            "Email:", "Mã khoa:", "Chuyên môn:", "Account:"
-        };
-        string[] values = {
-            "BS001", "Nguyễn Văn A", "01/01/2005", "Nam", "03775363745",
-            "23211ttt4040@mai.vn", "KH001", "Ngoại khoa", "AC001"
-        };
-
-        // Hiển thị thông tin dạng lưới 2 cột
-        for (int i = 0; i < labels.Length; i++)
-        {
-            int row = i % 5;
-            int col = i / 5;
-
-            Label lbl = new Label()
-            {
-                Text = labels[i],
-                Location = new Point(20 + col * 260, 20 + row * 40),
-                Size = new Size(100, 30),
-                Font = new Font("Segoe UI", 11, FontStyle.Bold)
-            };
-            infoPanel.Controls.Add(lbl);
-
-            Label val = new Label()
-            {
-                Text = values[i],
-                Location = new Point(120 + col * 260, 20 + row * 40),
-                Size = new Size(120, 30),
-                Font = new Font("Segoe UI", 11)
-            };
-            infoPanel.Controls.Add(val);
         }
-    }
 
-    private void InitializeComponent()
-    {
-            this.SuspendLayout();
-            // 
-            // DoctorInfoForm
-            // 
-            this.ClientSize = new System.Drawing.Size(528, 276);
-            this.Name = "DoctorInfoForm";
-            this.Load += new System.EventHandler(this.DoctorInfoForm_Load);
-            this.ResumeLayout(false);
+        private Label lblPosition, lblQualification, lblDegree, lblStatus, lblStartDate, lblNotes;
 
-    }
+        public frmDoctorInfo_Doctor(string id)
+        {
+            doctorId = id;
+            this.Text = "Thông tin bác sĩ";
+            this.BackColor = Color.WhiteSmoke;
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.Dock = DockStyle.Fill;
 
-    private void DoctorInfoForm_Load(object sender, EventArgs e)
-    {
+            BuildUI();
+            LoadDoctorInfo();
+        }
 
+        private void BuildUI()
+        {
+            var mainLayout = new TableLayoutPanel
+            {
+                Dock = DockStyle.Fill,
+                Padding = new Padding(40),
+                ColumnCount = 2,
+                RowCount = 7,
+                BackColor = Color.White,
+                AutoSize = true,
+                AutoScroll = true
+            };
+
+            mainLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            mainLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+
+            // Tạo Panel bọc tiêu đề để căn chỉnh thủ công
+            var titlePanel = new Panel
+            {
+                Dock = DockStyle.Top,
+                Height = 80,
+                Padding = new Padding(100, 10, 0, 10), // Kéo trái bằng Padding.Left
+                BackColor = Color.White
+            };
+            var lblTitle = new Label
+            {
+                Text = "THÔNG TIN CÁ NHÂN",
+                Font = new Font("Segoe UI", 18, FontStyle.Bold),
+                ForeColor = Color.SteelBlue,
+                AutoSize = true,
+                Anchor = AnchorStyles.Left | AnchorStyles.Top,
+                Margin = new Padding(300, 10, 0, 30) // Cách trái 80px, giữ đỉnh và đáy như cũ
+            };
+            titlePanel.Controls.Add(lblTitle);
+            mainLayout.SetColumnSpan(lblTitle, 2);
+            mainLayout.Controls.Add(lblTitle, 0, 0);
+
+            Font titleFont = new Font("Segoe UI", 12, FontStyle.Bold);
+            Font valueFont = new Font("Segoe UI", 12);
+
+            int rowIndex = 1;
+
+            // Cột trái
+            AddLabelPair(mainLayout, "Họ tên:", out lblName, titleFont, valueFont, rowIndex++, 0);
+            AddLabelPair(mainLayout, "Giới tính:", out lblGender, titleFont, valueFont, rowIndex++, 0);
+            AddLabelPair(mainLayout, "Ngày sinh:", out lblDob, titleFont, valueFont, rowIndex++, 0);
+            AddLabelPair(mainLayout, "SĐT:", out lblPhone, titleFont, valueFont, rowIndex++, 0);
+            AddLabelPair(mainLayout, "Địa chỉ:", out lblAddress, titleFont, valueFont, rowIndex++, 0);
+            AddLabelPair(mainLayout, "Email:", out lblEmail, titleFont, valueFont, rowIndex++, 0);
+
+            // Cột phải
+            rowIndex = 1;
+            AddLabelPair(mainLayout, "Chức vụ:", out lblPosition, titleFont, valueFont, rowIndex++, 1);
+            AddLabelPair(mainLayout, "Trình độ:", out lblQualification, titleFont, valueFont, rowIndex++, 1);
+            AddLabelPair(mainLayout, "Học vị:", out lblDegree, titleFont, valueFont, rowIndex++, 1);
+            AddLabelPair(mainLayout, "Trạng thái:", out lblStatus, titleFont, valueFont, rowIndex++, 1);
+            AddLabelPair(mainLayout, "Ngày bắt đầu:", out lblStartDate, titleFont, valueFont, rowIndex++, 1);
+            AddLabelPair(mainLayout, "Ghi chú:", out lblNotes, titleFont, valueFont, rowIndex++, 1);
+
+            this.Controls.Add(mainLayout);
+        }
+
+        private void AddLabelPair(TableLayoutPanel panel, string labelText, out Label valueLabel, Font titleFont, Font valueFont, int row, int col)
+        {
+            var container = new FlowLayoutPanel
+            {
+                Dock = DockStyle.Fill,
+                FlowDirection = FlowDirection.LeftToRight,
+                WrapContents = false,
+                AutoSize = true,
+                Padding = new Padding(10, 10, 10, 10),
+                Margin = new Padding(5)
+            };
+
+            var lblTitle = new Label
+            {
+                Text = labelText,
+                Font = titleFont,
+                ForeColor = Color.Black,
+                AutoSize = true,
+                Padding = new Padding(0, 5, 10, 0)
+            };
+
+            valueLabel = new Label
+            {
+                Text = "(...)",
+                Font = valueFont,
+                ForeColor = Color.DarkSlateGray,
+                AutoSize = true,
+                Padding = new Padding(0, 5, 0, 0)
+            };
+
+            container.Controls.Add(lblTitle);
+            container.Controls.Add(valueLabel);
+            panel.Controls.Add(container, col, row);
+        }
+
+        private void LoadDoctorInfo()
+        {
+            var doctor = bll.GetDoctorInfo(doctorId);
+            if (doctor != null)
+            {
+                lblName.Text = doctor.Name;
+                lblGender.Text = doctor.Gender;
+                lblDob.Text = doctor.Dob?.ToString("dd/MM/yyyy");
+                lblPhone.Text = doctor.PhoneNumber;
+                lblAddress.Text = doctor.HomeAddress;
+                lblEmail.Text = doctor.Email;
+                lblPosition.Text = doctor.Position;
+                lblQualification.Text = doctor.Qualification;
+                lblDegree.Text = doctor.Degree;
+                lblStatus.Text = doctor.Status;
+                lblStartDate.Text = doctor.StartDate?.ToString("dd/MM/yyyy");
+                lblNotes.Text = doctor.Notes;
+            }
+            else
+            {
+                MessageBox.Show("Không tìm thấy thông tin bác sĩ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
     }
 }
