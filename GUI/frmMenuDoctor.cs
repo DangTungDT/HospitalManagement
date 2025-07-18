@@ -14,12 +14,12 @@ namespace GUI
 {
     public partial class frmMenuDoctor : Form
     {
-        //private string maAccount;
+        private string maAccount;
 
         public frmMenuDoctor(string maAccount)
         {
             InitializeComponent();
-            //this.maAccount = maAccount;
+            this.maAccount = maAccount;
         }
 
 
@@ -49,7 +49,7 @@ namespace GUI
 
         private void btnThongTinBacSi_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new frmDoctorInfo_Doctor());
+            OpenChildForm(new frmDoctorInfo_Doctor(maAccount));
         }
 
         private void btnKhoaCongTac_Click(object sender, EventArgs e)
@@ -59,12 +59,12 @@ namespace GUI
 
         private void btnBenhNhan_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new frmPatientInfo_Doctor());
+            OpenChildForm(new frmPatientInfo_Doctor(maAccount));
         }
 
         private void btnBenhAn_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new frmMedicalRecordInfo());
+            OpenChildForm(new frmMedicalRecordInfo_Doctor(maAccount));
         }
 
         private void btnThuoc_Click(object sender, EventArgs e)
@@ -84,12 +84,22 @@ namespace GUI
 
         private void btnXetNghiem_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new frmTestInfo_Doctor());
+            OpenChildForm(new frmTestInfo_Doctor(maAccount));
         }
 
         private void btnLoaiXetNghiem_Click(object sender, EventArgs e)
         {
             OpenChildForm(new frmTestTypeInfo_Doctor());
+        }
+
+        private void frmMenuDoctor_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnMedicalOrder_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new FormMedicalOrderDoctorGUI(maAccount));
         }
     }
 }

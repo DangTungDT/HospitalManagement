@@ -28,11 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label11 = new System.Windows.Forms.Label();
             this.cboStatus = new System.Windows.Forms.ComboBox();
             this.dgvAppointment = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cboPatient = new System.Windows.Forms.ComboBox();
             this.cboNurse = new System.Windows.Forms.ComboBox();
             this.cboDepartment = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -52,7 +53,6 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dgvPatient = new System.Windows.Forms.DataGridView();
-            this.cboPatient = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAppointment)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -86,12 +86,12 @@
             // 
             // dgvAppointment
             // 
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvAppointment.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvAppointment.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvAppointment.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvAppointment.BackgroundColor = System.Drawing.Color.DarkGray;
             this.dgvAppointment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -128,6 +128,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông Tin";
             this.groupBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.groupBox2_Paint);
+            // 
+            // cboPatient
+            // 
+            this.cboPatient.FormattingEnabled = true;
+            this.cboPatient.Location = new System.Drawing.Point(157, 30);
+            this.cboPatient.Name = "cboPatient";
+            this.cboPatient.Size = new System.Drawing.Size(290, 30);
+            this.cboPatient.TabIndex = 41;
+            this.cboPatient.TextChanged += new System.EventHandler(this.cboPatient_TextChanged);
             // 
             // cboNurse
             // 
@@ -186,7 +195,7 @@
             // 
             // dtpDateofExamination
             // 
-            this.dtpDateofExamination.CustomFormat = "\tdd/MM/yyyy HH:mm:ss";
+            this.dtpDateofExamination.CustomFormat = "dd/MM/yyyy HH:mm:ss";
             this.dtpDateofExamination.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpDateofExamination.Location = new System.Drawing.Point(625, 27);
             this.dtpDateofExamination.Name = "dtpDateofExamination";
@@ -341,15 +350,6 @@
             this.dgvPatient.Size = new System.Drawing.Size(541, 289);
             this.dgvPatient.TabIndex = 0;
             this.dgvPatient.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPatient_CellClick);
-            // 
-            // cboPatient
-            // 
-            this.cboPatient.FormattingEnabled = true;
-            this.cboPatient.Location = new System.Drawing.Point(157, 30);
-            this.cboPatient.Name = "cboPatient";
-            this.cboPatient.Size = new System.Drawing.Size(290, 30);
-            this.cboPatient.TabIndex = 41;
-            this.cboPatient.TextChanged += new System.EventHandler(this.cboPatient_TextChanged);
             // 
             // FormAppointmentAdmin
             // 

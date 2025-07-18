@@ -57,6 +57,9 @@ namespace DAL
     partial void InsertLaboratoryTest(LaboratoryTest instance);
     partial void UpdateLaboratoryTest(LaboratoryTest instance);
     partial void DeleteLaboratoryTest(LaboratoryTest instance);
+    partial void InsertLabTestType(LabTestType instance);
+    partial void UpdateLabTestType(LabTestType instance);
+    partial void DeleteLabTestType(LabTestType instance);
     partial void InsertMedicalOrder(MedicalOrder instance);
     partial void UpdateMedicalOrder(MedicalOrder instance);
     partial void DeleteMedicalOrder(MedicalOrder instance);
@@ -72,6 +75,9 @@ namespace DAL
     partial void InsertSalary(Salary instance);
     partial void UpdateSalary(Salary instance);
     partial void DeleteSalary(Salary instance);
+    partial void InsertSalaryDetail(SalaryDetail instance);
+    partial void UpdateSalaryDetail(SalaryDetail instance);
+    partial void DeleteSalaryDetail(SalaryDetail instance);
     partial void InsertStaff(Staff instance);
     partial void UpdateStaff(Staff instance);
     partial void DeleteStaff(Staff instance);
@@ -179,6 +185,14 @@ namespace DAL
 			}
 		}
 		
+		public System.Data.Linq.Table<LabTestType> LabTestTypes
+		{
+			get
+			{
+				return this.GetTable<LabTestType>();
+			}
+		}
+		
 		public System.Data.Linq.Table<MedicalOrder> MedicalOrders
 		{
 			get
@@ -216,6 +230,14 @@ namespace DAL
 			get
 			{
 				return this.GetTable<Salary>();
+			}
+		}
+		
+		public System.Data.Linq.Table<SalaryDetail> SalaryDetails
+		{
+			get
+			{
+				return this.GetTable<SalaryDetail>();
 			}
 		}
 		
@@ -396,7 +418,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Staff_Account", Storage="_Staff", ThisKey="staffID", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Staff_Account", Storage="_Staff", ThisKey="staffID", OtherKey="id", IsForeignKey=true, DeleteRule="CASCADE")]
 		public Staff Staff
 		{
 			get
@@ -656,7 +678,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_unit", DbType="VarChar(255)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_unit", DbType="NVarChar(255)")]
 		public string unit
 		{
 			get
@@ -760,7 +782,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Item_SupplyHistory", Storage="_Item", ThisKey="itemID", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Item_SupplyHistory", Storage="_Item", ThisKey="itemID", OtherKey="ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Item Item
 		{
 			get
@@ -794,7 +816,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_SupplyHistory", Storage="_Patient", ThisKey="PatientID", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_SupplyHistory", Storage="_Patient", ThisKey="PatientID", OtherKey="id", IsForeignKey=true, DeleteRule="CASCADE")]
 		public Patient Patient
 		{
 			get
@@ -828,7 +850,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_SupplyHistory", Storage="_Room", ThisKey="roomID", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_SupplyHistory", Storage="_Room", ThisKey="roomID", OtherKey="id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Room Room
 		{
 			get
@@ -862,7 +884,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Staff_SupplyHistory", Storage="_Staff", ThisKey="nurseID", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Staff_SupplyHistory", Storage="_Staff", ThisKey="nurseID", OtherKey="id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Staff Staff
 		{
 			get
@@ -1092,7 +1114,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_Appointment", Storage="_Patient", ThisKey="patientID", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_Appointment", Storage="_Patient", ThisKey="patientID", OtherKey="id", IsForeignKey=true, DeleteRule="CASCADE")]
 		public Patient Patient
 		{
 			get
@@ -1126,7 +1148,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Staff_Appointment", Storage="_Staff", ThisKey="doctorID", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Staff_Appointment", Storage="_Staff", ThisKey="doctorID", OtherKey="id", IsForeignKey=true, DeleteRule="CASCADE")]
 		public Staff Staff
 		{
 			get
@@ -1459,7 +1481,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_DailyCare", Storage="_Patient", ThisKey="patientID", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_DailyCare", Storage="_Patient", ThisKey="patientID", OtherKey="id", IsForeignKey=true, DeleteRule="CASCADE")]
 		public Patient Patient
 		{
 			get
@@ -1493,7 +1515,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_DailyCare", Storage="_Room", ThisKey="roomID", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_DailyCare", Storage="_Room", ThisKey="roomID", OtherKey="id", IsForeignKey=true, DeleteRule="CASCADE")]
 		public Room Room
 		{
 			get
@@ -1527,7 +1549,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Staff_DailyCare", Storage="_Staff", ThisKey="nurseID", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Staff_DailyCare", Storage="_Staff", ThisKey="nurseID", OtherKey="id", IsForeignKey=true, DeleteRule="CASCADE")]
 		public Staff Staff
 		{
 			get
@@ -1990,6 +2012,8 @@ namespace DAL
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
+		private int _id;
+		
 		private string _ItemID;
 		
 		private int _Quantity;
@@ -2002,6 +2026,8 @@ namespace DAL
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
     partial void OnItemIDChanging(string value);
     partial void OnItemIDChanged();
     partial void OnQuantityChanging(int value);
@@ -2016,7 +2042,27 @@ namespace DAL
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ItemID", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ItemID", DbType="Char(10)")]
 		public string ItemID
 		{
 			get
@@ -2097,12 +2143,12 @@ namespace DAL
 					if ((previousValue != null))
 					{
 						this._Item.Entity = null;
-						previousValue.Inventory = null;
+						previousValue.Inventories.Remove(this);
 					}
 					this._Item.Entity = value;
 					if ((value != null))
 					{
-						value.Inventory = this;
+						value.Inventories.Add(this);
 						this._ItemID = value.ID;
 					}
 					else
@@ -2157,7 +2203,7 @@ namespace DAL
 		
 		private EntitySet<SupplyHistory> _SupplyHistories;
 		
-		private EntityRef<Inventory> _Inventory;
+		private EntitySet<Inventory> _Inventories;
 		
 		private EntitySet<MedicalOrder> _MedicalOrders;
 		
@@ -2184,7 +2230,7 @@ namespace DAL
 		public Item()
 		{
 			this._SupplyHistories = new EntitySet<SupplyHistory>(new Action<SupplyHistory>(this.attach_SupplyHistories), new Action<SupplyHistory>(this.detach_SupplyHistories));
-			this._Inventory = default(EntityRef<Inventory>);
+			this._Inventories = new EntitySet<Inventory>(new Action<Inventory>(this.attach_Inventories), new Action<Inventory>(this.detach_Inventories));
 			this._MedicalOrders = new EntitySet<MedicalOrder>(new Action<MedicalOrder>(this.attach_MedicalOrders), new Action<MedicalOrder>(this.detach_MedicalOrders));
 			OnCreated();
 		}
@@ -2342,32 +2388,16 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Item_Inventory", Storage="_Inventory", ThisKey="ID", OtherKey="ItemID", IsUnique=true, IsForeignKey=false)]
-		public Inventory Inventory
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Item_Inventory", Storage="_Inventories", ThisKey="ID", OtherKey="ItemID")]
+		public EntitySet<Inventory> Inventories
 		{
 			get
 			{
-				return this._Inventory.Entity;
+				return this._Inventories;
 			}
 			set
 			{
-				Inventory previousValue = this._Inventory.Entity;
-				if (((previousValue != value) 
-							|| (this._Inventory.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Inventory.Entity = null;
-						previousValue.Item = null;
-					}
-					this._Inventory.Entity = value;
-					if ((value != null))
-					{
-						value.Item = this;
-					}
-					this.SendPropertyChanged("Inventory");
-				}
+				this._Inventories.Assign(value);
 			}
 		}
 		
@@ -2416,6 +2446,18 @@ namespace DAL
 			entity.Item = null;
 		}
 		
+		private void attach_Inventories(Inventory entity)
+		{
+			this.SendPropertyChanging();
+			entity.Item = this;
+		}
+		
+		private void detach_Inventories(Inventory entity)
+		{
+			this.SendPropertyChanging();
+			entity.Item = null;
+		}
+		
 		private void attach_MedicalOrders(MedicalOrder entity)
 		{
 			this.SendPropertyChanging();
@@ -2437,11 +2479,7 @@ namespace DAL
 		
 		private int _id;
 		
-		private string _testName;
-		
-		private string _patientID;
-		
-		private string _doctorID;
+		private int _MedicalOrderID;
 		
 		private System.Nullable<System.DateTime> _startDate;
 		
@@ -2451,17 +2489,11 @@ namespace DAL
 		
 		private string _result;
 		
-		private string _testType;
-		
 		private string _status;
 		
 		private string _note;
 		
-		private EntitySet<MedicalOrder> _MedicalOrders;
-		
-		private EntityRef<Patient> _Patient;
-		
-		private EntityRef<Staff> _Staff;
+		private EntityRef<MedicalOrder> _MedicalOrder;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2469,12 +2501,8 @@ namespace DAL
     partial void OnCreated();
     partial void OnidChanging(int value);
     partial void OnidChanged();
-    partial void OntestNameChanging(string value);
-    partial void OntestNameChanged();
-    partial void OnpatientIDChanging(string value);
-    partial void OnpatientIDChanged();
-    partial void OndoctorIDChanging(string value);
-    partial void OndoctorIDChanged();
+    partial void OnMedicalOrderIDChanging(int value);
+    partial void OnMedicalOrderIDChanged();
     partial void OnstartDateChanging(System.Nullable<System.DateTime> value);
     partial void OnstartDateChanged();
     partial void OnresultValueChanging(string value);
@@ -2483,8 +2511,6 @@ namespace DAL
     partial void OnresultUnitChanged();
     partial void OnresultChanging(string value);
     partial void OnresultChanged();
-    partial void OntestTypeChanging(string value);
-    partial void OntestTypeChanged();
     partial void OnstatusChanging(string value);
     partial void OnstatusChanged();
     partial void OnnoteChanging(string value);
@@ -2493,9 +2519,7 @@ namespace DAL
 		
 		public LaboratoryTest()
 		{
-			this._MedicalOrders = new EntitySet<MedicalOrder>(new Action<MedicalOrder>(this.attach_MedicalOrders), new Action<MedicalOrder>(this.detach_MedicalOrders));
-			this._Patient = default(EntityRef<Patient>);
-			this._Staff = default(EntityRef<Staff>);
+			this._MedicalOrder = default(EntityRef<MedicalOrder>);
 			OnCreated();
 		}
 		
@@ -2519,70 +2543,26 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_testName", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
-		public string testName
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MedicalOrderID", DbType="Int NOT NULL")]
+		public int MedicalOrderID
 		{
 			get
 			{
-				return this._testName;
+				return this._MedicalOrderID;
 			}
 			set
 			{
-				if ((this._testName != value))
+				if ((this._MedicalOrderID != value))
 				{
-					this.OntestNameChanging(value);
-					this.SendPropertyChanging();
-					this._testName = value;
-					this.SendPropertyChanged("testName");
-					this.OntestNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_patientID", DbType="Char(10) NOT NULL", CanBeNull=false)]
-		public string patientID
-		{
-			get
-			{
-				return this._patientID;
-			}
-			set
-			{
-				if ((this._patientID != value))
-				{
-					if (this._Patient.HasLoadedOrAssignedValue)
+					if (this._MedicalOrder.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnpatientIDChanging(value);
+					this.OnMedicalOrderIDChanging(value);
 					this.SendPropertyChanging();
-					this._patientID = value;
-					this.SendPropertyChanged("patientID");
-					this.OnpatientIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_doctorID", DbType="Char(10) NOT NULL", CanBeNull=false)]
-		public string doctorID
-		{
-			get
-			{
-				return this._doctorID;
-			}
-			set
-			{
-				if ((this._doctorID != value))
-				{
-					if (this._Staff.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OndoctorIDChanging(value);
-					this.SendPropertyChanging();
-					this._doctorID = value;
-					this.SendPropertyChanged("doctorID");
-					this.OndoctorIDChanged();
+					this._MedicalOrderID = value;
+					this.SendPropertyChanged("MedicalOrderID");
+					this.OnMedicalOrderIDChanged();
 				}
 			}
 		}
@@ -2667,26 +2647,6 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_testType", DbType="NVarChar(100)")]
-		public string testType
-		{
-			get
-			{
-				return this._testType;
-			}
-			set
-			{
-				if ((this._testType != value))
-				{
-					this.OntestTypeChanging(value);
-					this.SendPropertyChanging();
-					this._testType = value;
-					this.SendPropertyChanged("testType");
-					this.OntestTypeChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status", DbType="NVarChar(50)")]
 		public string status
 		{
@@ -2727,7 +2687,130 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LaboratoryTest_MedicalOrder", Storage="_MedicalOrders", ThisKey="id", OtherKey="TestTypeID")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MedicalOrder_LaboratoryTest", Storage="_MedicalOrder", ThisKey="MedicalOrderID", OtherKey="id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public MedicalOrder MedicalOrder
+		{
+			get
+			{
+				return this._MedicalOrder.Entity;
+			}
+			set
+			{
+				MedicalOrder previousValue = this._MedicalOrder.Entity;
+				if (((previousValue != value) 
+							|| (this._MedicalOrder.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._MedicalOrder.Entity = null;
+						previousValue.LaboratoryTests.Remove(this);
+					}
+					this._MedicalOrder.Entity = value;
+					if ((value != null))
+					{
+						value.LaboratoryTests.Add(this);
+						this._MedicalOrderID = value.id;
+					}
+					else
+					{
+						this._MedicalOrderID = default(int);
+					}
+					this.SendPropertyChanged("MedicalOrder");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.LabTestType")]
+	public partial class LabTestType : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _testTypeName;
+		
+		private EntitySet<MedicalOrder> _MedicalOrders;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OntestTypeNameChanging(string value);
+    partial void OntestTypeNameChanged();
+    #endregion
+		
+		public LabTestType()
+		{
+			this._MedicalOrders = new EntitySet<MedicalOrder>(new Action<MedicalOrder>(this.attach_MedicalOrders), new Action<MedicalOrder>(this.detach_MedicalOrders));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_testTypeName", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string testTypeName
+		{
+			get
+			{
+				return this._testTypeName;
+			}
+			set
+			{
+				if ((this._testTypeName != value))
+				{
+					this.OntestTypeNameChanging(value);
+					this.SendPropertyChanging();
+					this._testTypeName = value;
+					this.SendPropertyChanged("testTypeName");
+					this.OntestTypeNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LabTestType_MedicalOrder", Storage="_MedicalOrders", ThisKey="id", OtherKey="TestTypeID")]
 		public EntitySet<MedicalOrder> MedicalOrders
 		{
 			get
@@ -2737,74 +2820,6 @@ namespace DAL
 			set
 			{
 				this._MedicalOrders.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_LaboratoryTest", Storage="_Patient", ThisKey="patientID", OtherKey="id", IsForeignKey=true)]
-		public Patient Patient
-		{
-			get
-			{
-				return this._Patient.Entity;
-			}
-			set
-			{
-				Patient previousValue = this._Patient.Entity;
-				if (((previousValue != value) 
-							|| (this._Patient.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Patient.Entity = null;
-						previousValue.LaboratoryTests.Remove(this);
-					}
-					this._Patient.Entity = value;
-					if ((value != null))
-					{
-						value.LaboratoryTests.Add(this);
-						this._patientID = value.id;
-					}
-					else
-					{
-						this._patientID = default(string);
-					}
-					this.SendPropertyChanged("Patient");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Staff_LaboratoryTest", Storage="_Staff", ThisKey="doctorID", OtherKey="id", IsForeignKey=true)]
-		public Staff Staff
-		{
-			get
-			{
-				return this._Staff.Entity;
-			}
-			set
-			{
-				Staff previousValue = this._Staff.Entity;
-				if (((previousValue != value) 
-							|| (this._Staff.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Staff.Entity = null;
-						previousValue.LaboratoryTests.Remove(this);
-					}
-					this._Staff.Entity = value;
-					if ((value != null))
-					{
-						value.LaboratoryTests.Add(this);
-						this._doctorID = value.id;
-					}
-					else
-					{
-						this._doctorID = default(string);
-					}
-					this.SendPropertyChanged("Staff");
-				}
 			}
 		}
 		
@@ -2831,13 +2846,13 @@ namespace DAL
 		private void attach_MedicalOrders(MedicalOrder entity)
 		{
 			this.SendPropertyChanging();
-			entity.LaboratoryTest = this;
+			entity.LabTestType = this;
 		}
 		
 		private void detach_MedicalOrders(MedicalOrder entity)
 		{
 			this.SendPropertyChanging();
-			entity.LaboratoryTest = null;
+			entity.LabTestType = null;
 		}
 	}
 	
@@ -2859,6 +2874,8 @@ namespace DAL
 		
 		private System.Nullable<int> _TestTypeID;
 		
+		private System.Nullable<bool> _HasLabTest;
+		
 		private string _Dosage;
 		
 		private System.Nullable<decimal> _Quantity;
@@ -2879,9 +2896,11 @@ namespace DAL
 		
 		private string _Note;
 		
+		private EntitySet<LaboratoryTest> _LaboratoryTests;
+		
 		private EntityRef<Item> _Item;
 		
-		private EntityRef<LaboratoryTest> _LaboratoryTest;
+		private EntityRef<LabTestType> _LabTestType;
 		
 		private EntityRef<Patient> _Patient;
 		
@@ -2903,6 +2922,8 @@ namespace DAL
     partial void OnItemIDChanged();
     partial void OnTestTypeIDChanging(System.Nullable<int> value);
     partial void OnTestTypeIDChanged();
+    partial void OnHasLabTestChanging(System.Nullable<bool> value);
+    partial void OnHasLabTestChanged();
     partial void OnDosageChanging(string value);
     partial void OnDosageChanged();
     partial void OnQuantityChanging(System.Nullable<decimal> value);
@@ -2927,8 +2948,9 @@ namespace DAL
 		
 		public MedicalOrder()
 		{
+			this._LaboratoryTests = new EntitySet<LaboratoryTest>(new Action<LaboratoryTest>(this.attach_LaboratoryTests), new Action<LaboratoryTest>(this.detach_LaboratoryTests));
 			this._Item = default(EntityRef<Item>);
-			this._LaboratoryTest = default(EntityRef<LaboratoryTest>);
+			this._LabTestType = default(EntityRef<LabTestType>);
 			this._Patient = default(EntityRef<Patient>);
 			this._Staff = default(EntityRef<Staff>);
 			OnCreated();
@@ -3057,7 +3079,7 @@ namespace DAL
 			{
 				if ((this._TestTypeID != value))
 				{
-					if (this._LaboratoryTest.HasLoadedOrAssignedValue)
+					if (this._LabTestType.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -3066,6 +3088,26 @@ namespace DAL
 					this._TestTypeID = value;
 					this.SendPropertyChanged("TestTypeID");
 					this.OnTestTypeIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HasLabTest", DbType="Bit")]
+		public System.Nullable<bool> HasLabTest
+		{
+			get
+			{
+				return this._HasLabTest;
+			}
+			set
+			{
+				if ((this._HasLabTest != value))
+				{
+					this.OnHasLabTestChanging(value);
+					this.SendPropertyChanging();
+					this._HasLabTest = value;
+					this.SendPropertyChanged("HasLabTest");
+					this.OnHasLabTestChanged();
 				}
 			}
 		}
@@ -3270,7 +3312,20 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Item_MedicalOrder", Storage="_Item", ThisKey="ItemID", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MedicalOrder_LaboratoryTest", Storage="_LaboratoryTests", ThisKey="id", OtherKey="MedicalOrderID")]
+		public EntitySet<LaboratoryTest> LaboratoryTests
+		{
+			get
+			{
+				return this._LaboratoryTests;
+			}
+			set
+			{
+				this._LaboratoryTests.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Item_MedicalOrder", Storage="_Item", ThisKey="ItemID", OtherKey="ID", IsForeignKey=true, DeleteRule="SET NULL")]
 		public Item Item
 		{
 			get
@@ -3304,26 +3359,26 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LaboratoryTest_MedicalOrder", Storage="_LaboratoryTest", ThisKey="TestTypeID", OtherKey="id", IsForeignKey=true)]
-		public LaboratoryTest LaboratoryTest
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LabTestType_MedicalOrder", Storage="_LabTestType", ThisKey="TestTypeID", OtherKey="id", IsForeignKey=true, DeleteRule="SET NULL")]
+		public LabTestType LabTestType
 		{
 			get
 			{
-				return this._LaboratoryTest.Entity;
+				return this._LabTestType.Entity;
 			}
 			set
 			{
-				LaboratoryTest previousValue = this._LaboratoryTest.Entity;
+				LabTestType previousValue = this._LabTestType.Entity;
 				if (((previousValue != value) 
-							|| (this._LaboratoryTest.HasLoadedOrAssignedValue == false)))
+							|| (this._LabTestType.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._LaboratoryTest.Entity = null;
+						this._LabTestType.Entity = null;
 						previousValue.MedicalOrders.Remove(this);
 					}
-					this._LaboratoryTest.Entity = value;
+					this._LabTestType.Entity = value;
 					if ((value != null))
 					{
 						value.MedicalOrders.Add(this);
@@ -3333,12 +3388,12 @@ namespace DAL
 					{
 						this._TestTypeID = default(Nullable<int>);
 					}
-					this.SendPropertyChanged("LaboratoryTest");
+					this.SendPropertyChanged("LabTestType");
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_MedicalOrder", Storage="_Patient", ThisKey="PatientID", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_MedicalOrder", Storage="_Patient", ThisKey="PatientID", OtherKey="id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Patient Patient
 		{
 			get
@@ -3372,7 +3427,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Staff_MedicalOrder", Storage="_Staff", ThisKey="DoctorID", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Staff_MedicalOrder", Storage="_Staff", ThisKey="DoctorID", OtherKey="id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Staff Staff
 		{
 			get
@@ -3424,6 +3479,18 @@ namespace DAL
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_LaboratoryTests(LaboratoryTest entity)
+		{
+			this.SendPropertyChanging();
+			entity.MedicalOrder = this;
+		}
+		
+		private void detach_LaboratoryTests(LaboratoryTest entity)
+		{
+			this.SendPropertyChanging();
+			entity.MedicalOrder = null;
 		}
 	}
 	
@@ -3674,7 +3741,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_MedicalRecord", Storage="_Patient", ThisKey="patientID", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_MedicalRecord", Storage="_Patient", ThisKey="patientID", OtherKey="id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Patient Patient
 		{
 			get
@@ -3708,7 +3775,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Staff_MedicalRecord", Storage="_Staff", ThisKey="doctorID", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Staff_MedicalRecord", Storage="_Staff", ThisKey="doctorID", OtherKey="id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Staff Staff
 		{
 			get
@@ -3779,6 +3846,8 @@ namespace DAL
 		
 		private string _phoneNumber;
 		
+		private string _TypePatient;
+		
 		private string _citizenID;
 		
 		private string _InsuranceID;
@@ -3807,8 +3876,6 @@ namespace DAL
 		
 		private EntitySet<DoctorPatient> _DoctorPatients;
 		
-		private EntitySet<LaboratoryTest> _LaboratoryTests;
-		
 		private EntitySet<MedicalOrder> _MedicalOrders;
 		
 		private EntitySet<MedicalRecord> _MedicalRecords;
@@ -3827,6 +3894,8 @@ namespace DAL
     partial void OndobChanged();
     partial void OnphoneNumberChanging(string value);
     partial void OnphoneNumberChanged();
+    partial void OnTypePatientChanging(string value);
+    partial void OnTypePatientChanged();
     partial void OncitizenIDChanging(string value);
     partial void OncitizenIDChanged();
     partial void OnInsuranceIDChanging(string value);
@@ -3855,7 +3924,6 @@ namespace DAL
 			this._Appointments = new EntitySet<Appointment>(new Action<Appointment>(this.attach_Appointments), new Action<Appointment>(this.detach_Appointments));
 			this._DailyCares = new EntitySet<DailyCare>(new Action<DailyCare>(this.attach_DailyCares), new Action<DailyCare>(this.detach_DailyCares));
 			this._DoctorPatients = new EntitySet<DoctorPatient>(new Action<DoctorPatient>(this.attach_DoctorPatients), new Action<DoctorPatient>(this.detach_DoctorPatients));
-			this._LaboratoryTests = new EntitySet<LaboratoryTest>(new Action<LaboratoryTest>(this.attach_LaboratoryTests), new Action<LaboratoryTest>(this.detach_LaboratoryTests));
 			this._MedicalOrders = new EntitySet<MedicalOrder>(new Action<MedicalOrder>(this.attach_MedicalOrders), new Action<MedicalOrder>(this.detach_MedicalOrders));
 			this._MedicalRecords = new EntitySet<MedicalRecord>(new Action<MedicalRecord>(this.attach_MedicalRecords), new Action<MedicalRecord>(this.detach_MedicalRecords));
 			OnCreated();
@@ -3957,6 +4025,26 @@ namespace DAL
 					this._phoneNumber = value;
 					this.SendPropertyChanged("phoneNumber");
 					this.OnphoneNumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TypePatient", DbType="VarChar(20)")]
+		public string TypePatient
+		{
+			get
+			{
+				return this._TypePatient;
+			}
+			set
+			{
+				if ((this._TypePatient != value))
+				{
+					this.OnTypePatientChanging(value);
+					this.SendPropertyChanging();
+					this._TypePatient = value;
+					this.SendPropertyChanged("TypePatient");
+					this.OnTypePatientChanged();
 				}
 			}
 		}
@@ -4213,19 +4301,6 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_LaboratoryTest", Storage="_LaboratoryTests", ThisKey="id", OtherKey="patientID")]
-		public EntitySet<LaboratoryTest> LaboratoryTests
-		{
-			get
-			{
-				return this._LaboratoryTests;
-			}
-			set
-			{
-				this._LaboratoryTests.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_MedicalOrder", Storage="_MedicalOrders", ThisKey="id", OtherKey="PatientID")]
 		public EntitySet<MedicalOrder> MedicalOrders
 		{
@@ -4315,18 +4390,6 @@ namespace DAL
 		}
 		
 		private void detach_DoctorPatients(DoctorPatient entity)
-		{
-			this.SendPropertyChanging();
-			entity.Patient = null;
-		}
-		
-		private void attach_LaboratoryTests(LaboratoryTest entity)
-		{
-			this.SendPropertyChanging();
-			entity.Patient = this;
-		}
-		
-		private void detach_LaboratoryTests(LaboratoryTest entity)
 		{
 			this.SendPropertyChanging();
 			entity.Patient = null;
@@ -4547,13 +4610,127 @@ namespace DAL
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Salaries")]
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Salary")]
 	public partial class Salary : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _Id;
+		private int _id;
+		
+		private decimal _BasicSalary;
+		
+		private EntitySet<SalaryDetail> _SalaryDetails;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnBasicSalaryChanging(decimal value);
+    partial void OnBasicSalaryChanged();
+    #endregion
+		
+		public Salary()
+		{
+			this._SalaryDetails = new EntitySet<SalaryDetail>(new Action<SalaryDetail>(this.attach_SalaryDetails), new Action<SalaryDetail>(this.detach_SalaryDetails));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BasicSalary", DbType="Decimal(18,2) NOT NULL")]
+		public decimal BasicSalary
+		{
+			get
+			{
+				return this._BasicSalary;
+			}
+			set
+			{
+				if ((this._BasicSalary != value))
+				{
+					this.OnBasicSalaryChanging(value);
+					this.SendPropertyChanging();
+					this._BasicSalary = value;
+					this.SendPropertyChanged("BasicSalary");
+					this.OnBasicSalaryChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Salary_SalaryDetail", Storage="_SalaryDetails", ThisKey="id", OtherKey="SalaryID")]
+		public EntitySet<SalaryDetail> SalaryDetails
+		{
+			get
+			{
+				return this._SalaryDetails;
+			}
+			set
+			{
+				this._SalaryDetails.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_SalaryDetails(SalaryDetail entity)
+		{
+			this.SendPropertyChanging();
+			entity.Salary = this;
+		}
+		
+		private void detach_SalaryDetails(SalaryDetail entity)
+		{
+			this.SendPropertyChanging();
+			entity.Salary = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SalaryDetail")]
+	public partial class SalaryDetail : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _SalaryID;
 		
 		private string _StaffId;
 		
@@ -4585,14 +4762,16 @@ namespace DAL
 		
 		private string _CreatedBy;
 		
+		private EntityRef<Salary> _Salary;
+		
 		private EntityRef<Staff> _Staff;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
+    partial void OnSalaryIDChanging(int value);
+    partial void OnSalaryIDChanged();
     partial void OnStaffIdChanging(string value);
     partial void OnStaffIdChanged();
     partial void OnSalaryPeriodChanging(string value);
@@ -4625,33 +4804,38 @@ namespace DAL
     partial void OnCreatedByChanged();
     #endregion
 		
-		public Salary()
+		public SalaryDetail()
 		{
+			this._Salary = default(EntityRef<Salary>);
 			this._Staff = default(EntityRef<Staff>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SalaryID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int SalaryID
 		{
 			get
 			{
-				return this._Id;
+				return this._SalaryID;
 			}
 			set
 			{
-				if ((this._Id != value))
+				if ((this._SalaryID != value))
 				{
-					this.OnIdChanging(value);
+					if (this._Salary.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSalaryIDChanging(value);
 					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
+					this._SalaryID = value;
+					this.SendPropertyChanged("SalaryID");
+					this.OnSalaryIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StaffId", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StaffId", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
 		public string StaffId
 		{
 			get
@@ -4695,7 +4879,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SalaryDate", DbType="Date NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SalaryDate", DbType="Date NOT NULL", IsPrimaryKey=true)]
 		public System.DateTime SalaryDate
 		{
 			get
@@ -4955,7 +5139,41 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Staff_Salary", Storage="_Staff", ThisKey="StaffId", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Salary_SalaryDetail", Storage="_Salary", ThisKey="SalaryID", OtherKey="id", IsForeignKey=true)]
+		public Salary Salary
+		{
+			get
+			{
+				return this._Salary.Entity;
+			}
+			set
+			{
+				Salary previousValue = this._Salary.Entity;
+				if (((previousValue != value) 
+							|| (this._Salary.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Salary.Entity = null;
+						previousValue.SalaryDetails.Remove(this);
+					}
+					this._Salary.Entity = value;
+					if ((value != null))
+					{
+						value.SalaryDetails.Add(this);
+						this._SalaryID = value.id;
+					}
+					else
+					{
+						this._SalaryID = default(int);
+					}
+					this.SendPropertyChanged("Salary");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Staff_SalaryDetail", Storage="_Staff", ThisKey="StaffId", OtherKey="id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Staff Staff
 		{
 			get
@@ -4972,12 +5190,12 @@ namespace DAL
 					if ((previousValue != null))
 					{
 						this._Staff.Entity = null;
-						previousValue.Salaries.Remove(this);
+						previousValue.SalaryDetails.Remove(this);
 					}
 					this._Staff.Entity = value;
 					if ((value != null))
 					{
-						value.Salaries.Add(this);
+						value.SalaryDetails.Add(this);
 						this._StaffId = value.id;
 					}
 					else
@@ -5058,13 +5276,11 @@ namespace DAL
 		
 		private EntitySet<DoctorPatient> _DoctorPatients;
 		
-		private EntitySet<LaboratoryTest> _LaboratoryTests;
-		
 		private EntitySet<MedicalOrder> _MedicalOrders;
 		
 		private EntitySet<MedicalRecord> _MedicalRecords;
 		
-		private EntitySet<Salary> _Salaries;
+		private EntitySet<SalaryDetail> _SalaryDetails;
 		
 		private EntityRef<Department> _Department;
 		
@@ -5113,10 +5329,9 @@ namespace DAL
 			this._Appointments = new EntitySet<Appointment>(new Action<Appointment>(this.attach_Appointments), new Action<Appointment>(this.detach_Appointments));
 			this._DailyCares = new EntitySet<DailyCare>(new Action<DailyCare>(this.attach_DailyCares), new Action<DailyCare>(this.detach_DailyCares));
 			this._DoctorPatients = new EntitySet<DoctorPatient>(new Action<DoctorPatient>(this.attach_DoctorPatients), new Action<DoctorPatient>(this.detach_DoctorPatients));
-			this._LaboratoryTests = new EntitySet<LaboratoryTest>(new Action<LaboratoryTest>(this.attach_LaboratoryTests), new Action<LaboratoryTest>(this.detach_LaboratoryTests));
 			this._MedicalOrders = new EntitySet<MedicalOrder>(new Action<MedicalOrder>(this.attach_MedicalOrders), new Action<MedicalOrder>(this.detach_MedicalOrders));
 			this._MedicalRecords = new EntitySet<MedicalRecord>(new Action<MedicalRecord>(this.attach_MedicalRecords), new Action<MedicalRecord>(this.detach_MedicalRecords));
-			this._Salaries = new EntitySet<Salary>(new Action<Salary>(this.attach_Salaries), new Action<Salary>(this.detach_Salaries));
+			this._SalaryDetails = new EntitySet<SalaryDetail>(new Action<SalaryDetail>(this.attach_SalaryDetails), new Action<SalaryDetail>(this.detach_SalaryDetails));
 			this._Department = default(EntityRef<Department>);
 			OnCreated();
 		}
@@ -5510,19 +5725,6 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Staff_LaboratoryTest", Storage="_LaboratoryTests", ThisKey="id", OtherKey="doctorID")]
-		public EntitySet<LaboratoryTest> LaboratoryTests
-		{
-			get
-			{
-				return this._LaboratoryTests;
-			}
-			set
-			{
-				this._LaboratoryTests.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Staff_MedicalOrder", Storage="_MedicalOrders", ThisKey="id", OtherKey="DoctorID")]
 		public EntitySet<MedicalOrder> MedicalOrders
 		{
@@ -5549,20 +5751,20 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Staff_Salary", Storage="_Salaries", ThisKey="id", OtherKey="StaffId")]
-		public EntitySet<Salary> Salaries
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Staff_SalaryDetail", Storage="_SalaryDetails", ThisKey="id", OtherKey="StaffId")]
+		public EntitySet<SalaryDetail> SalaryDetails
 		{
 			get
 			{
-				return this._Salaries;
+				return this._SalaryDetails;
 			}
 			set
 			{
-				this._Salaries.Assign(value);
+				this._SalaryDetails.Assign(value);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Department_Staff", Storage="_Department", ThisKey="departmentID", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Department_Staff", Storage="_Department", ThisKey="departmentID", OtherKey="id", IsForeignKey=true, DeleteRule="CASCADE")]
 		public Department Department
 		{
 			get
@@ -5676,18 +5878,6 @@ namespace DAL
 			entity.Staff = null;
 		}
 		
-		private void attach_LaboratoryTests(LaboratoryTest entity)
-		{
-			this.SendPropertyChanging();
-			entity.Staff = this;
-		}
-		
-		private void detach_LaboratoryTests(LaboratoryTest entity)
-		{
-			this.SendPropertyChanging();
-			entity.Staff = null;
-		}
-		
 		private void attach_MedicalOrders(MedicalOrder entity)
 		{
 			this.SendPropertyChanging();
@@ -5712,13 +5902,13 @@ namespace DAL
 			entity.Staff = null;
 		}
 		
-		private void attach_Salaries(Salary entity)
+		private void attach_SalaryDetails(SalaryDetail entity)
 		{
 			this.SendPropertyChanging();
 			entity.Staff = this;
 		}
 		
-		private void detach_Salaries(Salary entity)
+		private void detach_SalaryDetails(SalaryDetail entity)
 		{
 			this.SendPropertyChanging();
 			entity.Staff = null;

@@ -8,7 +8,7 @@
       <Column Name="startDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="staffID" Type="System.String" DbType="Char(10)" CanBeNull="true" />
       <Column Name="status" Type="System.String" DbType="Char(100)" CanBeNull="true" />
-      <Association Name="Staff_Account" Member="Staff" ThisKey="staffID" OtherKey="id" Type="Staff" IsForeignKey="true" />
+      <Association Name="Staff_Account" Member="Staff" ThisKey="staffID" OtherKey="id" Type="Staff" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
   <Table Name="dbo.SupplyHistory" Member="SupplyHistories">
@@ -19,15 +19,15 @@
       <Column Name="nurseID" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
       <Column Name="dosage" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
       <Column Name="quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="unit" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="unit" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="note" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="PatientID" Type="System.String" DbType="Char(10)" CanBeNull="true" />
       <Column Name="typeSupply" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
       <Column Name="dateSupply" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Association Name="Item_SupplyHistory" Member="Item" ThisKey="itemID" OtherKey="ID" Type="Item" IsForeignKey="true" />
-      <Association Name="Patient_SupplyHistory" Member="Patient" ThisKey="PatientID" OtherKey="id" Type="Patient" IsForeignKey="true" />
-      <Association Name="Room_SupplyHistory" Member="Room" ThisKey="roomID" OtherKey="id" Type="Room" IsForeignKey="true" />
-      <Association Name="Staff_SupplyHistory" Member="Staff" ThisKey="nurseID" OtherKey="id" Type="Staff" IsForeignKey="true" />
+      <Association Name="Item_SupplyHistory" Member="Item" ThisKey="itemID" OtherKey="ID" Type="Item" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Patient_SupplyHistory" Member="Patient" ThisKey="PatientID" OtherKey="id" Type="Patient" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Room_SupplyHistory" Member="Room" ThisKey="roomID" OtherKey="id" Type="Room" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Staff_SupplyHistory" Member="Staff" ThisKey="nurseID" OtherKey="id" Type="Staff" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Appointment" Member="Appointments">
@@ -38,8 +38,8 @@
       <Column Name="status" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
       <Column Name="doctorID" Type="System.String" DbType="Char(10)" CanBeNull="true" />
       <Column Name="patientID" Type="System.String" DbType="Char(10)" CanBeNull="true" />
-      <Association Name="Patient_Appointment" Member="Patient" ThisKey="patientID" OtherKey="id" Type="Patient" IsForeignKey="true" />
-      <Association Name="Staff_Appointment" Member="Staff" ThisKey="doctorID" OtherKey="id" Type="Staff" IsForeignKey="true" />
+      <Association Name="Patient_Appointment" Member="Patient" ThisKey="patientID" OtherKey="id" Type="Patient" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Staff_Appointment" Member="Staff" ThisKey="doctorID" OtherKey="id" Type="Staff" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
   <Table Name="dbo.DailyCare" Member="DailyCares">
@@ -54,9 +54,9 @@
       <Column Name="patientID" Type="System.String" DbType="Char(10)" CanBeNull="true" />
       <Column Name="roomID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="nurseID" Type="System.String" DbType="Char(10)" CanBeNull="true" />
-      <Association Name="Patient_DailyCare" Member="Patient" ThisKey="patientID" OtherKey="id" Type="Patient" IsForeignKey="true" />
-      <Association Name="Room_DailyCare" Member="Room" ThisKey="roomID" OtherKey="id" Type="Room" IsForeignKey="true" />
-      <Association Name="Staff_DailyCare" Member="Staff" ThisKey="nurseID" OtherKey="id" Type="Staff" IsForeignKey="true" />
+      <Association Name="Patient_DailyCare" Member="Patient" ThisKey="patientID" OtherKey="id" Type="Patient" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Room_DailyCare" Member="Room" ThisKey="roomID" OtherKey="id" Type="Room" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Staff_DailyCare" Member="Staff" ThisKey="nurseID" OtherKey="id" Type="Staff" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
   <Table Name="dbo.Department" Member="Departments">
@@ -81,7 +81,8 @@
   </Table>
   <Table Name="dbo.Inventory" Member="Inventories">
     <Type Name="Inventory">
-      <Column Name="ItemID" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ItemID" Type="System.String" DbType="Char(10)" CanBeNull="true" />
       <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="LastUpdated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="Item_Inventory" Member="Item" ThisKey="ItemID" OtherKey="ID" Type="Item" IsForeignKey="true" />
@@ -97,26 +98,28 @@
       <Column Name="CreatedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="Item_SupplyHistory" Member="SupplyHistories" ThisKey="ID" OtherKey="itemID" Type="SupplyHistory" />
-      <Association Name="Item_Inventory" Member="Inventory" ThisKey="ID" OtherKey="ItemID" Type="Inventory" Cardinality="One" />
+      <Association Name="Item_Inventory" Member="Inventories" ThisKey="ID" OtherKey="ItemID" Type="Inventory" />
       <Association Name="Item_MedicalOrder" Member="MedicalOrders" ThisKey="ID" OtherKey="ItemID" Type="MedicalOrder" />
     </Type>
   </Table>
   <Table Name="dbo.LaboratoryTest" Member="LaboratoryTests">
     <Type Name="LaboratoryTest">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="testName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="patientID" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
-      <Column Name="doctorID" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="MedicalOrderID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="startDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="resultValue" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
       <Column Name="resultUnit" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="result" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="testType" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
       <Column Name="status" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="note" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
-      <Association Name="LaboratoryTest_MedicalOrder" Member="MedicalOrders" ThisKey="id" OtherKey="TestTypeID" Type="MedicalOrder" />
-      <Association Name="Patient_LaboratoryTest" Member="Patient" ThisKey="patientID" OtherKey="id" Type="Patient" IsForeignKey="true" />
-      <Association Name="Staff_LaboratoryTest" Member="Staff" ThisKey="doctorID" OtherKey="id" Type="Staff" IsForeignKey="true" />
+      <Association Name="MedicalOrder_LaboratoryTest" Member="MedicalOrder" ThisKey="MedicalOrderID" OtherKey="id" Type="MedicalOrder" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LabTestType" Member="LabTestTypes">
+    <Type Name="LabTestType">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="testTypeName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="LabTestType_MedicalOrder" Member="MedicalOrders" ThisKey="id" OtherKey="TestTypeID" Type="MedicalOrder" />
     </Type>
   </Table>
   <Table Name="dbo.MedicalOrder" Member="MedicalOrders">
@@ -127,6 +130,7 @@
       <Column Name="OrderType" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="ItemID" Type="System.String" DbType="Char(10)" CanBeNull="true" />
       <Column Name="TestTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="HasLabTest" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="Dosage" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="Quantity" Type="System.Decimal" DbType="Decimal(8,2)" CanBeNull="true" />
       <Column Name="Unit" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
@@ -137,10 +141,11 @@
       <Column Name="CreatedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="SignedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Note" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
-      <Association Name="Item_MedicalOrder" Member="Item" ThisKey="ItemID" OtherKey="ID" Type="Item" IsForeignKey="true" />
-      <Association Name="LaboratoryTest_MedicalOrder" Member="LaboratoryTest" ThisKey="TestTypeID" OtherKey="id" Type="LaboratoryTest" IsForeignKey="true" />
-      <Association Name="Patient_MedicalOrder" Member="Patient" ThisKey="PatientID" OtherKey="id" Type="Patient" IsForeignKey="true" />
-      <Association Name="Staff_MedicalOrder" Member="Staff" ThisKey="DoctorID" OtherKey="id" Type="Staff" IsForeignKey="true" />
+      <Association Name="MedicalOrder_LaboratoryTest" Member="LaboratoryTests" ThisKey="id" OtherKey="MedicalOrderID" Type="LaboratoryTest" />
+      <Association Name="Item_MedicalOrder" Member="Item" ThisKey="ItemID" OtherKey="ID" Type="Item" IsForeignKey="true" DeleteRule="SET NULL" />
+      <Association Name="LabTestType_MedicalOrder" Member="LabTestType" ThisKey="TestTypeID" OtherKey="id" Type="LabTestType" IsForeignKey="true" DeleteRule="SET NULL" />
+      <Association Name="Patient_MedicalOrder" Member="Patient" ThisKey="PatientID" OtherKey="id" Type="Patient" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Staff_MedicalOrder" Member="Staff" ThisKey="DoctorID" OtherKey="id" Type="Staff" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.MedicalRecord" Member="MedicalRecords">
@@ -154,8 +159,8 @@
       <Column Name="vitalSigns" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="createdDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="notes" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
-      <Association Name="Patient_MedicalRecord" Member="Patient" ThisKey="patientID" OtherKey="id" Type="Patient" IsForeignKey="true" />
-      <Association Name="Staff_MedicalRecord" Member="Staff" ThisKey="doctorID" OtherKey="id" Type="Staff" IsForeignKey="true" />
+      <Association Name="Patient_MedicalRecord" Member="Patient" ThisKey="patientID" OtherKey="id" Type="Patient" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Staff_MedicalRecord" Member="Staff" ThisKey="doctorID" OtherKey="id" Type="Staff" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Patient" Member="Patients">
@@ -165,6 +170,7 @@
       <Column Name="gender" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
       <Column Name="dob" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="phoneNumber" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="TypePatient" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
       <Column Name="citizenID" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
       <Column Name="InsuranceID" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
       <Column Name="address" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
@@ -179,7 +185,6 @@
       <Association Name="Patient_Appointment" Member="Appointments" ThisKey="id" OtherKey="patientID" Type="Appointment" />
       <Association Name="Patient_DailyCare" Member="DailyCares" ThisKey="id" OtherKey="patientID" Type="DailyCare" />
       <Association Name="Patient_DoctorPatient" Member="DoctorPatients" ThisKey="id" OtherKey="patientID" Type="DoctorPatient" />
-      <Association Name="Patient_LaboratoryTest" Member="LaboratoryTests" ThisKey="id" OtherKey="patientID" Type="LaboratoryTest" />
       <Association Name="Patient_MedicalOrder" Member="MedicalOrders" ThisKey="id" OtherKey="PatientID" Type="MedicalOrder" />
       <Association Name="Patient_MedicalRecord" Member="MedicalRecords" ThisKey="id" OtherKey="patientID" Type="MedicalRecord" />
     </Type>
@@ -194,12 +199,19 @@
       <Association Name="Room_DailyCare" Member="DailyCares" ThisKey="id" OtherKey="roomID" Type="DailyCare" />
     </Type>
   </Table>
-  <Table Name="dbo.Salaries" Member="Salaries">
+  <Table Name="dbo.Salary" Member="Salaries">
     <Type Name="Salary">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="StaffId" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BasicSalary" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Association Name="Salary_SalaryDetail" Member="SalaryDetails" ThisKey="id" OtherKey="SalaryID" Type="SalaryDetail" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SalaryDetail" Member="SalaryDetails">
+    <Type Name="SalaryDetail">
+      <Column Name="SalaryID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="StaffId" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="SalaryPeriod" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="SalaryDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="SalaryDate" Type="System.DateTime" DbType="Date NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="BasicSalary" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
       <Column Name="WorkingDays" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="OvertimeHours" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
@@ -212,7 +224,8 @@
       <Column Name="Note" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="CreatedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="CreatedBy" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Association Name="Staff_Salary" Member="Staff" ThisKey="StaffId" OtherKey="id" Type="Staff" IsForeignKey="true" />
+      <Association Name="Salary_SalaryDetail" Member="Salary" ThisKey="SalaryID" OtherKey="id" Type="Salary" IsForeignKey="true" />
+      <Association Name="Staff_SalaryDetail" Member="Staff" ThisKey="StaffId" OtherKey="id" Type="Staff" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Staff" Member="Staffs">
@@ -238,11 +251,10 @@
       <Association Name="Staff_Appointment" Member="Appointments" ThisKey="id" OtherKey="doctorID" Type="Appointment" />
       <Association Name="Staff_DailyCare" Member="DailyCares" ThisKey="id" OtherKey="nurseID" Type="DailyCare" />
       <Association Name="Staff_DoctorPatient" Member="DoctorPatients" ThisKey="id" OtherKey="doctorID" Type="DoctorPatient" />
-      <Association Name="Staff_LaboratoryTest" Member="LaboratoryTests" ThisKey="id" OtherKey="doctorID" Type="LaboratoryTest" />
       <Association Name="Staff_MedicalOrder" Member="MedicalOrders" ThisKey="id" OtherKey="DoctorID" Type="MedicalOrder" />
       <Association Name="Staff_MedicalRecord" Member="MedicalRecords" ThisKey="id" OtherKey="doctorID" Type="MedicalRecord" />
-      <Association Name="Staff_Salary" Member="Salaries" ThisKey="id" OtherKey="StaffId" Type="Salary" />
-      <Association Name="Department_Staff" Member="Department" ThisKey="departmentID" OtherKey="id" Type="Department" IsForeignKey="true" />
+      <Association Name="Staff_SalaryDetail" Member="SalaryDetails" ThisKey="id" OtherKey="StaffId" Type="SalaryDetail" />
+      <Association Name="Department_Staff" Member="Department" ThisKey="departmentID" OtherKey="id" Type="Department" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
 </Database>

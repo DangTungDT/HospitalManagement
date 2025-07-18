@@ -122,9 +122,9 @@ namespace DAL
                     var medicalRecords = db.MedicalRecords.Where(mr => mr.doctorID == staffId);
                     db.MedicalRecords.DeleteAllOnSubmit(medicalRecords);
 
-                    // LaboratoryTest
-                    var labTests = db.LaboratoryTests.Where(lt => lt.doctorID == staffId);
-                    db.LaboratoryTests.DeleteAllOnSubmit(labTests);
+                    //// LaboratoryTest
+                    //var labTests = db.LaboratoryTests.Where(lt => lt.doctorID == staffId);
+                    //db.LaboratoryTests.DeleteAllOnSubmit(labTests);
 
                     // SupplyHistory (nurse)
                     var supplyHistories = db.SupplyHistories.Where(sh => sh.nurseID == staffId);

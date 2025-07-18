@@ -1,217 +1,296 @@
-﻿using System;
+﻿using BLL;
+using DTO;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
-public class frmMedicalRecordInfo : Form
+namespace GUI
 {
-    public frmMedicalRecordInfo()
+    public partial class frmMedicalRecordInfo_Doctor : Form
     {
-        // Cài đặt form
-        this.Text = "Thông Tin Bệnh Án";
-        this.Size = new Size(900, 650);
-        this.StartPosition = FormStartPosition.CenterScreen;
-        this.FormBorderStyle = FormBorderStyle.FixedDialog;
-        this.MaximizeBox = false;
-        this.Font = new Font("Segoe UI", 11);
-
-        // Tiêu đề
-        Label lblTitle = new Label()
+        public frmMedicalRecordInfo_Doctor(string currentDoctorId)
         {
-            Text = "Thông Tin Bệnh Án",
-            Font = new Font("Segoe UI", 20, FontStyle.Bold),
-            AutoSize = false,
-            TextAlign = ContentAlignment.MiddleCenter,
-            Dock = DockStyle.Top,
-            Height = 50
-        };
-        this.Controls.Add(lblTitle);
-
-        // GroupBox thông tin bệnh án
-        GroupBox gbDetail = new GroupBox()
+            InitializeComponent();
+            this.doctorId = currentDoctorId;
+        }
+        MedicalRecordDoctorBLL bll = new MedicalRecordDoctorBLL();
+        private string doctorId;
+        private void frmMedicalRecordInfo_Doctor_Load(object sender, EventArgs e)
         {
-            Text = "Thông tin bệnh án",
-            Font = new Font("Segoe UI", 12, FontStyle.Regular),
-            Location = new Point((this.ClientSize.Width - Width) / 2, 60),
-            Anchor = AnchorStyles.Top,
-            Size = new Size(820, 180)
-        };
-        this.Controls.Add(gbDetail);
-
-        // Label và textbox bên trái
-        string[] leftLabels = { "Mã Bệnh Án:", "Mã Bệnh Nhân:", "Mã Bác Sĩ:" };
-        int[] yLeft = { 35, 75, 115 };
-        for (int i = 0; i < leftLabels.Length; i++)
+            dgvMedicalRecord.DataSource = bll.GetRecordsByDoctor(doctorId);
+            LoadPatients();
+            StyleDataGridView(dgvMedicalRecord);
+            StyleDataGridView(dgvPatient);
+        }
+        private void groupBox2_Paint(object sender, PaintEventArgs e)
         {
-            Label lbl = new Label()
+            GroupBox box = sender as GroupBox;
+
+            // Màu nền nhẹ dịu (xanh nhạt)
+            Color nurseBackground = Color.FromArgb(230, 245, 255);
+            this.BackColor = nurseBackground;
+            e.Graphics.Clear(nurseBackground);
+
+            Pen thickPen = new Pen(Color.RoyalBlue, 2);
+            Brush textBrush = new SolidBrush(Color.RoyalBlue);
+
+            Font font = box.Font;
+            string text = box.Text;
+            SizeF textSize = e.Graphics.MeasureString(text, font);
+
+            int textPadding = 10;
+            int textWidth = (int)textSize.Width + textPadding * 2;
+
+            Rectangle borderRect = new Rectangle(
+                0,
+                (int)(textSize.Height / 2),
+                box.Width - 1,
+                box.Height - (int)(textSize.Height / 2) - 1
+            );
+
+            e.Graphics.DrawRectangle(thickPen, borderRect);
+
+            e.Graphics.FillRectangle(
+                new SolidBrush(nurseBackground),
+                new Rectangle(textPadding, 0, textWidth, (int)textSize.Height)
+            );
+
+            e.Graphics.DrawString(text, font, textBrush, textPadding, 0);
+
+            // Chỉ đổi màu chữ cho các control không phải TextBox
+            foreach (Control ctrl in box.Controls)
             {
-                Text = leftLabels[i],
-                Location = new Point(30, yLeft[i]),
-                Size = new Size(130, 25),
-                Font = new Font("Segoe UI", 11, FontStyle.Bold)
-            };
-            gbDetail.Controls.Add(lbl);
+                if (!(ctrl is TextBox))
+                {
+                    ctrl.ForeColor = Color.RoyalBlue;
+                }
+            }
+        }
+        private void StyleDataGridView(DataGridView dgv)
+        {
+            // Nền tổng thể (hơi xám xanh, khác biệt với form xanh nhạt)
+            dgv.BackgroundColor = Color.FromArgb(245, 248, 250); // Nhạt nhưng hơi xám -> tạo tách biệt
 
-            TextBox txt = new TextBox()
-            {
-                Location = new Point(160, yLeft[i]),
-                Size = new Size(200, 25),
-                Font = new Font("Segoe UI", 11),
-                BackColor = Color.Gainsboro,
-                BorderStyle = BorderStyle.FixedSingle
-            };
-            gbDetail.Controls.Add(txt);
+            // Viền & ô
+            dgv.BorderStyle = BorderStyle.None;
+            dgv.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+
+            // 👉 Đổi màu đường phân cách giữa các ô (hàng dữ liệu)
+            dgv.GridColor = Color.MediumSeaGreen; // Xanh lá dễ nhìn
+
+            // Header
+            dgv.EnableHeadersVisualStyles = false;
+            dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.SteelBlue;  // đậm hơn RoyalBlue
+            dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            dgv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            // Dữ liệu
+            dgv.DefaultCellStyle.BackColor = Color.White;
+            dgv.DefaultCellStyle.ForeColor = Color.FromArgb(30, 60, 90); // Xanh navy nhẹ
+            dgv.DefaultCellStyle.SelectionBackColor = Color.FromArgb(200, 230, 255); // xanh pastel khi chọn
+            dgv.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dgv.DefaultCellStyle.Font = new Font("Segoe UI", 10);
+
+            // Hàng xen kẽ
+            dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(250, 253, 255); // Trắng-xanh nhạt sát trắng
+
+            // Căn lề
+            dgv.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+
+            // Kích thước dòng + kiểu fill
+            dgv.RowTemplate.Height = 28;
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        }
+        private void LoadPatients()
+        {
+            var patients = bll.GetAllPatients(doctorId);
+
+            cboPatient.DataSource = patients;
+            cboPatient.DisplayMember = "FullName"; // ✅
+            cboPatient.ValueMember = "Id";         // ✅ đúng với DTO.Id
+
+            cboPatient.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cboPatient.AutoCompleteSource = AutoCompleteSource.CustomSource;
+
+            var auto = new AutoCompleteStringCollection();
+            auto.AddRange(patients.Select(p => p.FullName).ToArray());
+            cboPatient.AutoCompleteCustomSource = auto;
+
+            cboPatient.SelectedIndex = -1;
+            cboPatient.Text = "";
+        }
+        private void cboPatient_TextChanged(object sender, EventArgs e)
+        {
+            string keyword = cboPatient.Text.Trim().ToLower();
+
+            var allPatients = bll.GetAllPatients(doctorId);
+            var filtered = string.IsNullOrWhiteSpace(keyword)
+                ? allPatients
+                : allPatients.Where(p => p.FullName.ToLower().Contains(keyword)).ToList();
+
+            dgvPatient.DataSource = filtered;
         }
 
-        // Label và textbox bên phải
-        string[] rightLabels = { "Ngày Lập:", "Chuẩn Đoán:", "Ghi Chú:" };
-        int[] yRight = { 35, 75, 115 };
-        for (int i = 0; i < rightLabels.Length; i++)
+        private void dgvPatient_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            Label lbl = new Label()
+            if (e.RowIndex >= 0)
             {
-                Text = rightLabels[i],
-                Location = new Point(420, yRight[i]),
-                Size = new Size(110, 25),
-                Font = new Font("Segoe UI", 11, FontStyle.Bold)
-            };
-            gbDetail.Controls.Add(lbl);
+                var patient = dgvPatient.Rows[e.RowIndex].DataBoundItem as PatientSupplyHistoryDTO;
+                if (patient != null)
+                {
+                    cboPatient.SelectedValue = patient.Id;
 
-            Control txt;
-            if (rightLabels[i] == "Ghi Chú:")
-            {
-                txt = new RichTextBox()
-                {
-                    Location = new Point(540, yRight[i]),
-                    Size = new Size(200, 50),
-                    Font = new Font("Segoe UI", 11),
-                    BackColor = Color.Gainsboro,
-                    BorderStyle = BorderStyle.FixedSingle
-                };
+                    if (cboPatient.SelectedValue == null || cboPatient.SelectedValue.ToString() != patient.Id)
+                    {
+                        // fallback nếu không tìm được
+                        cboPatient.Text = patient.FullName;
+                    }
+                }
             }
-            else
-            {
-                txt = new TextBox()
-                {
-                    Location = new Point(540, yRight[i]),
-                    Size = new Size(200, 25),
-                    Font = new Font("Segoe UI", 11),
-                    BackColor = Color.Gainsboro,
-                    BorderStyle = BorderStyle.FixedSingle
-                };
-            }
-            gbDetail.Controls.Add(txt);
         }
 
-        // Nút chức năng
-        Button btnCreate = new Button()
+        private void btnAdd_Click(object sender, EventArgs e)
         {
-            Text = "Tạo Bệnh Án",
-            Location = new Point(250, 250),
-            Size = new Size(140, 40),
-            BackColor = Color.LightSkyBlue,
-            FlatStyle = FlatStyle.Flat,
-            Font = new Font("Segoe UI", 11, FontStyle.Bold),
-            ForeColor = Color.Black
-        };
-        btnCreate.FlatAppearance.BorderSize = 0;
-        btnCreate.Region = System.Drawing.Region.FromHrgn(
-            NativeMethods.CreateRoundRectRgn(0, 0, btnCreate.Width, btnCreate.Height, 10, 10));
-        this.Controls.Add(btnCreate);
-
-        Button btnUpdate = new Button()
-        {
-            Text = "Cập Nhật Bệnh Án",
-            Location = new Point(430, 250),
-            Size = new Size(170, 40),
-            BackColor = Color.LightSkyBlue,
-            FlatStyle = FlatStyle.Flat,
-            Font = new Font("Segoe UI", 11, FontStyle.Bold),
-            ForeColor = Color.Black
-        };
-        btnUpdate.FlatAppearance.BorderSize = 0;
-        btnUpdate.Region = System.Drawing.Region.FromHrgn(
-            NativeMethods.CreateRoundRectRgn(0, 0, btnUpdate.Width, btnUpdate.Height, 10, 10));
-        this.Controls.Add(btnUpdate);
-
-        // Label danh sách bệnh án
-        Label lblList = new Label()
-        {
-            Text = "Danh sách các bệnh án",
-            Font = new Font("Segoe UI", 13, FontStyle.Bold),
-            ForeColor = Color.Teal,
-            AutoSize = false,
-            TextAlign = ContentAlignment.MiddleCenter,
-            Location = new Point((this.ClientSize.Width - 900) / 2, 320),
-            Size = new Size(900, 30)
-        };
-        this.Controls.Add(lblList);
-        // Tự canh giữa khi form resize
-        this.Resize += (s, e) =>
-        {
-            lblList.Left = (this.ClientSize.Width - lblList.Width) / 2;
-        };
-        // DataGridView danh sách bệnh án
-        DataGridView dgv = new DataGridView()
-        {
-            Dock = DockStyle.Bottom,
-            Height = 230, // Chiều cao cố định
-            Font = new Font("Segoe UI", 11),
-            ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle()
+            if (cboPatient.SelectedValue == null)
             {
-                Font = new Font("Segoe UI", 11, FontStyle.Bold),
-                BackColor = Color.LightCyan,
-                ForeColor = Color.Black,
-                Alignment = DataGridViewContentAlignment.MiddleCenter
-            },
-            EnableHeadersVisualStyles = false,
-            AllowUserToAddRows = false,
-            ReadOnly = true,
-            RowTemplate = { Height = 30 },
-            SelectionMode = DataGridViewSelectionMode.FullRowSelect,
-            BackgroundColor = Color.White,
-            AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
-        };
+                MessageBox.Show("Vui lòng chọn bệnh nhân!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-        dgv.Columns.Add("MaBA", "Mã Bệnh Án");
-        dgv.Columns.Add("MaBN", "Mã Bệnh Nhân");
-        dgv.Columns.Add("MaBS", "Mã Bác Sĩ");
-        dgv.Columns.Add("NgayLap", "Ngày Lập");
-        dgv.Columns.Add("ChuanDoan", "Chuẩn Đoán");
-        dgv.Columns.Add("GhiChu", "Ghi Chú");
+            // Kiểm tra từng trường dữ liệu bắt buộc
+            if (string.IsNullOrWhiteSpace(txtDiagnosis.Text))
+            {
+                MessageBox.Show("Vui lòng nhập chẩn đoán!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtDiagnosis.Focus();
+                return;
+            }
 
-        this.Controls.Add(dgv);
-    }
+            if (string.IsNullOrWhiteSpace(txtTreatmentPlan.Text))
+            {
+                MessageBox.Show("Vui lòng nhập kế hoạch điều trị!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtTreatmentPlan.Focus();
+                return;
+            }
 
-    // Để bo góc nút
-    private static class NativeMethods
-    {
-        [System.Runtime.InteropServices.DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
-        public static extern IntPtr CreateRoundRectRgn
-        (
-            int nLeftRect,     // x-coordinate of upper-left corner
-            int nTopRect,      // y-coordinate of upper-left corner
-            int nRightRect,    // x-coordinate of lower-right corner
-            int nBottomRect,   // y-coordinate of lower-right corner
-            int nWidthEllipse, // width of ellipse
-            int nHeightEllipse // height of ellipse
-        );
-    }
+            if (string.IsNullOrWhiteSpace(txtPrescription.Text))
+            {
+                MessageBox.Show("Vui lòng nhập đơn thuốc!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtPrescription.Focus();
+                return;
+            }
 
-    private void InitializeComponent()
-    {
-            this.SuspendLayout();
-            // 
-            // frmMedicalRecordInfo
-            // 
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Name = "frmMedicalRecordInfo";
-            this.Load += new System.EventHandler(this.frmMedicalRecordInfo_Load);
-            this.ResumeLayout(false);
+            if (string.IsNullOrWhiteSpace(txtVitalSigns.Text))
+            {
+                MessageBox.Show("Vui lòng nhập dấu hiệu sinh tồn!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtVitalSigns.Focus();
+                return;
+            }
 
-    }
+            var dto = new MedicalRecordDoctorDTO
+            {
+                PatientID = cboPatient.SelectedValue.ToString(),
+                DoctorID = doctorId,
+                Diagnosis = txtDiagnosis.Text.Trim(),
+                TreatmentPlan = txtTreatmentPlan.Text.Trim(),
+                Prescription = txtPrescription.Text.Trim(),
+                VitalSigns = txtVitalSigns.Text.Trim(),
+                Notes = string.IsNullOrWhiteSpace(txtNote.Text) ? null : txtNote.Text.Trim()
+            };
 
-    private void frmMedicalRecordInfo_Load(object sender, EventArgs e)
-    {
+            try
+            {
+                bll.AddMedicalRecord(dto);
+                MessageBox.Show("Thêm bệnh án thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                RefreshData(); 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi thêm bệnh án: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            if (cboPatient.SelectedValue == null)
+            {
+                MessageBox.Show("Vui lòng chọn bệnh nhân trong danh sách để tìm kiếm!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string selectedPatientId = cboPatient.SelectedValue.ToString();
+
+            try
+            {
+                var result = bll.SearchRecordsByPatient(doctorId, selectedPatientId);
+
+                if (result.Count == 0)
+                {
+                    MessageBox.Show("Không tìm thấy bệnh án nào cho bệnh nhân đã chọn.", "Thông báo");
+                }
+
+                dgvMedicalRecord.DataSource = result;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi tìm kiếm bệnh án: " + ex.Message);
+            }
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            dgvMedicalRecord.DataSource = bll.GetRecordsByDoctor(doctorId);
+            cboPatient.SelectedIndex = -1;
+            txtDiagnosis.Clear();
+            txtTreatmentPlan.Clear();
+            txtPrescription.Clear();
+            txtVitalSigns.Clear();
+            txtNote.Clear();
+        }
+        private void RefreshData()
+        {
+            dgvMedicalRecord.DataSource = bll.GetRecordsByDoctor(doctorId);
+            cboPatient.SelectedIndex = -1;
+            txtDiagnosis.Clear();
+            txtTreatmentPlan.Clear();
+            txtPrescription.Clear();
+            txtVitalSigns.Clear();
+            txtNote.Clear();
+            cboPatient.Focus();
+        }
+
+        private void dgvMedicalRecord_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                var selected = dgvMedicalRecord.Rows[e.RowIndex].DataBoundItem as MedicalRecordDoctorDTO;
+
+                if (selected != null)
+                {
+                    // ✅ Gán bệnh nhân (chỉ hiển thị)
+                    cboPatient.SelectedValue = selected.PatientID;
+
+                    // Fallback nếu ID không match hoặc lỗi binding
+                    if (cboPatient.SelectedValue == null || cboPatient.SelectedValue.ToString() != selected.PatientID)
+                    {
+                        cboPatient.Text = selected.PatientName;
+                    }
+
+                    // ✅ Các trường thông tin bệnh án
+                    txtDiagnosis.Text = selected.Diagnosis ?? "";
+                    txtTreatmentPlan.Text = selected.TreatmentPlan ?? "";
+                    txtPrescription.Text = selected.Prescription ?? "";
+                    txtVitalSigns.Text = selected.VitalSigns ?? "";
+                    txtNote.Text = selected.Notes ?? "";
+                }
+            }
+        }
     }
 }

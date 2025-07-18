@@ -44,17 +44,23 @@
   <ItemGroup>
     <Compile Include="AppointmentDAL.cs" />
     <Compile Include="DailyCareDAL.cs" />
+    <Compile Include="DoctorPatientDAL.cs" />
     <Compile Include="HospitalManagement.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>HospitalManagement.dbml</DependentUpon>
     </Compile>
+    <Compile Include="ItemDoctorDAL.cs" />
+    <Compile Include="LaboratoryTestDoctorDAL.cs" />
+    <Compile Include="MedicalOrderDoctorDAL.cs" />
+    <Compile Include="MedicalRecordDoctorDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="StaffDoctorDAL.cs" />
     <Compile Include="SupplyHistoryDAL.cs" />
     <Compile Include="UsersDAL.cs" />
   </ItemGroup>
