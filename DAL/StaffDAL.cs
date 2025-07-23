@@ -120,7 +120,6 @@ namespace DAL
                 if (db.Accounts.Any(ac => ac.staffID == id)) return false;
                 if (db.MedicalRecords.Any(mr => mr.doctorID == id)) return false;
                 if (db.SalaryDetails.Any(sd => sd.StaffId == id)) return false;
-                if (db.LaboratoryTests.Any(lt => lt.doctorID == id)) return false;
                 if (db.MedicalOrders.Any(mo => mo.DoctorID == id)) return false;
                 if (db.SupplyHistories.Any(sh => sh.nurseID == id)) return false;
                 if (db.DoctorPatients.Any(dp => dp.doctorID == id)) return false;
