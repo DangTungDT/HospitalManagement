@@ -82,25 +82,32 @@ go
 
 --Table MedicalOrder
 CREATE TABLE MedicalOrder (
-    id INT PRIMARY KEY identity(1,1),     -- Mã y lệnh
-    PatientID CHAR(10) NOT NULL,               -- FK → Patient
-    DoctorID CHAR(10) NOT NULL,                -- FK → Doctor
-    OrderType VARCHAR(50) NOT NULL,            -- Loại y lệnh: Thuốc / Xét nghiệm / Chỉ định khác
-    ItemID char(10) NULL,                      -- FK → Medicine hoặc LabTestType
-    TestTypeID INT NULL,                       -- FK → LabTestType (nếu là xét nghiệm)
-    Dosage VARCHAR(100) NULL,                  -- Liều lượng (Dosage)
-    Quantity DECIMAL(8,2) NULL,                -- Số lượng (Quantity)
-    Unit VARCHAR(20) NULL,                     -- Đơn vị (Unit)
-    Frequency VARCHAR(50) NULL,                -- Tần suất (ví dụ: 2 lần/ngày)
-    StartDate DATE NULL,                       -- Ngày bắt đầu y lệnh
-    EndDate DATE NULL,                         -- Ngày kết thúc (nếu có)
-    Status VARCHAR(20) DEFAULT 'Active',       -- Trạng thái: Active / Completed / Discontinued
-    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,  -- Thời gian ghi y lệnh
-    SignedAt DATETIME NULL,                    -- Thời gian bác sĩ ký duyệt
-    Note nTEXT NULL                            -- Ghi chú thêm
-    -- có thể thêm FK tới các bảng Medicine hoặc LabTestType nếu lưu chi tiết
-)
+		id INT PRIMARY KEY IDENTITY(1,1),
+		PatientID CHAR(10) NOT NULL,
+		DoctorID CHAR(10) NOT NULL,
+		OrderType VARCHAR(50) NOT NULL,
+		ItemID CHAR(10) NULL,
+		TestTypeID INT NULL,
+		HasLabTest BIT DEFAULT 0,
+		Dosage VARCHAR(100) NULL,
+		Quantity DECIMAL(8,2) NULL,
+		Unit VARCHAR(20) NULL,
+		Frequency VARCHAR(50) NULL,
+		StartDate DATE NULL,
+		EndDate DATE NULL,
+		Status VARCHAR(20) DEFAULT 'Active',
+		CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+		SignedAt DATETIME NULL,
+		Note NTEXT NULL
+	);
 go
+
+--Table LabTestType
+CREATE TABLE LabTestType (
+		id INT IDENTITY(1,1) PRIMARY KEY,
+		testTypeName NVARCHAR(100) NOT NULL
+);
+	GO
 
 --table Patient
 CREATE TABLE Patient (
@@ -163,17 +170,14 @@ go
 --Table laboratoryTest
 CREATE TABLE LaboratoryTest (
     id INT IDENTITY(1,1) PRIMARY KEY,
-    testName NVARCHAR(255) NOT NULL,
-    patientID CHAR(10) NOT NULL,
-    doctorID CHAR(10) NOT NULL,
-    startDate DATETIME,
-    resultValue NVARCHAR(100),
-    resultUnit NVARCHAR(50),
-    result NVARCHAR(255),
-    testType NVARCHAR(100),
-    status NVARCHAR(50),
-    note ntext,
-)
+    MedicalOrderID INT NOT NULL,
+    startDate DATETIME NULL,
+    resultValue NVARCHAR(100) NULL,
+    resultUnit NVARCHAR(50) NULL,
+    result NVARCHAR(255) NULL,
+    status NVARCHAR(50) NULL,
+    note NTEXT NULL,
+);
 go
 
 --Table SupplyHistory 
@@ -264,12 +268,19 @@ add constraint fk_Patient_DailyCare foreign key(patientID) references Patient(id
 	constraint fk_Nurse_DailyCare foreign key(nurseID) references Staff(id);
 go
 
-alter table MedicalOrder
-add constraint fk_Patient_MedicalOrder foreign key(PatientID) references Patient(id),
-	constraint fk_Doctor_MedicalOrder foreign key(DoctorID) references Staff(id),
-	constraint fk_Items_MedicalOrder foreign key(ItemID) references Items(id),
-	constraint fk_TestType_MedicalOrder foreign key(TestTypeID) references LaboratoryTest(id);
-go
+ALTER TABLE MedicalOrder
+ADD CONSTRAINT fk_Patient_MedicalOrder FOREIGN KEY (PatientID)
+    REFERENCES Patient(id) ON DELETE CASCADE,
+    
+    CONSTRAINT fk_Doctor_MedicalOrder FOREIGN KEY (DoctorID)
+    REFERENCES Staff(id) ON DELETE CASCADE,
+    
+    CONSTRAINT fk_Items_MedicalOrder FOREIGN KEY (ItemID)
+    REFERENCES Items(id) ON DELETE SET NULL,
+    
+    CONSTRAINT fk_TestType_MedicalOrder FOREIGN KEY (TestTypeID)
+    REFERENCES LabTestType(id) ON DELETE SET NULL;
+GO
 
 alter table DoctorPatient
 add constraint fk_Doctor_DP foreign key(doctorID) references Staff(id),
@@ -285,9 +296,9 @@ add constraint fk_Doctor_MedicalRecord foreign key(doctorID) references Staff(id
 	constraint fk_Patient_MedicalRecord foreign key(patientID) references Patient(id);
 go
 
-alter table LaboratoryTest
-add constraint fk_Doctor_LaboratoryTest foreign key(doctorID) references Staff(id),
-	constraint fk_Patient_LaboratoryTest foreign key(patientID) references Patient(id);
+ALTER TABLE LaboratoryTest
+ADD CONSTRAINT fk_MedicalOrder_LaboratoryTestt
+    FOREIGN KEY (MedicalOrderID) REFERENCES MedicalOrder(id) ON DELETE CASCADE;
 go
 
 alter table SupplyHistory
@@ -302,6 +313,132 @@ add constraint fk_Staff_SalaryDetail foreign key(StaffId) references Staff(id),
    constraint fk_Salary_SalaryDetail foreign key(SalaryId) references Salary(id);
 go
 
+-- create procedure đơn thuốc
+CREATE PROCEDURE sp_GetPrescriptionReport
+    @PatientID CHAR(10),
+    @OrderDate DATE = NULL -- Nếu muốn lọc theo ngày kê đơn, có thể để NULL để lấy tất cả
+AS
+BEGIN
+    SELECT
+        mo.id AS PrescriptionID,
+        p.fullName AS PatientName,
+        p.gender AS PatientGender,
+        p.dob AS PatientDOB,
+        p.phoneNumber AS PatientPhone,
+        p.address AS PatientAddress,
+        p.InsuranceID AS PatientInsurance,
+        s.name AS DoctorName,
+        s.position AS DoctorPosition,
+        s.qualification AS DoctorQualification,
+        s.degree AS DoctorDegree,
+        d.departmentName AS DepartmentName,
+        mo.CreatedAt AS OrderDate,
+        mo.SignedAt AS DoctorSignedAt,
+        i.ItemName AS MedicineName,
+        mo.Dosage,
+        mo.Quantity,
+        mo.Unit,
+        mo.Frequency,
+        mo.Note
+    FROM MedicalOrder mo
+    INNER JOIN Patient p ON mo.PatientID = p.id
+    INNER JOIN Staff s ON mo.DoctorID = s.id
+    LEFT JOIN Department d ON s.departmentID = d.id
+    LEFT JOIN Items i ON mo.ItemID = i.ID
+    WHERE mo.PatientID = @PatientID
+      AND mo.OrderType = N'Thuốc'
+      AND (@OrderDate IS NULL OR CAST(mo.CreatedAt AS DATE) = @OrderDate)
+    ORDER BY mo.CreatedAt DESC, mo.id
+END
+go
+-- create procedure danh sách nhân viên theo khoa
+CREATE PROCEDURE sp_GetStaffListByDepartment
+    @DepartmentID CHAR(10)
+AS
+BEGIN
+    SELECT
+        s.id AS StaffID,
+        s.name AS StaffName,
+        s.role AS StaffRole,
+        s.dob AS DateOfBirth,
+        s.gender,
+        s.phoneNumber,
+        s.email,
+        s.homeAddress,
+        s.citizenID,
+        s.position,
+        s.qualification,
+        s.degree,
+        s.status,
+        s.startDate,
+        s.Notes,
+        d.departmentName AS DepartmentName
+    FROM Staff s
+    LEFT JOIN Department d ON s.departmentID = d.id
+    WHERE (@DepartmentID IS NULL OR s.departmentID = @DepartmentID)
+    ORDER BY s.name
+END
+
+go
+-- create procedure danh sách bệnh nhân theo khoa
+CREATE PROCEDURE sp_GetPatientListByDepartment
+    @DepartmentID CHAR(10)
+AS
+BEGIN
+    SELECT DISTINCT
+        p.id AS PatientID,
+        p.fullName,
+        p.gender,
+        p.dob,
+        p.phoneNumber,
+        p.TypePatient,
+        p.citizenID,
+        p.InsuranceID,
+        p.address,
+        p.EmergencyContact,
+        p.EmergencyPhone,
+        p.status,
+        p.createdDate,
+        p.updatedDate,
+        p.weight,
+        p.height,
+        d.departmentName AS DepartmentName
+    FROM Patient p
+    INNER JOIN DoctorPatient dp ON p.id = dp.patientID
+    INNER JOIN Staff s ON dp.doctorID = s.id
+    LEFT JOIN Department d ON s.departmentID = d.id
+    WHERE (@DepartmentID IS NULL OR s.departmentID = @DepartmentID)
+    ORDER BY p.fullName
+END
+
+go
+-- create procedure danh sách bác sĩ theo khoa
+CREATE PROCEDURE sp_GetDoctorListByDepartment
+    @DepartmentID CHAR(10)
+AS
+BEGIN
+    SELECT
+        s.id AS DoctorID,
+        s.name AS DoctorName,
+        s.dob AS DateOfBirth,
+        s.gender,
+        s.phoneNumber,
+        s.email,
+        s.homeAddress,
+        s.citizenID,
+        s.position,
+        s.qualification,
+        s.degree,
+        s.status,
+        s.startDate,
+        s.Notes,
+        d.departmentName AS DepartmentName
+    FROM Staff s
+    LEFT JOIN Department d ON s.departmentID = d.id
+    WHERE s.role = N'Bác sĩ'
+      AND (@DepartmentID IS NULL OR s.departmentID = @DepartmentID)
+    ORDER BY s.name
+END
 --USE master;
 --ALTER DATABASE HospitalManagement SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
 --DROP DATABASE HospitalManagement;
