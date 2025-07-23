@@ -39,7 +39,7 @@ namespace DAL
         {
             try
             {
-                return db.Salary.Select(x => new
+                return db.Salaries.Select(x => new
                 {
                     x.id,
                     x.BasicSalary
@@ -53,11 +53,11 @@ namespace DAL
         }
         private Salary find(Decimal salary)
         {
-            return db.Salary.Where(x => x.BasicSalary == salary).FirstOrDefault();
+            return db.Salaries.Where(x => x.BasicSalary == salary).FirstOrDefault();
         }
         private Salary findbyID(int id)
         {
-            return db.Salary.Where(x => x.id == id).FirstOrDefault();
+            return db.Salaries.Where(x => x.id == id).FirstOrDefault();
         }
         public int Add(SalaryDTO dto)
         {
@@ -71,7 +71,7 @@ namespace DAL
                 {
                     BasicSalary = dto.BasicSalary
                 };
-                db.Salary.InsertOnSubmit(newItem);
+                db.Salaries.InsertOnSubmit(newItem);
                 db.SubmitChanges();
                 return 0;
             }
@@ -85,12 +85,12 @@ namespace DAL
         {
             try
             {
-                Salary itemD = db.Salary.Where(x => x.BasicSalary == salary).FirstOrDefault();
+                Salary itemD = db.Salaries.Where(x => x.BasicSalary == salary).FirstOrDefault();
                 if (itemD == null)
                 {
                     return false;
                 }
-                db.Salary.DeleteOnSubmit(itemD);
+                db.Salaries.DeleteOnSubmit(itemD);
                 db.SubmitChanges();
                 return true;
 
@@ -112,7 +112,7 @@ namespace DAL
                 }
 
                 //Lấy dữ liệu và cập nhật
-                Salary oldItem = db.Salary.Where(x => x.id == item.Id).FirstOrDefault();
+                Salary oldItem = db.Salaries.Where(x => x.id == item.Id).FirstOrDefault();
 
                 // Cập nhật các thuộc tính
                 oldItem.BasicSalary = item.BasicSalary;

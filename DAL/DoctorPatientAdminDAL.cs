@@ -11,7 +11,7 @@ namespace DAL
     /// Lớp Data Access Layer (DAL) cho bảng DoctorPatient.
     /// Chứa các phương thức để tương tác trực tiếp với cơ sở dữ liệu.
     /// </summary>
-    public class DoctorPatientDAL
+    public class DoctorPatientAdminDAL
     {
         // Khởi tạo đối tượng DataContext của LINQ to SQL
         HospitalManagementDataContext db = new HospitalManagementDataContext();
@@ -21,14 +21,14 @@ namespace DAL
         /// Sử dụng LINQ để join các bảng DoctorPatient, Staff, và Patient để lấy tên.
         /// </summary>
         /// <returns>Một danh sách các đối tượng DoctorPatientDTO.</returns>
-        public List<DoctorPatientDTO> GetAll()
+        public List<DoctorPatientAdminDTO> GetAll()
         {
             // Join 3 bảng để lấy thông tin đầy đủ cho việc hiển thị
             var query = from dp in db.DoctorPatients
                         join doc in db.Staffs on dp.doctorID equals doc.id // Join với bảng Staff để lấy tên bác sĩ
                         join pat in db.Patients on dp.patientID equals pat.id // Join với bảng Patient để lấy tên bệnh nhân
                         orderby dp.startDate descending // Sắp xếp theo ngày bắt đầu giảm dần
-                        select new DoctorPatientDTO
+                        select new DoctorPatientAdminDTO
                         {
                             doctorID = dp.doctorID,
                             patientID = dp.patientID,
@@ -67,7 +67,7 @@ namespace DAL
         /// </summary>
         /// <param name="dp">Đối tượng DoctorPatientDTO chứa thông tin cần thêm.</param>
         /// <returns>True nếu thêm thành công, False nếu thất bại.</returns>
-        public bool Add(DoctorPatientDTO dp)
+        public bool Add(DoctorPatientAdminDTO dp)
         {
             try
             {
@@ -98,7 +98,7 @@ namespace DAL
         /// </summary>
         /// <param name="dp">Đối tượng DoctorPatientDTO chứa thông tin cập nhật.</param>
         /// <returns>True nếu cập nhật thành công, False nếu thất bại.</returns>
-        public bool Update(DoctorPatientDTO dp)
+        public bool Update(DoctorPatientAdminDTO dp)
         {
             try
             {

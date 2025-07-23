@@ -5,7 +5,7 @@ namespace DTO
     /// <summary>
     /// Data Transfer Object cho thông tin nhân viên (Staff)
     /// </summary>
-    public class StaffDTO
+    public class UserInfomationDTO
     {
         /// <summary> Mã nhân viên </summary>
         public string Id { get; set; }

@@ -13,16 +13,16 @@ namespace BLL
     /// Là cầu nối giữa lớp giao diện (GUI) và lớp truy cập dữ liệu (DAL).
     /// Chứa các logic nghiệp vụ và quy tắc xác thực.
     /// </summary>
-    public class DoctorPatientBLL
+    public class DoctorPatientAdminBLL
     {
         // Khởi tạo một đối tượng của lớp DAL tương ứng
-        DoctorPatientDAL dal = new DoctorPatientDAL();
+        DoctorPatientAdminDAL dal = new DoctorPatientAdminDAL();
 
         /// <summary>
         /// Lấy toàn bộ danh sách phân công. Chỉ đơn giản là gọi phương thức từ DAL.
         /// </summary>
         /// <returns>Danh sách các đối tượng DoctorPatientDTO.</returns>
-        public List<DoctorPatientDTO> GetAll() => dal.GetAll();
+        public List<DoctorPatientAdminDTO> GetAll() => dal.GetAll();
 
         /// <summary>
         /// Lấy danh sách các bác sĩ. Chỉ đơn giản là gọi phương thức từ DAL.
@@ -41,7 +41,7 @@ namespace BLL
         /// </summary>
         /// <param name="dp">Đối tượng DoctorPatientDTO chứa thông tin cần thêm.</param>
         /// <returns>True nếu thêm thành công, False nếu thất bại.</returns>
-        public bool Add(DoctorPatientDTO dp)
+        public bool Add(DoctorPatientAdminDTO dp)
         {
             // ===== QUY TẮC NGHIỆP VỤ 1: Không cho phép thêm trùng lặp khóa chính =====
             if (dal.IsDuplicate(dp.doctorID, dp.patientID, dp.startDate))
@@ -66,7 +66,7 @@ namespace BLL
         /// </summary>
         /// <param name="dp">Đối tượng DoctorPatientDTO chứa thông tin cần cập nhật.</param>
         /// <returns>True nếu cập nhật thành công, False nếu thất bại.</returns>
-        public bool Update(DoctorPatientDTO dp)
+        public bool Update(DoctorPatientAdminDTO dp)
         {
             // ===== QUY TẮC NGHIỆP VỤ: Ngày kết thúc phải sau hoặc bằng ngày bắt đầu =====
             if (dp.endDate.HasValue && dp.endDate < dp.startDate)

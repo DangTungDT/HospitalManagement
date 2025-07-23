@@ -15,7 +15,7 @@ namespace BLL
         /// </summary>
         /// <param name="username">Tên đăng nhập</param>
         /// <returns>StaffDTO chứa thông tin nhân viên</returns>
-        public StaffDTO GetStaffInfo(string username)
+        public UserInfomationDTO GetStaffInfo(string username)
         {
             return dal.GetStaffByUsername(username);
         }

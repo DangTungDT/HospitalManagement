@@ -15,14 +15,14 @@ namespace DAL
         /// </summary>
         /// <param name="username">Tên đăng nhập</param>
         /// <returns>StaffDTO chứa thông tin nhân viên</returns>
-        public StaffDTO GetStaffByUsername(string username)
+        public UserInfomationDTO GetStaffByUsername(string username)
         {
             var result = (from acc in db.Accounts
                           join s in db.Staffs on acc.staffID equals s.id
                           join d in db.Departments on s.departmentID equals d.id into dept
                           from d in dept.DefaultIfEmpty()
                           where acc.username == username
-                          select new StaffDTO
+                          select new UserInfomationDTO
                           {
                               Id = s.id,
                               Name = s.name,
