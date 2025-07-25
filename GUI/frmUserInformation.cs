@@ -26,7 +26,7 @@ namespace GUI
         /// </summary>
         private void LoadUserInfo()
         {
-            StaffDTO staff = bll.GetStaffInfo(_username);
+            UserInfomationDTO staff = bll.GetStaffInfo(_username);
             if (staff != null)
             {
                 // Gán dữ liệu lên các control (giả sử đã có các TextBox tương ứng)

@@ -7,7 +7,7 @@ namespace BLL
     /// <summary>
     /// Lớp BLL cho Xét nghiệm, chứa các logic nghiệp vụ.
     /// </summary>
-    public class LaboratoryTestBLL
+    public class LaboratoryTestAdminBLL
     {
         LaboratoryTestDAL dal = new LaboratoryTestDAL();
         MedicalOrderDAL commonDal = new MedicalOrderDAL(); // Dùng lại DAL của MedicalOrder để lấy danh sách cho ComboBox
@@ -17,56 +17,28 @@ namespace BLL
         /// </summary>
         public List<LaboratoryTestDTO> GetAll() => dal.GetAll();
 
-        /// <summary>
-        /// Lấy danh sách bệnh nhân cho ComboBox.
-        /// </summary>
-        public List<PatientComboboxDTO> GetPatients() => commonDal.GetPatients();
+        // Lấy danh sách y lệnh cho combobox
+        public List<MedicalOrderComboDTO> GetMedicalOrdersForLabTest() => dal.GetMedicalOrdersForLabTest();
 
-        /// <summary>
-        /// Lấy danh sách bác sĩ cho ComboBox.
-        /// </summary>
-        public List<StaffComboboxDTO> GetDoctors() => commonDal.GetDoctors();
+        // Lấy danh sách loại xét nghiệm
+        public List<LabTestTypeDTO> GetLabTestTypes() => dal.GetLabTestTypes();
 
-        /// <summary>
-        /// Thêm kết quả xét nghiệm.
-        /// </summary>
+        // Thêm kết quả xét nghiệm
         public bool Add(LaboratoryTestDTO dto)
         {
-            // Có thể thêm các quy tắc kiểm tra dữ liệu ở đây
-            if (string.IsNullOrWhiteSpace(dto.testName) || string.IsNullOrWhiteSpace(dto.patientID) || string.IsNullOrWhiteSpace(dto.doctorID))
-            {
-                return false; // Trả về false nếu thiếu thông tin bắt buộc
-            }
+            if (dto.MedicalOrderID <= 0)
+                return false;
             return dal.Add(dto);
         }
 
-        /// <summary>
-        /// Cập nhật kết quả xét nghiệm.
-        /// </summary>
+        // Cập nhật kết quả xét nghiệm
         public bool Update(LaboratoryTestDTO dto)
         {
-            // Có thể thêm các quy tắc kiểm tra dữ liệu ở đây
-            if (string.IsNullOrWhiteSpace(dto.testName) || string.IsNullOrWhiteSpace(dto.patientID) || string.IsNullOrWhiteSpace(dto.doctorID))
-            {
+            if (dto.MedicalOrderID <= 0)
                 return false;
-            }
             return dal.Update(dto);
         }
 
-        /// <summary>
-        /// Xóa kết quả xét nghiệm.
-        /// </summary>
-        public bool Delete(int id)
-        {
-            return dal.Delete(id);
-        }
-
-        /// <summary>
-        /// Lấy danh sách loại xét nghiệm.
-        /// </summary>
-        public List<LabTestTypeDTO> GetLabTestTypes()
-        {
-            return dal.GetLabTestTypes();
-        }
+        public bool Delete(int id) => dal.Delete(id);
     }
 }

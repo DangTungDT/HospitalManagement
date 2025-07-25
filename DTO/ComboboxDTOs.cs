@@ -41,4 +41,16 @@ namespace DTO
         public int Id { get; set; } // Khóa chính của LaboratoryTest là INT
         public string Name { get; set; }
     }
+
+    /// <summary>
+    /// DTO cho combobox Y lệnh (MedicalOrder) dùng cho xét nghiệm.
+    /// </summary>
+    public class MedicalOrderComboDTO
+    {
+        public int Id { get; set; }
+        public string PatientName { get; set; }
+        public string DoctorName { get; set; }
+        public string OrderType { get; set; }
+        public string Display => $"{PatientName} - {DoctorName} - {OrderType}";
+    }
 }
