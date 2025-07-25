@@ -29,12 +29,10 @@ namespace DAL
             var query = from mo in db.MedicalOrders
                         join p in db.Patients on mo.PatientID equals p.id
                         join d in db.Staffs on mo.DoctorID equals d.id
-                        // Left Join với bảng Items vì ItemID có thể null
                         join it in db.Items on mo.ItemID equals it.ID into itemGroup
                         from item in itemGroup.DefaultIfEmpty()
-                        // Left Join với bảng LaboratoryTest vì TestTypeID có thể null
-                        join lt in db.LaboratoryTests on mo.TestTypeID equals lt.id into testGroup
-                        from test in testGroup.DefaultIfEmpty()
+                        join ltt in db.LabTestTypes on mo.TestTypeID equals ltt.id into lttGroup
+                        from ltt in lttGroup.DefaultIfEmpty()
                         orderby mo.CreatedAt descending
                         select new MedicalOrderDTO
                         {
@@ -58,7 +56,7 @@ namespace DAL
                             PatientName = p.fullName,
                             DoctorName = d.name,
                             ItemName = item != null ? item.ItemName : "N/A", // Nếu item null thì hiển thị N/A
-                            TestName = test != null ? test.testName : "N/A"  // Nếu test null thì hiển thị N/A
+                            TestName = ltt != null ? ltt.testTypeName : "N/A"  // Nếu test null thì hiển thị N/A
                         };
             return query.ToList();
         }
@@ -87,11 +85,8 @@ namespace DAL
 
         public List<LabTestComboboxDTO> GetLabTests()
         {
-            // Lưu ý: CSDL của bạn có vẻ đang dùng bảng LaboratoryTest để lưu cả "loại xét nghiệm" và "kết quả xét nghiệm".
-            // Tạm thời sẽ lấy các tên xét nghiệm không trùng lặp.
-            return db.LaboratoryTests
-                     .Select(t => new LabTestComboboxDTO { Id = t.id, Name = t.testName })
-                     .Distinct() // Cân nhắc nếu có nhiều test trùng tên nhưng khác ID
+            return db.LabTestTypes
+                     .Select(t => new LabTestComboboxDTO { Id = t.id, Name = t.testTypeName })
                      .ToList();
         }
         #endregion

@@ -61,7 +61,7 @@ namespace GUI
                     }
                     else if (role == "bacsi")
                     {
-                        frmMenuDoctor f = new frmMenuDoctor();
+                        frmMenuDoctor f = new frmMenuDoctor("");
                         f.ShowDialog();
                     }
                     else if (role == "dieuduong")

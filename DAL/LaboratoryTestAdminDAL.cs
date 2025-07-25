@@ -20,24 +20,17 @@ namespace DAL
         public List<LaboratoryTestDTO> GetAll()
         {
             var query = from lt in db.LaboratoryTests
-                        join p in db.Patients on lt.patientID equals p.id
-                        join d in db.Staffs on lt.doctorID equals d.id
                         orderby lt.startDate descending
                         select new LaboratoryTestDTO
                         {
                             id = lt.id,
-                            testName = lt.testName,
-                            patientID = lt.patientID,
-                            doctorID = lt.doctorID,
+                            MedicalOrderID = lt.MedicalOrderID,
                             startDate = lt.startDate,
                             resultValue = lt.resultValue,
                             resultUnit = lt.resultUnit,
                             result = lt.result,
-                            testType = lt.testType,
                             status = lt.status,
-                            note = lt.note,
-                            PatientName = p.fullName,
-                            DoctorName = d.name
+                            note = lt.note
                         };
             return query.ToList();
         }
@@ -51,14 +44,11 @@ namespace DAL
             {
                 LaboratoryTest newTest = new LaboratoryTest
                 {
-                    testName = dto.testName,
-                    patientID = dto.patientID,
-                    doctorID = dto.doctorID,
+                    MedicalOrderID = dto.MedicalOrderID,
                     startDate = dto.startDate,
                     resultValue = dto.resultValue,
                     resultUnit = dto.resultUnit,
                     result = dto.result,
-                    testType = dto.testType,
                     status = dto.status,
                     note = dto.note,
                 };
@@ -79,14 +69,11 @@ namespace DAL
                 LaboratoryTest existingTest = db.LaboratoryTests.SingleOrDefault(t => t.id == dto.id);
                 if (existingTest == null) return false;
 
-                existingTest.testName = dto.testName;
-                existingTest.patientID = dto.patientID;
-                existingTest.doctorID = dto.doctorID;
+                existingTest.MedicalOrderID = dto.MedicalOrderID;
                 existingTest.startDate = dto.startDate;
                 existingTest.resultValue = dto.resultValue;
                 existingTest.resultUnit = dto.resultUnit;
                 existingTest.result = dto.result;
-                existingTest.testType = dto.testType;
                 existingTest.status = dto.status;
                 existingTest.note = dto.note;
 
@@ -115,9 +102,25 @@ namespace DAL
 
         public List<LabTestTypeDTO> GetLabTestTypes()
         {
-            return db.LaboratoryTests
-                     .Select(t => new LabTestTypeDTO { Id = t.id, Name = t.testName })
+            return db.LabTestTypes
+                     .Select(t => new LabTestTypeDTO { Id = t.id, Name = t.testTypeName })
                      .ToList();
+        }
+
+        // Lấy danh sách MedicalOrder cho combobox (bao gồm tên bệnh nhân, bác sĩ, loại y lệnh)
+        public List<MedicalOrderComboDTO> GetMedicalOrdersForLabTest()
+        {
+            var query = from mo in db.MedicalOrders
+                        join p in db.Patients on mo.PatientID equals p.id
+                        join d in db.Staffs on mo.DoctorID equals d.id
+                        select new MedicalOrderComboDTO
+                        {
+                            Id = mo.id,
+                            PatientName = p.fullName,
+                            DoctorName = d.name,
+                            OrderType = mo.OrderType
+                        };
+            return query.ToList();
         }
     }
 }

@@ -12,19 +12,13 @@ namespace DTO
     public class LaboratoryTestDTO
     {
         public int id { get; set; }
-        public string testName { get; set; }
-        public string patientID { get; set; }
-        public string doctorID { get; set; }
+        public int MedicalOrderID { get; set; }
         public DateTime? startDate { get; set; }
         public string resultValue { get; set; }
         public string resultUnit { get; set; }
         public string result { get; set; }
-        public string testType { get; set; }
         public string status { get; set; }
         public string note { get; set; }
-
-        // --- Thuộc tính bổ sung cho giao diện ---
-        public string PatientName { get; set; }
-        public string DoctorName { get; set; }
+        public string MedicalOrderDisplay { get; set; } // Hiển thị tên y lệnh
     }
 }

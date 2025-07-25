@@ -17,7 +17,7 @@ namespace GUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMenuDoctor("S001"));
+            Application.Run(new frmMedicalOrderAdmin());
         } 
     }
 }

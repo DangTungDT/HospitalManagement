@@ -8,7 +8,7 @@ namespace GUI
     public partial class LaboratoryTestAdmin : Form
     {
         // Khởi tạo lớp Business Logic Layer để thao tác dữ liệu xét nghiệm
-        LaboratoryTestBLL bll = new LaboratoryTestBLL();
+        LaboratoryTestAdminBLL bll = new LaboratoryTestAdminBLL();
 
         // Constructor của form
         public LaboratoryTestAdmin()
@@ -16,7 +16,7 @@ namespace GUI
             InitializeComponent();
             // Đăng ký các sự kiện cho các control trên form
             this.Load += LaboratoryTestAdmin_Load;
-            dgvDanhSachXetNghiem.CellClick += dgvDanhSachXetNghiem_CellClick;
+            //dgvDanhSachXetNghiem.CellClick += dgvDanhSachXetNghiem_CellClick;
             btnThem.Click += btnThem_Click;
             btnSua.Click += btnSua_Click;
             btnXoa.Click += btnXoa_Click;
@@ -33,9 +33,9 @@ namespace GUI
             dtpNgayBatDau.ShowCheckBox = true;
             dtpNgayBatDau.Checked = false;
 
-            LoadComboBoxes(); // Nạp dữ liệu cho các combobox
-            LoadDataGridView(); // Nạp dữ liệu cho DataGridView
-            ClearFields(); // Xóa trắng các control nhập liệu
+            LoadComboBoxes();
+            LoadDataGridView(); 
+            ClearFields();
         }
 
         /// <summary>
@@ -43,15 +43,10 @@ namespace GUI
         /// </summary>
         private void LoadComboBoxes()
         {
-            // Nạp danh sách bệnh nhân
-            cboBenhNhan.DataSource = bll.GetPatients();
-            cboBenhNhan.DisplayMember = "Name";
-            cboBenhNhan.ValueMember = "Id";
-
-            // Nạp danh sách bác sĩ
-            cboBacSi.DataSource = bll.GetDoctors();
-            cboBacSi.DisplayMember = "Name";
-            cboBacSi.ValueMember = "Id";
+            // Nạp danh sách y lệnh
+            cboYLenh.DataSource = bll.GetMedicalOrdersForLabTest();
+            cboYLenh.DisplayMember = "Display"; // Sẽ tạo property Display ở dưới
+            cboYLenh.ValueMember = "Id";
 
 
             // Nạp danh sách trạng thái xét nghiệm
@@ -59,12 +54,21 @@ namespace GUI
             cboTrangThai.Items.AddRange(new string[] { "Chờ lấy mẫu", "Đang xử lý", "Hoàn thành", "Hủy" });
         }
 
+       
+
         /// <summary>
         /// Nạp dữ liệu cho DataGridView từ BLL.
         /// </summary>
         private void LoadDataGridView()
         {
-            dgvDanhSachXetNghiem.DataSource = bll.GetAll();
+            var list = bll.GetAll();
+            var orders = bll.GetMedicalOrdersForLabTest();
+            foreach (var item in list)
+            {
+                var mo = orders.Find(x => x.Id == item.MedicalOrderID);
+                item.MedicalOrderDisplay = mo != null ? mo.Display : item.MedicalOrderID.ToString();
+            }
+            dgvDanhSachXetNghiem.DataSource = list;
             SetupDataGridView();
         }
 
@@ -75,18 +79,27 @@ namespace GUI
         {
             dgvDanhSachXetNghiem.Columns["id"].Visible = true;
             dgvDanhSachXetNghiem.Columns["id"].HeaderText = "Mã Xét Nghiệm";
-            dgvDanhSachXetNghiem.Columns["patientID"].Visible = false;
-            dgvDanhSachXetNghiem.Columns["doctorID"].Visible = false;
-            dgvDanhSachXetNghiem.Columns["testName"].HeaderText = "Tên Xét Nghiệm";
-            dgvDanhSachXetNghiem.Columns["PatientName"].HeaderText = "Bệnh Nhân";
-            dgvDanhSachXetNghiem.Columns["DoctorName"].HeaderText = "Bác Sĩ";
-            dgvDanhSachXetNghiem.Columns["resultValue"].HeaderText = "Giá trị KQ";
-            dgvDanhSachXetNghiem.Columns["resultUnit"].HeaderText = "Đơn vị KQ";
-            dgvDanhSachXetNghiem.Columns["result"].HeaderText = "Kết Luận";
-            dgvDanhSachXetNghiem.Columns["testType"].HeaderText = "Loại Xét Nghiệm";
-            dgvDanhSachXetNghiem.Columns["status"].HeaderText = "Trạng Thái";
-            dgvDanhSachXetNghiem.Columns["note"].HeaderText = "Ghi Chú";
-            dgvDanhSachXetNghiem.Columns["startDate"].HeaderText = "Ngày Thực Hiện";
+            if (dgvDanhSachXetNghiem.Columns.Contains("MedicalOrderID"))
+                dgvDanhSachXetNghiem.Columns["MedicalOrderID"].Visible = false;
+            if (dgvDanhSachXetNghiem.Columns.Contains("MedicalOrderDisplay"))
+                dgvDanhSachXetNghiem.Columns["MedicalOrderDisplay"].HeaderText = "Y lệnh";
+            if (dgvDanhSachXetNghiem.Columns.Contains("startDate"))
+                dgvDanhSachXetNghiem.Columns["startDate"].HeaderText = "Ngày Thực Hiện";
+            if (dgvDanhSachXetNghiem.Columns.Contains("resultValue"))
+                dgvDanhSachXetNghiem.Columns["resultValue"].HeaderText = "Giá trị KQ";
+            if (dgvDanhSachXetNghiem.Columns.Contains("resultUnit"))
+                dgvDanhSachXetNghiem.Columns["resultUnit"].HeaderText = "Đơn vị KQ";
+            if (dgvDanhSachXetNghiem.Columns.Contains("result"))
+                dgvDanhSachXetNghiem.Columns["result"].HeaderText = "Kết Luận";
+            if (dgvDanhSachXetNghiem.Columns.Contains("status"))
+                dgvDanhSachXetNghiem.Columns["status"].HeaderText = "Trạng Thái";
+            if (dgvDanhSachXetNghiem.Columns.Contains("note"))
+                dgvDanhSachXetNghiem.Columns["note"].HeaderText = "Ghi Chú";
+            // Ẩn các cột không có trong bảng LaboratoryTest nếu có
+            string[] extraCols = {"PatientName", "DoctorName", "TestTypeName", "LabTestTypeID"};
+            foreach (var col in extraCols)
+                if (dgvDanhSachXetNghiem.Columns.Contains(col))
+                    dgvDanhSachXetNghiem.Columns[col].Visible = false;
         }
         #endregion
 
@@ -99,18 +112,13 @@ namespace GUI
         {
             if (e.RowIndex < 0) return;
             DataGridViewRow row = dgvDanhSachXetNghiem.Rows[e.RowIndex];
-            // Hiển thị mã xét nghiệm lên control
             txtMaXetNghiem.Text = row.Cells["id"].Value?.ToString() ?? "";
-            txtTenXetNghiem.Text = GetStringValue(row.Cells["testName"].Value);
-            cboBenhNhan.SelectedValue = row.Cells["patientID"].Value;
-            cboBacSi.SelectedValue = row.Cells["doctorID"].Value;
+            if (row.Cells["MedicalOrderID"].Value != null)
+                cboYLenh.SelectedValue = Convert.ToInt32(row.Cells["MedicalOrderID"].Value);
             SetDateTimePickerValue(dtpNgayBatDau, row.Cells["startDate"].Value);
             txtGiaTriKetQua.Text = GetStringValue(row.Cells["resultValue"].Value);
             txtDonViKetQua.Text = GetStringValue(row.Cells["resultUnit"].Value);
             txtKetQua.Text = GetStringValue(row.Cells["result"].Value);
-            // Thay cboLoaiXetNghiem.Text = ... thành txtLoaiXetNghiem.Text = ... trong dgvDanhSachXetNghiem_CellClick
-            txtLoaiXetNghiem.Text = GetStringValue(row.Cells["testType"].Value);
-            // Hiển thị trạng thái đúng cách (so sánh text, không phân biệt hoa thường)
             string status = GetStringValue(row.Cells["status"].Value);
             int statusIdx = -1;
             for (int i = 0; i < cboTrangThai.Items.Count; i++)
@@ -217,20 +225,17 @@ namespace GUI
         /// </summary>
         private void ClearFields()
         {
-            txtTenXetNghiem.Clear();
-            cboBenhNhan.SelectedIndex = -1;
-            cboBacSi.SelectedIndex = -1;
+            cboYLenh.SelectedIndex = -1;
+            
             dtpNgayBatDau.Checked = false;
             txtGiaTriKetQua.Clear();
             txtDonViKetQua.Clear();
             txtKetQua.Clear();
-            // Thay cboLoaiXetNghiem.SelectedIndex = -1 thành txtLoaiXetNghiem.Clear() trong ClearFields
-            txtLoaiXetNghiem.Clear();
             cboTrangThai.SelectedIndex = -1;
             cboTrangThai.Text = "";
             txtGhiChu.Clear();
             txtMaXetNghiem.Text = "";
-            txtTenXetNghiem.Focus();
+            
         }
 
         /// <summary>
@@ -240,15 +245,11 @@ namespace GUI
         {
             return new LaboratoryTestDTO
             {
-                testName = txtTenXetNghiem.Text,
-                patientID = cboBenhNhan.SelectedValue?.ToString(),
-                doctorID = cboBacSi.SelectedValue?.ToString(),
+                MedicalOrderID = cboYLenh.SelectedValue != null ? (int)cboYLenh.SelectedValue : 0,
                 startDate = dtpNgayBatDau.Checked ? (DateTime?)dtpNgayBatDau.Value : null,
                 resultValue = txtGiaTriKetQua.Text,
                 resultUnit = txtDonViKetQua.Text,
                 result = txtKetQua.Text,
-                // Thay testType = cboLoaiXetNghiem.Text thành testType = txtLoaiXetNghiem.Text trong GetDTOFromForm
-                testType = txtLoaiXetNghiem.Text,
                 status = cboTrangThai.Text,
                 note = txtGhiChu.Text
             };
@@ -274,6 +275,7 @@ namespace GUI
                 dtp.Checked = false;
             }
         }
+
         #endregion
 
 

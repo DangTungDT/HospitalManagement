@@ -15,7 +15,7 @@ namespace GUI
     public partial class DoctorPatientAdmin : Form
     {
         // Khởi tạo lớp Business Logic Layer (BLL) để tương tác với logic nghiệp vụ
-        DoctorPatientBLL bll = new DoctorPatientBLL();
+        DoctorPatientAdminBLL bll = new DoctorPatientAdminBLL();
 
         // Constructor của Form
         public DoctorPatientAdmin()
@@ -139,7 +139,7 @@ namespace GUI
             }
 
             // Tạo đối tượng DTO từ dữ liệu trên form
-            DoctorPatientDTO dp = new DoctorPatientDTO
+            DoctorPatientAdminDTO dp = new DoctorPatientAdminDTO
             {
                 doctorID = cboBacSi.SelectedValue.ToString(),
                 patientID = cboBenhNhan.SelectedValue.ToString(),
@@ -177,7 +177,7 @@ namespace GUI
                 MessageBox.Show("Vui lòng điền vai trò.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            DoctorPatientDTO dp = new DoctorPatientDTO
+            DoctorPatientAdminDTO dp = new DoctorPatientAdminDTO
             {
                 doctorID = dgvDanhSachPhanCong.CurrentRow.Cells["doctorID"].Value.ToString(),
                 patientID = dgvDanhSachPhanCong.CurrentRow.Cells["patientID"].Value.ToString(),
