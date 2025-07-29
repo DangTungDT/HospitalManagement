@@ -39,9 +39,9 @@ namespace DAL
         {
             try
             {
-                return db.Patients.Select(x=> new
+                return db.Patients.Select(x => new
                 {
-                    x.id, 
+                    x.id,
                     x.fullName,
                     x.gender,
                     x.dob,
@@ -59,7 +59,7 @@ namespace DAL
                     x.height
                 });
 
-            }catch (Exception ex)
+            } catch (Exception ex)
             {
                 return null;
             }
@@ -78,7 +78,7 @@ namespace DAL
         {
             try
             {
-                if(Exists(dto.Id) != null)
+                if (Exists(dto.Id) != null)
                 {
                     return -1; //Đã tồn tại dũ liệu trùng id
                 }
@@ -110,7 +110,7 @@ namespace DAL
                 db.Patients.InsertOnSubmit(newP);
                 db.SubmitChanges();
                 return 0;
-            }catch(Exception ex)
+            } catch (Exception ex)
             {
                 return 1;
             }
@@ -121,54 +121,89 @@ namespace DAL
             try
             {
                 Patient itemDelete = Exists(id);
-                if(itemDelete != null)
+                if (itemDelete != null)
                 {
                     db.Patients.DeleteOnSubmit(itemDelete);
                     db.SubmitChanges();
                     return true;
                 }
                 return false;
-            }catch(Exception ex)
+            } catch (Exception ex)
             {
                 return false;
             }
         }
 
-        public int Update(PatientDTO dto)
+        public bool SuaBenhNhan(PatientDTO dto)
         {
-            try
+            Patient benhNhan = db.Patients.SingleOrDefault(e => e.id == dto.Id);
+            if (benhNhan != null)
             {
-                if (Exists(dto.Id) != null)
+                try
                 {
-                    return -1; //Đã tồn tại dũ liệu trùng id
+                    benhNhan.fullName = dto.FullName;
+                    benhNhan.gender = dto.Gender;
+                    benhNhan.dob = dto.Dob;
+                    benhNhan.phoneNumber = dto.PhoneNumber;
+                    benhNhan.TypePatient = dto.TypePatient;
+                    benhNhan.citizenID = dto.CitizenID;
+                    benhNhan.InsuranceID = dto.InsuranceID;
+                    benhNhan.address = dto.Address;
+                    benhNhan.EmergencyContact = dto.EmergencyContact;
+                    benhNhan.EmergencyPhone = dto.EmergencyPhone;
+                    benhNhan.status = dto.Status;
+                    benhNhan.updatedDate = DateTime.Now;
+                    benhNhan.weight = dto.Weight;
+                    benhNhan.height = dto.Height;
+
+                    db.SubmitChanges();
+                    return true;
                 }
-                Patient itemNew = db.Patients.Where(x=> x.id == dto.Id).FirstOrDefault();
-                itemNew = new Patient()
+                catch (Exception ex)
                 {
-                    id = dto.Id,
-                    fullName = dto.FullName,
-                    gender = dto.Gender,
-                    dob = dto.Dob,
-                    phoneNumber = dto.PhoneNumber,
-                    citizenID = dto.CitizenID,
-                    InsuranceID = dto.InsuranceID,
-                    TypePatient = dto.TypePatient,
-                    address = dto.Address,
-                    EmergencyContact = dto.EmergencyContact,
-                    EmergencyPhone = dto.EmergencyPhone,
-                    status = dto.Status,
-                    updatedDate = dto.UpdatedDate,
-                    weight = dto.Weight,
-                    height = dto.Height
-                };
-                db.Patients.InsertOnSubmit(itemNew);
-                db.SubmitChanges();
-                return 0;
+                    throw new Exception("Lỗi " + ex.Message);
+                }
             }
-            catch (Exception ex)
+            return false;
+        }              
+        public string TaoMaBNTuDong()
+        {
+            // Lấy tất cả mã chức vụ dưới dạng chuỗi từ database
+            var danhsachMaBN = db.Patients
+                                    .Select(p => p.id)
+                                    .ToList();
+            // Tìm mã chức vụ có số lớn nhất sau khi chuyển đổi phần số trong bộ nhớ
+            int maBenhNhanlonnhat = danhsachMaBN
+                                 .Select(maBN => int.Parse(maBN.Substring(2)))
+                                 .Max();  // Lấy số lớn nhất
+
+            // Tăng số chức vụ hiện tại lên 1
+            int maBNHT = maBenhNhanlonnhat + 1;
+            // Tạo mã chức vụ mới với phần số mới, đảm bảo 3 chữ số
+            string maBNmoi = "P" + maBNHT.ToString("D3");
+
+            return maBNmoi; // Trả về mã chức vụ mới
+        }
+        public bool KTBHYT(string maBN)
+        {
+            string maBHYT = (db.Patients.Where(x => x.id == maBN).Select(y=> y.InsuranceID )).FirstOrDefault();
+            return maBHYT != null;
+        }
+        public string HienThiBHYT(string maBN)
+        {
+            string maBHYT = "";
+            if(KTBHYT(maBN)==true)
             {
-                return 1; //Lỗi
-            }
+                 maBHYT = (db.Patients.Where(x => x.id == maBN).Select(y => y.InsuranceID)).FirstOrDefault();
+            }           
+            return maBHYT;
+        }
+        public IQueryable TimKiemPatient(string TenBN, string sdt)
+        {
+            IQueryable timKiemBN = (from patient in db.Patients                                   
+                                    where patient.fullName.Contains(TenBN)  && patient.phoneNumber == sdt
+                                    select new { patient.id, patient.fullName, patient.gender, patient.dob, patient.phoneNumber, patient.TypePatient, patient.citizenID, patient.InsuranceID, patient.address, patient.EmergencyContact, patient.EmergencyPhone, patient.status, patient.createdDate, patient.updatedDate,patient.weight,patient.height });
+            return timKiemBN;
         }
     }
 }

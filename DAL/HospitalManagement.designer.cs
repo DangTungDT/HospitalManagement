@@ -57,6 +57,9 @@ namespace DAL
     partial void InsertLaboratoryTest(LaboratoryTest instance);
     partial void UpdateLaboratoryTest(LaboratoryTest instance);
     partial void DeleteLaboratoryTest(LaboratoryTest instance);
+    partial void InsertLabTestType(LabTestType instance);
+    partial void UpdateLabTestType(LabTestType instance);
+    partial void DeleteLabTestType(LabTestType instance);
     partial void InsertMedicalOrder(MedicalOrder instance);
     partial void UpdateMedicalOrder(MedicalOrder instance);
     partial void DeleteMedicalOrder(MedicalOrder instance);
@@ -78,13 +81,10 @@ namespace DAL
     partial void InsertStaff(Staff instance);
     partial void UpdateStaff(Staff instance);
     partial void DeleteStaff(Staff instance);
-    partial void InsertLabTestType(LabTestType instance);
-    partial void UpdateLabTestType(LabTestType instance);
-    partial void DeleteLabTestType(LabTestType instance);
     #endregion
 		
 		public HospitalManagementDataContext() : 
-				base(global::DAL.Properties.Settings.Default.HospitalManagementConnectionString3, mappingSource)
+				base(global::DAL.Properties.Settings.Default.HospitalManagementConnectionString4, mappingSource)
 		{
 			OnCreated();
 		}
@@ -185,6 +185,14 @@ namespace DAL
 			}
 		}
 		
+		public System.Data.Linq.Table<LabTestType> LabTestTypes
+		{
+			get
+			{
+				return this.GetTable<LabTestType>();
+			}
+		}
+		
 		public System.Data.Linq.Table<MedicalOrder> MedicalOrders
 		{
 			get
@@ -238,14 +246,6 @@ namespace DAL
 			get
 			{
 				return this.GetTable<Staff>();
-			}
-		}
-		
-		public System.Data.Linq.Table<LabTestType> LabTestTypes
-		{
-			get
-			{
-				return this.GetTable<LabTestType>();
 			}
 		}
 	}
@@ -2742,6 +2742,120 @@ namespace DAL
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.LabTestType")]
+	public partial class LabTestType : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _testTypeName;
+		
+		private EntitySet<MedicalOrder> _MedicalOrders;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OntestTypeNameChanging(string value);
+    partial void OntestTypeNameChanged();
+    #endregion
+		
+		public LabTestType()
+		{
+			this._MedicalOrders = new EntitySet<MedicalOrder>(new Action<MedicalOrder>(this.attach_MedicalOrders), new Action<MedicalOrder>(this.detach_MedicalOrders));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_testTypeName", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string testTypeName
+		{
+			get
+			{
+				return this._testTypeName;
+			}
+			set
+			{
+				if ((this._testTypeName != value))
+				{
+					this.OntestTypeNameChanging(value);
+					this.SendPropertyChanging();
+					this._testTypeName = value;
+					this.SendPropertyChanged("testTypeName");
+					this.OntestTypeNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LabTestType_MedicalOrder", Storage="_MedicalOrders", ThisKey="id", OtherKey="TestTypeID")]
+		public EntitySet<MedicalOrder> MedicalOrders
+		{
+			get
+			{
+				return this._MedicalOrders;
+			}
+			set
+			{
+				this._MedicalOrders.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_MedicalOrders(MedicalOrder entity)
+		{
+			this.SendPropertyChanging();
+			entity.LabTestType = this;
+		}
+		
+		private void detach_MedicalOrders(MedicalOrder entity)
+		{
+			this.SendPropertyChanging();
+			entity.LabTestType = null;
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.MedicalOrder")]
 	public partial class MedicalOrder : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2786,11 +2900,11 @@ namespace DAL
 		
 		private EntityRef<Item> _Item;
 		
+		private EntityRef<LabTestType> _LabTestType;
+		
 		private EntityRef<Patient> _Patient;
 		
 		private EntityRef<Staff> _Staff;
-		
-		private EntityRef<LabTestType> _LabTestType;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2836,9 +2950,9 @@ namespace DAL
 		{
 			this._LaboratoryTests = new EntitySet<LaboratoryTest>(new Action<LaboratoryTest>(this.attach_LaboratoryTests), new Action<LaboratoryTest>(this.detach_LaboratoryTests));
 			this._Item = default(EntityRef<Item>);
+			this._LabTestType = default(EntityRef<LabTestType>);
 			this._Patient = default(EntityRef<Patient>);
 			this._Staff = default(EntityRef<Staff>);
-			this._LabTestType = default(EntityRef<LabTestType>);
 			OnCreated();
 		}
 		
@@ -3245,6 +3359,40 @@ namespace DAL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LabTestType_MedicalOrder", Storage="_LabTestType", ThisKey="TestTypeID", OtherKey="id", IsForeignKey=true, DeleteRule="SET NULL")]
+		public LabTestType LabTestType
+		{
+			get
+			{
+				return this._LabTestType.Entity;
+			}
+			set
+			{
+				LabTestType previousValue = this._LabTestType.Entity;
+				if (((previousValue != value) 
+							|| (this._LabTestType.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._LabTestType.Entity = null;
+						previousValue.MedicalOrders.Remove(this);
+					}
+					this._LabTestType.Entity = value;
+					if ((value != null))
+					{
+						value.MedicalOrders.Add(this);
+						this._TestTypeID = value.id;
+					}
+					else
+					{
+						this._TestTypeID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("LabTestType");
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_MedicalOrder", Storage="_Patient", ThisKey="PatientID", OtherKey="id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Patient Patient
 		{
@@ -3309,40 +3457,6 @@ namespace DAL
 						this._DoctorID = default(string);
 					}
 					this.SendPropertyChanged("Staff");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LabTestType_MedicalOrder", Storage="_LabTestType", ThisKey="TestTypeID", OtherKey="id", IsForeignKey=true, DeleteRule="SET NULL")]
-		public LabTestType LabTestType
-		{
-			get
-			{
-				return this._LabTestType.Entity;
-			}
-			set
-			{
-				LabTestType previousValue = this._LabTestType.Entity;
-				if (((previousValue != value) 
-							|| (this._LabTestType.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._LabTestType.Entity = null;
-						previousValue.MedicalOrders.Remove(this);
-					}
-					this._LabTestType.Entity = value;
-					if ((value != null))
-					{
-						value.MedicalOrders.Add(this);
-						this._TestTypeID = value.id;
-					}
-					else
-					{
-						this._TestTypeID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("LabTestType");
 				}
 			}
 		}
@@ -5798,120 +5912,6 @@ namespace DAL
 		{
 			this.SendPropertyChanging();
 			entity.Staff = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.LabTestType")]
-	public partial class LabTestType : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private string _testTypeName;
-		
-		private EntitySet<MedicalOrder> _MedicalOrders;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void OntestTypeNameChanging(string value);
-    partial void OntestTypeNameChanged();
-    #endregion
-		
-		public LabTestType()
-		{
-			this._MedicalOrders = new EntitySet<MedicalOrder>(new Action<MedicalOrder>(this.attach_MedicalOrders), new Action<MedicalOrder>(this.detach_MedicalOrders));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_testTypeName", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
-		public string testTypeName
-		{
-			get
-			{
-				return this._testTypeName;
-			}
-			set
-			{
-				if ((this._testTypeName != value))
-				{
-					this.OntestTypeNameChanging(value);
-					this.SendPropertyChanging();
-					this._testTypeName = value;
-					this.SendPropertyChanged("testTypeName");
-					this.OntestTypeNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LabTestType_MedicalOrder", Storage="_MedicalOrders", ThisKey="id", OtherKey="TestTypeID")]
-		public EntitySet<MedicalOrder> MedicalOrders
-		{
-			get
-			{
-				return this._MedicalOrders;
-			}
-			set
-			{
-				this._MedicalOrders.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_MedicalOrders(MedicalOrder entity)
-		{
-			this.SendPropertyChanging();
-			entity.LabTestType = this;
-		}
-		
-		private void detach_MedicalOrders(MedicalOrder entity)
-		{
-			this.SendPropertyChanging();
-			entity.LabTestType = null;
 		}
 	}
 }

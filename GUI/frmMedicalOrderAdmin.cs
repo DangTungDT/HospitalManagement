@@ -327,5 +327,10 @@ namespace GUI
         }
 
         #endregion
+
+        private void pnlThongTinChiTiet_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

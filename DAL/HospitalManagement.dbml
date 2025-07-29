@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="HospitalManagement" Class="HospitalManagementDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-FRGQVLQ\SQLEXPRESS;Initial Catalog=HospitalManagement;Integrated Security=True;Trust Server Certificate=True" SettingsObjectName="DAL.Properties.Settings" SettingsPropertyName="HospitalManagementConnectionString3" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=LAPTOP-2LEA9U48\SQLEXPRESS;Initial Catalog=HospitalManagement;Integrated Security=True;Trust Server Certificate=True" SettingsObjectName="DAL.Properties.Settings" SettingsPropertyName="HospitalManagementConnectionString4" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Account" Member="Accounts">
     <Type Name="Account">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -115,6 +115,13 @@
       <Association Name="MedicalOrder_LaboratoryTest" Member="MedicalOrder" ThisKey="MedicalOrderID" OtherKey="id" Type="MedicalOrder" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.LabTestType" Member="LabTestTypes">
+    <Type Name="LabTestType">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="testTypeName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="LabTestType_MedicalOrder" Member="MedicalOrders" ThisKey="id" OtherKey="TestTypeID" Type="MedicalOrder" />
+    </Type>
+  </Table>
   <Table Name="dbo.MedicalOrder" Member="MedicalOrders">
     <Type Name="MedicalOrder">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -136,9 +143,9 @@
       <Column Name="Note" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="MedicalOrder_LaboratoryTest" Member="LaboratoryTests" ThisKey="id" OtherKey="MedicalOrderID" Type="LaboratoryTest" />
       <Association Name="Item_MedicalOrder" Member="Item" ThisKey="ItemID" OtherKey="ID" Type="Item" IsForeignKey="true" DeleteRule="SET NULL" />
+      <Association Name="LabTestType_MedicalOrder" Member="LabTestType" ThisKey="TestTypeID" OtherKey="id" Type="LabTestType" IsForeignKey="true" DeleteRule="SET NULL" />
       <Association Name="Patient_MedicalOrder" Member="Patient" ThisKey="PatientID" OtherKey="id" Type="Patient" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="Staff_MedicalOrder" Member="Staff" ThisKey="DoctorID" OtherKey="id" Type="Staff" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-      <Association Name="LabTestType_MedicalOrder" Member="LabTestType" ThisKey="TestTypeID" OtherKey="id" Type="LabTestType" IsForeignKey="true" DeleteRule="SET NULL" />
     </Type>
   </Table>
   <Table Name="dbo.MedicalRecord" Member="MedicalRecords">
@@ -248,13 +255,6 @@
       <Association Name="Staff_MedicalRecord" Member="MedicalRecords" ThisKey="id" OtherKey="doctorID" Type="MedicalRecord" />
       <Association Name="Staff_SalaryDetail" Member="SalaryDetails" ThisKey="id" OtherKey="StaffId" Type="SalaryDetail" />
       <Association Name="Department_Staff" Member="Department" ThisKey="departmentID" OtherKey="id" Type="Department" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.LabTestType" Member="LabTestTypes">
-    <Type Name="LabTestType">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="testTypeName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
-      <Association Name="LabTestType_MedicalOrder" Member="MedicalOrders" ThisKey="id" OtherKey="TestTypeID" Type="MedicalOrder" />
     </Type>
   </Table>
 </Database>

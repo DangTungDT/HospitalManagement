@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BLL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,10 +17,11 @@ namespace GUI
         {
             InitializeComponent();
         }
-
+        PatientBLL bll = new PatientBLL();
         private void frmPatientSearchGUI_Load(object sender, EventArgs e)
         {
-            StyleDataGridView(dgvUsers);
+            StyleDataGridView(dgv_searchPatient);
+            dgv_searchPatient.DataSource = bll.GetAll();
         }
         private void groupBox2_Paint(object sender, PaintEventArgs e)
         {
@@ -101,6 +103,11 @@ namespace GUI
             dgv.RowTemplate.Height = 28;
             dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            bll.TimkiemBN(txt_hoten.Text, txt_sdt.Text,dgv_searchPatient);
         }
     }
 }
