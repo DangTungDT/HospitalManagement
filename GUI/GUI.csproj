@@ -127,11 +127,41 @@
     <Compile Include="FormDailyCareAdmin.Designer.cs">
       <DependentUpon>FormDailyCareAdmin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form_appoimentt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_appoimentt.Designer.cs">
+      <DependentUpon>Form_appoimentt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_DaiLyCare_DieuDuong.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form_DaiLyCare_DieuDuong.Designer.cs">
       <DependentUpon>Form_DaiLyCare_DieuDuong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Depment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Depment.Designer.cs">
+      <DependentUpon>Form_Depment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Invt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Invt.Designer.cs">
+      <DependentUpon>Form_Invt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Item.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Item.Designer.cs">
+      <DependentUpon>Form_Item.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Room.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Room.Designer.cs">
+      <DependentUpon>Form_Room.cs</DependentUpon>
     </Compile>
     <Compile Include="frmDoctorInfo_Doctor.Designer.cs">
       <DependentUpon>frmDoctorInfo_Doctor.cs</DependentUpon>
@@ -331,8 +361,23 @@
     <EmbeddedResource Include="FormDailyCareAdmin.resx">
       <DependentUpon>FormDailyCareAdmin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form_appoimentt.resx">
+      <DependentUpon>Form_appoimentt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_DaiLyCare_DieuDuong.resx">
       <DependentUpon>Form_DaiLyCare_DieuDuong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Depment.resx">
+      <DependentUpon>Form_Depment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Invt.resx">
+      <DependentUpon>Form_Invt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Item.resx">
+      <DependentUpon>Form_Item.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Room.resx">
+      <DependentUpon>Form_Room.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPatientListbyDepartmentGUI.resx">
       <DependentUpon>frmPatientListbyDepartmentGUI.cs</DependentUpon>

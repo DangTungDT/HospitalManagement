@@ -42,7 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountDTO.cs" />
+    <Compile Include="ApmentDTO.cs" />
+    <Compile Include="DepmentDTO.cs" />
     <Compile Include="DoctorPatientDTO.cs" />
+    <Compile Include="InvtDTO.cs" />
+    <Compile Include="ItemDTO.cs" />
     <Compile Include="LaboratoryTestDoctorDTO.cs" />
     <Compile Include="LabTestTypeDocTorDTO.cs" />
     <Compile Include="MedicalOrderDoctorDTO.cs" />
@@ -51,6 +55,7 @@
     <Compile Include="MedicineItemDoctorDTO.cs" />
     <Compile Include="PatientDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoomDTO.cs" />
     <Compile Include="SalaryDetailDTO.cs" />
     <Compile Include="SalaryDTO.cs" />
     <Compile Include="StaffDoctorDTO.cs" />
