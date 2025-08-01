@@ -43,8 +43,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountDAL.cs" />
+    <Compile Include="ApmentDAL.cs" />
     <Compile Include="AppointmentDAL.cs" />
     <Compile Include="DailyCareDAL.cs" />
+    <Compile Include="DepmentDAL.cs" />
     <Compile Include="DoctorListbyDepartmentDAL.cs" />
     <Compile Include="DoctorPatientAdminDAL.cs" />
     <Compile Include="DoctorPatientDAL.cs" />
@@ -53,6 +55,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>HospitalManagement.dbml</DependentUpon>
     </Compile>
+    <Compile Include="InvtDAL.cs" />
+    <Compile Include="ItemDAL.cs" />
     <Compile Include="ItemDoctorDAL.cs" />
     <Compile Include="LaboratoryTestDoctorDAL.cs" />
     <Compile Include="MedicalOrderDoctorDAL.cs" />
@@ -69,6 +73,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="RoomDAL.cs" />
     <Compile Include="SalaryDAL.cs" />
     <Compile Include="SalaryDetailDAL.cs" />
     <Compile Include="StaffDAL.cs" />

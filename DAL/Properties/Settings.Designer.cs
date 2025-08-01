@@ -66,5 +66,16 @@ namespace DAL.Properties {
                 return ((string)(this["HospitalManagementConnectionString3"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=LAPTOP-2LEA9U48\\SQLEXPRESS;Initial Catalog=HospitalManagement;Integra" +
+            "ted Security=True;TrustServerCertificate=True")]
+        public string HospitalManagementConnectionString4 {
+            get {
+                return ((string)(this["HospitalManagementConnectionString4"]));
+            }
+        }
     }
 }

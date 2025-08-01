@@ -7,6 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace BLL
 {
@@ -54,23 +55,34 @@ namespace BLL
             }
         }
 
-        public int Update(PatientDTO dto)
+        public void SuaBenhNhan(PatientDTO dto)
         {
-            try
+            if (dal.SuaBenhNhan(dto))
             {
-                if (string.IsNullOrEmpty(dto.Id) || string.IsNullOrEmpty(dto.FullName) || string.IsNullOrEmpty(dto.Gender) ||
-                    dto.Dob > DateTime.Now || string.IsNullOrEmpty(dto.PhoneNumber) || string.IsNullOrEmpty(dto.CitizenID) ||
-                    string.IsNullOrEmpty(dto.Address) || string.IsNullOrEmpty(dto.EmergencyContact) || string.IsNullOrEmpty(dto.EmergencyPhone) ||
-                    string.IsNullOrEmpty(dto.Status) || dto.Weight <= 0 || dto.Height <= 0)
-                {
-                    return -2;
-                }
-                return dal.Update(dto);
+                MessageBox.Show("Sửa thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            catch (Exception ex)
+            else
             {
-                return 2;
+                MessageBox.Show("Sửa không thành công", "THÔNG BÁO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+        public string TaoMaBNTuDong()
+        {
+            return dal.TaoMaBNTuDong();
+        }
+        public string HienThiBHYT(string maBN,CheckBox cbcheck)
+        {
+            string maBHYT = dal.HienThiBHYT(maBN);
+            cbcheck.Checked = true;
+            if(maBHYT == "")
+            {
+                cbcheck.Checked = false;
+            }
+            return maBHYT;
+        }
+        public void TimkiemBN(string tenBN, string sdt ,DataGridView dgv)
+        {
+            dgv.DataSource = dal.TimKiemPatient(tenBN, sdt);
         }
     }
 }

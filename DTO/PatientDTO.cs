@@ -8,6 +8,26 @@ namespace DTO
 {
     public class PatientDTO
     {
+        public PatientDTO(string id, string fullName, string gender, DateTime? dob, string phoneNumber, string typePatient, string citizenID, string insuranceID, string address, string emergencyContact, string emergencyPhone, string status, DateTime createdDate, DateTime updatedDate, double weight, double height)
+        {
+            Id = id;
+            FullName = fullName;
+            Gender = gender;
+            Dob = dob;
+            PhoneNumber = phoneNumber;
+            TypePatient = typePatient;
+            CitizenID = citizenID;
+            InsuranceID = insuranceID;
+            Address = address;
+            EmergencyContact = emergencyContact;
+            EmergencyPhone = emergencyPhone;
+            Status = status;
+            CreatedDate = createdDate;
+            UpdatedDate = updatedDate;
+            Weight = weight;
+            Height = height;
+        }
+
         public string Id { get; set; }                // Mã bệnh nhân
         public string FullName { get; set; }          // Họ tên
         public string Gender { get; set; }           // Giới tính: Nam/Nữ/Khác
@@ -24,5 +44,8 @@ namespace DTO
         public DateTime UpdatedDate { get; set; }    // Ngày cập nhật
         public double Weight { get; set; }           // Cân nặng (kg)
         public double Height { get; set; }           // Chiều cao (cm)
+        public PatientDTO() { }
+
     }
+    
 }

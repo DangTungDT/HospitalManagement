@@ -563,5 +563,10 @@ namespace GUI
 
             dgvPatient.DataSource = filtered;
         }
+
+        private void dgvPatient_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

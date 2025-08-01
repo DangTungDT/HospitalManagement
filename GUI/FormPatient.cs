@@ -85,7 +85,7 @@ namespace GUI
 
             //Đặt dữ liệu tĩnh cho dtpUpdatedDate
             dtpUpdatedDate.Value = DateTime.Now;
-
+            txtID.Text = bll.TaoMaBNTuDong();
         }
 
         private void cbbStatus_SelectedIndexChanged(object sender, EventArgs e)
@@ -403,6 +403,7 @@ namespace GUI
         private void Clean()
         {
             txtID.Text = "";
+            txtID.Text = bll.TaoMaBNTuDong();
             txtFullName.Text = "";
             radGenderFemale.Checked = false;
             radGenderMale.Checked = false;
@@ -454,17 +455,18 @@ namespace GUI
                 dtpDob.Value = DateTime.Parse(dgvPatient.Rows[cellSelected].Cells[3].Value.ToString());
                 txtPhoneNumber.Text = dgvPatient.Rows[cellSelected].Cells[4].Value.ToString();
                 txtCitizenID.Text = dgvPatient.Rows[cellSelected].Cells[6].Value.ToString();
-                if (dgvPatient.Rows[cellSelected].Cells[7].Value == null)
-                {
-                    cbInsuranceID.Checked = false;
-                    txtInsuranceID.Text = "";
-                }
-                else if(string.IsNullOrEmpty(dgvPatient.Rows[cellSelected].Cells[7].Value.ToString()))
-                {
-                    cbInsuranceID.Checked = true;
-                    txtInsuranceID.Text = dgvPatient.Rows[cellSelected].Cells[7].Value.ToString();
+                //if (dgvPatient.Rows[cellSelected].Cells[7].Value == null)
+                //{
+                //    cbInsuranceID.Checked = false;
+                //    txtInsuranceID.Text = "";
+                //}
+                //else if(string.IsNullOrEmpty(dgvPatient.Rows[cellSelected].Cells[7].Value.ToString()))
+                //{
+                //    cbInsuranceID.Checked = true;
+                //    txtInsuranceID.Text = dgvPatient.Rows[cellSelected].Cells[7].Value.ToString();
 
-                }
+                //}
+                txtInsuranceID.Text = bll.HienThiBHYT(txtID.Text, cbInsuranceID);
                 txtWeight.Text = dgvPatient.Rows[cellSelected].Cells[14].Value.ToString();
                 txtHeight.Text = dgvPatient.Rows[cellSelected].Cells[15].Value.ToString();
                 txtAddress.Text = dgvPatient.Rows[cellSelected].Cells[8].Value.ToString();
@@ -475,6 +477,39 @@ namespace GUI
                 dtpUpdatedDate.Value = DateTime.Parse(dgvPatient.Rows[cellSelected].Cells[13].Value.ToString());
                 cbbTypePatient.SelectedValue = dgvPatient.Rows[cellSelected].Cells[5].Value.ToString();
             }
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if(string.IsNullOrEmpty(txtFullName.Text) ||
+                    dtpDob.Value > DateTime.Now || string.IsNullOrEmpty(txtPhoneNumber.Text) || string.IsNullOrEmpty(txtCitizenID.Text) ||
+                    string.IsNullOrEmpty(txtAddress.Text) || string.IsNullOrEmpty(txtEmergencyName.Text) || string.IsNullOrEmpty(txtEmergencyPhone.Text) ||
+                     double.Parse(txtWeight.Text) <= 0 || double.Parse(txtHeight.Text) <= 0)
+            {
+                MessageBox.Show("Thiếu dữ liệu!!", "Thông báo!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            bll.SuaBenhNhan(new PatientDTO(txtID.Text, txtFullName.Text, gioitinh(), dtpDob.Value, txtPhoneNumber.Text, cbbTypePatient.SelectedValue.ToString(), txtCitizenID.Text, txtInsuranceID.Text, txtAddress.Text, txtEmergencyName.Text, txtEmergencyPhone.Text, cbbStatus.SelectedValue.ToString(), dtpCreatedDate.Value, dtpUpdatedDate.Value, double.Parse(txtWeight.Text), double.Parse(txtHeight.Text)));
+                dgvPatient.DataSource = bll.GetAll();            
+        }
+        public string gioitinh()
+        {
+            string gioitinh = "";
+            if(radGenderFemale.Checked == true)
+            {
+                gioitinh = "Nữ";
+            }else if (radGenderMale.Checked == true)
+            {
+                gioitinh = "Nam";
+            }else if(radGenderOther.Checked == true)
+            {
+                gioitinh = "Khác";
+            }
+            return gioitinh;
         }
     }
 }
