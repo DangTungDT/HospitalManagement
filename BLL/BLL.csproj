@@ -52,7 +52,9 @@
     <Compile Include="LaboratoryTestBLL.cs" />
     <Compile Include="MedicalOrderDoctorBLL.cs" />
     <Compile Include="MedicalRecordDoctorBLL.cs" />
+    <Compile Include="NurseAssignmentNurseBLL.cs" />
     <Compile Include="PatientBLL.cs" />
+    <Compile Include="PatientNurseBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoomBLL.cs" />
     <Compile Include="SalaryBLL.cs" />
@@ -71,6 +73,7 @@
     <Compile Include="StaffDoctorBLL.cs" />
     <Compile Include="StaffListbyDepartmentBLL.cs" />
     <Compile Include="SupplyHistoryBLL.cs" />
+    <Compile Include="TransferRoomNurseBLL.cs" />
     <Compile Include="UserInfomationBLL.cs" />
     <Compile Include="UsersBLL.cs" />
   </ItemGroup>

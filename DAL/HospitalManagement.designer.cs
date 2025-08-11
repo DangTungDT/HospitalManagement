@@ -72,6 +72,9 @@ namespace DAL
     partial void InsertRoom(Room instance);
     partial void UpdateRoom(Room instance);
     partial void DeleteRoom(Room instance);
+    partial void InsertRoomTransferHistory(RoomTransferHistory instance);
+    partial void UpdateRoomTransferHistory(RoomTransferHistory instance);
+    partial void DeleteRoomTransferHistory(RoomTransferHistory instance);
     partial void InsertSalary(Salary instance);
     partial void UpdateSalary(Salary instance);
     partial void DeleteSalary(Salary instance);
@@ -84,7 +87,7 @@ namespace DAL
     #endregion
 		
 		public HospitalManagementDataContext() : 
-				base(global::DAL.Properties.Settings.Default.HospitalManagementConnectionString4, mappingSource)
+				base(global::DAL.Properties.Settings.Default.HospitalManagementConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -222,6 +225,14 @@ namespace DAL
 			get
 			{
 				return this.GetTable<Room>();
+			}
+		}
+		
+		public System.Data.Linq.Table<RoomTransferHistory> RoomTransferHistories
+		{
+			get
+			{
+				return this.GetTable<RoomTransferHistory>();
 			}
 		}
 		
@@ -3880,6 +3891,8 @@ namespace DAL
 		
 		private EntitySet<MedicalRecord> _MedicalRecords;
 		
+		private EntitySet<RoomTransferHistory> _RoomTransferHistories;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -3926,6 +3939,7 @@ namespace DAL
 			this._DoctorPatients = new EntitySet<DoctorPatient>(new Action<DoctorPatient>(this.attach_DoctorPatients), new Action<DoctorPatient>(this.detach_DoctorPatients));
 			this._MedicalOrders = new EntitySet<MedicalOrder>(new Action<MedicalOrder>(this.attach_MedicalOrders), new Action<MedicalOrder>(this.detach_MedicalOrders));
 			this._MedicalRecords = new EntitySet<MedicalRecord>(new Action<MedicalRecord>(this.attach_MedicalRecords), new Action<MedicalRecord>(this.detach_MedicalRecords));
+			this._RoomTransferHistories = new EntitySet<RoomTransferHistory>(new Action<RoomTransferHistory>(this.attach_RoomTransferHistories), new Action<RoomTransferHistory>(this.detach_RoomTransferHistories));
 			OnCreated();
 		}
 		
@@ -4327,6 +4341,19 @@ namespace DAL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_RoomTransferHistory", Storage="_RoomTransferHistories", ThisKey="id", OtherKey="patientID")]
+		public EntitySet<RoomTransferHistory> RoomTransferHistories
+		{
+			get
+			{
+				return this._RoomTransferHistories;
+			}
+			set
+			{
+				this._RoomTransferHistories.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -4418,6 +4445,18 @@ namespace DAL
 			this.SendPropertyChanging();
 			entity.Patient = null;
 		}
+		
+		private void attach_RoomTransferHistories(RoomTransferHistory entity)
+		{
+			this.SendPropertyChanging();
+			entity.Patient = this;
+		}
+		
+		private void detach_RoomTransferHistories(RoomTransferHistory entity)
+		{
+			this.SendPropertyChanging();
+			entity.Patient = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Room")]
@@ -4438,6 +4477,10 @@ namespace DAL
 		
 		private EntitySet<DailyCare> _DailyCares;
 		
+		private EntitySet<RoomTransferHistory> _RoomTransferHistories;
+		
+		private EntitySet<RoomTransferHistory> _RoomTransferHistories1;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -4456,6 +4499,8 @@ namespace DAL
 		{
 			this._SupplyHistories = new EntitySet<SupplyHistory>(new Action<SupplyHistory>(this.attach_SupplyHistories), new Action<SupplyHistory>(this.detach_SupplyHistories));
 			this._DailyCares = new EntitySet<DailyCare>(new Action<DailyCare>(this.attach_DailyCares), new Action<DailyCare>(this.detach_DailyCares));
+			this._RoomTransferHistories = new EntitySet<RoomTransferHistory>(new Action<RoomTransferHistory>(this.attach_RoomTransferHistories), new Action<RoomTransferHistory>(this.detach_RoomTransferHistories));
+			this._RoomTransferHistories1 = new EntitySet<RoomTransferHistory>(new Action<RoomTransferHistory>(this.attach_RoomTransferHistories1), new Action<RoomTransferHistory>(this.detach_RoomTransferHistories1));
 			OnCreated();
 		}
 		
@@ -4565,6 +4610,32 @@ namespace DAL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_RoomTransferHistory", Storage="_RoomTransferHistories", ThisKey="id", OtherKey="fromRoomID")]
+		public EntitySet<RoomTransferHistory> RoomTransferHistories
+		{
+			get
+			{
+				return this._RoomTransferHistories;
+			}
+			set
+			{
+				this._RoomTransferHistories.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_RoomTransferHistory1", Storage="_RoomTransferHistories1", ThisKey="id", OtherKey="toRoomID")]
+		public EntitySet<RoomTransferHistory> RoomTransferHistories1
+		{
+			get
+			{
+				return this._RoomTransferHistories1;
+			}
+			set
+			{
+				this._RoomTransferHistories1.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -4607,6 +4678,335 @@ namespace DAL
 		{
 			this.SendPropertyChanging();
 			entity.Room = null;
+		}
+		
+		private void attach_RoomTransferHistories(RoomTransferHistory entity)
+		{
+			this.SendPropertyChanging();
+			entity.Room = this;
+		}
+		
+		private void detach_RoomTransferHistories(RoomTransferHistory entity)
+		{
+			this.SendPropertyChanging();
+			entity.Room = null;
+		}
+		
+		private void attach_RoomTransferHistories1(RoomTransferHistory entity)
+		{
+			this.SendPropertyChanging();
+			entity.Room1 = this;
+		}
+		
+		private void detach_RoomTransferHistories1(RoomTransferHistory entity)
+		{
+			this.SendPropertyChanging();
+			entity.Room1 = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.RoomTransferHistory")]
+	public partial class RoomTransferHistory : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _patientID;
+		
+		private System.Nullable<int> _fromRoomID;
+		
+		private int _toRoomID;
+		
+		private System.Nullable<System.DateTime> _transferDate;
+		
+		private string _note;
+		
+		private EntityRef<Room> _Room;
+		
+		private EntityRef<Patient> _Patient;
+		
+		private EntityRef<Room> _Room1;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnpatientIDChanging(string value);
+    partial void OnpatientIDChanged();
+    partial void OnfromRoomIDChanging(System.Nullable<int> value);
+    partial void OnfromRoomIDChanged();
+    partial void OntoRoomIDChanging(int value);
+    partial void OntoRoomIDChanged();
+    partial void OntransferDateChanging(System.Nullable<System.DateTime> value);
+    partial void OntransferDateChanged();
+    partial void OnnoteChanging(string value);
+    partial void OnnoteChanged();
+    #endregion
+		
+		public RoomTransferHistory()
+		{
+			this._Room = default(EntityRef<Room>);
+			this._Patient = default(EntityRef<Patient>);
+			this._Room1 = default(EntityRef<Room>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_patientID", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		public string patientID
+		{
+			get
+			{
+				return this._patientID;
+			}
+			set
+			{
+				if ((this._patientID != value))
+				{
+					if (this._Patient.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnpatientIDChanging(value);
+					this.SendPropertyChanging();
+					this._patientID = value;
+					this.SendPropertyChanged("patientID");
+					this.OnpatientIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fromRoomID", DbType="Int")]
+		public System.Nullable<int> fromRoomID
+		{
+			get
+			{
+				return this._fromRoomID;
+			}
+			set
+			{
+				if ((this._fromRoomID != value))
+				{
+					if (this._Room.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnfromRoomIDChanging(value);
+					this.SendPropertyChanging();
+					this._fromRoomID = value;
+					this.SendPropertyChanged("fromRoomID");
+					this.OnfromRoomIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_toRoomID", DbType="Int NOT NULL")]
+		public int toRoomID
+		{
+			get
+			{
+				return this._toRoomID;
+			}
+			set
+			{
+				if ((this._toRoomID != value))
+				{
+					if (this._Room1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OntoRoomIDChanging(value);
+					this.SendPropertyChanging();
+					this._toRoomID = value;
+					this.SendPropertyChanged("toRoomID");
+					this.OntoRoomIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_transferDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> transferDate
+		{
+			get
+			{
+				return this._transferDate;
+			}
+			set
+			{
+				if ((this._transferDate != value))
+				{
+					this.OntransferDateChanging(value);
+					this.SendPropertyChanging();
+					this._transferDate = value;
+					this.SendPropertyChanged("transferDate");
+					this.OntransferDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_note", DbType="NVarChar(255)")]
+		public string note
+		{
+			get
+			{
+				return this._note;
+			}
+			set
+			{
+				if ((this._note != value))
+				{
+					this.OnnoteChanging(value);
+					this.SendPropertyChanging();
+					this._note = value;
+					this.SendPropertyChanged("note");
+					this.OnnoteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_RoomTransferHistory", Storage="_Room", ThisKey="fromRoomID", OtherKey="id", IsForeignKey=true, DeleteRule="SET NULL")]
+		public Room Room
+		{
+			get
+			{
+				return this._Room.Entity;
+			}
+			set
+			{
+				Room previousValue = this._Room.Entity;
+				if (((previousValue != value) 
+							|| (this._Room.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Room.Entity = null;
+						previousValue.RoomTransferHistories.Remove(this);
+					}
+					this._Room.Entity = value;
+					if ((value != null))
+					{
+						value.RoomTransferHistories.Add(this);
+						this._fromRoomID = value.id;
+					}
+					else
+					{
+						this._fromRoomID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Room");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Patient_RoomTransferHistory", Storage="_Patient", ThisKey="patientID", OtherKey="id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public Patient Patient
+		{
+			get
+			{
+				return this._Patient.Entity;
+			}
+			set
+			{
+				Patient previousValue = this._Patient.Entity;
+				if (((previousValue != value) 
+							|| (this._Patient.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Patient.Entity = null;
+						previousValue.RoomTransferHistories.Remove(this);
+					}
+					this._Patient.Entity = value;
+					if ((value != null))
+					{
+						value.RoomTransferHistories.Add(this);
+						this._patientID = value.id;
+					}
+					else
+					{
+						this._patientID = default(string);
+					}
+					this.SendPropertyChanged("Patient");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_RoomTransferHistory1", Storage="_Room1", ThisKey="toRoomID", OtherKey="id", IsForeignKey=true)]
+		public Room Room1
+		{
+			get
+			{
+				return this._Room1.Entity;
+			}
+			set
+			{
+				Room previousValue = this._Room1.Entity;
+				if (((previousValue != value) 
+							|| (this._Room1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Room1.Entity = null;
+						previousValue.RoomTransferHistories1.Remove(this);
+					}
+					this._Room1.Entity = value;
+					if ((value != null))
+					{
+						value.RoomTransferHistories1.Add(this);
+						this._toRoomID = value.id;
+					}
+					else
+					{
+						this._toRoomID = default(int);
+					}
+					this.SendPropertyChanged("Room1");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	

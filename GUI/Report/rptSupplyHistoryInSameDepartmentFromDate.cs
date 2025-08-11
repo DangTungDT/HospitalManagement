@@ -16,14 +16,14 @@ namespace GUI.Report {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class rptStaffList : ReportClass {
+    public class rptSupplyHistoryInSameDepartmentFromDate : ReportClass {
         
-        public rptStaffList() {
+        public rptSupplyHistoryInSameDepartmentFromDate() {
         }
         
         public override string ResourceName {
             get {
-                return "rptStaffList.rpt";
+                return "rptSupplyHistoryInSameDepartmentFromDate.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace GUI.Report {
         
         public override string FullResourceName {
             get {
-                return "GUI.Report.rptStaffList.rpt";
+                return "GUI.Report.rptSupplyHistoryInSameDepartmentFromDate.rpt";
             }
             set {
                 // Do nothing
@@ -90,17 +90,25 @@ namespace GUI.Report {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_DepartmentID {
+        public CrystalDecisions.Shared.IParameterField Parameter_DoctorId {
             get {
                 return this.DataDefinition.ParameterFields[0];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_FromDate {
+            get {
+                return this.DataDefinition.ParameterFields[1];
             }
         }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedrptStaffList : Component, ICachedReport {
+    public class CachedrptSupplyHistoryInSameDepartmentFromDate : Component, ICachedReport {
         
-        public CachedrptStaffList() {
+        public CachedrptSupplyHistoryInSameDepartmentFromDate() {
         }
         
         [Browsable(false)]
@@ -137,7 +145,7 @@ namespace GUI.Report {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            rptStaffList rpt = new rptStaffList();
+            rptSupplyHistoryInSameDepartmentFromDate rpt = new rptSupplyHistoryInSameDepartmentFromDate();
             rpt.Site = this.Site;
             return rpt;
         }
