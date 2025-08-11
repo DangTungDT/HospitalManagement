@@ -42,6 +42,58 @@ namespace BLL
         public List<StaffSupplyHistoryDTO> GetAllNurses() => dal.GetAllNurses();
         public List<RoomSupplyHistoryDTO> GetAllRooms() => dal.GetAllRooms();
         public List<PatientSupplyHistoryDTO> GetAllPatients() => dal.GetAllPatients();
+        // Lấy tất cả chăm sóc theo khoa của y tá đăng nhập
+        public List<DailyCareDTO> GetDailyCaresByDepartment(string loggedInNurseId)
+        {
+            return dal.GetDailyCaresByDepartment(loggedInNurseId);
+        }
+
+        // Tìm kiếm theo khoa, không lọc theo y tá
+        public List<DailyCareDTO> SearchDailyCaresByDepartment(string loggedInNurseId, string patientId, string roomId, string shift)
+        {
+            return dal.SearchDailyCaresByDepartment(loggedInNurseId, patientId, roomId, shift);
+        }
+
+        // Thêm chăm sóc dựa vào y tá đăng nhập
+        public bool AddDailyCareByNurse(DailyCareDTO dto, string loggedInNurseId)
+        {
+            try
+            {
+                dal.AddDailyCareByNurse(dto, loggedInNurseId);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        // Sửa chăm sóc dựa vào y tá đăng nhập
+        public bool UpdateDailyCareByNurse(DailyCareDTO dto, string loggedInNurseId)
+        {
+            try
+            {
+                dal.UpdateDailyCareByNurse(dto, loggedInNurseId);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public List<DailyCareDTO> SearchByPatientAndRoom(string loggedInNurseId, string patientName, string roomName, string shift)
+        {
+            return dal.SearchDailyCaresByDepartment(loggedInNurseId, patientName, roomName, shift);
+        }
+        public List<DailyCareDTO> GetDailyCaresByPatient(string patientId)
+        {
+            return dal.GetDailyCaresByPatientId(patientId);
+        }
+        public List<DailyCareDTO> GetDailyCaresInSameDepartmentAsDoctorAndDate(string doctorId, DateTime targetDate)
+        {
+            return dal.GetDailyCaresInSameDepartmentAsDoctorAndDate(doctorId, targetDate);
+        }
 
     }
 }

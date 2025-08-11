@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="HospitalManagement" Class="HospitalManagementDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=LAPTOP-2LEA9U48\SQLEXPRESS;Initial Catalog=HospitalManagement;Integrated Security=True;Trust Server Certificate=True" SettingsObjectName="DAL.Properties.Settings" SettingsPropertyName="HospitalManagementConnectionString4" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=LAPTOP-S013149L\SQLEXPRESS;Initial Catalog=HospitalManagement;Integrated Security=True;Trust Server Certificate=True" SettingsObjectName="DAL.Properties.Settings" SettingsPropertyName="HospitalManagementConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Account" Member="Accounts">
     <Type Name="Account">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -187,6 +187,7 @@
       <Association Name="Patient_DoctorPatient" Member="DoctorPatients" ThisKey="id" OtherKey="patientID" Type="DoctorPatient" />
       <Association Name="Patient_MedicalOrder" Member="MedicalOrders" ThisKey="id" OtherKey="PatientID" Type="MedicalOrder" />
       <Association Name="Patient_MedicalRecord" Member="MedicalRecords" ThisKey="id" OtherKey="patientID" Type="MedicalRecord" />
+      <Association Name="Patient_RoomTransferHistory" Member="RoomTransferHistories" ThisKey="id" OtherKey="patientID" Type="RoomTransferHistory" />
     </Type>
   </Table>
   <Table Name="dbo.Room" Member="Rooms">
@@ -197,6 +198,21 @@
       <Column Name="departmentID" Type="System.String" DbType="Char(10)" CanBeNull="true" />
       <Association Name="Room_SupplyHistory" Member="SupplyHistories" ThisKey="id" OtherKey="roomID" Type="SupplyHistory" />
       <Association Name="Room_DailyCare" Member="DailyCares" ThisKey="id" OtherKey="roomID" Type="DailyCare" />
+      <Association Name="Room_RoomTransferHistory" Member="RoomTransferHistories" ThisKey="id" OtherKey="fromRoomID" Type="RoomTransferHistory" />
+      <Association Name="Room_RoomTransferHistory1" Member="RoomTransferHistories1" ThisKey="id" OtherKey="toRoomID" Type="RoomTransferHistory" />
+    </Type>
+  </Table>
+  <Table Name="dbo.RoomTransferHistory" Member="RoomTransferHistories">
+    <Type Name="RoomTransferHistory">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="patientID" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="fromRoomID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="toRoomID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="transferDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="note" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="Room_RoomTransferHistory" Member="Room" ThisKey="fromRoomID" OtherKey="id" Type="Room" IsForeignKey="true" DeleteRule="SET NULL" />
+      <Association Name="Patient_RoomTransferHistory" Member="Patient" ThisKey="patientID" OtherKey="id" Type="Patient" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Room_RoomTransferHistory1" Member="Room1" ThisKey="toRoomID" OtherKey="id" Type="Room" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Salary" Member="Salaries">

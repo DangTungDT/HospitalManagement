@@ -61,11 +61,13 @@
     <Compile Include="LaboratoryTestDoctorDAL.cs" />
     <Compile Include="MedicalOrderDoctorDAL.cs" />
     <Compile Include="MedicalRecordDoctorDAL.cs" />
+    <Compile Include="NurseAssignmentNurseDAL.cs" />
     <Compile Include="PatientDAL.cs" />
     <Compile Include="LaboratoryTestAdminDAL.cs" />
     <Compile Include="MedicalOrderAdminDAL.cs" />
     <Compile Include="MedicalRecordAdminDAL.cs" />
     <Compile Include="PatientListbyDepartmentDAL.cs" />
+    <Compile Include="PatientNurseDAL.cs" />
     <Compile Include="PrescriptionOfPatientDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -80,6 +82,7 @@
     <Compile Include="StaffDoctorDAL.cs" />
     <Compile Include="StaffListbyDepartmentDAL.cs" />
     <Compile Include="SupplyHistoryDAL.cs" />
+    <Compile Include="TransferRoomNurseDAL.cs" />
     <Compile Include="UserInfomationDAL.cs" />
     <Compile Include="UsersDAL.cs" />
   </ItemGroup>

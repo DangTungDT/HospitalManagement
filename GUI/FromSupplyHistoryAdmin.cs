@@ -115,7 +115,48 @@ namespace GUI
                 MessageBox.Show("Không tìm thấy vật tư có mã: " + itemId, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
+            // Giới hạn độ dài theo bảng
+            if (id.Length > 10)
+            {
+                MessageBox.Show("Mã cung cấp không được vượt quá 10 ký tự.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (itemId.Length > 10)
+            {
+                MessageBox.Show("Mã vật tư không được vượt quá 10 ký tự.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (!string.IsNullOrEmpty(nurseId) && nurseId.Length > 10)
+            {
+                MessageBox.Show("Mã y tá không được vượt quá 10 ký tự.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (dosage.Length > 255)
+            {
+                MessageBox.Show("Liều dùng không được vượt quá 255 ký tự.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (unit.Length > 255)
+            {
+                MessageBox.Show("Đơn vị không được vượt quá 255 ký tự.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (!string.IsNullOrEmpty(patientID) && patientID.Length > 10)
+            {
+                MessageBox.Show("Mã bệnh nhân không được vượt quá 10 ký tự.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (typeSupply.Length > 100)
+            {
+                MessageBox.Show("Loại cấp phát không được vượt quá 100 ký tự.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            // Note thì bạn tự giới hạn tùy ý, ví dụ:
+            if (note.Length > 2000)
+            {
+                MessageBox.Show("Ghi chú không được vượt quá 2000 ký tự.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             var dto = new SupplyHistoryDTO
             {
                 Id = id,
@@ -190,6 +231,7 @@ namespace GUI
             LoadDepartments();
             LoadRooms();     // ✅ Gọi để nạp phòng
             LoadPatients();  // ✅ Gọi để nạp bệnh nhân
+            dgvPatient.Enabled = cboPatient.Enabled;
 
             cboDepartment.SelectedIndexChanged += cboDepartment_SelectedIndexChanged;
             cboNurse.TextChanged += cboNurse_TextChanged;
@@ -445,6 +487,7 @@ namespace GUI
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
+
             if (string.IsNullOrEmpty(txtMedicineSupplyID.Text))
             {
                 MessageBox.Show("Vui lòng chọn bản ghi để sửa.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -468,7 +511,47 @@ namespace GUI
             string currentNurseId = cboNurse.SelectedValue?.ToString()?.Trim();
             string currentPatientId = cboPatient.SelectedValue?.ToString()?.Trim();
 
-
+            // ==== Giới hạn ký tự theo bảng SQL ====
+            if (txtMedicineSupplyID.Text.Length > 10)
+            {
+                MessageBox.Show("Mã cung cấp không được quá 10 ký tự.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (itemId.Length > 10)
+            {
+                MessageBox.Show("Mã vật tư không được quá 10 ký tự.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (!string.IsNullOrWhiteSpace(currentNurseId) && currentNurseId.Length > 10)
+            {
+                MessageBox.Show("Mã y tá không được quá 10 ký tự.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (!string.IsNullOrWhiteSpace(currentPatientId) && currentPatientId.Length > 10)
+            {
+                MessageBox.Show("Mã bệnh nhân không được quá 10 ký tự.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (dosage.Length > 255)
+            {
+                MessageBox.Show("Liều lượng không được quá 255 ký tự.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (unit.Length > 255)
+            {
+                MessageBox.Show("Đơn vị không được quá 255 ký tự.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (note.Length > 1000) // giới hạn tùy chọn
+            {
+                MessageBox.Show("Ghi chú không được quá 1000 ký tự.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (tySubbly.Length > 100)
+            {
+                MessageBox.Show("Loại cấp phát không được quá 100 ký tự.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             if (string.IsNullOrWhiteSpace(itemId) || string.IsNullOrWhiteSpace(dosage)||
                 string.IsNullOrWhiteSpace(roomText) || string.IsNullOrWhiteSpace(quantityText)||
                  string.IsNullOrWhiteSpace(note) || string.IsNullOrWhiteSpace(tySubbly))
@@ -523,6 +606,7 @@ namespace GUI
                 MessageBox.Show("Không được thay đổi y tá!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
             var dto = new SupplyHistoryDTO
             {
                 Id = txtMedicineSupplyID.Text.Trim(),
@@ -693,6 +777,12 @@ namespace GUI
                 cboNurse.SelectedIndex = -1;
                 cboNurse.Text = "";
             }
+        }
+
+        private void cboPatient_EnabledChanged(object sender, EventArgs e)
+        {
+            dgvPatient.Enabled = cboPatient.Enabled;
+
         }
     }
 }

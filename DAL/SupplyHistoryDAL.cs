@@ -83,6 +83,22 @@ namespace DAL
                 db.SubmitChanges();
             }
         }
+        public void UpdateEditableFields(SupplyHistoryDTO dto)
+        {
+            var s = db.SupplyHistories.FirstOrDefault(x => x.id == dto.Id);
+            if (s != null)
+            {
+                // Chỉ update các trường được phép sửa
+                s.dosage = dto.Dosage;
+                s.quantity = dto.Quantity;
+                s.unit = dto.Unit;
+                s.note = dto.Note;
+                s.dateSupply = dto.DateSupply;
+
+                db.SubmitChanges();
+            }
+        }
+
 
         public void Delete(string id)
         {
@@ -237,7 +253,203 @@ namespace DAL
                 Status = p.status
             }).ToList();
         }
+        public List<SupplyHistoryDTO> GetPatientSupplyHistoryInSameDepartment(string doctorId)
+        {
+            // Lấy departmentID của bác sĩ
+            var departmentId = db.Staffs
+                .Where(st => st.id == doctorId)
+                .Select(st => st.departmentID)
+                .FirstOrDefault();
 
+            if (string.IsNullOrEmpty(departmentId))
+                return new List<SupplyHistoryDTO>();
+
+            var query = from sh in db.SupplyHistories
+                        join p in db.Patients on sh.PatientID equals p.id into patientJoin
+                        from p in patientJoin.DefaultIfEmpty()
+                        join r in db.Rooms on sh.roomID equals r.id
+                        join n in db.Staffs on sh.nurseID equals n.id
+                        join i in db.Items on sh.itemID equals i.ID
+                        where sh.typeSupply == "Patient"
+                              && r.departmentID == departmentId
+                              && sh.PatientID != null
+                        orderby sh.dateSupply descending
+                        select new SupplyHistoryDTO
+                        {
+                            Id = sh.id,
+                            ItemID = sh.itemID,
+                            RoomID = sh.roomID,
+                            NurseID = sh.nurseID,
+                            Dosage = sh.dosage,
+                            Quantity = sh.quantity ?? 0,
+                            Unit = sh.unit,
+                            Note = sh.note,
+                            PatientID = sh.PatientID,
+                            TypeSupply = sh.typeSupply,
+                            DateSupply = sh.dateSupply,
+
+                            // Thông tin mô tả
+                            ItemName = i.ItemName,
+                            NurseName = n.name,
+                            RoomName = r.roomName,
+                            PatientName = p != null ? p.fullName : null
+                        };
+
+            return query.ToList();
+        }
+        public List<SupplyHistoryDTO> SearchPatientSupplyHistoryByFilters(
+            string doctorId, string patientId, int? roomId, string itemId)
+        {
+            // Lấy departmentID của bác sĩ
+            var departmentId = db.Staffs
+                .Where(st => st.id == doctorId)
+                .Select(st => st.departmentID)
+                .FirstOrDefault();
+
+            if (string.IsNullOrEmpty(departmentId))
+                return new List<SupplyHistoryDTO>();
+
+            // Query cơ bản
+            var query = from sh in db.SupplyHistories
+                        join p in db.Patients on sh.PatientID equals p.id into patientJoin
+                        from p in patientJoin.DefaultIfEmpty()
+                        join r in db.Rooms on sh.roomID equals r.id
+                        join n in db.Staffs on sh.nurseID equals n.id
+                        join i in db.Items on sh.itemID equals i.ID
+                        where sh.typeSupply == "Patient"
+                              && r.departmentID == departmentId
+                              && sh.PatientID != null
+                        select new { sh, p, r, n, i };
+
+            // Lọc theo bệnh nhân nếu có chọn
+            if (!string.IsNullOrWhiteSpace(patientId))
+                query = query.Where(x => x.sh.PatientID == patientId);
+
+            // Lọc theo phòng nếu có chọn
+            if (roomId.HasValue)
+                query = query.Where(x => x.sh.roomID == roomId.Value);
+
+            // Lọc theo thuốc nếu có chọn
+            if (!string.IsNullOrWhiteSpace(itemId))
+                query = query.Where(x => x.sh.itemID == itemId);
+
+            // Trả kết quả
+            return query
+                .OrderByDescending(x => x.sh.dateSupply)
+                .Select(x => new SupplyHistoryDTO
+                {
+                    Id = x.sh.id,
+                    ItemID = x.sh.itemID,
+                    RoomID = x.sh.roomID,
+                    NurseID = x.sh.nurseID,
+                    Dosage = x.sh.dosage,
+                    Quantity = x.sh.quantity ?? 0,
+                    Unit = x.sh.unit,
+                    Note = x.sh.note,
+                    PatientID = x.sh.PatientID,
+                    TypeSupply = x.sh.typeSupply,
+                    DateSupply = x.sh.dateSupply,
+
+                    ItemName = x.i.ItemName,
+                    NurseName = x.n.name,
+                    RoomName = x.r.roomName,
+                    PatientName = x.p != null ? x.p.fullName : null
+                }).ToList();
+        }
+        public List<SupplyHistoryDTO> GetPatientSupplyHistoryInSameDepartment(string doctorId, string patientId)
+        {
+            // Lấy departmentId của bác sĩ
+            var departmentId = db.Staffs
+                                 .Where(s => s.id == doctorId)
+                                 .Select(s => s.departmentID)
+                                 .FirstOrDefault();
+
+            // Nếu không tìm thấy khoa thì trả về list rỗng
+            if (string.IsNullOrEmpty(departmentId))
+                return new List<SupplyHistoryDTO>();
+
+            var query = from sh in db.SupplyHistories
+                        join i in db.Items on sh.itemID equals i.ID
+                        join r in db.Rooms on sh.roomID equals r.id
+                        join d in db.Departments on r.departmentID equals d.id
+                        join n in db.Staffs on sh.nurseID equals n.id
+                        join p in db.Patients on sh.PatientID equals p.id into pp
+                        from p in pp.DefaultIfEmpty() // LEFT JOIN
+                        where sh.typeSupply == "Patient"
+                              && sh.PatientID == patientId
+                              && r.departmentID == departmentId
+                        orderby sh.dateSupply descending
+                        select new SupplyHistoryDTO
+                        {
+                            Id = sh.id,
+                            ItemID = sh.itemID,
+                            RoomID = sh.roomID, // int
+                            NurseID = sh.nurseID,
+                            Dosage = sh.dosage,
+                            Quantity = sh.quantity ?? 0,
+                            Unit = sh.unit,
+                            Note = sh.note,
+                            PatientID = sh.PatientID,
+                            TypeSupply = sh.typeSupply,
+                            DateSupply = sh.dateSupply,
+
+                            // Thông tin mô tả
+                            ItemName = i.ItemName,
+                            NurseName = n.name,
+                            RoomName = r.roomName,
+                            PatientName = p != null ? p.fullName : null
+                        };
+
+            return query.ToList();
+        }
+        public List<SupplyHistoryDTO> GetSupplyHistoryInSameDepartmentFromDate(string doctorId, DateTime fromDate)
+        {
+            // Lấy department của bác sĩ
+            var departmentId = db.Staffs
+                                 .Where(s => s.id == doctorId)
+                                 .Select(s => s.departmentID)
+                                 .FirstOrDefault();
+
+            if (string.IsNullOrEmpty(departmentId))
+                return new List<SupplyHistoryDTO>();
+
+            var query = from sh in db.SupplyHistories
+                        join i in db.Items on sh.itemID equals i.ID
+                        join r in db.Rooms on sh.roomID equals r.id
+                        join d in db.Departments on r.departmentID equals d.id
+                        join n in db.Staffs on sh.nurseID equals n.id
+                        join p in db.Patients on sh.PatientID equals p.id into pj
+                        from p in pj.DefaultIfEmpty()
+                        where sh.typeSupply == "Patient"
+                              && r.departmentID == departmentId
+                              && sh.dateSupply >= fromDate
+                              && sh.PatientID != null
+                        orderby sh.dateSupply descending
+                        select new SupplyHistoryDTO
+                        {
+                            Id = sh.id,
+                            ItemID = sh.itemID,
+                            RoomID = sh.roomID,
+                            NurseID = sh.nurseID,
+                            Dosage = sh.dosage,
+                            Quantity = sh.quantity ?? 0,
+                            Unit = sh.unit,
+                            Note = sh.note,
+                            PatientID = sh.PatientID,
+                            TypeSupply = sh.typeSupply,
+                            DateSupply = sh.dateSupply,
+
+                            // Thông tin mô tả
+                            ItemName = i.ItemName,
+                            NurseName = n.name,
+                            RoomName = r.roomName,
+                            PatientName = p != null ? p.fullName : null
+                        };
+
+            return query.ToList();
+        }
     }
 }
+
+
 

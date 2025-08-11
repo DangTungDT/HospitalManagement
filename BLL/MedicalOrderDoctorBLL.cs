@@ -44,5 +44,36 @@ namespace BLL
         {
             return dal.GetAllLabTestTypes();
         }
+        public List<PatientSupplyHistoryDTO> GetPatientsByDoctorDepartment(string doctorId)
+        {
+            return dal.GetPatientsByDoctorDepartment(doctorId);
+        }
+        // MedicalOrderDoctorBLL.cs
+        public List<MedicalOrderDoctorDTO> SearchMedicalOrdersByDoctorDepartment(string doctorId, string orderType, string patientName)
+        {
+            return dal.SearchMedicalOrdersByDoctorDepartment(doctorId, orderType, patientName);
+        }
+        public List<MedicalOrderDoctorDTO> GetMedicalOrdersInDepartmentOfDoctor(string doctorId)
+        {
+            return dal.GetMedicalOrdersInDepartmentOfDoctor(doctorId);
+        }
+
+        public void CompleteMedicalOrder(int medicalOrderId)
+        {
+            var dal = new MedicalOrderDoctorDAL();
+            dal.CompleteMedicalOrder(medicalOrderId);
+        }
+        public List<MedicalOrderDoctorDTO> GetMedicalOrdersOfPatientInDoctorDepartment(string doctorId, string patientId)
+        {
+            MedicalOrderDoctorDAL dal = new MedicalOrderDoctorDAL();
+            return dal.GetMedicalOrdersOfPatientInDoctorDepartment(doctorId, patientId);
+        }
+        public PatientSupplyHistoryDTO GetPatientInfoById(string patientId)
+        {
+            var dal = new MedicalOrderDoctorDAL();
+            return dal.GetPatientInfoById(patientId);
+        }
+        public string GetDepartmentIdByDoctor(string doctorId) => dal.GetDepartmentIdByDoctor(doctorId);
+        public List<RoomSupplyHistoryDTO> GetRoomsByDoctorDepartment(string doctorId) => dal.GetRoomsByDoctorDepartment(doctorId);
     }
 }
