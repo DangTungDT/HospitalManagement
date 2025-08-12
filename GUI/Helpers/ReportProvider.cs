@@ -2,21 +2,45 @@
 using CrystalDecisions.Shared;
 using System;
 using System.Collections.Generic;
+using System.Data.Sql;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Data.SqlClient;
+using System.Configuration;
 namespace GUI.Helpers
 {
     public static class CrystalReportHelper
     {
-        // Gắn cứng thông tin kết nối
-        private static readonly string ServerName = @"LAPTOP-S013149L\SQLEXPRESS";
+        private static readonly string ServerName = GetServerName();
         private static readonly string DatabaseName = "HospitalManagement";
         private static readonly string UserId = "";   // Nếu dùng SQL Auth sau này
         private static readonly string Password = "";
+
+        private static string GetServerName()
+        {
+            try
+            {
+                // Lấy từ connection string trong App.config
+                var connStr = ConfigurationManager.ConnectionStrings["HospitalManagementConnection"]?.ConnectionString;
+                if (!string.IsNullOrEmpty(connStr))
+                {
+                    var builder = new SqlConnectionStringBuilder(connStr);
+                    if (!string.IsNullOrEmpty(builder.DataSource))
+                        return builder.DataSource;
+                }
+            }
+            catch
+            {
+                // Bỏ qua lỗi, sẽ fallback
+            }
+
+            // Nếu không tìm thấy connection string -> dùng mặc định
+            return Environment.MachineName + "\\SQLEXPRESS";
+        }
 
         public static ReportDocument LoadReport(string reportFileName, Dictionary<string, object> parameters = null)
         {
@@ -41,11 +65,23 @@ namespace GUI.Helpers
                 IntegratedSecurity = true
             };
 
+            // Apply cho tất cả bảng chính
             foreach (Table table in report.Database.Tables)
             {
                 TableLogOnInfo logonInfo = table.LogOnInfo;
                 logonInfo.ConnectionInfo = connectionInfo;
                 table.ApplyLogOnInfo(logonInfo);
+            }
+
+            // Apply cho subreport (nếu có)
+            foreach (ReportDocument subreport in report.Subreports)
+            {
+                foreach (Table table in subreport.Database.Tables)
+                {
+                    TableLogOnInfo logonInfo = table.LogOnInfo;
+                    logonInfo.ConnectionInfo = connectionInfo;
+                    table.ApplyLogOnInfo(logonInfo);
+                }
             }
 
             // Gán tham số nếu có
@@ -54,8 +90,10 @@ namespace GUI.Helpers
                 foreach (var param in parameters)
                 {
                     ParameterValues values = new ParameterValues();
-                    ParameterDiscreteValue value = new ParameterDiscreteValue();
-                    value.Value = param.Value;
+                    ParameterDiscreteValue value = new ParameterDiscreteValue
+                    {
+                        Value = param.Value
+                    };
                     values.Add(value);
 
                     report.DataDefinition.ParameterFields[param.Key].ApplyCurrentValues(values);
