@@ -74,5 +74,11 @@ namespace GUI
             bb.Show();
 
         }
+
+        private void chuyểnPhòngToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form_chuyenphong chuyenphong = new Form_chuyenphong();
+            chuyenphong.Show();
+        }
     }
 }
