@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="HospitalManagement" Class="HospitalManagementDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=LAPTOP-S013149L\SQLEXPRESS;Initial Catalog=HospitalManagement;Integrated Security=True;Trust Server Certificate=True" SettingsObjectName="DAL.Properties.Settings" SettingsPropertyName="HospitalManagementConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=LAPTOP-2LEA9U48\SQLEXPRESS;Initial Catalog=HospitalManagement;Integrated Security=True;Trust Server Certificate=True" SettingsObjectName="DAL.Properties.Settings" SettingsPropertyName="HospitalManagementConnectionString4" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Account" Member="Accounts">
     <Type Name="Account">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -273,4 +273,195 @@
       <Association Name="Department_Staff" Member="Department" ThisKey="departmentID" OtherKey="id" Type="Department" IsForeignKey="true" />
     </Type>
   </Table>
+  <Function Name="dbo.sp_GetDailyCaresByPatient" Method="sp_GetDailyCaresByPatient">
+    <Parameter Name="PatientId" Parameter="patientId" Type="System.String" DbType="Char(10)" />
+    <ElementType Name="sp_GetDailyCaresByPatientResult">
+      <Column Name="[Mã chăm sóc]" Member="Mã_chăm_sóc" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[Tên bệnh nhân]" Member="Tên_bệnh_nhân" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="[Y tá chăm sóc]" Member="Y_tá_chăm_sóc" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Phòng" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Khoa" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="[Ca trực]" Member="Ca_trực" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="[Huyết áp]" Member="Huyết_áp" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="[Nhiệt độ (°C)]" Member="Nhiệt_độ___C_" Type="System.Decimal" DbType="Decimal(4,1)" CanBeNull="true" />
+      <Column Name="[Nhịp tim (lần/phút)]" Member="Nhịp_tim__lần_phút_" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[Ngày chăm sóc]" Member="Ngày_chăm_sóc" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="[Ghi chú]" Member="Ghi_chú" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_GetSupplyHistoryInSameDepartmentFromDate" Method="sp_GetSupplyHistoryInSameDepartmentFromDate">
+    <Parameter Name="DoctorId" Parameter="doctorId" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="FromDate" Parameter="fromDate" Type="System.DateTime" DbType="Date" />
+    <ElementType Name="sp_GetSupplyHistoryInSameDepartmentFromDateResult">
+      <Column Name="[Mã cấp thuốc]" Member="Mã_cấp_thuốc" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="[Tên vật tư/thuốc]" Member="Tên_vật_tư_thuốc" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Phòng" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Khoa" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="[Tên y tá]" Member="Tên_y_tá" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="[Tên bệnh nhân]" Member="Tên_bệnh_nhân" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="[Ngày cấp]" Member="Ngày_cấp" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="[Liều lượng]" Member="Liều_lượng" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="[Số lượng]" Member="Số_lượng" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[Đơn vị]" Member="Đơn_vị" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="[Ghi chú]" Member="Ghi_chú" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_GetDailyCaresInSameDepartmentAsDoctorAndDate" Method="sp_GetDailyCaresInSameDepartmentAsDoctorAndDate">
+    <Parameter Name="DoctorId" Parameter="doctorId" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="TargetDate" Parameter="targetDate" Type="System.DateTime" DbType="Date" />
+    <ElementType Name="sp_GetDailyCaresInSameDepartmentAsDoctorAndDateResult">
+      <Column Name="[Mã chăm sóc]" Member="Mã_chăm_sóc" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[Tên bệnh nhân]" Member="Tên_bệnh_nhân" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="[Y tá chăm sóc]" Member="Y_tá_chăm_sóc" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Phòng" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Khoa" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="[Ca trực]" Member="Ca_trực" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="[Huyết áp]" Member="Huyết_áp" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="[Nhiệt độ (°C)]" Member="Nhiệt_độ___C_" Type="System.Decimal" DbType="Decimal(4,1)" CanBeNull="true" />
+      <Column Name="[Nhịp tim (lần/phút)]" Member="Nhịp_tim__lần_phút_" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[Ngày chăm sóc]" Member="Ngày_chăm_sóc" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="[Ghi chú]" Member="Ghi_chú" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_GetDoctorListByDepartment" Method="sp_GetDoctorListByDepartment">
+    <Parameter Name="DepartmentID" Parameter="departmentID" Type="System.String" DbType="Char(10)" />
+    <ElementType Name="sp_GetDoctorListByDepartmentResult">
+      <Column Name="DoctorID" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="DoctorName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="DateOfBirth" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="gender" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="phoneNumber" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="homeAddress" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="citizenID" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
+      <Column Name="position" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="qualification" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="degree" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="status" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="startDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DepartmentName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_GetMedicalOrdersOfPatientInDoctorDepartment" Method="sp_GetMedicalOrdersOfPatientInDoctorDepartment">
+    <Parameter Name="DoctorId" Parameter="doctorId" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="PatientId" Parameter="patientId" Type="System.String" DbType="Char(10)" />
+    <ElementType Name="sp_GetMedicalOrdersOfPatientInDoctorDepartmentResult">
+      <Column Name="[Mã y lệnh]" Member="Mã_y_lệnh" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="[Tên bệnh nhân]" Member="Tên_bệnh_nhân" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="[Tên khoa]" Member="Tên_khoa" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="[Loại y lệnh]" Member="Loại_y_lệnh" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="[Liều lượng]" Member="Liều_lượng" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="[Số lượng]" Member="Số_lượng" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[Đơn vị]" Member="Đơn_vị" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="[Tần suất]" Member="Tần_suất" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="[Ngày bắt đầu]" Member="Ngày_bắt_đầu" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="[Ngày kết thúc]" Member="Ngày_kết_thúc" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="[Trạng thái]" Member="Trạng_thái" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="[Ghi chú]" Member="Ghi_chú" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="[Ngày ký]" Member="Ngày_ký" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_GetPatientListByDepartment" Method="sp_GetPatientListByDepartment">
+    <Parameter Name="DepartmentID" Parameter="departmentID" Type="System.String" DbType="Char(10)" />
+    <ElementType Name="sp_GetPatientListByDepartmentResult">
+      <Column Name="PatientID" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="fullName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="gender" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="dob" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="phoneNumber" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="TypePatient" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="citizenID" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="InsuranceID" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="address" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="EmergencyContact" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="EmergencyPhone" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="status" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="createdDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="updatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="weight" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="height" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="DepartmentName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_GetPatientSupplyHistoryInSameDepartment" Method="sp_GetPatientSupplyHistoryInSameDepartment">
+    <Parameter Name="DoctorId" Parameter="doctorId" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="PatientId" Parameter="patientId" Type="System.String" DbType="Char(10)" />
+    <ElementType Name="sp_GetPatientSupplyHistoryInSameDepartmentResult">
+      <Column Name="[Mã cấp thuốc]" Member="Mã_cấp_thuốc" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="[Tên vật tư/thuốc]" Member="Tên_vật_tư_thuốc" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Phòng" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Khoa" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="[Tên y tá]" Member="Tên_y_tá" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="[Tên bệnh nhân]" Member="Tên_bệnh_nhân" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="[Ngày cấp]" Member="Ngày_cấp" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="[Liều lượng]" Member="Liều_lượng" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="[Số lượng]" Member="Số_lượng" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[Đơn vị]" Member="Đơn_vị" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="[Ghi chú]" Member="Ghi_chú" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_GetPrescriptionReport" Method="sp_GetPrescriptionReport">
+    <Parameter Name="PatientID" Parameter="patientID" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="OrderDate" Parameter="orderDate" Type="System.DateTime" DbType="Date" />
+    <ElementType Name="sp_GetPrescriptionReportResult">
+      <Column Name="PrescriptionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PatientName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="PatientGender" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="PatientDOB" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="PatientPhone" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="PatientAddress" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PatientInsurance" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="DoctorName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="DoctorPosition" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DoctorQualification" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="DoctorDegree" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="DepartmentName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="OrderDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DoctorSignedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="MedicineName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Dosage" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Decimal" DbType="Decimal(8,2)" CanBeNull="true" />
+      <Column Name="Unit" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Frequency" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Note" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_GetStaffListByDepartment" Method="sp_GetStaffListByDepartment">
+    <Parameter Name="DepartmentID" Parameter="departmentID" Type="System.String" DbType="Char(10)" />
+    <ElementType Name="sp_GetStaffListByDepartmentResult">
+      <Column Name="StaffID" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="StaffName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="StaffRole" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DateOfBirth" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="gender" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="phoneNumber" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="homeAddress" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="citizenID" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
+      <Column Name="position" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="qualification" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="degree" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="status" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="startDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DepartmentName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_GetDailyAppointmentReport" Method="sp_GetDailyAppointmentReport">
+    <Parameter Name="Date" Parameter="date" Type="System.DateTime" DbType="Date" />
+    <ElementType Name="sp_GetDailyAppointmentReportResult">
+      <Column Name="AppointmentID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PatientName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="PatientPhone" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="PatientGender" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="PatientDOB" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="DoctorName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="DoctorPosition" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DepartmentName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="AppointmentTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="AppointmentStatus" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="AppointmentNote" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+    </ElementType>
+  </Function>
 </Database>

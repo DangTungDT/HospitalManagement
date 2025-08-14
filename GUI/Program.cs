@@ -17,7 +17,7 @@ namespace GUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmHeadNurseGUI("DD0001"));
+            Application.Run(new FormMenu_LeTan());
         } 
     }
 }

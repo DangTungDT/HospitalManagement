@@ -200,6 +200,18 @@
     <Compile Include="Form_Room.Designer.cs">
       <DependentUpon>Form_Room.cs</DependentUpon>
     </Compile>
+    <Compile Include="form_rpttruyvanlichhen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form_rpttruyvanlichhen.Designer.cs">
+      <DependentUpon>form_rpttruyvanlichhen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_truyvanlichhen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_truyvanlichhen.Designer.cs">
+      <DependentUpon>Form_truyvanlichhen.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmDailyCaresOfPatientNurseGUI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -365,6 +377,13 @@
     <Compile Include="ReporstDailyCaresInSameDepartmentAsDoctorAndDateNurseGUI.Designer.cs">
       <DependentUpon>ReporstDailyCaresInSameDepartmentAsDoctorAndDateNurseGUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="Report\crptTruyvanlichhen.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crptTruyvanlichhen.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="Report\rptDailyCaresByPatientNurse.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -499,6 +518,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Room.resx">
       <DependentUpon>Form_Room.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form_rpttruyvanlichhen.resx">
+      <DependentUpon>form_rpttruyvanlichhen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_truyvanlichhen.resx">
+      <DependentUpon>Form_truyvanlichhen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDailyCaresOfPatientNurseGUI.resx">
       <DependentUpon>frmDailyCaresOfPatientNurseGUI.cs</DependentUpon>
@@ -904,6 +929,11 @@
       <LastGenOutput>rptSupplyHistoryInSameDepartmentFromDate.cs</LastGenOutput>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Report\crptTruyvanlichhen.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptTruyvanlichhen.cs</LastGenOutput>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

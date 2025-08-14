@@ -49,9 +49,10 @@
             // btnAppointmentManagement
             // 
             this.btnAppointmentManagement.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnAppointmentManagement.Location = new System.Drawing.Point(-1, 320);
+            this.btnAppointmentManagement.Location = new System.Drawing.Point(-1, 260);
+            this.btnAppointmentManagement.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnAppointmentManagement.Name = "btnAppointmentManagement";
-            this.btnAppointmentManagement.Size = new System.Drawing.Size(187, 73);
+            this.btnAppointmentManagement.Size = new System.Drawing.Size(140, 59);
             this.btnAppointmentManagement.TabIndex = 4;
             this.btnAppointmentManagement.Text = "Quản Lý Lịch Hẹn";
             this.btnAppointmentManagement.UseVisualStyleBackColor = false;
@@ -60,9 +61,10 @@
             // btnInpatientAdmission
             // 
             this.btnInpatientAdmission.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnInpatientAdmission.Location = new System.Drawing.Point(-1, 391);
+            this.btnInpatientAdmission.Location = new System.Drawing.Point(-1, 318);
+            this.btnInpatientAdmission.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnInpatientAdmission.Name = "btnInpatientAdmission";
-            this.btnInpatientAdmission.Size = new System.Drawing.Size(187, 73);
+            this.btnInpatientAdmission.Size = new System.Drawing.Size(140, 59);
             this.btnInpatientAdmission.TabIndex = 3;
             this.btnInpatientAdmission.Text = "Nhập Viện";
             this.btnInpatientAdmission.UseVisualStyleBackColor = false;
@@ -70,9 +72,10 @@
             // btnMedicalRegistration
             // 
             this.btnMedicalRegistration.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnMedicalRegistration.Location = new System.Drawing.Point(-1, 248);
+            this.btnMedicalRegistration.Location = new System.Drawing.Point(-1, 202);
+            this.btnMedicalRegistration.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnMedicalRegistration.Name = "btnMedicalRegistration";
-            this.btnMedicalRegistration.Size = new System.Drawing.Size(187, 73);
+            this.btnMedicalRegistration.Size = new System.Drawing.Size(140, 59);
             this.btnMedicalRegistration.TabIndex = 5;
             this.btnMedicalRegistration.Text = "Đăng Ký Khám";
             this.btnMedicalRegistration.UseVisualStyleBackColor = false;
@@ -81,9 +84,10 @@
             // btnDischarge
             // 
             this.btnDischarge.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnDischarge.Location = new System.Drawing.Point(-1, 461);
+            this.btnDischarge.Location = new System.Drawing.Point(-1, 375);
+            this.btnDischarge.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnDischarge.Name = "btnDischarge";
-            this.btnDischarge.Size = new System.Drawing.Size(187, 73);
+            this.btnDischarge.Size = new System.Drawing.Size(140, 59);
             this.btnDischarge.TabIndex = 2;
             this.btnDischarge.Text = "Xuất Viện ";
             this.btnDischarge.UseVisualStyleBackColor = false;
@@ -91,9 +95,10 @@
             // btnPatientAdmission
             // 
             this.btnPatientAdmission.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnPatientAdmission.Location = new System.Drawing.Point(-1, 177);
+            this.btnPatientAdmission.Location = new System.Drawing.Point(-1, 144);
+            this.btnPatientAdmission.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnPatientAdmission.Name = "btnPatientAdmission";
-            this.btnPatientAdmission.Size = new System.Drawing.Size(187, 73);
+            this.btnPatientAdmission.Size = new System.Drawing.Size(140, 59);
             this.btnPatientAdmission.TabIndex = 1;
             this.btnPatientAdmission.Text = "Tiếp Nhận Bệnh Nhân";
             this.btnPatientAdmission.UseVisualStyleBackColor = false;
@@ -102,12 +107,14 @@
             // btnSignout
             // 
             this.btnSignout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnSignout.Location = new System.Drawing.Point(0, 602);
+            this.btnSignout.Location = new System.Drawing.Point(0, 489);
+            this.btnSignout.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSignout.Name = "btnSignout";
-            this.btnSignout.Size = new System.Drawing.Size(187, 73);
+            this.btnSignout.Size = new System.Drawing.Size(140, 59);
             this.btnSignout.TabIndex = 7;
             this.btnSignout.Text = "Đăng Xuất";
             this.btnSignout.UseVisualStyleBackColor = false;
+            this.btnSignout.Click += new System.EventHandler(this.btnSignout_Click);
             // 
             // panel2
             // 
@@ -122,16 +129,18 @@
             this.panel2.Controls.Add(this.btnAppointmentManagement);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(187, 728);
+            this.panel2.Size = new System.Drawing.Size(140, 592);
             this.panel2.TabIndex = 12;
             // 
             // btnPatientSearch
             // 
             this.btnPatientSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnPatientSearch.Location = new System.Drawing.Point(0, 531);
+            this.btnPatientSearch.Location = new System.Drawing.Point(0, 431);
+            this.btnPatientSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnPatientSearch.Name = "btnPatientSearch";
-            this.btnPatientSearch.Size = new System.Drawing.Size(187, 73);
+            this.btnPatientSearch.Size = new System.Drawing.Size(140, 59);
             this.btnPatientSearch.TabIndex = 8;
             this.btnPatientSearch.Text = "Tìm Kiếm Bệnh Nhân";
             this.btnPatientSearch.UseVisualStyleBackColor = false;
@@ -143,8 +152,9 @@
             this.pictureBox1.Image = global::GUI.Properties.Resources.logoRexeption;
             this.pictureBox1.InitialImage = global::GUI.Properties.Resources.logonursing;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(187, 175);
+            this.pictureBox1.Size = new System.Drawing.Size(140, 142);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
@@ -153,9 +163,10 @@
             // 
             this.panel1.Controls.Add(this.pictureBox2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(187, 0);
+            this.panel1.Location = new System.Drawing.Point(140, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1079, 175);
+            this.panel1.Size = new System.Drawing.Size(810, 142);
             this.panel1.TabIndex = 15;
             // 
             // pictureBox2
@@ -163,28 +174,31 @@
             this.pictureBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox2.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(1079, 175);
+            this.pictureBox2.Size = new System.Drawing.Size(810, 142);
             this.pictureBox2.TabIndex = 0;
             this.pictureBox2.TabStop = false;
             // 
             // panel_Body
             // 
             this.panel_Body.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel_Body.Location = new System.Drawing.Point(187, 175);
+            this.panel_Body.Location = new System.Drawing.Point(140, 142);
+            this.panel_Body.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel_Body.Name = "panel_Body";
-            this.panel_Body.Size = new System.Drawing.Size(1079, 553);
+            this.panel_Body.Size = new System.Drawing.Size(810, 450);
             this.panel_Body.TabIndex = 17;
             // 
             // frmReceptionistDashboardGUI
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1266, 728);
+            this.ClientSize = new System.Drawing.Size(950, 592);
             this.Controls.Add(this.panel_Body);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.IsMdiContainer = true;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "frmReceptionistDashboardGUI";
             this.Text = "frmReceptionistDashboardGUI";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
