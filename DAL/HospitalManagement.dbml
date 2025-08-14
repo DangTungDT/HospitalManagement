@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="HospitalManagement" Class="HospitalManagementDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=LAPTOP-2LEA9U48\SQLEXPRESS;Initial Catalog=HospitalManagement;Integrated Security=True;Trust Server Certificate=True" SettingsObjectName="DAL.Properties.Settings" SettingsPropertyName="HospitalManagementConnectionString4" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=LAPTOP-S013149L\SQLEXPRESS;Initial Catalog=HospitalManagement;Integrated Security=True;Trust Server Certificate=True" SettingsObjectName="DAL.Properties.Settings" SettingsPropertyName="HospitalManagementConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Account" Member="Accounts">
     <Type Name="Account">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -446,22 +446,6 @@
       <Column Name="startDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="Notes" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="DepartmentName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.sp_GetDailyAppointmentReport" Method="sp_GetDailyAppointmentReport">
-    <Parameter Name="Date" Parameter="date" Type="System.DateTime" DbType="Date" />
-    <ElementType Name="sp_GetDailyAppointmentReportResult">
-      <Column Name="AppointmentID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="PatientName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="PatientPhone" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
-      <Column Name="PatientGender" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
-      <Column Name="PatientDOB" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="DoctorName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="DoctorPosition" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="DepartmentName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="AppointmentTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="AppointmentStatus" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="AppointmentNote" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
     </ElementType>
   </Function>
 </Database>

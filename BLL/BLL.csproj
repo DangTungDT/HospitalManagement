@@ -51,6 +51,7 @@
     <Compile Include="ItemBLL.cs" />
     <Compile Include="ItemDoctorBLL.cs" />
     <Compile Include="LaboratoryTestBLL.cs" />
+    <Compile Include="LabTestTypeAdminBLL.cs" />
     <Compile Include="MedicalOrderDoctorBLL.cs" />
     <Compile Include="MedicalRecordDoctorBLL.cs" />
     <Compile Include="NurseAssignmentNurseBLL.cs" />

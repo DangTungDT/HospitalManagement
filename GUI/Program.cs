@@ -1,5 +1,4 @@
-﻿using DAL;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Versioning;
@@ -18,7 +17,7 @@ namespace GUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form_DtorPaitent());
+            Application.Run(new frmHeadNurseGUI("DD0001"));
         } 
     }
 }

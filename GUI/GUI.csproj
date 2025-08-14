@@ -92,6 +92,12 @@
     <Compile Include="FormDailyCaresByPatientReporstNurseGUI.Designer.cs">
       <DependentUpon>FormDailyCaresByPatientReporstNurseGUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormLabTestTypeAdminGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLabTestTypeAdminGUI.Designer.cs">
+      <DependentUpon>FormLabTestTypeAdminGUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormMedicalOrderDoctorGUI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,6 +127,18 @@
     </Compile>
     <Compile Include="FormPatientSupplyHistoryInSameDepartmentReporst.Designer.cs">
       <DependentUpon>FormPatientSupplyHistoryInSameDepartmentReporst.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormRoomTransferHistoryAdminGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRoomTransferHistoryAdminGUI.Designer.cs">
+      <DependentUpon>FormRoomTransferHistoryAdminGUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormRoomTransferHistoryDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRoomTransferHistoryDetail.Designer.cs">
+      <DependentUpon>FormRoomTransferHistoryDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="FormSalary.cs">
       <SubType>Form</SubType>
@@ -338,6 +356,12 @@
     <Compile Include="frmTestTypeInfo_Doctor.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmTransferRoomGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTransferRoomGUI.Designer.cs">
+      <DependentUpon>frmTransferRoomGUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmUserGUI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -471,6 +495,9 @@
     <EmbeddedResource Include="FormDailyCaresByPatientReporstNurseGUI.resx">
       <DependentUpon>FormDailyCaresByPatientReporstNurseGUI.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormLabTestTypeAdminGUI.resx">
+      <DependentUpon>FormLabTestTypeAdminGUI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormMedicalOrderDoctorGUI.resx">
       <DependentUpon>FormMedicalOrderDoctorGUI.cs</DependentUpon>
     </EmbeddedResource>
@@ -485,6 +512,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormPatientSupplyHistoryInSameDepartmentReporst.resx">
       <DependentUpon>FormPatientSupplyHistoryInSameDepartmentReporst.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormRoomTransferHistoryAdminGUI.resx">
+      <DependentUpon>FormRoomTransferHistoryAdminGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormRoomTransferHistoryDetail.resx">
+      <DependentUpon>FormRoomTransferHistoryDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormSalary.resx">
       <DependentUpon>FormSalary.cs</DependentUpon>
@@ -690,6 +723,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmTaskAssignmentGUI.resx">
       <DependentUpon>frmTaskAssignmentGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTransferRoomGUI.resx">
+      <DependentUpon>frmTransferRoomGUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmUserGUI.resx">
       <DependentUpon>frmUserGUI.cs</DependentUpon>

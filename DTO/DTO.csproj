@@ -58,6 +58,7 @@
     <Compile Include="PatientNurseDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoomDTO.cs" />
+    <Compile Include="RoomTransferHistoryDTO.cs" />
     <Compile Include="SalaryDetailDTO.cs" />
     <Compile Include="SalaryDTO.cs" />
     <Compile Include="StaffDoctorDTO.cs" />

@@ -60,6 +60,7 @@
     <Compile Include="ItemDAL.cs" />
     <Compile Include="ItemDoctorDAL.cs" />
     <Compile Include="LaboratoryTestDoctorDAL.cs" />
+    <Compile Include="LabTestTypeAdminDAL.cs" />
     <Compile Include="MedicalOrderDoctorDAL.cs" />
     <Compile Include="MedicalRecordDoctorDAL.cs" />
     <Compile Include="NurseAssignmentNurseDAL.cs" />
