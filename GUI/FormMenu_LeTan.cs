@@ -65,5 +65,14 @@ namespace GUI
             c.Show();
             this.Hide();  
         }
+        private string staffId;
+        private string patientId;
+        private string patientName;
+        private void lịchSửChuyểnPhòngToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormTransferRoomNurseGUI bb = new FormTransferRoomNurseGUI(staffId, patientId, patientName);
+            bb.Show();
+
+        }
     }
 }
