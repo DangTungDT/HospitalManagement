@@ -182,6 +182,12 @@
     <Compile Include="Form_Depment.Designer.cs">
       <DependentUpon>Form_Depment.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form_DtorPaitent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_DtorPaitent.Designer.cs">
+      <DependentUpon>Form_DtorPaitent.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_Invt.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -509,6 +515,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Depment.resx">
       <DependentUpon>Form_Depment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_DtorPaitent.resx">
+      <DependentUpon>Form_DtorPaitent.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Invt.resx">
       <DependentUpon>Form_Invt.cs</DependentUpon>

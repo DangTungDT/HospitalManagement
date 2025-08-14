@@ -50,6 +50,7 @@
     <Compile Include="DoctorListbyDepartmentDAL.cs" />
     <Compile Include="DoctorPatientAdminDAL.cs" />
     <Compile Include="DoctorPatientDAL.cs" />
+    <Compile Include="DtorPaitentDAL.cs" />
     <Compile Include="HospitalManagement.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

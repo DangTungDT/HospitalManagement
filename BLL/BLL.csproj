@@ -46,6 +46,7 @@
     <Compile Include="ApmentBLL.cs" />
     <Compile Include="DepmentBLL.cs" />
     <Compile Include="DoctorPatientBLL.cs" />
+    <Compile Include="DtorPaitent_BLL.cs" />
     <Compile Include="InvtBLL.cs" />
     <Compile Include="ItemBLL.cs" />
     <Compile Include="ItemDoctorBLL.cs" />
