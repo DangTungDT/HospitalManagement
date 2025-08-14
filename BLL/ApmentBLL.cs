@@ -67,6 +67,17 @@ namespace BLL
             }
             return result;
         }
+        public List<Appointment> TimKiemAppointmentTheoStartDate(DateTime ngayBatDau)
+        {
+            if (ngayBatDau == default(DateTime))
+            {
+                throw new ArgumentException("Ngày bắt đầu không hợp lệ.");
+            }
+
+            var ketQua = daldk.TimKiemAppointmentTheoStartDate(ngayBatDau);
+
+            return ketQua;
+        }
     }
 }
 

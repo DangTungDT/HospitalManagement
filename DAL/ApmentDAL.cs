@@ -101,6 +101,17 @@ namespace DAL
                 return false;
             }
         }
+        public List<Appointment> TimKiemAppointmentTheoStartDate(DateTime ngayBatDau)
+        {
+            DateTime ngayTiepTheo = ngayBatDau.Date.AddDays(1);
+
+            var ketQua = db.Appointments
+                           .Where(ap => ap.startDate >= ngayBatDau.Date
+                                     && ap.startDate < ngayTiepTheo)
+                           .ToList();
+
+            return ketQua;
+        }
     }
 }
 

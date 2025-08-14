@@ -16,6 +16,12 @@ namespace GUI
         {
             InitializeComponent();
         }
+        string Idstaff;
+        public FormMenu_LeTan(string Id)
+        {          
+            InitializeComponent();
+            Idstaff = Id;
+        }
 
         private void đăngKýLicg5GToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -40,6 +46,24 @@ namespace GUI
         {
             frmPatientSearchGUI c = new frmPatientSearchGUI();
             c.Show();
+        }
+
+        private void truyVấnLịchHẹnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form_truyvanlichhen b = new Form_truyvanlichhen();
+            b.Show();
+        }
+
+        private void đăngNhậpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void thoátToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DangNhap_GUI c = new DangNhap_GUI();
+            c.Show();
+            this.Hide();  
         }
     }
 }
