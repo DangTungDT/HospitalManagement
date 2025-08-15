@@ -100,5 +100,13 @@ namespace GUI
         {
             OpenChildForm(new FormMedicalOrderDoctorGUI(maAccount));
         }
+
+        private void btnDangXuat_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            DangNhap_GUI f = new DangNhap_GUI();
+            f.Show();
+            f.FormClosed += (s, args) => Application.Exit();
+        }
     }
 }
