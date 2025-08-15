@@ -66,7 +66,7 @@ namespace GUI
                     }
                     else if (role == "dieuduong")
                     {
-                        frmHeadNurseGUI f = new frmHeadNurseGUI();
+                        frmHeadNurseGUI f = new frmHeadNurseGUI("");
                         f.ShowDialog();
                     }
                     else if (role == "admin")

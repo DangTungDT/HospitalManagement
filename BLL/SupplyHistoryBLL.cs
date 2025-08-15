@@ -40,5 +40,23 @@ namespace BLL
         }
         public List<RoomSupplyHistoryDTO> GetAllRooms() => dal.GetAllRooms();
         public List<PatientSupplyHistoryDTO> GetAllPatients() => dal.GetAllPatients();
+        public List<SupplyHistoryDTO> GetPatientSupplyHistoryInSameDepartment(string doctorId) => dal.GetPatientSupplyHistoryInSameDepartment(doctorId);
+        public void UpdateEditableFields(SupplyHistoryDTO dto)
+        {
+            dal.UpdateEditableFields(dto);
+        }
+        public List<SupplyHistoryDTO> SearchPatientSupplyHistoryByFilters(
+               string doctorId, string patientId, int? roomId, string itemId)
+        {
+            return dal.SearchPatientSupplyHistoryByFilters(doctorId, patientId, roomId, itemId);
+        }
+        public List<SupplyHistoryDTO> GetPatientSupplyHistoryInSameDepartment(string doctorId, string patientId)
+        {
+            return dal.GetPatientSupplyHistoryInSameDepartment(doctorId, patientId);
+        }
+        public List<SupplyHistoryDTO> GetSupplyHistoryInSameDepartmentFromDate(string doctorId, DateTime fromDate)
+        {
+            return dal.GetSupplyHistoryInSameDepartmentFromDate(doctorId, fromDate);
+        }
     }
 }

@@ -57,5 +57,10 @@ namespace GUI
         {
             OpenChildForm(new frmPatientSearchGUI());
         }
+
+        private void btnSignout_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

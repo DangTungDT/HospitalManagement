@@ -243,6 +243,16 @@ CREATE TABLE SalaryDetail (
 	primary key(SalaryID, StaffId, SalaryDate)
 )
 go
+CREATE TABLE RoomTransferHistory (
+    id INT PRIMARY KEY IDENTITY(1,1),
+    patientID CHAR(10) NOT NULL,
+    fromRoomID INT NULL,
+    toRoomID INT NOT NULL,
+    transferDate DATETIME DEFAULT GETDATE(),
+    note NVARCHAR(255)
+);
+GO
+
  
 --Table Salary
 create table Salary (
@@ -267,6 +277,19 @@ add constraint fk_Patient_DailyCare foreign key(patientID) references Patient(id
 	constraint fk_Room_DailyCare foreign key(roomID) references Room(id),
 	constraint fk_Nurse_DailyCare foreign key(nurseID) references Staff(id);
 go
+
+ALTER TABLE RoomTransferHistory
+ADD CONSTRAINT FK_Transfer_Patient 
+    FOREIGN KEY (patientID) REFERENCES Patient(id) ON DELETE CASCADE;
+
+ALTER TABLE RoomTransferHistory
+ADD CONSTRAINT FK_Transfer_FromRoom 
+    FOREIGN KEY (fromRoomID) REFERENCES Room(id) ON DELETE SET NULL;
+
+ALTER TABLE RoomTransferHistory
+ADD CONSTRAINT FK_Transfer_ToRoom 
+    FOREIGN KEY (toRoomID) REFERENCES Room(id)  ON DELETE NO ACTION;
+GO
 
 ALTER TABLE MedicalOrder
 ADD CONSTRAINT fk_Patient_MedicalOrder FOREIGN KEY (PatientID)
@@ -439,6 +462,267 @@ BEGIN
       AND (@DepartmentID IS NULL OR s.departmentID = @DepartmentID)
     ORDER BY s.name
 END
+go
+CREATE OR ALTER PROCEDURE sp_GetMedicalOrdersOfPatientInDoctorDepartment
+    @DoctorId CHAR(10),
+    @PatientId CHAR(10)
+AS
+BEGIN
+    DECLARE @DepartmentId CHAR(10);
+
+    -- Lấy khoa của bác sĩ
+    SELECT @DepartmentId = departmentID
+    FROM Staff
+    WHERE id = @DoctorId;
+
+    IF @DepartmentId IS NULL
+    BEGIN
+        SELECT TOP 0 
+            CAST(NULL AS CHAR(10)) AS [Mã y lệnh],
+            CAST(NULL AS NVARCHAR(100)) AS [Tên bệnh nhân],
+            CAST(NULL AS NVARCHAR(100)) AS [Tên khoa],
+            CAST(NULL AS NVARCHAR(100)) AS [Loại y lệnh],
+            CAST(NULL AS NVARCHAR(50)) AS [Liều lượng],
+            CAST(NULL AS INT) AS [Số lượng],
+            CAST(NULL AS NVARCHAR(50)) AS [Đơn vị],
+            CAST(NULL AS NVARCHAR(50)) AS [Tần suất],
+            CAST(NULL AS DATETIME) AS [Ngày bắt đầu],
+            CAST(NULL AS DATETIME) AS [Ngày kết thúc],
+            CAST(NULL AS NVARCHAR(50)) AS [Trạng thái],
+            CAST(NULL AS NVARCHAR(MAX)) AS [Ghi chú],
+            CAST(NULL AS DATETIME) AS [Ngày ký]
+        WHERE 1 = 0;
+        RETURN;
+    END
+
+    ;WITH ValidTransfers AS (
+        SELECT 
+            t.patientID,
+            t.transferDate,
+            r.departmentID
+        FROM RoomTransferHistory t
+        JOIN Room r ON t.toRoomID = r.id
+        WHERE r.departmentID = @DepartmentId
+    ),
+    LatestTransfers AS (
+        SELECT vt.patientID, vt.departmentID
+        FROM ValidTransfers vt
+        WHERE vt.transferDate = (
+            SELECT MAX(vt2.transferDate)
+            FROM ValidTransfers vt2
+            WHERE vt2.patientID = vt.patientID
+        )
+    )
+    SELECT 
+        mo.id AS [Mã y lệnh],
+        p.fullName AS [Tên bệnh nhân],
+        d.departmentName AS [Tên khoa],
+        mo.OrderType AS [Loại y lệnh],
+        mo.Dosage AS [Liều lượng],
+        mo.Quantity AS [Số lượng],
+        mo.Unit AS [Đơn vị],
+        mo.Frequency AS [Tần suất],
+        mo.StartDate AS [Ngày bắt đầu],
+        mo.EndDate AS [Ngày kết thúc],
+        mo.Status AS [Trạng thái],
+        mo.Note AS [Ghi chú],
+        mo.SignedAt AS [Ngày ký]
+    FROM MedicalOrder mo
+    JOIN Patient p ON mo.PatientID = p.id
+    JOIN LatestTransfers lt ON p.id = lt.patientID
+    JOIN Department d ON lt.departmentID = d.id
+    WHERE 
+        p.TypePatient = 'Inpatient'
+        AND p.id = @PatientId
+    ORDER BY mo.CreatedAt DESC;
+END
+GO
+
+---- Xoá thủ tục cũ nếu có
+--IF OBJECT_ID('sp_GetDailyCaresByPatient', 'P') IS NOT NULL
+--    DROP PROCEDURE sp_GetSupplyHistoryInSameDepartmentFromDate;
+GO
+
+-- Tạo lại thủ tục với thêm tên khoa
+CREATE PROCEDURE sp_GetDailyCaresByPatient
+    @PatientId CHAR(10)
+AS
+BEGIN
+    SELECT 
+        dc.id AS 'Mã chăm sóc',
+        p.fullName AS 'Tên bệnh nhân',
+        s.name AS 'Y tá chăm sóc',
+        r.roomName AS 'Phòng',
+        d.departmentName AS 'Khoa',
+        dc.shift AS 'Ca trực',
+        dc.bloodPressure AS 'Huyết áp',
+        dc.bodyTempearature AS 'Nhiệt độ (°C)',
+        dc.pulseRate AS 'Nhịp tim (lần/phút)',
+        dc.dateCare AS 'Ngày chăm sóc',
+        dc.note AS 'Ghi chú'
+    FROM DailyCare dc
+    INNER JOIN Patient p ON dc.patientID = p.id
+    INNER JOIN Staff s ON dc.nurseID = s.id
+    LEFT JOIN Room r ON dc.roomID = r.id
+    LEFT JOIN Department d ON r.departmentID = d.id
+    WHERE dc.patientID = @PatientId
+    ORDER BY dc.dateCare DESC;
+END
+go
+CREATE OR ALTER PROCEDURE sp_GetDailyCaresInSameDepartmentAsDoctorAndDate
+    @DoctorId CHAR(10),
+    @TargetDate DATE
+AS
+BEGIN
+    SELECT 
+        dc.id AS 'Mã chăm sóc',
+        p.fullName AS 'Tên bệnh nhân',
+        s.name AS 'Y tá chăm sóc',
+        r.roomName AS 'Phòng',
+        d.departmentName AS 'Khoa',
+        dc.shift AS 'Ca trực',
+        dc.bloodPressure AS 'Huyết áp',
+        dc.bodyTempearature AS 'Nhiệt độ (°C)',
+        dc.pulseRate AS 'Nhịp tim (lần/phút)',
+        dc.dateCare AS 'Ngày chăm sóc',
+        dc.note AS 'Ghi chú'
+    FROM DailyCare dc
+    JOIN Patient p ON dc.patientID = p.id
+    JOIN Staff s ON dc.nurseID = s.id
+    JOIN Room r ON dc.roomID = r.id
+    JOIN Department d ON r.departmentID = d.id
+    JOIN Staff doctor ON doctor.id = @DoctorId
+    WHERE 
+        r.departmentID = doctor.departmentID
+        AND p.TypePatient = 'Inpatient'
+        AND dc.dateCare >= @TargetDate
+    ORDER BY dc.dateCare DESC;
+END
+GO
+CREATE PROCEDURE sp_GetPatientSupplyHistoryInSameDepartment
+    @DoctorId CHAR(10),
+    @PatientId CHAR(10)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @DepartmentId CHAR(10);
+
+    -- Lấy khoa của bác sĩ đăng nhập
+    SELECT @DepartmentId = departmentID
+    FROM Staff
+    WHERE id = @DoctorId;
+
+    -- Nếu không tìm thấy khoa => trả về rỗng
+    IF @DepartmentId IS NULL
+    BEGIN
+        SELECT 
+            CAST(NULL AS CHAR(10)) AS [Mã cấp thuốc],
+            CAST(NULL AS NVARCHAR(255)) AS [Tên vật tư/thuốc],
+            CAST(NULL AS NVARCHAR(255)) AS [Phòng],
+            CAST(NULL AS NVARCHAR(255)) AS [Khoa],
+            CAST(NULL AS NVARCHAR(255)) AS [Tên y tá],
+            CAST(NULL AS NVARCHAR(255)) AS [Tên bệnh nhân],
+            CAST(NULL AS DATE) AS [Ngày cấp],
+            CAST(NULL AS NVARCHAR(255)) AS [Liều lượng],
+            CAST(NULL AS INT) AS [Số lượng],
+            CAST(NULL AS NVARCHAR(50)) AS [Đơn vị],
+            CAST(NULL AS NVARCHAR(255)) AS [Ghi chú];
+        RETURN;
+    END
+
+    -- Lấy danh sách lịch sử cấp thuốc
+    SELECT 
+        sh.id AS [Mã cấp thuốc],
+        i.ItemName AS [Tên vật tư/thuốc],
+        r.roomName AS [Phòng],
+        d.departmentName AS [Khoa],
+        n.name AS [Tên y tá],
+        p.fullName AS [Tên bệnh nhân],
+        sh.dateSupply AS [Ngày cấp],
+        sh.dosage AS [Liều lượng],
+        sh.quantity AS [Số lượng],
+        sh.unit AS [Đơn vị],
+        sh.note AS [Ghi chú]
+    FROM SupplyHistory sh
+    INNER JOIN Items i ON sh.itemID = i.ID
+    INNER JOIN Room r ON sh.roomID = r.id
+    INNER JOIN Department d ON r.departmentID = d.id
+    INNER JOIN Staff n ON sh.nurseID = n.id
+    LEFT JOIN Patient p ON sh.PatientID = p.id
+    WHERE sh.typeSupply = N'Patient'
+      AND sh.PatientID = @PatientId
+      AND r.departmentID = @DepartmentId
+    ORDER BY sh.dateSupply DESC;
+END;
+GO
+CREATE OR ALTER PROCEDURE sp_GetSupplyHistoryInSameDepartmentFromDate
+    @DoctorId CHAR(10),
+    @FromDate DATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @DepartmentId CHAR(10);
+
+    -- Lấy khoa của bác sĩ đăng nhập
+    SELECT @DepartmentId = departmentID
+    FROM Staff
+    WHERE id = @DoctorId;
+
+    -- Nếu không tìm thấy khoa => trả về rỗng
+    IF @DepartmentId IS NULL
+    BEGIN
+        SELECT 
+            CAST(NULL AS CHAR(10)) AS [Mã cấp thuốc],
+            CAST(NULL AS NVARCHAR(255)) AS [Tên vật tư/thuốc],
+            CAST(NULL AS NVARCHAR(255)) AS [Phòng],
+            CAST(NULL AS NVARCHAR(255)) AS [Khoa],
+            CAST(NULL AS NVARCHAR(255)) AS [Tên y tá],
+            CAST(NULL AS NVARCHAR(255)) AS [Tên bệnh nhân],
+            CAST(NULL AS DATE) AS [Ngày cấp],
+            CAST(NULL AS NVARCHAR(255)) AS [Liều lượng],
+            CAST(NULL AS INT) AS [Số lượng],
+            CAST(NULL AS NVARCHAR(50)) AS [Đơn vị],
+            CAST(NULL AS NVARCHAR(255)) AS [Ghi chú];
+        RETURN;
+    END
+
+    -- Lấy danh sách lịch sử cấp thuốc/vật tư theo khoa và ngày (chỉ bệnh nhân không null)
+    SELECT 
+        sh.id AS [Mã cấp thuốc],
+        i.ItemName AS [Tên vật tư/thuốc],
+        r.roomName AS [Phòng],
+        d.departmentName AS [Khoa],
+        n.name AS [Tên y tá],
+        p.fullName AS [Tên bệnh nhân],
+        sh.dateSupply AS [Ngày cấp],
+        sh.dosage AS [Liều lượng],
+        sh.quantity AS [Số lượng],
+        sh.unit AS [Đơn vị],
+        sh.note AS [Ghi chú]
+    FROM SupplyHistory sh
+    INNER JOIN Items i ON sh.itemID = i.ID
+    INNER JOIN Room r ON sh.roomID = r.id
+    INNER JOIN Department d ON r.departmentID = d.id
+    INNER JOIN Staff n ON sh.nurseID = n.id
+    LEFT JOIN Patient p ON sh.PatientID = p.id
+    WHERE sh.typeSupply = N'Patient'
+      AND r.departmentID = @DepartmentId
+      AND sh.dateSupply >= @FromDate
+      AND sh.PatientID IS NOT NULL
+    ORDER BY sh.dateSupply DESC;
+END;
+GO
+EXEC sp_GetSupplyHistoryInSameDepartmentFromDate
+    @DoctorId = 'DD0001',
+    @FromDate = '2025-08-01';
+
+
+EXEC sp_GetPatientSupplyHistoryInSameDepartment 'BS0001', 'P003';
+EXEC sp_GetDailyCaresInSameDepartmentAsDoctorAndDate 'DD0002', '1900-01-01';
+
+EXEC sp_GetDailyCaresByPatient 'P001';
 --USE master;
 --ALTER DATABASE HospitalManagement SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
 --DROP DATABASE HospitalManagement;

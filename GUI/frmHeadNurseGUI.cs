@@ -13,11 +13,12 @@ namespace GUI
 {
     public partial class frmHeadNurseGUI : Form
     {
-        public frmHeadNurseGUI()
+        public frmHeadNurseGUI( string maAcc)
         {
             InitializeComponent();
+            this.maAccount = maAcc;
         }
-
+        private string maAccount;
         private void frmHeadNurse_Load(object sender, EventArgs e)
         {
 
@@ -41,27 +42,35 @@ namespace GUI
 
         private void btnInpatientManagement_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new frmInpatientManagementGUI());
+            var inpatientForm = new frmInpatientManagementGUI(maAccount);
+            inpatientForm.OnTransferRoomRequested += HandleTransferRoomRequest;
+
+            OpenChildForm(inpatientForm);
+        }
+        private void HandleTransferRoomRequest(string patientId, string fullName)
+        {
+            var transferForm = new FormTransferRoomNurseGUI(maAccount, patientId, fullName);
+            OpenChildForm(transferForm);
         }
 
         private void btnMedicalRecord_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new frmMedicalRecordGUI());
+            OpenChildForm(new frmMedicalRecordGUI(maAccount));
         }
 
         private void btnDailyCare_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new frmDailyCareGUI());
+            OpenChildForm(new frmDailyCareGUI(maAccount));
         }
 
         private void btnTaskAssignment_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new frmTaskAssignmentGUI());
+            OpenChildForm(new frmTaskAssignmentGUI(maAccount));
         }
 
         private void btnMedicalInventory_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new frmMedicalInventoryGUI());
+            OpenChildForm(new frmMedicalInventoryGUI(maAccount));
         }
 
         private void frmHeadNurseGUI_FormClosing(object sender, FormClosingEventArgs e)
@@ -69,6 +78,11 @@ namespace GUI
             this.Hide();
             DangNhap_GUI f = new DangNhap_GUI();
             f.ShowDialog();
+            this.Close();
+        }
+
+        private void btnSignout_Click(object sender, EventArgs e)
+        {
             this.Close();
         }
     }

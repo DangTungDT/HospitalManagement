@@ -96,7 +96,6 @@ namespace GUI
         {
 
         }
-
         private void btnMedicalOrder_Click(object sender, EventArgs e)
         {
             OpenChildForm(new FormMedicalOrderDoctorGUI(maAccount));

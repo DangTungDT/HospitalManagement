@@ -54,11 +54,17 @@
     <Compile Include="MedicalOrderSimpleDTO.cs" />
     <Compile Include="MedicalRecordDoctorDTO.cs" />
     <Compile Include="MedicineItemDoctorDTO.cs" />
+    <Compile Include="NurseAssignmentNurseDTO.cs" />
     <Compile Include="PatientDTO.cs" />
+
     <Compile Include="PrescriptionDetailInfoDoctorDTO.cs" />
     <Compile Include="PrescriptionInfoDoctorDTO.cs" />
+
+    <Compile Include="PatientNurseDTO.cs" />
+
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoomDTO.cs" />
+    <Compile Include="RoomTransferHistoryDTO.cs" />
     <Compile Include="SalaryDetailDTO.cs" />
     <Compile Include="SalaryDTO.cs" />
     <Compile Include="StaffDoctorDTO.cs" />
