@@ -726,3 +726,26 @@ EXEC sp_GetDailyCaresByPatient 'P001';
 --USE master;
 --ALTER DATABASE HospitalManagement SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
 --DROP DATABASE HospitalManagement;
+
+-- Thêm dữ liệu mẫu cho bảng LabTestType
+INSERT INTO LabTestType (testTypeName) VALUES 
+(N'Xét nghiệm máu tổng quát'),
+(N'Xét nghiệm sinh hóa máu'),
+(N'Xét nghiệm nước tiểu'),
+(N'Xét nghiệm phân'),
+(N'Xét nghiệm chức năng gan'),
+(N'Xét nghiệm chức năng thận'),
+(N'Xét nghiệm đường huyết'),
+(N'Xét nghiệm mỡ máu'),
+(N'Xét nghiệm điện giải đồ'),
+(N'Xét nghiệm hormone tuyến giáp'),
+(N'Xét nghiệm viêm gan'),
+(N'Xét nghiệm HIV'),
+(N'Xét nghiệm giang mai'),
+(N'Xét nghiệm lao'),
+(N'Xét nghiệm vi khuẩn kháng thuốc'),
+(N'Xét nghiệm tế bào học'),
+(N'Xét nghiệm mô bệnh học'),
+(N'Xét nghiệm di truyền'),
+(N'Xét nghiệm miễn dịch'),
+(N'Xét nghiệm dị ứng');

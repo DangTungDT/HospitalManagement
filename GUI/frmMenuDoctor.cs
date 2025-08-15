@@ -54,7 +54,7 @@ namespace GUI
 
         private void btnKhoaCongTac_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new frmDepartmentInfo_Doctor());
+            OpenChildForm(new frmDepartmentInfoDoctorGUI(maAccount));
         }
 
         private void btnBenhNhan_Click(object sender, EventArgs e)
@@ -74,12 +74,12 @@ namespace GUI
 
         private void btnDonThuoc_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new frmPrescriptionInfo_Doctor());
+            OpenChildForm(new frmPrescriptionDoctorGUI(maAccount));
         }
 
         private void btnChiTietDonThuoc_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new frmPrescriptionDetailInfo_Doctor());
+            OpenChildForm(new frmPrescriptionDetailInfoDoctorGUI());
         }
 
         private void btnXetNghiem_Click(object sender, EventArgs e)
@@ -89,7 +89,7 @@ namespace GUI
 
         private void btnLoaiXetNghiem_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new frmTestTypeInfo_Doctor());
+            OpenChildForm(new frmTestTypeInfoDoctorGUI());
         }
 
         private void frmMenuDoctor_Load(object sender, EventArgs e)

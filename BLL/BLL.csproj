@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="AccountBLL.cs" />
     <Compile Include="ApmentBLL.cs" />
+    <Compile Include="DepartmentInfoDoctorBLL.cs" />
     <Compile Include="DepmentBLL.cs" />
     <Compile Include="DoctorPatientBLL.cs" />
     <Compile Include="DtorPaitent_BLL.cs" />
@@ -56,7 +57,12 @@
     <Compile Include="MedicalRecordDoctorBLL.cs" />
     <Compile Include="NurseAssignmentNurseBLL.cs" />
     <Compile Include="PatientBLL.cs" />
+
+    <Compile Include="PrescriptionDetailInfoDoctorBLL.cs" />
+    <Compile Include="PrescriptionInfoDoctorBLL.cs" />
+
     <Compile Include="PatientNurseBLL.cs" />
+
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoomBLL.cs" />
     <Compile Include="SalaryBLL.cs" />
@@ -75,7 +81,11 @@
     <Compile Include="StaffDoctorBLL.cs" />
     <Compile Include="StaffListbyDepartmentBLL.cs" />
     <Compile Include="SupplyHistoryBLL.cs" />
+
+    <Compile Include="TestTypeInfoDoctorBLL.cs" />
+
     <Compile Include="TransferRoomNurseBLL.cs" />
+
     <Compile Include="UserInfomationBLL.cs" />
     <Compile Include="UsersBLL.cs" />
   </ItemGroup>

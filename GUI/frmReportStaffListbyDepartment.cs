@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using GUI.Helpers;
 
 namespace GUI
 {
@@ -24,16 +25,12 @@ namespace GUI
 
         private void crystalReportViewer1_Load(object sender, EventArgs e)
         {
-            ReportDocument report = new ReportDocument();
-            string path = Path.Combine(Application.StartupPath, "Report", "rptStaffList.rpt");
-            report.Load(path);
-
-            ParameterValues para = new ParameterValues();
-            ParameterDiscreteValue parav = new ParameterDiscreteValue();
-            parav.Value = _maKhoa;
-            para.Add(parav);
-            report.DataDefinition.ParameterFields["@DepartmentID"].ApplyCurrentValues(para);
-
+            var parameters = new System.Collections.Generic.Dictionary<string, object>
+            {
+                { "@DepartmentID", _maKhoa }
+            };
+            var report = CrystalReportHelper.LoadReport("rptStaffList.rpt", parameters);
+            if (report == null) return;
             crystalReportViewer1.ReportSource = report;
         }
     }

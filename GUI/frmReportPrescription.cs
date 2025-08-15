@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DTO;
+using GUI.Helpers;
 
 namespace GUI
 {
@@ -25,14 +26,10 @@ namespace GUI
 
         private void crystalReportViewer1_Load(object sender, EventArgs e)
         {
-            ReportDocument report = new ReportDocument();
-            string path = Path.Combine(Application.StartupPath, "Report", "rptPrescription.rpt");
-            report.Load(path);
-
-            // Chuyển List sang DataTable nếu cần
+            var report = CrystalReportHelper.LoadReport("rptPrescription.rpt");
+            if (report == null) return;
             var dt = ConvertToDataTable(_prescriptions);
             report.SetDataSource(dt);
-
             crystalReportViewer1.ReportSource = report;
         }
 

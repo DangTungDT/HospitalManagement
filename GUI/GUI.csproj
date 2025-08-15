@@ -230,6 +230,13 @@
     <Compile Include="Form_Room.Designer.cs">
       <DependentUpon>Form_Room.cs</DependentUpon>
     </Compile>
+
+    <Compile Include="frmDepartmentInfoDoctorGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDepartmentInfoDoctorGUI.Designer.cs">
+      <DependentUpon>frmDepartmentInfoDoctorGUI.cs</DependentUpon>
+
     <Compile Include="form_rpttruyvanlichhen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -247,6 +254,7 @@
     </Compile>
     <Compile Include="frmDailyCaresOfPatientNurseGUI.Designer.cs">
       <DependentUpon>frmDailyCaresOfPatientNurseGUI.cs</DependentUpon>
+
     </Compile>
     <Compile Include="frmDoctorInfo_Doctor.Designer.cs">
       <DependentUpon>frmDoctorInfo_Doctor.cs</DependentUpon>
@@ -284,6 +292,18 @@
     <Compile Include="frmPatientListbyDepartmentGUI.Designer.cs">
       <DependentUpon>frmPatientListbyDepartmentGUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPrescriptionDetailInfoDoctorGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrescriptionDetailInfoDoctorGUI.Designer.cs">
+      <DependentUpon>frmPrescriptionDetailInfoDoctorGUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPrescriptionDoctorGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrescriptionDoctorGUI.Designer.cs">
+      <DependentUpon>frmPrescriptionDoctorGUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPrescriptionOfPatient.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -314,9 +334,6 @@
     <Compile Include="frmReportStaffListbyDepartment.Designer.cs">
       <DependentUpon>frmReportStaffListbyDepartment.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmDepartmentInfo_Doctor.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="frmDoctorInfo_Doctor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -333,12 +350,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmPatientInfo_Doctor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmPrescriptionDetailInfo_Doctor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmPrescriptionInfo_Doctor.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmMenuDoctor.cs">
@@ -359,14 +370,19 @@
     <Compile Include="frmTestInfo_Doctor.Designer.cs">
       <DependentUpon>frmTestInfo_Doctor.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmTestTypeInfo_Doctor.cs">
+    <Compile Include="frmTestTypeInfoDoctorGUI.cs">
       <SubType>Form</SubType>
     </Compile>
+
+    <Compile Include="frmTestTypeInfoDoctorGUI.Designer.cs">
+      <DependentUpon>frmTestTypeInfoDoctorGUI.cs</DependentUpon>
+
     <Compile Include="frmTransferRoomGUI.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmTransferRoomGUI.Designer.cs">
       <DependentUpon>frmTransferRoomGUI.cs</DependentUpon>
+
     </Compile>
     <Compile Include="frmUserGUI.cs">
       <SubType>Form</SubType>
@@ -374,6 +390,9 @@
     <Compile Include="frmUserGUI.designer.cs">
       <DependentUpon>frmUserGUI.cs</DependentUpon>
     </Compile>
+
+    <Compile Include="Helpers\ReportProvider.cs" />
+
     <Compile Include="FromSupplyHistoryInSameDepartmentFromDateNurse.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -381,6 +400,7 @@
       <DependentUpon>FromSupplyHistoryInSameDepartmentFromDateNurse.cs</DependentUpon>
     </Compile>
     <Compile Include="helpers\ReportProvider.cs" />
+
     <Compile Include="Item.cs" />
     <Compile Include="frmUserInformation.cs">
       <SubType>Form</SubType>
@@ -570,6 +590,10 @@
     <EmbeddedResource Include="Form_Room.resx">
       <DependentUpon>Form_Room.cs</DependentUpon>
     </EmbeddedResource>
+
+    <EmbeddedResource Include="frmDepartmentInfoDoctorGUI.resx">
+      <DependentUpon>frmDepartmentInfoDoctorGUI.cs</DependentUpon>
+
     <EmbeddedResource Include="form_rpttruyvanlichhen.resx">
       <DependentUpon>form_rpttruyvanlichhen.cs</DependentUpon>
     </EmbeddedResource>
@@ -584,9 +608,16 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMedicalOrdersOfPatientNurse.resx">
       <DependentUpon>frmMedicalOrdersOfPatientNurse.cs</DependentUpon>
+
     </EmbeddedResource>
     <EmbeddedResource Include="frmPatientListbyDepartmentGUI.resx">
       <DependentUpon>frmPatientListbyDepartmentGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrescriptionDetailInfoDoctorGUI.resx">
+      <DependentUpon>frmPrescriptionDetailInfoDoctorGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrescriptionDoctorGUI.resx">
+      <DependentUpon>frmPrescriptionDoctorGUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmReportDoctorListbyDepartment.resx">
       <DependentUpon>frmReportDoctorListbyDepartment.cs</DependentUpon>
@@ -599,9 +630,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmReportStaffListbyDepartment.resx">
       <DependentUpon>frmReportStaffListbyDepartment.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmDepartmentInfo_Doctor.resx">
-      <DependentUpon>frmDepartmentInfo_Doctor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDoctorInfo_Doctor.resx">
       <DependentUpon>frmDoctorInfo_Doctor.cs</DependentUpon>
@@ -618,20 +646,14 @@
     <EmbeddedResource Include="frmPatientInfo_Doctor.resx">
       <DependentUpon>frmPatientInfo_Doctor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPrescriptionDetailInfo_Doctor.resx">
-      <DependentUpon>frmPrescriptionDetailInfo_Doctor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmPrescriptionInfo_Doctor.resx">
-      <DependentUpon>frmPrescriptionInfo_Doctor.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmMenuDoctor.resx">
       <DependentUpon>frmMenuDoctor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmTestInfo_Doctor.resx">
       <DependentUpon>frmTestInfo_Doctor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmTestTypeInfo_Doctor.resx">
-      <DependentUpon>frmTestTypeInfo_Doctor.cs</DependentUpon>
+    <EmbeddedResource Include="frmTestTypeInfoDoctorGUI.resx">
+      <DependentUpon>frmTestTypeInfoDoctorGUI.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="frmAppointmentManagement.cs">
       <SubType>Form</SubType>

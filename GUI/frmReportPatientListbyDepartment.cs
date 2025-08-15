@@ -5,6 +5,7 @@ using System.Data;
 using System.IO;
 using System.Windows.Forms;
 using DTO;
+using GUI.Helpers;
 
 namespace GUI
 {
@@ -19,13 +20,10 @@ namespace GUI
 
         private void crystalReportViewer1_Load(object sender, EventArgs e)
         {
-            ReportDocument report = new ReportDocument();
-            string path = Path.Combine(Application.StartupPath, "Report", "rptPatientList.rpt");
-            report.Load(path);
-
+            var report = CrystalReportHelper.LoadReport("rptPatientList.rpt");
+            if (report == null) return;
             var dt = ConvertToDataTable(_patients);
             report.SetDataSource(dt);
-
             crystalReportViewer1.ReportSource = report;
         }
 

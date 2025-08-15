@@ -87,7 +87,9 @@ namespace DAL
     #endregion
 		
 		public HospitalManagementDataContext() : 
-				base(global::DAL.Properties.Settings.Default.HospitalManagementConnectionString1, mappingSource)
+
+				base(global::DAL.Properties.Settings.Default.HospitalManagementConnectionString3, mappingSource)
+
 		{
 			OnCreated();
 		}
