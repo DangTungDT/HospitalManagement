@@ -13,13 +13,14 @@ namespace GUI
     public partial class FormInventoryManager : Form
     {
         bool flagType = false;
-        public FormInventoryManager()
+
+        public FormInventoryManager(string id)
         {
             InitializeComponent();
-            
+
         }
 
-        public FormInventoryManager(string Type)
+        public FormInventoryManager(bool check, string Type)
         {
             InitializeComponent();
             flagType = true;
