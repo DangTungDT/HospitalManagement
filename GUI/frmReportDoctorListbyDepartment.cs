@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CrystalDecisions.CrystalReports.Engine;
 using DTO;
+using GUI.Helpers;
 
 namespace GUI
 {
@@ -26,13 +27,10 @@ namespace GUI
 
         private void crystalReportViewer1_Load(object sender, EventArgs e)
         {
-            ReportDocument report = new ReportDocument();
-            string path = Path.Combine(Application.StartupPath, "Report", "rptDoctorList.rpt");
-            report.Load(path);
-
+            var report = CrystalReportHelper.LoadReport("rptDoctorList.rpt");
+            if (report == null) return;
             var dt = ConvertToDataTable(_doctors);
             report.SetDataSource(dt);
-
             crystalReportViewer1.ReportSource = report;
         }
 
