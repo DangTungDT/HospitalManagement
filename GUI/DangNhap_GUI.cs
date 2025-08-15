@@ -41,58 +41,63 @@ namespace GUI
         }
 
         private void Login(string username, string password)
+{
+    UsersDTO accountLogin = bll.GetAccountByUsername(username);
+    if(accountLogin != null)
+    {
+        password = HashStringSHA256(password);
+        if (password.Equals(accountLogin.PasswordHash.Trim(), StringComparison.OrdinalIgnoreCase))
         {
-            UsersDTO accountLogin = bll.GetAccountByUsername(username);
-            if(accountLogin != null)
+            // Cắt chuỗi để lấy phần quyền
+            string[] parts = username.Split('_');
+            string role = parts[0].ToLower();
+
+            this.Hide();  // Ẩn form Login trước
+
+            if (role == "quanlykho")
             {
-                password = HashStringSHA256(password);
-                if (password.Equals(accountLogin.PasswordHash.Trim(), StringComparison.OrdinalIgnoreCase))
-                {
-                    // Cắt chuỗi để lấy phần quyền
-                    string[] parts = username.Split('_');
-                    string role = parts[0].ToLower();
-
-                    this.Hide();  // Ẩn form Login trước
-
-                    if (role == "quanlykho")
-                    {
-                        FormInventoryManager f = new FormInventoryManager();
-                        f.ShowDialog();
-                    }
-                    else if (role == "bacsi")
-                    {
-                        frmMenuDoctor f = new frmMenuDoctor(accountLogin.StaffID);
-                        f.ShowDialog();
-                    }
-                    else if (role == "dieuduong")
-                    {
-                        frmHeadNurseGUI f = new frmHeadNurseGUI("");
-                        f.ShowDialog();
-                    }
-                    else if (role == "admin")
-                    {
-                        FormAdmin f = new FormAdmin();
-                        f.ShowDialog();
-                    }
-                    else if (role == "quanlythuoc")
-                    {
-                        FormInventoryManager f = new FormInventoryManager("quanlythuoc");
-                        f.ShowDialog();
-                    }
-
-                    // Sau khi form con đóng thì mới đóng form Login
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("Thất bại!");
-                }
+                FormInventoryManager f = new FormInventoryManager(accountLogin.StaffID);
+                f.ShowDialog();
+            }
+            else if (role == "bacsi")
+            {
+                frmMenuDoctor f = new frmMenuDoctor(accountLogin.StaffID);
+                f.ShowDialog();
+            }
+            else if (role == "dieuduong" || role == "yta")
+            {
+                frmHeadNurseGUI f = new frmHeadNurseGUI("");
+                f.ShowDialog();
+            }
+            else if (role == "admin")
+            {
+                FormAdmin f = new FormAdmin(accountLogin.StaffID);
+                f.ShowDialog();
+            }
+            else if (role == "quanlythuoc")
+            {
+                FormInventoryManager f = new FormInventoryManager(true, accountLogin.StaffID);
+                f.ShowDialog();
             }
             else
             {
-                MessageBox.Show("Thất bại!");
+                frmReceptionistDashboardGUI f = new frmReceptionistDashboardGUI();
+                f.ShowDialog();
             }
+
+            // Sau khi form con đóng thì mới đóng form Login
+            this.Close();
         }
+        else
+        {
+            MessageBox.Show("Thất bại!");
+        }
+    }
+    else
+    {
+        MessageBox.Show("Thất bại!");
+    }
+}
 
         // Hàm mã hóa SHA256
         private static string HashStringSHA256(string input)
