@@ -58,5 +58,16 @@ namespace BLL
         {
             return dal.GetSupplyHistoryInSameDepartmentFromDate(doctorId, fromDate);
         }
+        public List<SupplyHistoryDTO> GetSupplyHistoryByDate(DateTime dateSupply)
+        {
+            if (dateSupply == DateTime.MinValue)
+                throw new ArgumentException("Ngày cung cấp không hợp lệ.");
+
+            return dal.GetSupplyHistoryByDate(dateSupply);
+        }
+        public List<SupplyHistoryDTO> GetSupplyHistoryByPatient(string patientId)
+        { 
+            return dal.GetSupplyHistoryByPatient(patientId);
+        }
     }
 }

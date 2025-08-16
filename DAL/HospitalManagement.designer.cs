@@ -87,9 +87,7 @@ namespace DAL
     #endregion
 		
 		public HospitalManagementDataContext() : 
-
-				base(global::DAL.Properties.Settings.Default.HospitalManagementConnectionString3, mappingSource)
-
+				base(global::DAL.Properties.Settings.Default.HospitalManagementConnectionString5, mappingSource)
 		{
 			OnCreated();
 		}
@@ -323,6 +321,20 @@ namespace DAL
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), departmentID);
 			return ((ISingleResult<sp_GetStaffListByDepartmentResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_GetSupplyHistoryByDate")]
+		public ISingleResult<sp_GetSupplyHistoryByDateResult> sp_GetSupplyHistoryByDate([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> dateSupply)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), dateSupply);
+			return ((ISingleResult<sp_GetSupplyHistoryByDateResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_GetSupplyHistoryByPatient")]
+		public ISingleResult<sp_GetSupplyHistoryByPatientResult> sp_GetSupplyHistoryByPatient([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Char(10)")] string patientId)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), patientId);
+			return ((ISingleResult<sp_GetSupplyHistoryByPatientResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -8697,6 +8709,454 @@ namespace DAL
 				if ((this._DepartmentName != value))
 				{
 					this._DepartmentName = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_GetSupplyHistoryByDateResult
+	{
+		
+		private string _id;
+		
+		private System.Nullable<System.DateTime> _dateSupply;
+		
+		private string _typeSupply;
+		
+		private string _dosage;
+		
+		private System.Nullable<int> _quantity;
+		
+		private string _unit;
+		
+		private string _note;
+		
+		private string _patientName;
+		
+		private string _nurseName;
+		
+		private string _roomName;
+		
+		private string _departmentName;
+		
+		private string _ItemName;
+		
+		public sp_GetSupplyHistoryByDateResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		public string id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dateSupply", DbType="Date")]
+		public System.Nullable<System.DateTime> dateSupply
+		{
+			get
+			{
+				return this._dateSupply;
+			}
+			set
+			{
+				if ((this._dateSupply != value))
+				{
+					this._dateSupply = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_typeSupply", DbType="NVarChar(100)")]
+		public string typeSupply
+		{
+			get
+			{
+				return this._typeSupply;
+			}
+			set
+			{
+				if ((this._typeSupply != value))
+				{
+					this._typeSupply = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dosage", DbType="VarChar(255)")]
+		public string dosage
+		{
+			get
+			{
+				return this._dosage;
+			}
+			set
+			{
+				if ((this._dosage != value))
+				{
+					this._dosage = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_quantity", DbType="Int")]
+		public System.Nullable<int> quantity
+		{
+			get
+			{
+				return this._quantity;
+			}
+			set
+			{
+				if ((this._quantity != value))
+				{
+					this._quantity = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_unit", DbType="NVarChar(255)")]
+		public string unit
+		{
+			get
+			{
+				return this._unit;
+			}
+			set
+			{
+				if ((this._unit != value))
+				{
+					this._unit = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_note", DbType="NText", UpdateCheck=UpdateCheck.Never)]
+		public string note
+		{
+			get
+			{
+				return this._note;
+			}
+			set
+			{
+				if ((this._note != value))
+				{
+					this._note = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_patientName", DbType="NVarChar(255)")]
+		public string patientName
+		{
+			get
+			{
+				return this._patientName;
+			}
+			set
+			{
+				if ((this._patientName != value))
+				{
+					this._patientName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nurseName", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string nurseName
+		{
+			get
+			{
+				return this._nurseName;
+			}
+			set
+			{
+				if ((this._nurseName != value))
+				{
+					this._nurseName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_roomName", DbType="NVarChar(100)")]
+		public string roomName
+		{
+			get
+			{
+				return this._roomName;
+			}
+			set
+			{
+				if ((this._roomName != value))
+				{
+					this._roomName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_departmentName", DbType="NVarChar(255)")]
+		public string departmentName
+		{
+			get
+			{
+				return this._departmentName;
+			}
+			set
+			{
+				if ((this._departmentName != value))
+				{
+					this._departmentName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ItemName", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string ItemName
+		{
+			get
+			{
+				return this._ItemName;
+			}
+			set
+			{
+				if ((this._ItemName != value))
+				{
+					this._ItemName = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_GetSupplyHistoryByPatientResult
+	{
+		
+		private string _id;
+		
+		private System.Nullable<System.DateTime> _dateSupply;
+		
+		private string _typeSupply;
+		
+		private string _dosage;
+		
+		private System.Nullable<int> _quantity;
+		
+		private string _unit;
+		
+		private string _note;
+		
+		private string _patientName;
+		
+		private string _nurseName;
+		
+		private string _roomName;
+		
+		private string _departmentName;
+		
+		private string _ItemName;
+		
+		public sp_GetSupplyHistoryByPatientResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		public string id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dateSupply", DbType="Date")]
+		public System.Nullable<System.DateTime> dateSupply
+		{
+			get
+			{
+				return this._dateSupply;
+			}
+			set
+			{
+				if ((this._dateSupply != value))
+				{
+					this._dateSupply = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_typeSupply", DbType="NVarChar(100)")]
+		public string typeSupply
+		{
+			get
+			{
+				return this._typeSupply;
+			}
+			set
+			{
+				if ((this._typeSupply != value))
+				{
+					this._typeSupply = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dosage", DbType="VarChar(255)")]
+		public string dosage
+		{
+			get
+			{
+				return this._dosage;
+			}
+			set
+			{
+				if ((this._dosage != value))
+				{
+					this._dosage = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_quantity", DbType="Int")]
+		public System.Nullable<int> quantity
+		{
+			get
+			{
+				return this._quantity;
+			}
+			set
+			{
+				if ((this._quantity != value))
+				{
+					this._quantity = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_unit", DbType="NVarChar(255)")]
+		public string unit
+		{
+			get
+			{
+				return this._unit;
+			}
+			set
+			{
+				if ((this._unit != value))
+				{
+					this._unit = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_note", DbType="NText", UpdateCheck=UpdateCheck.Never)]
+		public string note
+		{
+			get
+			{
+				return this._note;
+			}
+			set
+			{
+				if ((this._note != value))
+				{
+					this._note = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_patientName", DbType="NVarChar(255)")]
+		public string patientName
+		{
+			get
+			{
+				return this._patientName;
+			}
+			set
+			{
+				if ((this._patientName != value))
+				{
+					this._patientName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nurseName", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string nurseName
+		{
+			get
+			{
+				return this._nurseName;
+			}
+			set
+			{
+				if ((this._nurseName != value))
+				{
+					this._nurseName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_roomName", DbType="NVarChar(100)")]
+		public string roomName
+		{
+			get
+			{
+				return this._roomName;
+			}
+			set
+			{
+				if ((this._roomName != value))
+				{
+					this._roomName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_departmentName", DbType="NVarChar(255)")]
+		public string departmentName
+		{
+			get
+			{
+				return this._departmentName;
+			}
+			set
+			{
+				if ((this._departmentName != value))
+				{
+					this._departmentName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ItemName", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string ItemName
+		{
+			get
+			{
+				return this._ItemName;
+			}
+			set
+			{
+				if ((this._ItemName != value))
+				{
+					this._ItemName = value;
 				}
 			}
 		}

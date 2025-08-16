@@ -170,6 +170,30 @@
     <Compile Include="FormDailyCareAdmin.Designer.cs">
       <DependentUpon>FormDailyCareAdmin.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormSupplyHistoryByDateAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSupplyHistoryByDateAdmin.Designer.cs">
+      <DependentUpon>FormSupplyHistoryByDateAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSupplyHistoryByDateReportAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSupplyHistoryByDateReportAdmin.Designer.cs">
+      <DependentUpon>FormSupplyHistoryByDateReportAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSupplyHistoryByPatientAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSupplyHistoryByPatientAdmin.Designer.cs">
+      <DependentUpon>FormSupplyHistoryByPatientAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSupplyHistoryByPatientReprstAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSupplyHistoryByPatientReprstAdmin.Designer.cs">
+      <DependentUpon>FormSupplyHistoryByPatientReprstAdmin.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormSupplyHistoryInSameDepartmentFromDateReports.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -386,14 +410,13 @@
     <Compile Include="frmUserGUI.designer.cs">
       <DependentUpon>frmUserGUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\ReportProvider.cs" />
     <Compile Include="FromSupplyHistoryInSameDepartmentFromDateNurse.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FromSupplyHistoryInSameDepartmentFromDateNurse.Designer.cs">
       <DependentUpon>FromSupplyHistoryInSameDepartmentFromDateNurse.cs</DependentUpon>
     </Compile>
-    <Compile Include="helpers\ReportProvider.cs" />
+    <Compile Include="Helpers\ReportProvider.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="frmUserInformation.cs">
       <SubType>Form</SubType>
@@ -489,6 +512,20 @@
       <SubType>Component</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Report\rptSupplyHistoryByDate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptSupplyHistoryByDate.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Report\rptSupplyHistoryByPatient.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptSupplyHistoryByPatient.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="Report\rptSupplyHistoryInSameDepartmentFromDate.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -552,6 +589,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormDailyCareAdmin.resx">
       <DependentUpon>FormDailyCareAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSupplyHistoryByDateAdmin.resx">
+      <DependentUpon>FormSupplyHistoryByDateAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSupplyHistoryByDateReportAdmin.resx">
+      <DependentUpon>FormSupplyHistoryByDateReportAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSupplyHistoryByPatientAdmin.resx">
+      <DependentUpon>FormSupplyHistoryByPatientAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSupplyHistoryByPatientReprstAdmin.resx">
+      <DependentUpon>FormSupplyHistoryByPatientReprstAdmin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormSupplyHistoryInSameDepartmentFromDateReports.resx">
       <DependentUpon>FormSupplyHistoryInSameDepartmentFromDateReports.cs</DependentUpon>
@@ -994,6 +1043,16 @@
     <Content Include="Report\rptSupplyHistoryInSameDepartmentFromDate.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptSupplyHistoryInSameDepartmentFromDate.cs</LastGenOutput>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Report\rptSupplyHistoryByDate.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptSupplyHistoryByDate.cs</LastGenOutput>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Report\rptSupplyHistoryByPatient.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptSupplyHistoryByPatient.cs</LastGenOutput>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="Report\crptTruyvanlichhen.rpt">

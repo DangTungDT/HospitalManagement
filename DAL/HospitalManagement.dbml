@@ -1,7 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="HospitalManagement" Class="HospitalManagementDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-
-  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-FRGQVLQ\SQLEXPRESS;Initial Catalog=HospitalManagement;Integrated Security=True;Trust Server Certificate=True" SettingsObjectName="DAL.Properties.Settings" SettingsPropertyName="HospitalManagementConnectionString3" Provider="System.Data.SqlClient" />
-
+  <Connection Mode="AppSettings" ConnectionString="Data Source=laptop-s013149l\sqlexpress;Initial Catalog=HospitalManagement;Integrated Security=True;Trust Server Certificate=True" SettingsObjectName="DAL.Properties.Settings" SettingsPropertyName="HospitalManagementConnectionString5" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Account" Member="Accounts">
     <Type Name="Account">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -448,6 +446,40 @@
       <Column Name="startDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="Notes" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="DepartmentName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_GetSupplyHistoryByDate" Method="sp_GetSupplyHistoryByDate">
+    <Parameter Name="dateSupply" Type="System.DateTime" DbType="Date" />
+    <ElementType Name="sp_GetSupplyHistoryByDateResult">
+      <Column Name="id" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="dateSupply" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="typeSupply" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="dosage" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="unit" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="note" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="patientName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="nurseName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="roomName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="departmentName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ItemName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_GetSupplyHistoryByPatient" Method="sp_GetSupplyHistoryByPatient">
+    <Parameter Name="patientId" Type="System.String" DbType="Char(10)" />
+    <ElementType Name="sp_GetSupplyHistoryByPatientResult">
+      <Column Name="id" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="dateSupply" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="typeSupply" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="dosage" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="unit" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="note" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="patientName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="nurseName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="roomName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="departmentName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ItemName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
 </Database>

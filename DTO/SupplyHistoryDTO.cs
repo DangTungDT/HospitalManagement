@@ -22,6 +22,7 @@ namespace DTO
         public DateTime? DateSupply { get; set; }
 
         // Thông tin mô tả
+        public string DepartmentName { get; set; }
         public string ItemName { get; set; }
         public string NurseName { get; set; }
         public string RoomName { get; set; }

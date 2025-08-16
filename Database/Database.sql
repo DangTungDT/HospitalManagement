@@ -540,7 +540,7 @@ GO
 
 ---- Xoá thủ tục cũ nếu có
 --IF OBJECT_ID('sp_GetDailyCaresByPatient', 'P') IS NOT NULL
---    DROP PROCEDURE sp_GetSupplyHistoryInSameDepartmentFromDate;
+--    DROP PROCEDURE sp_GetSupplyHistoryByDate;
 GO
 
 -- Tạo lại thủ tục với thêm tên khoa
@@ -714,9 +714,65 @@ BEGIN
     ORDER BY sh.dateSupply DESC;
 END;
 GO
-EXEC sp_GetSupplyHistoryInSameDepartmentFromDate
-    @DoctorId = 'DD0001',
-    @FromDate = '2025-08-01';
+CREATE PROCEDURE sp_GetSupplyHistoryByDate
+    @dateSupply DATE
+AS
+BEGIN
+    SELECT 
+        sh.id,
+        sh.dateSupply,
+        sh.typeSupply,
+        sh.dosage,
+        sh.quantity,
+        sh.unit,
+        sh.note,
+        
+        p.fullName AS patientName,       -- Tên bệnh nhân
+        s.name AS nurseName,             -- Tên y tá
+        r.roomName,                      -- Tên phòng
+        d.departmentName,                -- Tên khoa
+        i.ItemName                        -- Tên vật tư
+
+    FROM SupplyHistory sh
+    INNER JOIN Staff s ON sh.nurseID = s.id
+    INNER JOIN Room r ON sh.roomID = r.id
+    INNER JOIN Department d ON r.departmentID = d.id
+    INNER JOIN Items i ON sh.itemID = i.ID               -- Thêm join với Items
+    LEFT JOIN Patient p ON sh.PatientID = p.id           -- Có thể null nếu typeSupply khác 'Patient'
+    WHERE sh.dateSupply >= @dateSupply
+    ORDER BY sh.dateSupply, sh.id;
+END
+GO
+CREATE PROCEDURE sp_GetSupplyHistoryByPatient
+    @patientId CHAR(10)
+AS
+BEGIN
+    SELECT 
+        sh.id,
+        sh.dateSupply,
+        sh.typeSupply,
+        sh.dosage,
+        sh.quantity,
+        sh.unit,
+        sh.note,
+
+        p.fullName AS patientName,       -- Tên bệnh nhân
+        s.name AS nurseName,             -- Tên y tá
+        r.roomName,                      -- Tên phòng
+        d.departmentName,                -- Tên khoa
+        i.ItemName                        -- Tên vật tư
+
+    FROM SupplyHistory sh
+    INNER JOIN Staff s ON sh.nurseID = s.id
+    INNER JOIN Room r ON sh.roomID = r.id
+    INNER JOIN Department d ON r.departmentID = d.id
+    INNER JOIN Items i ON sh.itemID = i.ID                -- Thêm join với Items
+    LEFT JOIN Patient p ON sh.PatientID = p.id
+    WHERE sh.PatientID = @patientId
+    ORDER BY sh.dateSupply DESC, sh.id;
+END
+GO
+EXEC sp_GetSupplyHistoryByPatient 'P001';
 
 
 EXEC sp_GetPatientSupplyHistoryInSameDepartment 'BS0001', 'P003';
@@ -726,26 +782,3 @@ EXEC sp_GetDailyCaresByPatient 'P001';
 --USE master;
 --ALTER DATABASE HospitalManagement SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
 --DROP DATABASE HospitalManagement;
-
--- Thêm dữ liệu mẫu cho bảng LabTestType
-INSERT INTO LabTestType (testTypeName) VALUES 
-(N'Xét nghiệm máu tổng quát'),
-(N'Xét nghiệm sinh hóa máu'),
-(N'Xét nghiệm nước tiểu'),
-(N'Xét nghiệm phân'),
-(N'Xét nghiệm chức năng gan'),
-(N'Xét nghiệm chức năng thận'),
-(N'Xét nghiệm đường huyết'),
-(N'Xét nghiệm mỡ máu'),
-(N'Xét nghiệm điện giải đồ'),
-(N'Xét nghiệm hormone tuyến giáp'),
-(N'Xét nghiệm viêm gan'),
-(N'Xét nghiệm HIV'),
-(N'Xét nghiệm giang mai'),
-(N'Xét nghiệm lao'),
-(N'Xét nghiệm vi khuẩn kháng thuốc'),
-(N'Xét nghiệm tế bào học'),
-(N'Xét nghiệm mô bệnh học'),
-(N'Xét nghiệm di truyền'),
-(N'Xét nghiệm miễn dịch'),
-(N'Xét nghiệm dị ứng');

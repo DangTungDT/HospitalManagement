@@ -81,6 +81,7 @@
             this.btnPrintPatientList.TabIndex = 5;
             this.btnPrintPatientList.Text = "DS Bênh Nhân";
             this.btnPrintPatientList.UseVisualStyleBackColor = false;
+            this.btnPrintPatientList.Click += new System.EventHandler(this.btnPrintPatientList_Click);
             // 
             // btnPatientInformation
             // 
@@ -92,6 +93,7 @@
             this.btnPatientInformation.TabIndex = 4;
             this.btnPatientInformation.Text = "Thông tin Bệnh Nhân";
             this.btnPatientInformation.UseVisualStyleBackColor = false;
+            this.btnPatientInformation.Click += new System.EventHandler(this.btnPatientInformation_Click);
             // 
             // btnEdit
             // 

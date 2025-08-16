@@ -784,5 +784,27 @@ namespace GUI
             dgvPatient.Enabled = cboPatient.Enabled;
 
         }
+
+        private void btnPrintPatientList_Click(object sender, EventArgs e)
+        {
+            FormSupplyHistoryByDateAdmin f = new FormSupplyHistoryByDateAdmin();
+            f.ShowDialog();
+        }
+
+        private void btnPatientInformation_Click(object sender, EventArgs e)
+        {
+            string patientId = cboPatient.SelectedValue?.ToString();
+
+            if (string.IsNullOrEmpty(patientId))
+            {
+                MessageBox.Show("Vui lòng chọn bệnh nhân trước khi xem thông tin.",
+                                "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Mở form mới, truyền PatientID
+            FormSupplyHistoryByPatientAdmin frm = new FormSupplyHistoryByPatientAdmin(patientId); // Form nhận qua constructor
+            frm.Show();
+        }
     }
 }

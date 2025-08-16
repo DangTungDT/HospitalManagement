@@ -43,6 +43,70 @@ namespace DAL
         }
 
 
+        public List<SupplyHistoryDTO> GetSupplyHistoryByDate(DateTime dateSupply)
+        {
+            var query = from sh in db.SupplyHistories
+                        join s in db.Staffs on sh.nurseID equals s.id
+                        join r in db.Rooms on sh.roomID equals r.id
+                        join d in db.Departments on r.departmentID equals d.id
+                        join i in db.Items on sh.itemID equals i.ID // join Items để lấy ItemName
+                        join p in db.Patients on sh.PatientID equals p.id into patientJoin
+                        from p in patientJoin.DefaultIfEmpty() // LEFT JOIN
+                        where sh.dateSupply >= dateSupply
+                        orderby sh.dateSupply, sh.id
+                        select new SupplyHistoryDTO
+                        {
+                            Id = sh.id,
+                            DateSupply = sh.dateSupply,
+                            TypeSupply = sh.typeSupply,
+                            Dosage = sh.dosage,
+                            Quantity = sh.quantity ?? 0,
+                            Unit = sh.unit,
+                            Note = sh.note,
+                            ItemName = i.ItemName,
+                            PatientName = p != null ? p.fullName : null,
+                            NurseName = s.name,
+                            RoomName = r.roomName,
+                            DepartmentName = d.departmentName
+                        };
+
+            return query.ToList();
+        }
+
+        public List<SupplyHistoryDTO> GetSupplyHistoryByPatient(string patientId)
+        {
+            var query = from sh in db.SupplyHistories
+                        join s in db.Staffs on sh.nurseID equals s.id
+                        join r in db.Rooms on sh.roomID equals r.id
+                        join d in db.Departments on r.departmentID equals d.id
+                        join i in db.Items on sh.itemID equals i.ID // join Items
+                        join p in db.Patients on sh.PatientID equals p.id into patientJoin
+                        from p in patientJoin.DefaultIfEmpty()
+                        where sh.PatientID == patientId
+                        orderby sh.dateSupply descending, sh.id
+                        select new SupplyHistoryDTO
+                        {
+                            Id = sh.id,
+                            ItemID = sh.itemID,
+                            ItemName = i.ItemName,
+                            RoomID = sh.roomID,
+                            NurseID = sh.nurseID,
+                            Dosage = sh.dosage,
+                            Quantity = sh.quantity ?? 0,
+                            Unit = sh.unit,
+                            Note = sh.note,
+                            PatientID = sh.PatientID,
+                            TypeSupply = sh.typeSupply,
+                            DateSupply = sh.dateSupply,
+                            DepartmentName = d.departmentName,
+                            NurseName = s.name,
+                            RoomName = r.roomName,
+                            PatientName = p != null ? p.fullName : null
+                        };
+
+            return query.ToList();
+        }
+
         public void Add(SupplyHistoryDTO dto)
         {
             var s = new SupplyHistory
